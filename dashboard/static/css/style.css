@@ -1,0 +1,35 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+#sidebar{
+    display: flex;
+}
+#img_sidebar-expansive{/*define a largura e altura do icone de expandir o menu*/
+    width: 28px;
+    height: 28px;
+    margin-top: 30%;
+}
+#div-img_sidebar-expansive{/*define a largura e altura da div do icone de expandir o menu*/
+    width: 28px;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+#sidebar-expansive{
+    background-color: rgba(16, 185, 129, 1);
+    width: 260px;
+    height: 1020px;
+}
+#sidebar-expansive a{/*Remove a linha abaixo do texto*/
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+
+}
+#sidebar-expansive img{
+    width: 12px;
+    height: 12px;
+}
+#sidebar-expansive h3{/*Define as cores do texto*/
+    color: aliceblue;
+}

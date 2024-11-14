@@ -1,11 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fleet Hub</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
 </head>
 <body>
-    <h1>home</h1>
+    <aside id="sidebar">
+            <div>
+                <div id="sidebar-expansive">
+                    <a href="#"><img class="icon" src="{% static 'img/icons/house-simple-fill.png' %}" alt=""><h3 id="text-init">Início</h3></a>
+                    <a href=""><img class="icon" src="{% static 'img/icons/car-fill.png' %}" alt=""><h3 id="text-veicles">Veículos</h3></a>
+                    <a href=""><img class="icon" src="{% static 'img/icons/users-fill.png' %}" alt=""><h3 id="text-users">Usuários</h3></a>
+                    <a href=""><img class="icon" src="{% static 'img/icons/tag-fill.png' %}" alt=""><h3 id="text-reservations">Reservas</h3></a>
+                    <a href=""><img class="icon" src="{% static 'img/icons/presentation-chart-fill.png' %}" alt=""><h3 id="text-routes">Rotas</h3></a>
+                    <a href=""><img class="icon" src="{% static 'img/icons/Vector.png' %}" alt=""><h3 id="text-maintenance">Manutenção</h3></a>
+                    <a href=""><img class="icon" src="{% static 'img/icons/🦆 icon _drop_.png' %}" alt=""><h3 id="text-supply">Abastecimento</h3></a>
+                </div>
+            </div>
+            <div id="div-img_sidebar-expansive"><img id="img_sidebar-expansive" src="{% static 'img/icons/chevron_left.png' %}" alt=""></div>
+    </aside>
 </body>
+<script src="{% static 'js/script.js' %}"></script>
 </html>
