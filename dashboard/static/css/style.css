@@ -1,13 +1,43 @@
 body{
     background-color: rgb(255, 255, 255);
+    margin: 0;
 }
 #sidebar{
+    background-color: rgba(16, 185, 129, 1);
     display: flex;
+    width: 260px;
+}
+#user_menu{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 120px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: white;
+    margin-top: 20px;
+}
+#user_icon{
+    width: 16px;
+    height: 16px;
+    transition: 400ms;
+}
+#gestor_name{
+    font-size: 20px;
+}
+#img_perfil{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+#user-menu-sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #img_sidebar-expansive{/*define a largura e altura do icone de expandir o menu*/
     width: 28px;
     height: 28px;
-    margin-top: 30%;
 }
 #div-img_sidebar-expansive{/*define a largura e altura da div do icone de expandir o menu*/
     width: 28px;
@@ -18,17 +48,28 @@ body{
 #sidebar-expansive{
     background-color: rgba(16, 185, 129, 1);
     width: 260px;
-    height: 1020px;
+    height: 1020px;  
 }
-#sidebar-expansive a{/*Remove a linha abaixo do texto*/
+.element-icon{/*Remove a linha abaixo do texto*/
     text-decoration: none;
     display: flex;
     align-items: center;
-
+    gap: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 10px;
+    width: 230px;
+    height: 44px;
 }
-#sidebar-expansive img{
+.element-icon:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    margin-left: 15px;
+}
+.icon{
     width: 12px;
     height: 12px;
+    margin-left: 10px;
 }
 #sidebar-expansive h3{/*Define as cores do texto*/
     color: aliceblue;
