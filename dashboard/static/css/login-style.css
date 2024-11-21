@@ -1,0 +1,141 @@
+body{
+    margin: 0 auto;
+}
+:root{
+    --color-white:#ffffff;
+    --color-green-menu: #10B981;
+    --menu-modulos-color:rgba(255,255,255,0.3);
+    --color-text-primary:#153448;
+    --color-button:#595C61;
+}
+#tela-login{
+    background-color: var(--color-green-menu);
+    display: flex;
+    flex-direction: row;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+#campo-login{
+    min-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
+}
+#logo-img{
+    width: 322px;
+    height: 322px;
+    margin: 0 auto;
+}
+
+#img-login{
+    max-width: 100%;
+    height: 1025px;
+}
+
+#login-tittle{
+    margin: 0 auto;
+    color: var(--color-white);
+    font-size: 32px;
+}
+
+#enter-button{
+    background-color: var(--color-button);
+    width: 300px;
+    height: 60px;
+    color: var(--color-white);
+    border-radius: 12px;
+    margin: 30px 10px 10px 90px;
+    font-size: 32px;
+
+}
+
+#user-input, #pass-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre o input e o botão/ícone */
+    width: 100%; /* Garantir alinhamento */
+    max-width: 400px; /* Uniformidade no tamanho */
+    margin: 10px auto; /* Centralização na tela */
+}
+
+#username, #id_password {
+    border-radius: 8px;
+    width: 400px; /* Mantém a largura uniforme */
+    height: 60px; /* Mantém a altura uniforme */
+    border: 0; /* Remove bordas extras */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+    font-size: 16px; /* Garante o tamanho de texto uniforme */
+
+}
+
+#username{
+    padding-right: 10px; /* Espaço para o botão */
+    padding-left: 10px; /* Espaço para o ícone */
+}
+
+.password-input {
+    width: 400px; /* Deve corresponder ao #username */
+    height: 60px; /* Deve corresponder ao #username */
+    border-radius: 8px; /* Uniformidade com o #username */
+    border: 1px solid #ccc; /* Adiciona borda para todos os campos */
+    box-sizing: border-box;
+    font-size: 16px;
+    padding-right: 45px; /* Espaço para o botão */
+    padding-left: 10px; /* Espaço para o ícone */
+}
+
+#reset-pass{
+    display: flex;
+    flex-direction: row-reverse;
+    text-decoration: none;
+    color: var(--color-text-primary);
+}
+
+
+#pass-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%; /* Ajuste conforme necessário */
+    max-width: 400px; /* Tamanho máximo para a entrada */
+}
+
+#pass-input .fa-lock {
+    left: 10px; /* Ajusta o ícone para dentro do input */
+    color: #777;
+    pointer-events: none;
+}
+
+.input-group-addon {
+    position: absolute;
+    right: 10px; /* Ajusta o botão para dentro do input */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #777;
+    font-size: 18px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fa-solid{
+    opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+    #img-login {
+        display: none;
+    }
+    #tela-login{
+        max-width: 100%; /* Reduz a imagem em telas menores */
+        max-height: 100%;
+        min-height: 800px;
+        min-width: 320px;
+    }
+
+    
+}

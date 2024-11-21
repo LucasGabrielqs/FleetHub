@@ -1,0 +1,22 @@
+footer{ /*Formatação geral do rodapé*/
+    width: 1200px;
+    height: 161px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(239,240,244,0.4);
+}
+
+footer #logo_fleethub{/*Formatação da logo*/
+    width: 140px;
+    height: 107px;
+}
+
+.footer-left, .footer-right{/*Ajustes dos itens laterais do rodapé*/
+    margin: 30px;
+}
+.footer-center{/*Ajuste do texto centraol do rodapé*/
+    margin-top:140px;
+}
