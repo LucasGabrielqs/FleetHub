@@ -7,3 +7,6 @@ def dashboard(request):
 
 def login(request):
     return render(request, 'dashboard/login.html')
+
+def cadastrar(request):
+    return render(request, 'dashboard/cadastrar.html')
