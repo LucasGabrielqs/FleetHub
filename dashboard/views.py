@@ -7,3 +7,6 @@ def dashboard(request):
 
 def login(request):
     return render(request, 'dashboard/login.html')
+
+def recuperar_senha(request):
+    return render(request, 'dashboard/recuperar-senha.html')

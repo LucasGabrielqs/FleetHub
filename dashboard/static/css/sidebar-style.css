@@ -33,6 +33,10 @@ body {
     margin-top: 20px;
 }
 
+#exit{/* Seleciona o btão de sair*/
+    text-decoration: none;
+}
+
 /* Seleciona o ícone do usuário */
 #user_icon {
     width: 16px;

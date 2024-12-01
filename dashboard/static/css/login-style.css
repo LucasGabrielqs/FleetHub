@@ -39,15 +39,25 @@ body{
     font-size: 32px;
 }
 
-#enter-button{
+#link-enter-button {
+    display: inline-block; /* Torna o link comportar-se como um bloco */
     background-color: var(--color-button);
     width: 300px;
     height: 60px;
-    color: var(--color-white);
+    line-height: 60px; /* Centraliza o texto verticalmente */
+    text-align: center; /* Centraliza o texto horizontalmente */
     border-radius: 12px;
     margin: 30px 10px 10px 90px;
+    text-decoration: none; /* Remove o sublinhado */
+    color: var(--color-white); /* Define a cor do texto */
     font-size: 32px;
+    font-weight: bold; /* Torna o texto mais visível */
+    transition: background-color 0.3s ease; /* Adiciona um efeito ao passar o mouse */
+}
 
+/* Efeito ao passar o mouse */
+#link-enter-button:hover {
+    background-color: #444; 
 }
 
 #user-input, #pass-input {
