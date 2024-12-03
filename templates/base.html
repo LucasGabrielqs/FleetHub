@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Hub</title>
+    <link rel="stylesheet" href="{% static 'css/sidebar-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer-style.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+    <aside id="sidebar">
+        <div id="sidebar-menu">
+            <h3>Mudar a Senha</h3>
+            <a id="exit" href="{% url 'login' %}"><h3>Sair</h3></a>
+        </div>
+            <div id="user-menu-sidebar">
+                <div id="user_menu">
+                    <img id="img_perfil" src="{% static 'img/img_perfil.jpg' %}" alt="" title="Imagem do Perfil">
+                    <h1 id="gestor_name">Thiago</h1>
+                    <i id="user_icon" class="fa-solid fa-caret-down" style="color: #a1a1aa;"></i>
+                </div>
+                <div id="sidebar-expansive">
+                    <a href="" class="element-icon"><i class="fa-solid fa-house icon" title="Início"></i><h3 id="text-init">Início</h3></a>
+                    <a href="" class="element-icon"><i class="fa-solid fa-car icon" title="Veículos"></i><h3 id="text-veicles">Veículos</h3></a>
+                    <a href="" class="element-icon"><i class="fa-solid fa-users icon" title="Usuários"></i><h3 id="text-users">Usuários</h3></a>
+                    <a href="" class="element-icon"><i class="fa-solid fa-tag icon" title="Reservas"></i><h3 id="text-reservations">Reservas</h3></a>
+                    <a href="" class="element-icon"><i class="fa-solid fa-route icon" title="Rotas"></i><h3 id="text-routes">Rotas</h3></a>
+                    <a href="" class="element-icon"><i class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i><h3 id="text-maintenance">Manutenção</h3></a>
+                    <a href="" class="element-icon"><i class="fa-solid fa-droplet icon" title="Abastecimento"></i><h3 id="text-supply">Abastecimento</h3></a>
+                </div>
+            </div>
+            <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
+    </aside>
+    </header>
+
+
+    {% block main %}
+
+
+    {% endblock %}
+
+    <footer>
+        <div class="footer-left">
+            <h1>Fleet Hub</h1>
+            <p>Endereço: Avenida Independência, Centro</p>
+            <p>Email: fleethub.sac@gmail.com</p>
+            <p>CEP: 59900-000 Telefone: (84) 43351-3454</p>
+        </div>
+        <div class="footer-center">
+            <p>CopyRight @2024 Fleet Hub </p>
+        </div>
+        <div class="footer-right">
+            <img id="logo_fleethub" src="{% static 'img/logo_fleethub.png' %}" alt="Logo">
+        </div>
+    </footer>
+</body>
+<script src="{% static 'js/script.js' %}"></script>
+</html>

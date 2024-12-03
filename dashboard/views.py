@@ -13,3 +13,6 @@ def cadastrar(request):
 
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
+
+def cadastrar_veiculo(request):
+    return render(request, 'dashboard/cadastrar_veiculos.html')
