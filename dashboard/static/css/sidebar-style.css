@@ -13,6 +13,13 @@ body {
     display: flex;
 }
 
+hr {/* Estilo de barra horizontal*/
+    background-color: white;
+    width: 90%;
+    height: 0.5px;
+    margin: 20px auto;
+    }
+
 /* Seleciona a sidebar */
 #sidebar {
     background-color: var(--color-green-menu);
