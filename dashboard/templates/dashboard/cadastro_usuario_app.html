@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <link rel="stylesheet" href="{% static 'css/cadastro_usuario_app.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="profile">
+            <div class="role-selector">
+                <a href="pagina-gestor.html" class="gestor-icon">
+                <span class="role-icon"></span>
+                <span>Gestor</span>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+        </div>
+        <hr />
+        <nav class="menu">
+            <ul>
+                <li>
+                    <a href="#"><i class="fas fa-home"></i> Início</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#"><i class="fas fa-car"></i> Veículos</a>
+                    <ul class="submenu">
+                        <li><a href="#">Cadastro de Veículos</a></li>
+                        <li><a href="#">Lista de Veículos</a></li>
+                    </ul>
+                </li>
+
+                  <li class="dropdown">
+                    <a href="#"><i class="fa-solid fa-users icon"></i> Usuários</a>
+                        <ul class="submenu">
+                          <li><a href="#">Cadastro de usuários</a></li>
+                          <li><a href="#">Listar usuários</a></li>
+                      </ul>
+                </li>
+                 
+                <li class="dropdown">
+                    <a href="#"><i class="fa-solid fa-tag icon"></i> Reservas</a>
+                    <ul class="submenu">
+                      <li><a href="#">Criação de Reserva</a></li>
+                      <li><a href="#">Lista de Reserva</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#"><i class="fa-solid fa-route icon"></i> Rotas</a>
+                    <ul class="submenu">
+                      <li><a href="#">Criar Rotas</a></li>
+                      <li><a href="#">Gerenciar Rotas</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#"><i class="fa-solid fa-screwdriver-wrench icon"></i> Manutenção</a>
+                    <ul class="submenu">
+                      <li><a href="#">Agendar Manutenção</a></li>
+                      <li><a href="#">Lista de manutenções</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#"><i class="fa-solid fa-droplet icon"></i> Abastecimento</a>
+                    <ul class="submenu">
+                      <li><a href="#">Registro de Abastecimento</a></li>
+                      <li><a href="#">Lista de Abastecimento</a></li>
+                  </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    
+        <div class="form-container">
+          <h1>Cadastro de Usuário</h1>
+          <form class="user-form">
+            
+              <div class="form-section">
+                  <h2>Dados do Usuário:</h2>
+      
+                  <div class="form-group">
+                      <label for="nome">Nome Completo</label>
+                      <input type="text" id="nome" placeholder="Digite o nome completo">
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" placeholder="Digite o email">
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="cpf">CPF</label>
+                      <input type="text" id="cpf" placeholder="Digite o CPF">
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="telefone">Telefone</label>
+                      <div class="telefone-group">
+                          <select>
+                              <option>+55</option>
+                          </select>
+                          <input type="text" id="telefone" placeholder="Número de Telefone">
+                      </div>
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="tipo-usuario">Tipo Usuário</label>
+                      <select id="tipo-usuario">
+                          <option>Selecione</option>
+                      </select>
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <div class="senha-container">
+                        <input type="password" id="senha" placeholder="Digite a senha">
+                        <i class="fas fa-eye" id="toggle-password" onclick="togglePassword()"></i>
+                    </div>
+                </div>
+                <script>
+                  function togglePassword() {
+                      const passwordField = document.getElementById('senha');
+                      const toggleIcon = document.getElementById('toggle-password');
+                      
+                      if (passwordField.type === 'password') {
+                          passwordField.type = 'text';
+                          toggleIcon.classList.remove('fa-eye');
+                          toggleIcon.classList.add('fa-eye-slash');
+                      } else {
+                          passwordField.type = 'password';
+                          toggleIcon.classList.remove('fa-eye-slash');
+                          toggleIcon.classList.add('fa-eye');
+                      }
+                  }
+              </script>
+              
+      
+                  <div class="form-group">
+                      <label for="codigo-usuario">Código Usuário</label>
+                      <input type="text" id="codigo-usuario" placeholder="Digite o código do usuário">
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="status">Status</label>
+                      <select id="status">
+                          <option>Selecione</option>
+                      </select>
+                  </div>
+              </div>
+      
+    
+              <div class="form-section endereco-section">
+                <h2>Endereços:</h2>
+      
+                  <div class="form-group">
+                      <label for="rua">Rua</label>
+                      <input type="text" id="rua" placeholder="Digite a Rua">
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="bairro">Bairro</label>
+                      <input type="text" id="bairro" placeholder="Digite o Bairro">
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="cidade">Cidade</label>
+                      <input type="text" id="cidade" placeholder="Digite a Cidade">
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="cep">CEP</label>
+                      <div class="cep-group">
+                          <select id="estado">
+                            <option value="">Selecione o estado</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                          </select>
+                          <input type="text" id="cep" placeholder="Digite o CEP">
+                      </div>
+                  </div>
+              </div>
+      
+              
+              <div class="form-actions">
+                  <button type="button" class="btn btn-cancel">Cancelar</button>
+                  <button type="submit" class="btn btn-save">Salvar</button>
+              </div>
+          </form>
+      </div>               
+      <footer class="footer">
+        <footer>
+            <div class="footer-left">
+                <h1>Fleet Hub</h1>
+                <p>Endereço: Avenida Independência, Centro</p>
+                <p>Email: fleethub.sac@gmail.com</p>
+                <p>CEP: 59900-000 Telefone: (84) 43351-3454</p>
+            </div>
+            <div class="footer-center">
+                <p>CopyRight @2024 Fleet Hub </p>
+            </div>
+            <div class="footer-right">
+                <img id="logo_fleethub" src="{% static 'images/fleetH.png' %}" alt="Logo">
+            </div>
+        </footer>
+        
+</body>
+</html>
