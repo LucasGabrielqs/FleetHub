@@ -7,19 +7,14 @@
     <title>Fleet Hub</title>
     <link rel="stylesheet" href="{% static 'css/sidebar-style.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer-style.css' %}">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-    <style>
-        hr {
-            background-color: white;
-            width: 90%;
-            height: 0.5px;
-            margin: 20px auto;
-            }
-    </style>
 </head>
 <body>
+<div id="teste">
+<div>
+    <header>
+    <div style="position: fixed; top: 0; left: 0; height: 100vh;">
     <aside id="sidebar">
         <div id="sidebar-menu">
             <h3>Mudar a Senha</h3>
@@ -31,7 +26,6 @@
                     <h1 id="gestor_name">Thiago</h1>
                     <i id="user_icon" class="fa-solid fa-caret-down" style="color: #a1a1aa;"></i>
                 </div>
-                <hr>
                 <div id="sidebar-expansive">
                     <a href="" class="element-icon"><i class="fa-solid fa-house icon" title="Início"></i><h3 id="text-init">Início</h3></a>
                     <a href="{% url 'cadastrar_veiculo' %}" class="element-icon"><i class="fa-solid fa-car icon" title="Veículos"></i><h3 id="text-veicles">Veículos</h3></a>
@@ -44,6 +38,16 @@
             </div>
             <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
     </aside>
+    </div>
+    </header>
+</div>
+<div id="conteudo">
+    {% block header %} {% endblock %}
+
+    {% block main %}
+
+
+    {% endblock %}
 
     <footer>
         <div class="footer-left">
@@ -59,6 +63,8 @@
             <img id="logo_fleethub" src="{% static 'img/logo_fleethub.png' %}" alt="Logo">
         </div>
     </footer>
+</div>  
+</div>
 </body>
 <script src="{% static 'js/script.js' %}"></script>
 </html>

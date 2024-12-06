@@ -13,3 +13,12 @@ def cadastrar(request):
 
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
+
+def cadastrar_veiculo(request):
+    return render(request, 'dashboard/cadastrar_veiculos.html')
+
+def cadastro_usuario(request):
+    return render(request,'dashboard/cadastro_usuario_app.html')
+
+def agendar_manutencao(request):
+    return render(request,'dashboard/agendar_manutencao.html')

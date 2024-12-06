@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/cadastrar_veiculos.css' %}">
+{% endblock %}
+
+
+{% block main %}
+
+<section>
+    <form>
+
+        
+        <h2>Cadastrar Veículo</h2>
+        <form action="">
+        <div class="container">
+            
+            <div class="menu_esquerdo">
+                
+                <div class="input_container">
+                    <label>Modelo</label>
+                    <input type="text" id="modelo" placeholder="Digite o Modelo">
+                </div>
+                
+                <div class="input_container">
+                    <label>Marca</label>
+                    <input type="text" id="marca" placeholder="Digite a Marca">
+                </div>
+                
+                <div class="input_container">
+                    <label>Valor da Compra</label>
+                    <input type="text" id="valcompra" maxlength="14" placeholder="Digite o valor da compra">
+                </div>
+                
+                <div class="campo_duplo">
+                    
+                    <div class="input_container">
+                        <label>Ano</label>
+                        <input type="text" id="ano" placeholder="Digite o ano">
+                    </div>
+                    
+                    <div class="input_container">
+                        <label>KM</label>
+                        <input type="text" id="km" placeholder="Digite a Quilometragem">
+                    </div>
+                
+                </div>
+
+                
+                <div class="campo_duplo">
+                    
+                    <div class="input_container">
+                        <label>Motor</label>
+                        <input type="text" id="motor" placeholder="Digite o CV do Motor">
+                    </div>
+                    
+                    <div class="input_container">
+                        <label>Status</label>
+                        <select id="estados" name="estados">
+                            <option disabled selected>Status</option>
+                            <option value="Novo">Novo</option>
+                            <option value="Usado">Usado</option>
+                          </select>
+                    </div>
+                
+                </div>
+
+                
+                <div class="campo_duplo">
+                    
+                    <div class="input_container">
+                        <label>Placa</label>
+                        <input type="text" id="placa" placeholder="Digite a Placa">
+                    </div>
+                    
+                    <div class="input_container">
+                        <label>Chassi</label>
+                        <input type="text" id="km" placeholder="Digite o Chassi">
+                    </div>
+                
+                </div>
+            
+            </div>
+            
+            <div class="menu_direito">
+
+
+                <div class="logo-img">
+                    <input type="file" name="img" id="img">
+                </div>
+        </div>
+        </form>
+                
+</section>
+
+
+
+<script src="{% static 'js/cadastrar-veiculo-script.js' %}"></script>
+{% endblock %}
