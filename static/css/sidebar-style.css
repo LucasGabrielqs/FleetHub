@@ -13,6 +13,23 @@ body {
     display: flex;
 }
 
+
+header{
+    position: relative;
+}
+
+
+#teste{
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: 100vh;
+}
+
+#conteudo{
+    display: grid;
+    grid-template-rows: 1fr 161px;
+}
+
 /* Seleciona a sidebar */
 #sidebar {
     background-color: var(--color-green-menu);

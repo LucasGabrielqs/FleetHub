@@ -16,6 +16,7 @@ const texto5 = document.getElementById('text-routes');
 const texto6 = document.getElementById('text-maintenance');
 const texto7 = document.getElementById('text-supply');
 const menu_perfil = document.getElementById('sidebar-menu');
+const teste = document.getElementById('teste');
 
 user_menu.addEventListener('click', () => {
     //console.log(user_menu_is_open())
@@ -47,6 +48,7 @@ expand_button.addEventListener('click', () =>{//lógica para a barra lateral
         user_menu.style.justifyContent = 'center';
         img_expand.style.rotate = '180deg';
         user_icon.style.display = 'none';
+        teste.style.gridTemplateColumns = '44px 1fr';
     }
     
     else if (!sidebar_is_open()){
@@ -62,6 +64,7 @@ expand_button.addEventListener('click', () =>{//lógica para a barra lateral
         user_menu.style.height = '40px';
         user_icon.style.display = 'block';
         user_menu.style.justifyContent = 'space-evenly';
+        teste.style.gridTemplateColumns = '260px 1fr';
     }
 })
 

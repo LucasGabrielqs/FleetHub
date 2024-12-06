@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<div id="teste">
+<div>
     <header>
+    <div style="position: fixed; top: 0; left: 0; height: 100vh;">
     <aside id="sidebar">
         <div id="sidebar-menu">
             <h3>Mudar a Senha</h3>
@@ -35,8 +38,11 @@
             </div>
             <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
     </aside>
+    </div>
     </header>
-
+</div>
+<div id="conteudo">
+    {% block header %} {% endblock %}
 
     {% block main %}
 
@@ -57,6 +63,8 @@
             <img id="logo_fleethub" src="{% static 'img/logo_fleethub.png' %}" alt="Logo">
         </div>
     </footer>
+</div>  
+</div>
 </body>
 <script src="{% static 'js/script.js' %}"></script>
 </html>
