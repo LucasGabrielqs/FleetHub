@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: transparent;
+    color: black;
+    font-family: 'Inter', sans-serif; 
+  }
+  
+  .container {
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    background: transparent;
+    border: transparent;
+    border-radius: 12px;
+    padding: 30px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: black;
+    margin-bottom: 50px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  fieldset {
+    border: transparent;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: transparent;
+  }
+  
+  legend {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: black;
+  }
+  
+  label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+    color: black;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+    color: black;
+    margin-bottom: 20px;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  input:focus, select:focus, textarea:focus {
+    background-color: #e6f7ff; 
+    border-color: #10B981; 
+    outline: none !important;
+  }
+  
+  textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  button.cancel {
+    background-color: #fff;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+  }
+  
+  button.cancel:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  button.save {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  button.save:hover {
+    background-color: #218838;
+  }
+  
