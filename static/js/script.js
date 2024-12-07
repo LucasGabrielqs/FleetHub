@@ -16,7 +16,7 @@ const texto5 = document.getElementById('text-routes');
 const texto6 = document.getElementById('text-maintenance');
 const texto7 = document.getElementById('text-supply');
 const menu_perfil = document.getElementById('sidebar-menu');
-const teste = document.getElementById('teste');
+const teste = document.getElementById('content');
 
 user_menu.addEventListener('click', () => {
     //console.log(user_menu_is_open())

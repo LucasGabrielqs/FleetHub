@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block header %}
-<link rel="stylesheet" href="{% static 'css/cadastrar_veiculos.css' %}">
-{% endblock %}
-
-
 {% block main %}
+<link rel="stylesheet" href="{% static 'css/cadastrar_veiculos.css' %}">
 
-<section>
+<section id="conteudo-secundario">
     <form>
 
         
@@ -97,4 +93,7 @@
 
 
 <script src="{% static 'js/cadastrar-veiculo-script.js' %}"></script>
+
+
+
 {% endblock %}
