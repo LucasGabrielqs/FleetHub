@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+body {
+    font-family: 'Inter', sans-serif; 
+}
+  
+.form-reserva {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .campo-lado-a-lado {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .campo {
+    flex: 1;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+    margin-bottom: 20px;
+  }
+  
+  input:focus, select:focus {
+    border-color: #10B981;
+    background-color: #e9f7ff;
+    outline: none;
+  }
+  
+  .botoes {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 30px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  button.cancelar {
+    background-color: transparent;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+  }
+  
+  button.cancelar:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  button.salvar {
+    background-color: #28a745;
+    color: #fff;
+    border: 2px solid #28a745;
+  }
+  
+  button.salvar:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
