@@ -32,7 +32,7 @@ hr {/* Estilo de barra horizontal*/
     display: flex;
     width: 260px;
     position: relative;
-    height: 100vh;
+    height: 100%;
 }
 
 /* Seleciona o menu de usuário dentro da sidebar */
