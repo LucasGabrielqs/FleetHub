@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block main %}
+{% block title %}Cadastrar Veículo{% endblock title %}
+{% block estilos %}
 <link rel="stylesheet" href="{% static 'css/cadastrar_veiculos.css' %}">
+{% endblock estilos %}
 
+{% block content %}
 <section id="conteudo-secundario">
     <form>
 
         
-        <h2>Cadastrar Veículo</h2>
+        <h2 id='page_title'>Cadastrar Veículo</h2>
         <form action="">
         <div class="container">
             

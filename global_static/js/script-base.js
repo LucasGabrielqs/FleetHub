@@ -30,7 +30,7 @@ const submenu_abastecimento = document.getElementById('submenu-abastecimento')
 if (page_title.innerText == "Lista de Usuários" || page_title.innerText == "Cadastro de Usuário" || page_title.innerText == "Informações de Usuário"){
     submenu_usuarios.style.display = 'block';
 }
-else if (page_title.innerText == "Cadastro de Veículos" || page_title.innerText == "Lista de Veiculos" || page_title.innerText == "Informações do Veiculo"){
+else if (page_title.innerText == "Cadastrar Veículo" || page_title.innerText == "Lista de Veiculos" || page_title.innerText == "Informações do Veiculo"){
     submenu_veiculos.style.display = 'block';
 }
 else if (page_title.innerText == "Editar Manutenção" || page_title.innerText == "Agendar Manutenção" || page_title.innerText == "Listas de Manutenção"){

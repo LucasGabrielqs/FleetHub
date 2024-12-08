@@ -3,7 +3,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def dashboard(request):
-    return render(request, 'dashboard/sidebar-footer.html')
+    return render(request, 'base.html')
 
 def login(request):
     return render(request, 'dashboard/login.html')
@@ -28,8 +28,3 @@ def editar_manutencao(request):
 
 def criar_reserva(request):
     return render(request, 'dashboard/criacao_reserva.html')
-
-
-
-def home_view(request):
-    return render(request, 'base.html')

@@ -1,13 +1,13 @@
 section{
     padding: 0;
 }
-h2{
+#page_title{
     margin: auto;
     text-align: center;
     font-family: inter;
     font-weight: bold;
     font-size: 24px;
-    color: #153448;
+    color: #bde0f8;
     padding-top: 40px;
 }
 
