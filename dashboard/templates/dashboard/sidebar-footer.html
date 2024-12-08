@@ -2,14 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fleet Hub</title>
+    <title>{% block tittle %}Fleet Hub{% endblock tittle %}</title>
+    
     <link rel="stylesheet" href="{% static 'css/sidebar-style.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer-style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
+    
     <style>
         hr {
             background-color: white;
@@ -17,6 +18,7 @@
             height: 0.5px;
             margin: 20px auto;
             }
+
     </style>
 </head>
 <body>
@@ -33,17 +35,59 @@
                 </div>
                 <hr>
                 <div id="sidebar-expansive">
-                    <a href="" class="element-icon"><i class="fa-solid fa-house icon" title="Início"></i><h3 id="text-init">Início</h3></a>
+
+
+                    <a href="{% url 'dashboard' %}" class="element-icon"><i class="fa-solid fa-house icon" title="Início"></i><h3 id="text-init">Início</h3></a>
+
                     <a href="{% url 'cadastrar_veiculo' %}" class="element-icon"><i class="fa-solid fa-car icon" title="Veículos"></i><h3 id="text-veicles">Veículos</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-users icon" title="Usuários"></i><h3 id="text-users">Usuários</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-tag icon" title="Reservas"></i><h3 id="text-reservations">Reservas</h3></a>
+                    <ul id="submenu-veiculos" class="submenu">
+                        <li><a href="#">Cadastro de Veículos</a></li>
+                        <li><a href="#">Lista de Veículos</a></li>
+                    </ul>
+
+                    <a href="{% url 'cadastrar_usuario' %}" class="element-icon"><i class="fa-solid fa-users icon" title="Usuários"></i><h3 id="text-users">Usuários</h3></a>
+                    <ul id="submenu-usuarios" class="submenu">
+                        <li><a href="#">Cadastro de usuários</a></li>
+                        <li><a href="#">Listar usuários</a></li>
+                    </ul>
+
+                    <a href="{% url 'criar_reserva' %}" class="element-icon"><i class="fa-solid fa-tag icon" title="Reservas"></i><h3 id="text-reservations">Reservas</h3></a>
+                    <ul id="submenu-reservas" class="submenu">
+                        <li><a href="#">Criação de Reserva</a></li>
+                        <li><a href="#">Lista de Reserva</a></li>
+                    </ul>
+
                     <a href="" class="element-icon"><i class="fa-solid fa-route icon" title="Rotas"></i><h3 id="text-routes">Rotas</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i><h3 id="text-maintenance">Manutenção</h3></a>
+                    <ul id="submenu-rotas" class="submenu">
+                        <li><a href="#">Criar Rotas</a></li>
+                        <li><a href="#">Gerenciar Rotas</a></li>
+                    </ul>
+
+                    <a href="{% url 'agendar_manutencao' %}" class="element-icon"><i class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i><h3 id="text-maintenance">Manutenção</h3></a>
+                    <ul id="submenu-manutencao" class="submenu">
+                        <li><a href="#">Agendar Manutenção</a></li>
+                        <li><a href="#">Lista de manutenções</a></li>
+                    </ul>
+
                     <a href="" class="element-icon"><i class="fa-solid fa-droplet icon" title="Abastecimento"></i><h3 id="text-supply">Abastecimento</h3></a>
+                    <ul id="submenu-abastecimento" class="submenu">
+                        <li><a href="#">Registro de Abastecimento</a></li>
+                        <li><a href="#">Lista de Abastecimento</a></li>
+
+                    </ul>
                 </div>
             </div>
             <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
     </aside>
+
+
+
+    <div id='container-block-content'>
+        {% block content %}{% endblock content %}
+    </div>
+
+
+
 
     <footer>
         <div class="footer-left">
@@ -60,5 +104,5 @@
         </div>
     </footer>
 </body>
-<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/script-base.js' %}"></script>
 </html>

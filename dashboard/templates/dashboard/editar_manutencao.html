@@ -1,128 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
+{% load static %}
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendar Manutenção</title>
+  <title>{% block title %}Editar Manutenção{% endblock title %}</title>
+  {% block estilos %}
   <link rel="stylesheet" href="{% static 'css/editar_manutencao.css' %}">
-  <link rel="stylesheet" href="{% static 'css/sidebar-style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/footer-style.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <aside id="sidebar">
-        <div id="sidebar-menu">
-        </div>
-            <div id="user-menu-sidebar">
-                <div id="user_menu">
-                    <img id="img_perfil" src="{% static 'img/img_perfil.jpg' %}" alt="" title="Imagem do Perfil">
-                    <h1 id="gestor_name">Thiago</h1>
-                    <i id="user_icon" class="fa-solid fa-caret-down" style="color: #a1a1aa;"></i>
-                </div>
-                <hr>
-                <div id="sidebar-expansive">
-                    <a href="" class="element-icon"><i class="fa-solid fa-house icon" title="Início"></i><h3 id="text-init">Início</h3></a>
-                    <a href="{% url 'cadastrar_veiculo' %}" class="element-icon"><i class="fa-solid fa-car icon" title="Veículos"></i><h3 id="text-veicles">Veículos</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-users icon" title="Usuários"></i><h3 id="text-users">Usuários</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-tag icon" title="Reservas"></i><h3 id="text-reservations">Reservas</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-route icon" title="Rotas"></i><h3 id="text-routes">Rotas</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i><h3 id="text-maintenance">Manutenção</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-droplet icon" title="Abastecimento"></i><h3 id="text-supply">Abastecimento</h3></a>
-                </div>
-            </div>
-            <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
-    </aside>
+  {% endblock estilos %}
 
-  <div class="container">
-    <h1>Agendar Manutenção</h1>
-    <form>
-      <div class="row">
-        <fieldset>
-          <legend>Dados do Veículo</legend>
-          <label for="veiculo">Veículo:</label>
-          <select id="veiculo">
-            <option>Strada</option>
-          </select>
-
-          <label for="km">Km Atual:</label>
-          <input type="text" id="km" value="15.000 Km">
-
-          <label for="status">Status:</label>
-          <select id="status">
-            <option>Pendente</option>
-          </select>
-
-          <label for="tipoManutencao">Tipo de Manutenção:</label>
-          <select id="tipoManutencao">
-            <option>Quilometragem/Ano</option>
-          </select>
-        </fieldset>
-
-        <fieldset>
-          <legend>Dados da Manutenção</legend>
-          <label for="idManutencao">ID Manutenção:</label>
-          <input type="text" id="idManutencao" value="01">
-
-          <label for="prioridade">Prioridade de Atendimento:</label>
-          <select id="prioridade">
-            <option>Média</option>
-          </select>
-
-          <label for="dataEntrega">Data Prevista de Entrega:</label>
-          <input type="date" id="dataEntrega" value="2024-02-25">
-
-          <label for="valorManutencao">Valor da Manutenção:</label>
-          <input type="text" id="valorManutencao">
-        </fieldset>
-      </div>
-
-      <div>
-        <label for="comentarios">Comentários:</label>
-        <textarea id="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta"></textarea>
-      </div>
-
+{% block content %}
+<div class="container">
+  <h1 id='page_title'>Editar Manutenção</h1>
+  <form>
+    <div class="row">
       <fieldset>
-        <legend>Outras Informações</legend>
-        <div class="info-grid">
-          <div>
-            <label for="usuarioCadastro">Usuário de Cadastro:</label>
-            <input type="text" id="usuarioCadastro" value="Admin" disabled>
-          </div>
-          <div>
-            <label for="dataCadastro">Data de Cadastro:</label>
-            <input type="date" id="dataCadastro" value="2024-10-20" disabled>
-          </div>
-          <div>
-            <label for="usuarioAlteracao">Usuário Alteração:</label>
-            <input type="text" id="usuarioAlteracao" value="Admin" disabled>
-          </div>
-          <div>
-            <label for="dataAlteracao">Data de Alteração:</label>
-            <input type="date" id="dataAlteracao" value="2024-10-27" disabled>
-          </div>
-        </div>
+        <legend>Dados do Veículo</legend>
+        <label for="veiculo">Veículo:</label>
+        <select id="veiculo">
+          <option>Strada</option>
+        </select>
+
+        <label for="km">Km Atual:</label>
+        <input type="text" id="km" value="15.000 Km">
+
+        <label for="status">Status:</label>
+        <select id="status">
+          <option>Pendente</option>
+        </select>
+
+        <label for="tipoManutencao">Tipo de Manutenção:</label>
+        <select id="tipoManutencao">
+          <option>Quilometragem/Ano</option>
+        </select>
       </fieldset>
 
-      <div class="buttons">
-        <button type="reset" class="cancel">Cancelar</button>
-        <button type="submit" class="save">Salvar Edição</button>
+      <fieldset>
+        <legend>Dados da Manutenção</legend>
+        <label for="idManutencao">ID Manutenção:</label>
+        <input type="text" id="idManutencao" value="01">
+
+        <label for="prioridade">Prioridade de Atendimento:</label>
+        <select id="prioridade">
+          <option>Média</option>
+        </select>
+
+        <label for="dataEntrega">Data Prevista de Entrega:</label>
+        <input type="date" id="dataEntrega" value="2024-02-25">
+
+        <label for="valorManutencao">Valor da Manutenção:</label>
+        <input type="text" id="valorManutencao">
+      </fieldset>
+    </div>
+
+    <div>
+      <label for="comentarios">Comentários:</label>
+      <textarea id="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta"></textarea>
+    </div>
+
+    <fieldset>
+      <legend>Outras Informações</legend>
+      <div class="info-grid">
+        <div>
+          <label for="usuarioCadastro">Usuário de Cadastro:</label>
+          <input type="text" id="usuarioCadastro" value="Admin" disabled>
+        </div>
+        <div>
+          <label for="dataCadastro">Data de Cadastro:</label>
+          <input type="date" id="dataCadastro" value="2024-10-20" disabled>
+        </div>
+        <div>
+          <label for="usuarioAlteracao">Usuário Alteração:</label>
+          <input type="text" id="usuarioAlteracao" value="Admin" disabled>
+        </div>
+        <div>
+          <label for="dataAlteracao">Data de Alteração:</label>
+          <input type="date" id="dataAlteracao" value="2024-10-27" disabled>
+        </div>
       </div>
-    </form>
-  </div>
-  <footer>
-    <div class="footer-left">
-        <h1>Fleet Hub</h1>
-        <p>Endereço: Avenida Independência, Centro</p>
-        <p>Email: fleethub.sac@gmail.com</p>
-        <p>CEP: 59900-000 Telefone: (84) 43351-3454</p>
+    </fieldset>
+
+    <div class="buttons">
+      <button type="reset" class="cancel">Cancelar</button>
+      <button type="submit" class="save">Salvar Edição</button>
     </div>
-    <div class="footer-center">
-        <p>CopyRight @2024 Fleet Hub </p>
-    </div>
-    <div class="footer-right">
-        <img id="logo_fleethub" src="{% static 'img/logo_fleethub.png' %}" alt="Logo">
-    </div>
-</footer>
-</body>
-<script src="{% static 'js/script.js' %}"></script>
-</html>
+  </form>
+</div>
+{% endblock content %}

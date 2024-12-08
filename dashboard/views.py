@@ -22,3 +22,14 @@ def cadastro_usuario(request):
 
 def agendar_manutencao(request):
     return render(request,'dashboard/agendar_manutencao.html')
+
+def editar_manutencao(request):
+    return render(request,'dashboard/editar_manutencao.html')
+
+def criar_reserva(request):
+    return render(request, 'dashboard/criacao_reserva.html')
+
+
+
+def home_view(request):
+    return render(request, 'base.html')

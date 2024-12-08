@@ -7,6 +7,10 @@ urlpatterns = [
     path('cadastrar',views.cadastrar,name='cadastrar'),
     path('recuperar-senha/',views.recuperar_senha, name='recuperar_senha'),
     path('cadastrar-veiculo',views.cadastrar_veiculo,name='cadastrar_veiculo'),
-    path('cadastro_usuario',views.cadastro_usuario,name='cadastro_usuario'),
+    path('cadastrar_usuario',views.cadastro_usuario,name='cadastrar_usuario'),
     path('agendar_manutencao',views.agendar_manutencao,name='agendar_manutencao'),
+    path('editar_manutencao',views.editar_manutencao,name='editar_manutencao'),
+    path('criar_reserva',views.criar_reserva,name='criar_reserva'),
+
+    path('base', views.home_view)
 ]

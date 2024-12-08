@@ -40,6 +40,41 @@ hr {/* Estilo de barra horizontal*/
     margin-top: 20px;
 }
 
+
+
+
+
+.submenu {/* Estilos de submenu*/
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+
+}
+
+.submenu li a {
+    display: block;
+    font-size: 14px;
+    color: var(--color-white);
+    padding: 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-left: 34px;
+    height: 20px;
+    width: 180px;
+}
+
+.submenu li a:hover {
+    background-color:var(--menu-modulos-color);
+}
+
+#submenu-abastecimento, #submenu-manutencao, #submenu-rotas, #submenu-reservas, #submenu-usuarios, #submenu-veiculos{
+    display: none;
+}
+
+
+
+
+
 #exit{/* Seleciona o btão de sair*/
     text-decoration: none;
 }
@@ -88,7 +123,7 @@ hr {/* Estilo de barra horizontal*/
 #sidebar-expansive {
     background-color: var(--color-green-menu);
     width: 260px;
-    height: 1020px;
+    height: 100%
 }
 
 /* Seleciona os links com ícones na sidebar */
@@ -144,4 +179,30 @@ hr {/* Estilo de barra horizontal*/
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     margin-left: 35px;
+}
+
+#content-and-footer{
+    width: 900px;
+}
+
+
+footer{ /*Formatação geral do rodapé*/
+    width: 100%;
+    height: 161px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(239,240,244,0.4);
+}
+
+footer #logo_fleethub{/*Formatação da logo*/
+    width: 140px;
+    height: 107px;
+}
+
+
+.footer-center{/*Ajuste do texto centraol do rodapé*/
+    margin-top:140px;
 }
