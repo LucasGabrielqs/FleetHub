@@ -44,6 +44,14 @@ const gerenciar_rotas = document.getElementById('submenu-gerenciar-rotas');
 const lista_abastecimento = document.getElementById('submenu-lista-abastecimento');
 const registro_abastecimento = document.getElementById('submenu-registro-abastecimento');
 
+
+const container_veiculos = document.getElementById('id-veiculos');
+const container_usuarios = document.getElementById('id-usuarios');
+const container_reservas = document.getElementById('id-reservas');
+const container_rotas = document.getElementById('id-rotas');
+const container_manutencao = document.getElementById('id-manutencao');
+const container_abastecimento = document.getElementById('id-abastecimento');
+
 user_menu.addEventListener('click', () => {
     //console.log(user_menu_is_open())
     //console.log('123',sidebar_is_open())
@@ -147,6 +155,12 @@ function alter_text_sidebar(){
         texto5.style.display = 'none';
         texto6.style.display = 'none';
         texto7.style.display = 'none';
+        submenu_abastecimento.style.display = 'none';
+        submenu_manutencao.style.display = 'none';
+        submenu_reservas.style.display = 'none';
+        submenu_rotas.style.display = 'none';
+        submenu_usuarios.style.display = 'none';
+        submenu_veiculos.style.display = 'none';
     }else{
         gestor_name.style.display = 'block';
         texto1.style.display = 'block';
@@ -169,12 +183,7 @@ else if (page_title.innerText == "Visualização da Rota" || page_title.innerTex
 
 
 
-const container_veiculos = document.getElementById('id-veiculos');
-const container_usuarios = document.getElementById('id-usuarios');
-const container_reservas = document.getElementById('id-reservas');
-const container_rotas = document.getElementById('id-rotas');
-const container_manutencao = document.getElementById('id-manutencao');
-const container_abastecimento = document.getElementById('id-abastecimento');
+
 
 document.addEventListener("DOMContentLoaded", function () {//Lógica de Identificação de Página e ações do submenu
     const pageName = document.body.getAttribute("data-page");
