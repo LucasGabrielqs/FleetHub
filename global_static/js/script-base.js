@@ -26,6 +26,24 @@ const submenu_rotas = document.getElementById('submenu-rotas')
 const submenu_manutencao = document.getElementById('submenu-manutencao')
 const submenu_abastecimento = document.getElementById('submenu-abastecimento')
 
+const agendar_manutencao = document.getElementById('submenu-agendar-manutencao');
+const editar_manutencao = document.getElementById('submenu-editar-manutencao');
+
+const cadastrar_veiculo = document.getElementById('submenu-cadastro-veiculos');
+const lista_veiculos = document.getElementById('submenu-lista-veiculos');
+
+const cadastro_usuarios = document.getElementById('submenu-cadastro-usuarios');
+const lista_usuarios = document.getElementById('submenu-lista-usuarios');
+
+const criacao_reservas = document.getElementById('submenu-criacao-reservas');
+const lista_reservas = document.getElementById('submenu-lista-reservas');
+
+const criar_rotas = document.getElementById('submenu-criar-rotas');
+const gerenciar_rotas = document.getElementById('submenu-gerenciar-rotas');
+
+const lista_abastecimento = document.getElementById('submenu-lista-abastecimento');
+const registro_abastecimento = document.getElementById('submenu-registro-abastecimento');
+
 user_menu.addEventListener('click', () => {
     //console.log(user_menu_is_open())
     //console.log('123',sidebar_is_open())
@@ -90,6 +108,7 @@ function user_menu_is_open() {
 function open_user_menu (){
 
 }
+
 function close_user_menu (){
     user_icon.style.transform = 'rotate(0deg)';
     menu_perfil.style.display = 'none';
@@ -148,53 +167,46 @@ else if (page_title.innerText == "Visualização da Rota" || page_title.innerTex
     submenu_rotas.style.display = 'block';
 }
 
-const agendar_manutencao = document.getElementById('submenu-agendar-manutencao');
-const editar_manutencao = document.getElementById('submenu-editar-manutencao');
-
-const cadastrar_veiculo = document.getElementById('submenu-cadastro-veiculos');
-const lista_veiculos = document.getElementById('submenu-lista-veiculos');
-
-const cadastro_usuarios = document.getElementById('submenu-cadastro-usuarios');
-const lista_usuarios = document.getElementById('submenu-lista-usuarios');
-
-const criacao_reservas = document.getElementById('submenu-criacao-reservas');
-const lista_reservas = document.getElementById('submenu-lista-reservas');
-
-const criar_rotas = document.getElementById('submenu-criar-rotas');
-const gerenciar_rotas = document.getElementById('submenu-gerenciar-rotas');
-
-const lista_abastecimento = document.getElementById('submenu-lista-abastecimento');
-const registro_abastecimento = document.getElementById('submenu-registro-abastecimento');
 
 
-document.addEventListener("DOMContentLoaded", function () {//Lógica de Identificação de Página
+const container_veiculos = document.getElementById('id-veiculos');
+const container_usuarios = document.getElementById('id-usuarios');
+const container_reservas = document.getElementById('id-reservas');
+const container_rotas = document.getElementById('id-rotas');
+const container_manutencao = document.getElementById('id-manutencao');
+const container_abastecimento = document.getElementById('id-abastecimento');
+
+document.addEventListener("DOMContentLoaded", function () {//Lógica de Identificação de Página e ações do submenu
     const pageName = document.body.getAttribute("data-page");
     console.log(pageName)
     switch(pageName){
         case "agendar_manutencao":
             submenu_manutencao.style.display = 'block';
             agendar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
             break;
         case "editar_manutencao":
             submenu_manutencao.style.display = 'block';
             editar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
             break;            
         
         case "cadastrar_veiculo":
             submenu_veiculos.style.display = 'block';
             cadastrar_veiculo.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_veiculos.style.backgroundColor = "rgba(255,255,255,0.3)";
             break;
 
         case "cadastrar_usuario":
             submenu_usuarios.style.display = 'block';
             cadastro_usuarios.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
             break;
 
         case "criar_reserva":
             submenu_reservas.style.display = 'block';
             criacao_reservas.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
             break;
     }
 });
-
-

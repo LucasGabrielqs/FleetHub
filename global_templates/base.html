@@ -39,8 +39,8 @@
                     <h3 id="text-init">Início</h3>
                 </a>
 
-                <a href="{% url 'cadastrar_veiculo' %}" class="element-icon"><i class="fa-solid fa-car icon"
-                        title="Veículos"></i>
+                <a href="{% url 'cadastrar_veiculo' %}" class="element-icon" id="id-veiculos"><i
+                        class="fa-solid fa-car icon" title="Veículos"></i>
                     <h3 id="text-veicles">Veículos</h3>
 
                 </a>
@@ -49,8 +49,8 @@
                     <li><a id="submenu-lista-veiculos" href="#">Lista de Veículos</a></li>
                 </ul>
 
-                <a href="{% url 'cadastrar_usuario' %}" class="element-icon"><i class="fa-solid fa-users icon"
-                        title="Usuários"></i>
+                <a href="{% url 'cadastrar_usuario' %}" class="element-icon" id="id-usuarios"><i
+                        class="fa-solid fa-users icon" title="Usuários"></i>
                     <h3 id="text-users">Usuários</h3>
                 </a>
                 <ul id="submenu-usuarios" class="submenu">
@@ -58,8 +58,8 @@
                     <li><a id="submenu-lista-usuarios" href="#">Listar usuários</a></li>
                 </ul>
 
-                <a href="{% url 'criar_reserva' %}" class="element-icon"><i class="fa-solid fa-tag icon"
-                        title="Reservas"></i>
+                <a href="{% url 'criar_reserva' %}" class="element-icon" id="id-reservas"><i
+                        class="fa-solid fa-tag icon" title="Reservas"></i>
                     <h3 id="text-reservations">Reservas</h3>
                 </a>
                 <ul id="submenu-reservas" class="submenu">
@@ -67,7 +67,7 @@
                     <li><a id="submenu-lista-reservas" href="#">Lista de Reserva</a></li>
                 </ul>
 
-                <a href="" class="element-icon"><i class="fa-solid fa-route icon" title="Rotas"></i>
+                <a href="" class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
                     <h3 id="text-routes">Rotas</h3>
                 </a>
                 <ul id="submenu-rotas" class="submenu">
@@ -75,7 +75,7 @@
                     <li><a id="submenu-gerenciar-rotas" href="#">Gerenciar Rotas</a></li>
                 </ul>
 
-                <a href="{% url 'agendar_manutencao' %}" class="element-icon"><i
+                <a href="{% url 'agendar_manutencao' %}" class="element-icon" id="id-manutencao"><i
                         class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i>
                     <h3 id="text-maintenance">Manutenção</h3>
                 </a>
@@ -84,7 +84,8 @@
                     <li><a id="submenu-lista-manutencao" href="#">Lista de manutenções</a></li>
                 </ul>
 
-                <a href="" class="element-icon"><i class="fa-solid fa-droplet icon" title="Abastecimento"></i>
+                <a href="" class="element-icon" id="id-abastecimento"><i class="fa-solid fa-droplet icon"
+                        title="Abastecimento"></i>
                     <h3 id="text-supply">Abastecimento</h3>
                 </a>
                 <ul id="submenu-abastecimento" class="submenu">

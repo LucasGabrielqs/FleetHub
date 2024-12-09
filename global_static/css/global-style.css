@@ -137,12 +137,12 @@ hr {/* Estilo de barra horizontal*/
     margin-top: 10px;
     width: 230px;
     height: 44px;
+    border-radius: 10px;
 }
 
 /* Efeito hover para os links com ícones */
 .element-icon:hover {
     background-color: var(--menu-modulos-color);
-    border-radius: 10px;
     margin-left: 15px;
 }
 
