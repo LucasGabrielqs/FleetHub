@@ -1,0 +1,30 @@
+section{
+    padding: 0;
+}
+#page_title{
+    margin: auto;
+    text-align: center;
+    font-family: inter;
+    font-weight: bold;
+    font-size: 24px;
+    color: #153448;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#conteudo_principal{
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+#conteudo-secundario{
+    margin: auto;
+}
+
+form{
+    margin: auto;
+}
+
+#container-block-content{
+    margin: auto;
+}

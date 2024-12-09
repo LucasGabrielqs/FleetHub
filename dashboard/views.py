@@ -28,3 +28,9 @@ def editar_manutencao(request):
 
 def criar_reserva(request):
     return render(request, 'dashboard/criacao_reserva.html')
+
+def listagem_veiculos(request):
+    return render(request, 'dashboard/listagem_veiculos.html')
+
+def listagem_usuarios(request):
+    return render(request, 'dashboard/listagem_usuarios.html')

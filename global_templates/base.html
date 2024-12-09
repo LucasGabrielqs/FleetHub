@@ -45,8 +45,8 @@
 
                 </a>
                 <ul id="submenu-veiculos" class="submenu">
-                    <li><a id="submenu-cadastro-veiculos" href="#">Cadastro de Veículos</a></li>
-                    <li><a id="submenu-lista-veiculos" href="#">Lista de Veículos</a></li>
+                    <li><a id="submenu-cadastro-veiculos" href="{% url 'cadastrar_veiculo' %}">Cadastro de Veículos</a></li>
+                    <li><a id="submenu-lista-veiculos" href="{% url 'listagem_usuarios' %}">Lista de Veículos</a></li>
                 </ul>
 
                 <a href="{% url 'cadastrar_usuario' %}" class="element-icon" id="id-usuarios"><i
@@ -54,8 +54,8 @@
                     <h3 id="text-users">Usuários</h3>
                 </a>
                 <ul id="submenu-usuarios" class="submenu">
-                    <li><a id="submenu-cadastro-usuarios" href="#">Cadastro de usuários</a></li>
-                    <li><a id="submenu-lista-usuarios" href="#">Listar usuários</a></li>
+                    <li><a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Cadastro de usuários</a></li>
+                    <li><a id="submenu-lista-usuarios" href="{% url 'listagem_usuarios' %}">Listar usuários</a></li>
                 </ul>
 
                 <a href="{% url 'criar_reserva' %}" class="element-icon" id="id-reservas"><i
@@ -107,14 +107,14 @@
 
 
         <footer>
-            <div class="footer-left">
+            <div class="footer-left" style="margin-left: 15px;">
                 <h1>Fleet Hub</h1>
                 <p>Endereço: Avenida Independência, Centro</p>
                 <p>Email: fleethub.sac@gmail.com</p>
-                <p>CEP: 59900-000 Telefone: (84) 43351-3454</p>
+                <p style="margin-bottom: 0;">CEP: 59900-000 Telefone: (84) 43351-3454</p>
             </div>
             <div class="footer-center">
-                <p>CopyRight @2024 Fleet Hub </p>
+                <p style="margin-bottom: 0;">CopyRight @2024 Fleet Hub </p>
             </div>
             <div class="footer-right">
                 <img id="logo_fleethub" src="{% static 'img/logo_fleethub.png' %}" alt="Logo">
