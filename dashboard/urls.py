@@ -13,6 +13,6 @@ urlpatterns = [
     path('criar_reserva',views.criar_reserva,name='criar_reserva'),
     path('listagem-veiculos',views.listagem_veiculos,name='listagem_veiculos'),
     path('listagem-usuarios',views.listagem_usuarios,name='listagem_usuarios'),
-    path('listagem-usuarios',views.criacao_rota,name='criacao_rota'),
-    path('listagem-usuarios',views.visualizacao_rota,name='visualizacao_rota'),
+    path('criacao_rota',views.criacao_rota,name='criacao_rota'),
+    path('visualizacao_rota',views.visualizacao_rota,name='visualizacao_rota'),
 ]

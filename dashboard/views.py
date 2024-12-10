@@ -39,4 +39,4 @@ def criacao_rota(request):
     return render(request, 'dashboard/criacao_rota.html')
 
 def visualizacao_rota(request):
-    return render(request, 'visualizacao_rota.html')
+    return render(request, 'dashboard/visualizacao_rota.html')
