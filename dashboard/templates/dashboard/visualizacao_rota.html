@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_name %}visualizacao_rota{% endblock page_name %}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% block title %}Visualização da Rota{% endblock title %}
+
+{% block estilos %}   
+<link rel="stylesheet" href="{% static 'css/visualizacao_rota.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+{% endblock estilos %}
+
+{% block content %}
+    <section id="conteudo-secundario">
+        <h2 id="page_title">Visualização da Rota</h2>
+        <h3 id="rota_id">Id Rota: 1</h3>
+        <form action="">
+            <div class="container">
+                <div class="coluna">
+                    <div class="input_container">
+                        <label>Veículo</label>
+                        <select id="veiculo" name="veiculo">
+                            <option disabled selected>Selecione seu veículo</option>
+                        </select>
+                    </div>
+                    <div class="input_container">
+                        <label>Data de Início da Rota</label>
+                        <input type="date" id="data_inicio" placeholder="Digite a data de início">
+                    </div>
+                    <div class="input_container">
+                        <label>Data de Fim da Rota</label>
+                        <input type="date" id="data_fim" placeholder="Digite a data de fim">
+                    </div>
+                    <div class="input_container">
+                        <label>Km da Viagem</label>
+                        <input type="number" id="km_viagem" placeholder="Digite os Km da viagem">
+                    </div>
+                    <div class="input_container">
+                        <label>Km Atual do Veículo</label>
+                        <input type="number" id="km_atual" placeholder="Digite o Km atual">
+                    </div>
+                    <div class="input_container">
+                        <label>Km Final Previsto</label>
+                        <input type="number" id="km_final" placeholder="Digite o Km final previsto">
+                    </div>
+                    <div class="input_container">
+                        <label>Valor</label>
+                        <input type="number" id="valor" placeholder="Digite o valor em R$">
+                    </div>
+                </div>
+    
+                <div class="coluna">
+                    <div class="input_container">
+                        <label>Tipo de Carga</label>
+                        <select id="tipo_carga" name="tipo_carga">
+                            <option disabled selected>Selecione o tipo de carga</option>
+                        </select>
+                    </div>
+                    <div class="input_container">
+                        <label>Motorista</label>
+                        <select id="motorista" name="motorista">
+                            <option disabled selected>Selecione o motorista</option>
+                        </select>
+                    </div>
+                    <div class="input_container">
+                        <label>Cidade Início da Rota</label>
+                        <input type="text" id="cidade_inicio" placeholder="Digite a cidade de início">
+                    </div>
+                    <div class="input_container">
+                        <label>Cidade Fim da Rota</label>
+                        <input type="text" id="cidade_fim" placeholder="Digite a cidade de fim">
+                    </div>
+                    <div class="input_container">
+                        <label>Estado Início</label>
+                        <input type="text" id="estado_inicio" placeholder="Digite o estado de início">
+                    </div>
+                    <div class="input_container">
+                        <label>Estado Fim</label>
+                        <input type="text" id="estado_fim" placeholder="Digite o estado de fim">
+                    </div>
+                    <div class="input_container">
+                        <label>Forma de Pagamento</label>
+                        <input type="text" id="forma_pagamento" placeholder="Digite a forma de pagamento">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    
+    {% endblock content %}   

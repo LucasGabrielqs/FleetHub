@@ -34,3 +34,9 @@ def listagem_veiculos(request):
 
 def listagem_usuarios(request):
     return render(request, 'dashboard/listagem_usuarios.html')
+
+def criacao_rota(request):
+    return render(request, 'dashboard/criacao_rota.html')
+
+def visualizacao_rota(request):
+    return render(request, 'visualizacao_rota.html')
