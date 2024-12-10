@@ -32,8 +32,6 @@
             </div>
             <hr>
             <div id="sidebar-expansive">
-
-
                 <a href="{% url 'dashboard' %}" class="element-icon"><i class="fa-solid fa-house icon"
                         title="Início"></i>
                     <h3 id="text-init">Início</h3>
@@ -41,26 +39,37 @@
 
                 <a href="{% url 'cadastrar_veiculo' %}" class="element-icon" id="id-veiculos"><i
                         class="fa-solid fa-car icon" title="Veículos"></i>
-                    <h3 id="text-veicles">Veículos</h3>
+                    <h3 class="text-menu-lateral" id="text-veicles">Veículos</h3>
+
+                    <i id="icon_veiculos" class="fa-solid fa-caret-down"
+                        style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
                 <ul id="submenu-veiculos" class="submenu">
-                    <li><a id="submenu-cadastro-veiculos" href="{% url 'cadastrar_veiculo' %}">Cadastro de Veículos</a></li>
+                    <li><a id="submenu-cadastro-veiculos" href="{% url 'cadastrar_veiculo' %}">Cadastro de Veículos</a>
+                    </li>
                     <li><a id="submenu-lista-veiculos" href="{% url 'listagem_usuarios' %}">Lista de Veículos</a></li>
                 </ul>
 
                 <a href="{% url 'cadastrar_usuario' %}" class="element-icon" id="id-usuarios"><i
                         class="fa-solid fa-users icon" title="Usuários"></i>
-                    <h3 id="text-users">Usuários</h3>
+                    <h3 class="text-menu-lateral" id="text-users">Usuários</h3>
+                    <i id="icon_usuarios" class="fa-solid fa-caret-down"
+                        style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+
                 </a>
                 <ul id="submenu-usuarios" class="submenu">
-                    <li><a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Cadastro de usuários</a></li>
+                    <li><a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Cadastro de usuários</a>
+                    </li>
                     <li><a id="submenu-lista-usuarios" href="{% url 'listagem_usuarios' %}">Listar usuários</a></li>
                 </ul>
 
                 <a href="{% url 'criar_reserva' %}" class="element-icon" id="id-reservas"><i
                         class="fa-solid fa-tag icon" title="Reservas"></i>
-                    <h3 id="text-reservations">Reservas</h3>
+                    <h3 class="text-menu-lateral" id="text-reservations">Reservas</h3>
+                    <i id="icon_reservas" class="fa-solid fa-caret-down"
+                        style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+
                 </a>
                 <ul id="submenu-reservas" class="submenu">
                     <li><a id="submenu-criacao-reservas" href="#">Criação de Reserva</a></li>
@@ -68,7 +77,10 @@
                 </ul>
 
                 <a href="" class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
-                    <h3 id="text-routes">Rotas</h3>
+                    <h3 class="text-menu-lateral" id="text-routes">Rotas</h3>
+                    <i id="icon_rotas" class="fa-solid fa-caret-down"
+                        style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+
                 </a>
                 <ul id="submenu-rotas" class="submenu">
                     <li><a id="submenu-criar-rotas" href="#">Criar Rotas</a></li>
@@ -77,7 +89,10 @@
 
                 <a href="{% url 'agendar_manutencao' %}" class="element-icon" id="id-manutencao"><i
                         class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i>
-                    <h3 id="text-maintenance">Manutenção</h3>
+                    <h3 class="text-menu-lateral" id="text-maintenance">Manutenção</h3>
+                    <i id="icon_manutencao" class="fa-solid fa-caret-down"
+                        style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+
                 </a>
                 <ul id="submenu-manutencao" class="submenu">
                     <li><a id="submenu-agendar-manutencao" href="#">Agendar Manutenção</a></li>
@@ -86,7 +101,10 @@
 
                 <a href="" class="element-icon" id="id-abastecimento"><i class="fa-solid fa-droplet icon"
                         title="Abastecimento"></i>
-                    <h3 id="text-supply">Abastecimento</h3>
+                    <h3 class="text-menu-lateral" id="text-supply">Abastecimento</h3>
+                    <i id="icon_abastecimento" class="fa-solid fa-caret-down"
+                        style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+
                 </a>
                 <ul id="submenu-abastecimento" class="submenu">
                     <li><a id="submenu-registro-abastecimento" href="#">Registro de Abastecimento</a></li>

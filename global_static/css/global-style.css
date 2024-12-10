@@ -41,7 +41,9 @@ hr {/* Estilo de barra horizontal*/
 }
 
 
-
+.text-menu-lateral{
+    width: 150px;/*define o tamanho do container de texto*/
+}
 
 
 .submenu {/* Estilos de submenu*/
@@ -187,7 +189,6 @@ hr {/* Estilo de barra horizontal*/
     width: 100%;
     height: 1000px;
 }
-
 
 
 footer{ /*Formatação geral do rodapé*/
