@@ -5,6 +5,14 @@ from django.http import HttpResponse
 def dashboard(request):
     return render(request, 'base.html')
 
+def tela_dashboard(request):
+    contexto = {
+        'range_7': range(7),  # Lista de 0 a 6
+        'range_4': range(4),  # Lista de 0 a 3
+        'range_2': range(2)  # Lista de 0 a 1
+    }
+    return render(request, 'dashboard/dashboard.html', contexto)
+
 def login(request):
     return render(request, 'dashboard/login.html')
 

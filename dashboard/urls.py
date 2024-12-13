@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('dashboards',views.dashboard, name='dashboard'),
+    path('dashboard',views.tela_dashboard, name='tela_dashboard'),
     path('',views.login, name='login'),
     path('cadastrar',views.cadastrar,name='cadastrar'),
     path('recuperar-senha/',views.recuperar_senha, name='recuperar_senha'),
