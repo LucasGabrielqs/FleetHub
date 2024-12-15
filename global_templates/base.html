@@ -140,6 +140,21 @@
             </div>
         </footer>
     </div>
+
+
+    
+    <!-- Caixa de diálogo personalizada -->
+    <div id="custom-confirm">
+        <div class="confirm-box">
+            <p>Confirma que deseja fazer alterações?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-yes" onclick="confirmarAcao()">Sim</button>
+                <button class="confirm-no" onclick="fecharCustomConfirm()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 <script src="{% static 'js/script-base.js' %}"></script>
