@@ -2,16 +2,202 @@
 
 {% load static %}
 
-{% block page_name %}Listagem_Veiculos{% endblock page_name %}
+{% block page_name %}informacoes_usuario{% endblock page_name %}
 
-{% block title %}Listagem Veiculos{% endblock title %}
+{% block title %}Informações de Usuário{% endblock title %}
 {% block estilos %}
-<link rel="stylesheet" href="{% static 'css/listagem_veiculos.css' %}">
+<link rel="stylesheet" href="{% static 'css/informacoes_usuarios.css' %}">
 {% endblock estilos %}
 
 {% block content %}
+<div id='container-block-content'>
+
+    <section id="conteudo-secundario">
+        <form>
+
+
+            <h2 id='page_title'>Informações de Usuário</h2>
+            <form action="">
+                <div class="container">
+
+                    <div class="menu_esquerdo">
+                        <h3 class="form-title">Dados do Usuário:</h3>
+
+                        <div class="input_container">
+                            <label>Nome Completo</label>
+                            <input class="input_detect" type="text" id="nome" value="Aluisio Igor Rego Fontes"
+                                placeholder="Digite o Novo Nome">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Email</label>
+                            <input class="input_detect" type="text" id="email"
+                                value="aluisio.rego@escolar.ifrn.edu.br" placeholder="Digite o novo E-mail">
+                        </div>
+
+                        <div class="input_container">
+                            <label>CPF</label>
+                            <input class="input_detect" type="text" value="111.222.333-44" id="cpf"
+                                maxlength="14" placeholder="Digite o CPF">
+                        </div>
+
+                        <div class="campo_duplo">
+
+
+                            <select class="input_detect" name="select-estado" id="select-ddd-inter">
+                                <option value="RN" selected>+55</option>
+                            </select>
+
+                            <div class="input_container">
+                                <label>Telefone</label>
+                                <input class="input_detect" type="text" value="8023456789" id="telefone"
+                                    placeholder="Numero de Telefone">
+                            </div>
+
+                        </div>
+
+                        <div class="input_container">
+                            <label>Tipo Usuário</label>
+                            <select class="input_detect" id="estados" name="estados" disabled>
+                                <option selected>Motorista</option>
+                                <option value="Novo">Técnico</option>
+                                <option value="Usado">Gestor</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="input_container">
+                            <label>Senha</label>
+                            <input class="input_detect" type="text" id="nome" value="**************"
+                                placeholder="Digite a Nova Senha">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Código do Usuário</label>
+                            <input class="input_detect" type="text" id="codigo-usuario" value="29110">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Status</label>
+                            <select class="input_detect" id="status" name="status">
+                                <option selected>Ativo</option>
+                                <option value="Novo">Inativo</option>
+                            </select>
+                        </div>
+
+
+                    </div>
 
 
 
 
+                    <div class="menu_direito">
+                        <div class="logo-img">
+                            <input class="input_detect" type="file" name="img" id="img">
+                        </div>
+
+
+                        <div class="input_container">
+                            <label>Rua</label>
+                            <input class="input_detect" type="text" id="input-rua"
+                                value="Avenida Independência">
+                        </div>
+
+
+                        <div class="input_container">
+                            <label>Bairro</label>
+                            <input class="input_detect" type="text" id="input-bairro" value="Centro">
+                        </div>
+                        <div class="input_container">
+                            <label>Cidade</label>
+                            <input class="input_detect" type="text" id="input-cidade" value="Pau dos Ferros">
+                        </div>
+
+                        <div class="estado-cep">
+
+                            <select class="input_detect" name="select-estado" id="select-estado">
+                                <option value="">Selecione o estado</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN" disabled selected>RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                            <div class="input_container">
+                                <label>CEP</label>
+                                <input class="input_detect" type="text" id="input-cep" value="59900-000">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+
+                    <div class="menu_esquerdo">
+                        <h3 class="form-title">Outras Informações</h3>
+                        <div class="input_container">
+                            <label>Usuário de Cadastro</label>
+                            <input type="text" id="usuario-cadastro" value="Admin" disabled>
+                        </div>
+                        <div class="input_container">
+                            <label>Usuário Alteração</label>
+                            <input type="text" id="usuario-alteracao" value="Admin" disabled>
+                        </div>
+
+                    </div>
+
+
+                    <div class="menu_direito-2">
+                        <h3 class="form-title"></h3>
+                        <div class="input_container">
+                            <label>Data de Cadastro</label>
+                            <input type="text" id="data-cadastro" value="20/10/2024" disabled>
+                        </div>
+                        <div class="input_container">
+                            <label>Senha</label>
+                            <input type="text" id="data-alteracao" value="27/10/2024" disabled>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </form>
+
+    </section>
+
+    <div class="rodape" id="rodape">
+        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+        <button type="submit" class="btn-submit">Salvar Edição</button>
+    </div>
+</div>
 {% endblock %}
+
+{% block scripts_extras %}
+<script src={% static "js/info-usuario-script.js" %}></script>
+{% endblock  %}

@@ -51,3 +51,6 @@ def criacao_rota(request):
 
 def visualizacao_rota(request):
     return render(request, 'dashboard/visualizacao_rota.html')
+
+def informacoes_usuario(request):
+    return render(request, 'dashboard/informacoes_usuarios.html')
