@@ -22,9 +22,6 @@ def cadastrar(request):
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
 
-def cadastrar_veiculo(request):
-    return render(request, 'dashboard/cadastrar_veiculos.html')
-
 def cadastro_usuario(request):
     return render(request,'dashboard/cadastro_usuario_app.html')
 
@@ -39,9 +36,6 @@ def criar_reserva(request):
 
 def editar_reserva(request):
     return render(request, 'dashboard/editar_reserva.html')
-
-def listagem_veiculos(request):
-    return render(request, 'dashboard/listagem_veiculos.html')
 
 def listagem_usuarios(request):
     return render(request, 'dashboard/listagem_usuarios.html')
