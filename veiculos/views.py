@@ -6,3 +6,6 @@ def listagem_veiculos(request):
 
 def cadastrar_veiculo(request):
     return render(request, 'veiculos/cadastrar_veiculos.html')
+
+def informacoes_veiculo(request):
+    return render(request, 'veiculos/informacoes_veiculos.html')
