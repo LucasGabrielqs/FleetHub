@@ -49,9 +49,6 @@ function cancelar_alteracoes(){
 }
 
 
-
-
-
 //lógica para caixa de diálogo personalizada
 const custom_confirm = document.getElementById('custom-confirm');
 // Mostra o modal personalizado

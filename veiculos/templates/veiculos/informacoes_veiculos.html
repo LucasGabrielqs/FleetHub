@@ -4,7 +4,7 @@
 
 {% block page_name %}informacoes_veiculo{% endblock page_name %}
 
-{% block title %}Informações do Veiculo{% endblock title %}
+{% block title %}Informações do Veículo{% endblock title %}
 {% block estilos %}
 <link rel="stylesheet" href="{% static 'css/info_veiculo_style.css' %}">
 {% endblock estilos %}
@@ -13,53 +13,41 @@
 
 <section id="conteudo-secundario">
     <form>
-
-
         <h2 id='page_title'>Informações do Veículo</h2>
         <form action="">
             <div class="container">
-
                 <div class="menu_esquerdo">
-
                     <div class="input_container">
                         <label>Modelo</label>
-                        <input class="input_detect input" type="text" id="modelo" value="Strada"
-                            placeholder="Digite o Novo Nome">
+                        <input class="input_detect input" type="text" id="modelo" value="Strada" placeholder="Digite o nome do modelo do veículo">
                     </div>
 
                     <div class="input_container">
                         <label>Marca</label>
-                        <input class="input_detect input" type="text" id="marca"
-                            value="Fiat" placeholder="Digite o novo E-mail">
+                        <input class="input_detect input" type="text" id="marca" value="Fiat" placeholder="Digite a marca do veículo">
                     </div>
 
                     <div class="input_container">
                         <label>Valor da Compra</label>
-                        <input class="input_detect input" type="text" value="R$ 136.000,00" id="valor-carro"
-                            maxlength="14" placeholder="Digite o CPF">
+                        <input class="input_detect input" type="text" value="R$ 136.000,00" id="valor-carro" maxlength="14" placeholder="Digite o valor da compra">
                     </div>
 
                     <div class="campo_duplo">
-
                         <div class="input_container">
                             <label>Ano</label>
-                            <input class="input_detect input" type="text" value="2024" id="ano-carro"
-                                placeholder="Numero de Telefone">
+                            <input class="input_detect input" type="text" value="2024" id="ano-carro" placeholder="Digite o ano do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>KM</label>
-                            <input class="input_detect input" type="text" value="10.000 Km" id="km-carro"
-                                placeholder="Numero de Telefone">
+                            <input class="input_detect input" type="text" value="10.000 Km" id="km-carro" placeholder="Digite a quilometragem">
                         </div>
-
                     </div>
-                    <div class="campo_duplo">
 
+                    <div class="campo_duplo">
                         <div class="input_container">
                             <label>Motor</label>
-                            <input class="input_detect input" type="text" value="130 CV" id="motor-carro"
-                                placeholder="Numero de Telefone">
+                            <input class="input_detect input" type="text" value="130 CV" id="motor-carro" placeholder="Digite a potência do motor">
                         </div>
                         <div class="input_container">
                             <label>Status</label>
@@ -67,46 +55,30 @@
                                 <option selected>No Pátio</option>
                             </select>
                         </div>
-
                     </div>
+
                     <div class="campo_duplo">
-
-
-
                         <div class="input_container">
                             <label>Placa</label>
-                            <input class="input_detect input" type="text" value="RQPI-2E50" id="placa-carro"
-                                placeholder="Digite a placa do Veículo">
+                            <input class="input_detect input" type="text" value="RQPI-2E50" id="placa-carro" placeholder="Digite a placa do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>Chassi</label>
-                            <input  class="input_detect input" type="text" value="8EJaLGfcC1HF44180" id="chassi-carro"
-                                placeholder="Digite o chassi do veiculo">
+                            <input class="input_detect input" type="text" value="8EJaLGfcC1HF44180" id="chassi-carro" placeholder="Digite o número do chassi">
                         </div>
-
                     </div>
-
-
-
                 </div>
-
-
-
 
                 <div class="menu_direito">
                     <div class="logo-img input_detect">
-                        <img class="input_detect" src="fiat-strada-2025-jpg 1.png" alt="" style="width: 100%;">
-                        <input  type="file" accept=".jpg, .jpeg, .png" name="img" id="img" style="display: none;">
+                        <img class="input_detect" src="{% static "img/fiat-strada-2025-jpg.png" %}" alt="" style="width: 100%;">
+                        <input type="file" accept=".jpg, .jpeg, .png" name="img" id="img" style="display: none;">
                     </div>
-
-                    
-
                 </div>
             </div>
 
             <div class="menu-inferior">
-
                 <div class="menu_esquerdo">
                     <h3 class="form-title">Outras Informações</h3>
                     <div class="input_container">
@@ -117,9 +89,7 @@
                         <label>Usuário Alteração</label>
                         <input class="input" type="text" id="usuario-alteracao" value="Admin" disabled>
                     </div>
-
                 </div>
-
 
                 <div class="menu_direito-2">
                     <h3 class="form-title"></h3>
@@ -132,18 +102,18 @@
                         <input class="input" type="text" id="data-alteracao" value="27/10/2024" disabled>
                     </div>
                 </div>
-
             </div>
 
-
-
         </form>
+    </section>
 
-</section>
-
+    <div class="rodape" id="rodape">
+        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+        <button type="submit" class="btn-submit">Salvar Edição</button>
+    </div>
 
 {% endblock %}
 
 {% block scripts_extras %}
-<script str='{% static "js/info-veiculo-script.js" %}'></script>
+<script src='{% static "js/info-veiculo-script.js" %}'></script>
 {% endblock scripts_extras %}
