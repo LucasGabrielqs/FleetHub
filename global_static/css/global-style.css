@@ -193,7 +193,7 @@ hr {/* Estilo de barra horizontal*/
 
 footer{ /*Formatação geral do rodapé*/
     width: 100%;
-    height: 161px;
+    height: auto;
     margin: 0;
     display: flex;
     flex-direction: row;
@@ -211,3 +211,5 @@ footer #logo_fleethub{/*Formatação da logo*/
 .footer-center{/*Ajuste do texto centraol do rodapé*/
     margin-top:140px;
 }
+
+
