@@ -32,7 +32,7 @@
             </div>
             <hr>
             <div id="sidebar-expansive">
-                <a href="{% url 'dashboard' %}" class="element-icon"><i class="fa-solid fa-house icon"
+                <a href="{% url 'tela_dashboard' %}" class="element-icon"><i class="fa-solid fa-house icon"
                         title="Início"></i>
                     <h3 id="text-init">Início</h3>
                 </a>
@@ -51,7 +51,7 @@
                     <li><a id="submenu-lista-veiculos" href="{% url 'listagem_usuarios' %}">Lista de Veículos</a></li>
                 </ul>
 
-                <a href="{% url 'cadastrar_usuario' %}" class="element-icon" id="id-usuarios"><i
+                <a href="{% url 'informacoes_usuario' %}" class="element-icon" id="id-usuarios"><i
                         class="fa-solid fa-users icon" title="Usuários"></i>
                     <h3 class="text-menu-lateral" id="text-users">Usuários</h3>
                     <i id="icon_usuarios" class="fa-solid fa-caret-down"
@@ -59,7 +59,7 @@
 
                 </a>
                 <ul id="submenu-usuarios" class="submenu">
-                    <li><a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Cadastro de usuários</a>
+                    <li><a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Criar usuário</a>
                     </li>
                     <li><a id="submenu-lista-usuarios" href="{% url 'listagem_usuarios' %}">Listar usuários</a></li>
                 </ul>
@@ -82,7 +82,7 @@
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
-                
+
                 <ul id="submenu-rotas" class="submenu">
                     <li><a id="submenu-criar-rotas" href="{% url 'criacao_rota' %}">Criar Rotas</a></li>
                     <li><a id="submenu-gerenciar-rotas" href="{% url 'visualizacao_rota' %}">Gerenciar Rotas</a></li>
@@ -140,6 +140,21 @@
             </div>
         </footer>
     </div>
+
+
+
+    <!-- Caixa de diálogo personalizada -->
+    <div id="custom-confirm">
+        <div class="confirm-box">
+            <p>Confirma que deseja fazer alterações?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-yes" onclick="confirmarAcao()">Sim</button>
+                <button class="confirm-no" onclick="fecharCustomConfirm()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 <script src="{% static 'js/script-base.js' %}"></script>

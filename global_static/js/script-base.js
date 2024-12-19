@@ -232,12 +232,19 @@ document.addEventListener("DOMContentLoaded", function () {//Lógica de Identifi
             verificar_est(icon_usuarios)
             break;
 
+        case "informacoes_usuario":
+            submenu_usuarios.style.display = 'block';
+            container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_est(icon_usuarios)
+            break;
+
         case "criar_reserva":
             submenu_reservas.style.display = 'block';
             criacao_reservas.style.color = 'rgba(21, 52, 72, 0.4)';
             container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
             verificar_est(icon_reservas)
             break;
+
     }
 });
 
