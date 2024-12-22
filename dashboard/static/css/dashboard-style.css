@@ -78,7 +78,13 @@
     border-radius: 12px;
     box-shadow: var(--box-shadow-reservas);
 }
-
+.vertodas-a{
+    text-decoration: none;
+    border-radius: 12px;
+}
+.vertodas-a:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
 .vertodas,
 .nome-carro,
 .numero-reserva,
@@ -93,7 +99,7 @@
 }
 
 .numero-placa,
-.estado-carro {
+.estado-carro{
     width: 84px;
     height: 20px;
     font-size: 12px;
@@ -106,14 +112,24 @@
     justify-content: center;
     margin-top: 0;
 }
+.ponto-verde{
+    background-color: var(--color-green-text-3);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
 
 .numero-placa {
     color: var(--color-menu-off);
     border-color: var(--color-menu-off);
     margin-left: 20px;
 }
+.estado-carro h2{
+    font-size: 12px;
 
+}
 .estado-carro {
+    gap: 5px;
     width: 72px;
     color: var(--color-green-text-3);
     border-color: var(--color-green-text-3);
@@ -132,19 +148,62 @@
 .menu-reservas button {
     width: 175px;
     height: 32px;
-    border: none;
+    border: 2px;
 }
 
-#button-hoje {
+.button-hoje {
+    margin-left: 2px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+
+
+.button-hoje-selecionado {
+    margin-left: 2px;
     border-radius: 10px;
     background-color: var(--color-white);
 }
+.scroll-container{
+    overflow-x: scroll;
+    overflow-x: hidden;
+}
+.scroll-container::-webkit-scrollbar{
+    width: 2px;
+}
+/* Cor do trilho da barra */
+.scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
-#button-proximosdias {
+/* Cor da barra */
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Cor da barra ao passar o mouse */
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.button-proximosdias {
+    margin-right: 2px;
+    border-radius: 10px;
     color: var(--color-menu-off);
     font-size: 14px;
     background-color: transparent;
+    transition: 0.5s ease;
 }
+.button-proximosdias-selecionado {
+    margin-right: 2px;
+    border-radius: 10px;
+    color: var(--color-menu-off);
+    font-size: 14px;
+    background-color: var(--color-white);
+    transition: 0.5s ease;
+}
+
+
 
 .numero-telefone,
 .data-entrega {
@@ -287,11 +346,15 @@
 }
 
 .total-pedidos {
+    width: 1100px;
     display: flex;
     flex-direction: column;
+    height: 200px;
 }
 
 .usuario-info {
+    height: 40px;
+
     margin: 8px;
 }
 
@@ -353,4 +416,10 @@
     gap: 10px;
     list-style: none;
     color: var(--text-color-dashboard);
+}
+.list-users{
+    display: flex;
+    width: 700px;
+    height: 440px;
+    flex-direction: column;
 }
