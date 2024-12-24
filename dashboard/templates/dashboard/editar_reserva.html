@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_name %}editar_reserva{% endblock page_name %}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% block title %}Editar Reserva{% endblock title %}
+
+{% block estilos %}   
+<link rel="stylesheet" href="{% static 'css/editar_reserva.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+{% endblock estilos %}
+
+{% block content %}
+<section id="conteudo-secundario">
+    <h2 id='page_title'>Editar Reserva</h2>
+    <form action="">
+        <div class="container">
+            <div class="coluna">
+                <div class="input_container">
+                    <label>Veículo</label>
+                    <input type="text" value="Prisma">
+                </div>
+                <div class="input_container">
+                    <label>Data da Reserva</label>
+                    <input type="date" value="2024-10-23">
+                </div>
+                <div class="input_container">
+                    <label>Data da Entrega</label>
+                    <input type="date" value="2024-10-30">
+                </div>
+                <div class="input_container">
+                    <label>Motorista</label>
+                    <select >
+                        <option selected>Lizandro</option>
+                    </select>
+                </div>
+                <div class="input_container">
+                    <label>Código da Reserva</label>
+                    <input type="number" value="25">
+                </div>
+            </div>
+
+            <div class="coluna">
+                <div class="input_container">
+                    <label>Idade do Condutor</label>
+                    <input type="text" value="20 Anos">
+                </div>
+                <div class="input_container">
+                    <label>Valor</label>
+                    <input type="text" value="R$ 500,00">
+                </div>
+                <div class="input_container">
+                    <label>Forma de Pagamento</label>
+                    <input type="text" value="Cartão de Crédito">
+                </div>
+                <div class="input_container">
+                    <label>Status</label>
+                    <select>
+                        <option selected>Pendente</option>
+                        <option>Confirmado</option>
+                        <option>Cancelado</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h3 class="titulo-secao">Outras Informações</h3>
+            <div class="coluna">
+                <div class="input_container">
+                    <label>Usuário de Cadastro</label>
+                    <input type="text" value="Admin">
+                </div>
+                <div class="input_container">
+                    <label>Usuário Alteração</label>
+                    <input type="text" value="Admin">
+                </div>
+            </div>
+            <div class="coluna">
+                <div class="input_container">
+                    <label>Data de Cadastro</label>
+                    <input type="date" value="2024-10-20">
+                </div>
+                <div class="input_container">
+                    <label>Data de Alteração</label>
+                    <input type="date" value="2024-10-27">
+                </div>
+            </div>
+        </div>
+
+        <div class="rodape">
+            <button type="reset" class="btn-reset">Cancelar</button>
+            <button type="submit" class="btn-submit">Salvar Edição</button>
+        </div>
+    </form>
+</section>
+{% endblock content %}   

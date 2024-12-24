@@ -35,6 +35,34 @@ user_menu.addEventListener('click', () => {
     }
 });
 
+const page_title = document.getElementById('page_title');
+const submenu_veiculos = document.getElementById('submenu-veiculos')
+const submenu_usuarios = document.getElementById('submenu-usuarios')
+const submenu_reservas = document.getElementById('submenu-reservas')
+const submenu_rotas = document.getElementById('submenu-rotas')
+const submenu_manutencao = document.getElementById('submenu-manutencao')
+const submenu_abastecimento = document.getElementById('submenu-abastecimento')
+
+
+if (page_title.innerText == "Lista de Usuários" || page_title.innerText == "Cadastro de Usuário" || page_title.innerText == "Informações de Usuário"){
+    submenu_usuarios.style.display = 'block';
+}
+else if (page_title.innerText == "Cadastrar Veículo" || page_title.innerText == "Lista de Veiculos" || page_title.innerText == "Informações do Veiculo"){
+    submenu_veiculos.style.display = 'block';
+}
+else if (page_title.innerText == "Editar Manutenção" || page_title.innerText == "Agendar Manutenção" || page_title.innerText == "Listas de Manutenção"){
+    submenu_manutencao.style.display = 'block';
+}
+else if (page_title.innerText == "Registro de Abastecimento" || page_title.innerText == "Lista de Abastecimento" || page_title.innerText == "Registro de Abastecimento"){
+    submenu_abastecimento.style.display = 'block';
+}
+else if (page_title.innerText == "Criação de Reserva" || page_title.innerText == "Lista de Reservas" || page_title.innerText == "Editar Reserva"){
+    submenu_reservas.style.display = 'block';
+}
+else if (page_title.innerText == "Visualização da Rota" || page_title.innerText == "Lista de Rotas" || page_title.innerText == "Criação da Rota"){
+    submenu_rotas.style.display = 'block';
+}
+
 expand_button.addEventListener('click', () =>{//lógica para a barra lateral
     if (sidebar_is_open()){
         alter_element_icon()

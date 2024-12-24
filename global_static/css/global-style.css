@@ -40,14 +40,49 @@ hr {/* Estilo de barra horizontal*/
     margin-top: 20px;
 }
 
+
+.text-menu-lateral{
+    width: 150px;/*define o tamanho do container de texto*/
+}
+
+
+.submenu {/* Estilos de submenu*/
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+
+}
+
+.submenu li a {
+    display: block;
+    font-size: 14px;
+    color: var(--color-white);
+    padding: 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-left: 34px;
+    height: 20px;
+    width: 180px;
+}
+
+.submenu li a:hover {
+    background-color:var(--menu-modulos-color);
+}
+
+#submenu-abastecimento, #submenu-manutencao, #submenu-rotas, #submenu-reservas, #submenu-usuarios, #submenu-veiculos{
+    display: none;
+}
+
+
+
+
+
 #exit{/* Seleciona o btão de sair*/
     text-decoration: none;
 }
 
 /* Seleciona o ícone do usuário */
 #user_icon {
-    width: 16px;
-    height: 16px;
     transition: 400ms;
 }
 
@@ -88,7 +123,7 @@ hr {/* Estilo de barra horizontal*/
 #sidebar-expansive {
     background-color: var(--color-green-menu);
     width: 260px;
-    height: 1020px;
+    height: 100%
 }
 
 /* Seleciona os links com ícones na sidebar */
@@ -102,12 +137,12 @@ hr {/* Estilo de barra horizontal*/
     margin-top: 10px;
     width: 230px;
     height: 44px;
+    border-radius: 10px;
 }
 
 /* Efeito hover para os links com ícones */
 .element-icon:hover {
     background-color: var(--menu-modulos-color);
-    border-radius: 10px;
     margin-left: 15px;
 }
 
@@ -144,4 +179,83 @@ hr {/* Estilo de barra horizontal*/
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     margin-left: 35px;
+}
+
+#content-and-footer{
+    display: grid;
+    grid-template-rows: 1fr auto;
+    width: 100%;
+    height: 1000px;
+}
+
+
+footer{ /*Formatação geral do rodapé*/
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(239,240,244,0.4);
+}
+
+footer #logo_fleethub{/*Formatação da logo*/
+    width: 140px;
+    height: 107px;
+}
+
+
+.footer-center{/*Ajuste do texto centraol do rodapé*/
+    margin-top:140px;
+}
+
+
+
+
+
+
+
+
+
+/* Estilização do fundo escuro */
+#custom-confirm {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Estilização da caixa de diálogo */
+.confirm-box {
+    background: white;
+    width: 300px;
+    margin: 20% auto;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botões */
+.confirm-buttons button {
+    margin: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-yes {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.confirm-no {
+    background-color: #f44336;
+    color: white;
 }

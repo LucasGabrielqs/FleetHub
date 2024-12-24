@@ -1,90 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_name %}criar_reserva{% endblock page_name %}
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criação de Reserva</title>
-    <link rel="stylesheet" href="{% static 'css/criacao_reserva.css' %}">
-    <link rel="stylesheet" href="{% static 'css/sidebar-style.css' %}">
-   <link rel="stylesheet" href="{% static 'css/footer-style.css' %}">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <aside id="sidebar">
-        <div id="sidebar-menu">
+    {% block title %}Criação de Reserva{% endblock title %}
+    {% block estilos %}<link rel="stylesheet" href="{% static 'css/criacao_reserva.css' %}">{% endblock estilos %}
+{% block content %}
+<form class="form-reserva">
+    <h2 id='page_title'>Criação de Reserva</h2>
+    <div class="campo-lado-a-lado">
+        <div class="campo">
+        <label for="veiculo">Veículo</label>
+        <input type="text" id="veiculo" name="veiculo" placeholder="Digite o veículo" required>
+        
+        <label for="data-reserva">Data de Reserva</label>
+        <input type="date" id="data-reserva" name="data-reserva" required>
+        
+        <label for="data-entrega">Data de Entrega</label>
+        <input type="date" id="data-entrega" name="data-entrega" required>
+        
+        <label for="motorista">Motorista</label>
+        <input type="text" id="motorista" name="motorista" placeholder="Digite o nome do motorista" required>
         </div>
-            <div id="user-menu-sidebar">
-                <div id="user_menu">
-                    <img id="img_perfil" src="{% static 'img/img_perfil.jpg' %}" alt="" title="Imagem do Perfil">
-                    <h1 id="gestor_name">Thiago</h1>
-                    <i id="user_icon" class="fa-solid fa-caret-down" style="color: #a1a1aa;"></i>
-                </div>
-                <hr>
-                <div id="sidebar-expansive">
-                    <a href="" class="element-icon"><i class="fa-solid fa-house icon" title="Início"></i><h3 id="text-init">Início</h3></a>
-                    <a href="{% url 'cadastrar_veiculo' %}" class="element-icon"><i class="fa-solid fa-car icon" title="Veículos"></i><h3 id="text-veicles">Veículos</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-users icon" title="Usuários"></i><h3 id="text-users">Usuários</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-tag icon" title="Reservas"></i><h3 id="text-reservations">Reservas</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-route icon" title="Rotas"></i><h3 id="text-routes">Rotas</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i><h3 id="text-maintenance">Manutenção</h3></a>
-                    <a href="" class="element-icon"><i class="fa-solid fa-droplet icon" title="Abastecimento"></i><h3 id="text-supply">Abastecimento</h3></a>
-                </div>
-            </div>
-            <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
-    </aside>
-    <form class="form-reserva">
-        <h2>Criação de Reserva</h2>
-      
-        <div class="campo-lado-a-lado">
-          <div class="campo">
-            <label for="veiculo">Veículo</label>
-            <input type="text" id="veiculo" name="veiculo" placeholder="Digite o veículo" required>
-            
-            <label for="data-reserva">Data de Reserva</label>
-            <input type="date" id="data-reserva" name="data-reserva" required>
-            
-            <label for="data-entrega">Data de Entrega</label>
-            <input type="date" id="data-entrega" name="data-entrega" required>
-            
-            <label for="motorista">Motorista</label>
-            <input type="text" id="motorista" name="motorista" placeholder="Digite o nome do motorista" required>
-          </div>
 
-          <div class="campo">
-            <label for="idade">Idade do Condutor</label>
-            <input type="number" id="idade" name="idade" placeholder="Digite a idade do condutor" required>
-            
-            <label for="valor">Valor</label>
-            <input type="text" id="valor" name="valor" placeholder="Digite o valor" required>
-            
-            <label for="forma-pagamento">Forma de Pagamento</label>
-            <select id="forma-pagamento" name="forma-pagamento" required>
-              <option value="cartao">Cartão de Crédito</option>
-              <option value="boleto">Boleto Bancário</option>
-              <option value="pix">Pix</option>
-            </select>
-          </div>
+        <div class="campo">
+        <label for="idade">Idade do Condutor</label>
+        <input type="number" id="idade" name="idade" placeholder="Digite a idade do condutor" required>
+        
+        <label for="valor">Valor</label>
+        <input type="text" id="valor" name="valor" placeholder="Digite o valor" required>
+        
+        <label for="forma-pagamento">Forma de Pagamento</label>
+        <select id="forma-pagamento" name="forma-pagamento" required>
+            <option value="cartao">Cartão de Crédito</option>
+            <option value="boleto">Boleto Bancário</option>
+            <option value="pix">Pix</option>
+        </select>
         </div>
-      
-        <div class="botoes">
-          <button type="button" class="cancelar">Cancelar</button>
-          <button type="submit" class="salvar">Salvar</button>
-        </div>
-    </form>
-    <footer>
-        <div class="footer-left">
-            <h1>Fleet Hub</h1>
-            <p>Endereço: Avenida Independência, Centro</p>
-            <p>Email: fleethub.sac@gmail.com</p>
-            <p>CEP: 59900-000 Telefone: (84) 43351-3454</p>
-        </div>
-        <div class="footer-center">
-            <p>CopyRight @2024 Fleet Hub </p>
-        </div>
-        <div class="footer-right">
-            <img id="logo_fleethub" src="{% static 'img/logo_fleethub.png' %}" alt="Logo">
-        </div>
-    </footer>
-</body>
-<script src="{% static 'js/script.js' %}"></script>
-</html>
+    </div>
+    
+    <div class="botoes">
+        <button type="button" class="cancelar">Cancelar</button>
+        <button type="submit" class="salvar">Salvar</button>
+    </div>
+</form>
+{% endblock content %}

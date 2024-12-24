@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_name %}registro_abastecimento{% endblock page_name %}
+
+{% block title %}Registro de Abastecimento{% endblock title %}
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/registro_abastecimento.css' %}">
+{% endblock estilos %}
+
+{% block content %}
+
+<div id='container-block-content'>
+
+    <section id="conteudo-secundario">
+        <form>
+
+
+            <h2 id='page_title'>Registro de Abastecimento</h2>
+            <form action="">
+                <div class="container">
+
+                    <div class="menu_esquerdo">
+
+                        <div class="input_container">
+                            <label>Veículo</label>
+                            <select class="input_detect" name="select-estado" id="select-status-carro">
+                                <option selected>Strada</option>
+                                <option selected>Hilux</option>
+                            </select>
+                        </div>
+
+                        <div class="input_container">
+                            <label>Km Atual</label>
+                            <input class="input_detect input" type="text" value="30.000 Km" id="valor-compra"
+                                maxlength="14" placeholder="Digite a Quilometragem do veículo">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Tipo de Combustível</label>
+                            <select class="input_detect" name="select-estado" id="select-status-carro">
+                                <option selected>Gasolina</option>
+                                <option selected>Díesel</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="input_container">
+                            <label>Motorista</label>
+                            <select class="input_detect" name="select-estado" id="select-status-carro">
+                                <option selected>Lizandro</option>
+                                <option selected>Lázaro Ramos</option>
+                            </select>
+                        </div>
+
+                            <div class="input_container">
+                                <label>Quantidade em Litros</label>
+                                <input class="input_detect input" type="text" value="25 Litros" id="ka-carro"
+                                    placeholder="Digite a Quantidade em Litros">
+                            </div>
+
+
+
+                            <div class="input_container">
+                                <label>Valor em R$</label>
+                                <input class="input_detect input" type="text" value="R$ 130,00" id="motor-carro"
+                                    placeholder="Digite o valor em R$">
+                            </div>
+
+                            <div class="input_container">
+                                <label>Código do Abastecimento</label>
+                                <input class="input_detect input" type="text" value="2345345234" id="motor-carro"
+                                    placeholder="Digite o valor em R$">
+                            </div>
+
+                    </div>
+
+
+
+
+                    <div class="menu_direito">
+                        <div class="nota-img">
+                            <img class="input_detect img-nota-fiscal" src="{% static 'img/nota-fiscal.webp' %}" alt="">
+                            <input  type="file" name="img" id="img" style="display: none;">
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+
+                    <div class="menu_esquerdo">
+                        <h3 class="form-title">Outras Informações</h3>
+                        <div class="input_container">
+                            <label>Usuário de Cadastro</label>
+                            <input class="input" type="text" id="usuario-cadastro" value="Admin" disabled>
+                        </div>
+                        <div class="input_container">
+                            <label>Usuário Alteração</label>
+                            <input class="input" type="text" id="usuario-alteracao" value="Admin" disabled>
+                        </div>
+
+                    </div>
+
+
+                    <div class="menu_direito-2">
+                        <h3 class="form-title"></h3>
+                        <div class="input_container">
+                            <label>Data de Cadastro</label>
+                            <input class="input" type="text" id="data-cadastro" value="20/10/2024" disabled>
+                        </div>
+                        <div class="input_container">
+                            <label>Senha</label>
+                            <input class="input" type="text" id="data-alteracao" value="27/10/2024" disabled>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </form>
+
+    </section>
+
+    <div class="rodape" id="rodape">
+        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+        <button type="submit" class="btn-submit">Salvar Edição</button>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts_extras %}
+<script src={% static "js/abastecimento-script.js" %}></script>
+{% endblock  %}

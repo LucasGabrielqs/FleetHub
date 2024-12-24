@@ -3,11 +3,6 @@ body {
     background-color: white;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
 }
 
 .form-container {
@@ -115,52 +110,13 @@ textarea {
     color: #fff;              
 }
 
-.sidebar {
-    width: 15%;
-    height: 100vh; 
-    position: fixed; 
-    top: 0;
-    left: 0;
-    background-color: #10B981;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    font-family: 'DM Sans', sans-serif;
-}
-.sidebar .menu ul {
-    list-style: none;
-    color: #EFF0F4;
-}
-
-.sidebar .menu ul li {
-    margin: 10px 0;
-}
-.sidebar .menu ul li a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.sidebar .menu ul li a:hover {
-    background-color: #005c00;
-}
-body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f4f4f4;
-}
 .main-content {
     background-color: white;
     width: 100%;
     padding: 20px;
 }
 
-h1 {
+#page_title{
     font-size: 24px;
     margin-bottom: 20px;
 }
@@ -188,45 +144,6 @@ input, select {
     border-radius: 4px;
     background-color: transparent;
     color: #333;
-}
-footer{ 
-    width: 1200px;
-    height: 161px;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(239,240,244,0.4);
-    margin-left: 240px;
-}
-
-footer #logo_fleethub{
-    width: 140px;
-    height: 107px;
-}
-
-.footer-left, .footer-right{
-    margin: 30px;
-}
-.footer-center{
-    margin-top:140px;
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.sidebar {
-    width: 240px;
-    background-color: #10B981;
-    color: white;
-    padding: 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
 }
 
 .profile {
@@ -276,58 +193,4 @@ footer #logo_fleethub{
 }
 .dropdown-arrow {
     font-size: 12px;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #005c00;
-    margin: 10px 0;
-}
-
-.menu ul {
-    list-style: none;
-    padding: 0;
-}
-
-.menu ul li {
-    position: relative;
-    margin: 15px 0;
-}
-
-.menu ul li a {
-    text-decoration: none;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-.menu ul li a:hover {
-    background-color: #005c00;
-}
-
-.menu ul li .submenu {
-    list-style: none;
-    padding-left: 20px;
-    margin-top: 5px;
-    display: none;
-}
-
-.menu ul li.dropdown:hover .submenu {
-    display: block;
-}
-
-.menu ul li .submenu li a {
-    font-size: 14px;
-    color: #c2f0c2;
-    padding: 5px;
-    border-radius: 3px;
-}
-
-.menu ul li .submenu li a:hover {
-    background-color: #004700;
 }

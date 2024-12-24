@@ -4,12 +4,6 @@
     --menu-modulos-color:rgba(255,255,255,0.3);
 }
 
-#content{
-    display: grid;
-    width: 100%;
-    grid-template-columns: auto 1fr;
-    height: 100%;
-}
 
 
 /* Seleciona o body da página */
@@ -32,7 +26,6 @@ hr {/* Estilo de barra horizontal*/
     display: flex;
     width: 260px;
     position: relative;
-    height: 100%;
 }
 
 /* Seleciona o menu de usuário dentro da sidebar */
@@ -46,6 +39,42 @@ hr {/* Estilo de barra horizontal*/
     background-color: var(--color-white);
     margin-top: 20px;
 }
+
+
+
+
+
+.submenu {/* Estilos de submenu*/
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+    display: block;
+
+}
+
+.submenu li a {
+    display: block;
+    font-size: 14px;
+    color: var(--color-white);
+    padding: 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-left: 34px;
+    height: 20px;
+    width: 180px;
+}
+
+.submenu li a:hover {
+    background-color:var(--menu-modulos-color);
+}
+
+#submenu-abastecimento, #submenu-manutencao, #submenu-rotas, #submenu-reservas, #submenu-usuarios, #submenu-veiculos{
+    display: none;
+}
+
+
+
+
 
 #exit{/* Seleciona o btão de sair*/
     text-decoration: none;
@@ -95,7 +124,7 @@ hr {/* Estilo de barra horizontal*/
 #sidebar-expansive {
     background-color: var(--color-green-menu);
     width: 260px;
-    height: 100%;
+    height: 100%
 }
 
 /* Seleciona os links com ícones na sidebar */

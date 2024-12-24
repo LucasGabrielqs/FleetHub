@@ -1,0 +1,425 @@
+:root {
+    --color-white: #ffffff;
+    --color-green-text: #065F46;
+    --color-green-text-2: #059669;
+    --color-green-text-3: #65A30D;
+    --text-color-dashboard: #153448;
+    --background-color1: #F7FEE7;
+    --color-menu-off: #71717A;
+    --menu-modulos-color: rgba(255, 255, 255, 0.3);
+    --box-shadow-reservas: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+#dashboard,
+#reservas {
+    display: flex;
+    flex-direction: column;
+}
+
+#reservas {
+    align-items: center;
+    width: 380px;
+    height: 435px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-reservas);
+}
+
+.container-reservas {
+    width: 380px;
+    height: 470px;
+    margin: 50px 20px 50px 50px;
+}
+
+.data-entrega, .numero-telefone{
+    margin-left: 20px;
+}
+
+.container-nome-veiculo,
+.container-estado-veiculo {
+    display: flex;
+    gap: 20px;
+}
+
+.container-estado-veiculo {
+    gap: 10px;
+}
+
+.icon-nome-reservas,
+.icon-reservas,
+.icon-phone,
+.icon-data,
+.dados-motorista {
+    display: flex;
+    align-items: center;
+}
+
+.icon-nome-reservas {
+    justify-content: space-between;
+}
+
+.icon-reservas,
+.icon-phone,
+.icon-data {
+    gap: 10px;
+}
+
+.h2-name-reservas {
+    font-size: 16px;
+    color: var(--color-green-text);
+}
+
+.ver-todas-reservas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 105px;
+    height: 36px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-reservas);
+}
+.vertodas-a{
+    text-decoration: none;
+    border-radius: 12px;
+}
+.vertodas-a:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.vertodas,
+.nome-carro,
+.numero-reserva,
+.nome-motorista {
+    font-size: 14px;
+    color: var(--color-menu-off);
+}
+
+.numero-reserva {
+    color: var(--color-green-text);
+    margin-left: 20px;
+}
+
+.numero-placa,
+.estado-carro{
+    width: 84px;
+    height: 20px;
+    font-size: 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+    background-color: var(--background-color1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+}
+.ponto-verde{
+    background-color: var(--color-green-text-3);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.numero-placa {
+    color: var(--color-menu-off);
+    border-color: var(--color-menu-off);
+    margin-left: 20px;
+}
+.estado-carro h2{
+    font-size: 12px;
+
+}
+.estado-carro {
+    gap: 5px;
+    width: 72px;
+    color: var(--color-green-text-3);
+    border-color: var(--color-green-text-3);
+}
+
+.menu-reservas {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    height: 36px;
+    background-color: #F4F4F5;
+    border-radius: 12px;
+    margin: 10px;
+}
+
+.menu-reservas button {
+    width: 175px;
+    height: 32px;
+    border: 2px;
+}
+
+.button-hoje {
+    margin-left: 2px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+
+
+.button-hoje-selecionado {
+    margin-left: 2px;
+    border-radius: 10px;
+    background-color: var(--color-white);
+}
+.scroll-container{
+    overflow-x: scroll;
+    overflow-x: hidden;
+}
+.scroll-container::-webkit-scrollbar{
+    width: 2px;
+}
+/* Cor do trilho da barra */
+.scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Cor da barra */
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Cor da barra ao passar o mouse */
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.button-proximosdias {
+    margin-right: 2px;
+    border-radius: 10px;
+    color: var(--color-menu-off);
+    font-size: 14px;
+    background-color: transparent;
+    transition: 0.5s ease;
+}
+.button-proximosdias-selecionado {
+    margin-right: 2px;
+    border-radius: 10px;
+    color: var(--color-menu-off);
+    font-size: 14px;
+    background-color: var(--color-white);
+    transition: 0.5s ease;
+}
+
+
+
+.numero-telefone,
+.data-entrega {
+    display: flex;
+    justify-content: space-between;
+    height: 16px;
+    margin-bottom: 10px;
+}
+
+.nome-telefone,
+.h2-data-entrega,
+.h2-numero,
+.h2-data {
+    color: var(--color-menu-off);
+    font-size: 12px;
+    height: 16px;
+}
+
+.h2-numero,
+.h2-data {
+    margin-right: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#carro-reservado {
+    display: block;
+    box-shadow: var(--box-shadow-reservas);
+    width: 350px;
+    height: 165px;
+    border-radius: 12px;
+    margin: 10px;
+}
+
+#imagem-motorista {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.barra-horizontal {
+    margin: 0 auto;
+    border: none;
+    width: 326px;
+    height: 1px;
+    background-color: #E4E4E7;
+}
+
+.ponto {
+    border-radius: 50%;
+    width: 3px;
+    height: 3px;
+    margin: auto 0;
+    background-color: var(--color-menu-off);
+}
+
+#pedidos-usuarios {
+    margin-left: 50px;
+    width: 1100px;
+    height: 273px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3);
+    margin-bottom: 50px;
+}
+
+#titulo-coluna {
+    width: 1100px;
+    height: 47px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #EFF0F4;
+}
+
+.nome-coluna {
+    color: var(--text-color-dashboard);
+    width: 177px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lista-usuarios {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0;
+    padding-inline-start: 0;
+}
+
+.img-name-number,
+.user-info-all {
+    width: 183px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user-info-all {
+    list-style: none;
+}
+
+#img-usuario {
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+}
+
+.name-user,
+.number-user {
+    margin: 0;
+}
+
+.name-user {
+    color: var(--text-color-dashboard);
+    font-size: 12px;
+}
+
+.number-user {
+    color: #90A0B7;
+    font-size: 10px;
+}
+
+#valor-corrida {
+    background-color: rgba(36, 193, 143, 0.1);
+    width: 100px;
+    height: 18px;
+    border-radius: 9px;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #24C18F;
+}
+
+.total-pedidos {
+    width: 1100px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+.usuario-info {
+    height: 40px;
+
+    margin: 8px;
+}
+
+.usuarios-cadastrados {
+    margin-top: 50px;
+    width: 700px;
+    height: 460px;
+}
+
+.list-title-users {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 8px;
+    width: 700px;
+    height: 45px;
+    background-color: #EFF0F4;
+    list-style-type: disc;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0;
+    unicode-bidi: isolate;
+}
+
+.title-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    width: 175px;
+}
+
+
+.container-reserva-cadastros{
+    display: flex;
+}
+
+#lista-usuarios-sistema{
+    margin: 15px auto;
+    width: 700px;
+    height: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-inline-start: 0;
+}
+
+.user-info{
+    
+    width: 175px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    color: var(--text-color-dashboard);
+}
+.list-users{
+    display: flex;
+    width: 700px;
+    height: 440px;
+    flex-direction: column;
+}

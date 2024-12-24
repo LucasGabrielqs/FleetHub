@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block main %}
-<link rel="stylesheet" href="{% static 'css/cadastrar_veiculos.css' %}">
+{% block page_name %}cadastrar_veiculo{% endblock page_name %}
 
+{% block title %}Cadastrar Veículo{% endblock title %}
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/cadastrar_veiculos.css' %}">
+{% endblock estilos %}
+
+{% block content %}
 <section id="conteudo-secundario">
     <form>
 
         
-        <h2>Cadastrar Veículo</h2>
+        <h2 id='page_title'>Cadastrar Veículo</h2>
         <form action="">
         <div class="container">
             
@@ -87,9 +92,13 @@
                 </div>
         </div>
         </form>
-                
+  
 </section>
 
+<div class="rodape">
+    <button type="reset" class="btn-reset">Cancelar</button>
+    <button type="submit" class="btn-submit">Cadastrar</button>
+</div>
 
 
 <script src="{% static 'js/cadastrar-veiculo-script.js' %}"></script>
