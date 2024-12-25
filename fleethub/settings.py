@@ -51,7 +51,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+]
 ROOT_URLCONF = 'fleethub.urls'
 
 TEMPLATES = [
@@ -109,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -133,3 +135,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'global_static'),  # Diretório de arquivos estáticos globais
 ]
+
+# Diretório onde os arquivos de mídia serão armazenados
+MEDIA_URL = '/media/'  # URL base para acessar os arquivos de mídia
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Caminho absoluto para o diretório de mídia

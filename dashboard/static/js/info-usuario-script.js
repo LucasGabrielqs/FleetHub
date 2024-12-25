@@ -1,5 +1,5 @@
 const campos_input = document.getElementsByClassName('input_container');
-const alterar_input_nome = document.getElementById('nome');
+const alterar_input_all = document.getElementsByClassName('input_detect');
 const alterar_input_email = document.getElementById('email');
 const rodape = document.getElementById('rodape');
 
@@ -10,13 +10,19 @@ for (let i = 0; i < campos_input.length; i++) {
 }
 
 function fazer_alteracoes() {
-    alterar_input_email.style.pointerEvents = 'visible';
+    for (let i = 0; i < alterar_input_all.length; i++) {
+        alterar_input_all[i].style.pointerEvents = 'visible';
+        }
+    
     rodape.style.display = 'flex'; // Exibe o rodapé
 }
 
 function cancelar_alteracoes(){
     if(confirm('As Informações não Salvas serão Perdidas!')){
-        alterar_input_email.style.pointerEvents = 'none';
+        for (let i = 0; i < alterar_input_all.length; i++) {
+            alterar_input_all[i].style.pointerEvents = 'none';
+                mostrarCustomConfirm()
+            }
         rodape.style.display = 'none';
         //adicionar lógica para recarregar as informações salvas
     }

@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_list_or_404, get_object_or_404
+from .models import Usuário, Estado
+from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
 def dashboard(request):
@@ -18,6 +19,8 @@ def login(request):
     return render(request, 'dashboard/login.html')
 
 def cadastrar(request):
+
+
     return render(request, 'dashboard/cadastrar.html')
 
 def recuperar_senha(request):
@@ -47,8 +50,52 @@ def criacao_rota(request):
 def visualizacao_rota(request):
     return render(request, 'dashboard/visualizacao_rota.html')
 
+
 def informacoes_usuario(request):
-    return render(request, 'dashboard/informacoes_usuarios.html')
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        rua = request.POST.get('rua')
+        bairro = request.POST.get('bairro')
+        cidade = request.POST.get('cidade')
+        cep = request.POST.get('cep')
+        estado = request.POST.get('estado')
+        imagem = request.FILES.get('img')
+        
+        usuario = get_object_or_404(Usuário, id=id)
+
+        usuario.nome = nome
+        usuario.email = email
+        usuario.cpf = cpf
+        usuario.telefone = telefone
+        usuario.rua = rua
+        usuario.bairro = bairro
+        usuario.cidade = cidade
+        usuario.cep = cep
+
+        # Verifica se um arquivo foi enviado no campo "img"
+        if 'img' in request.FILES:
+            usuario.imagem = imagem
+
+
+        # Caso `estado` seja uma ForeignKey
+        if hasattr(usuario, 'estado') and usuario.estado:
+            Estado = usuario.estado.__class__  # Obter o modelo relacionado
+            usuario.estado = get_object_or_404(Estado, sigla=estado)
+        else:
+            usuario.estado = estado  # Caso seja um campo de texto
+
+        usuario.save()
+
+
+
+    usuario = get_object_or_404(Usuário, id=1)
+    estados = get_list_or_404(Estado)
+    #senha=make_password(password=usuario.senha, hasher='pbkdf2_sha256')
+    return render(request, 'dashboard/informacoes_usuarios.html',{'usuario':usuario, 'estados':estados})
 
 def listagem_reservas(request):
     return render(request, 'dashboard/listagem_reservas.html')
