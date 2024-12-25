@@ -81,12 +81,7 @@ def informacoes_usuario(request):
             usuario.imagem = imagem
 
 
-        # Caso `estado` seja uma ForeignKey
-        if hasattr(usuario, 'estado') and usuario.estado:
-            Estado = usuario.estado.__class__  # Obter o modelo relacionado
-            usuario.estado = get_object_or_404(Estado, sigla=estado)
-        else:
-            usuario.estado = estado  # Caso seja um campo de texto
+        usuario.estado = get_object_or_404(Estado, sigla=estado)
 
         usuario.save()
 
