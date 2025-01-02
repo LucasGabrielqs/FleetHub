@@ -18,4 +18,6 @@ urlpatterns = [
     path('criacao_rota',views.criacao_rota,name='criacao_rota'),
     path('visualizacao_rota',views.visualizacao_rota,name='visualizacao_rota'),
     path('informacoes_usuario',views.informacoes_usuario,name='informacoes_usuario'),
+    path('listagem_reservas', views.listagem_reservas, name='listagem_reservas'),
+    path('registro_abastecimento', views.registro_abastecimento, name='registro_abastecimento'),
 ]

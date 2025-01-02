@@ -170,6 +170,11 @@ select:focus{
     font-family: Inter;
 }
 
+.btn-reset:hover{
+    background-color: rgba(247, 6, 6, 0.3);
+    transition: all 0.4s;
+}
+
 .rodape .btn-reset{
     width: 180px;
     height: 58px;

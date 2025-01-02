@@ -209,47 +209,61 @@ document.addEventListener("DOMContentLoaded", function () {//Lógica de Identifi
             submenu_manutencao.style.display = 'block';
             agendar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
             container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_est(icon_manutencao)
+            verificar_estado(icon_manutencao)
             break;
         case "editar_manutencao":
             submenu_manutencao.style.display = 'block';
             editar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
             container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_est(icon_manutencao)
+            verificar_estado(icon_manutencao)
             break;            
         
         case "cadastrar_veiculo":
             submenu_veiculos.style.display = 'block';
             cadastrar_veiculo.style.color = 'rgba(21, 52, 72, 0.4)';
             container_veiculos.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_est(icon_veiculos)
+            verificar_estado(icon_veiculos)
+            break;
+
+        case "informacoes_veiculo":
+            submenu_veiculos.style.display = 'block';
+            //cadastrar_veiculo.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_veiculos.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_veiculos)
             break;
 
         case "cadastrar_usuario":
             submenu_usuarios.style.display = 'block';
             cadastro_usuarios.style.color = 'rgba(21, 52, 72, 0.4)';
             container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_est(icon_usuarios)
+            verificar_estado(icon_usuarios)
             break;
 
         case "informacoes_usuario":
             submenu_usuarios.style.display = 'block';
             container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_est(icon_usuarios)
+            verificar_estado(icon_usuarios)
             break;
 
         case "criar_reserva":
             submenu_reservas.style.display = 'block';
             criacao_reservas.style.color = 'rgba(21, 52, 72, 0.4)';
             container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_est(icon_reservas)
+            verificar_estado(icon_reservas)
+            break;
+
+        case "registro_abastecimento":
+            submenu_abastecimento.style.display = 'block';
+            registro_abastecimento.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_abastecimento.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_abastecimento)
             break;
 
     }
 });
 
 
-function verificar_est (elemento){
+function verificar_estado (elemento){
 if (elemento.style.transform == 'rotate(0deg)'){
     elemento.style.transform = 'rotate(180deg)'
 }}

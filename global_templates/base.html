@@ -37,7 +37,7 @@
                     <h3 id="text-init">Início</h3>
                 </a>
 
-                <a href="{% url 'cadastrar_veiculo' %}" class="element-icon" id="id-veiculos"><i
+                <a href="{% url 'informacoes_veiculo' %}" class="element-icon" id="id-veiculos"><i
                         class="fa-solid fa-car icon" title="Veículos"></i>
                     <h3 class="text-menu-lateral" id="text-veicles">Veículos</h3>
 
@@ -100,15 +100,16 @@
                     <li><a id="submenu-lista-manutencao" href="#">Lista de manutenções</a></li>
                 </ul>
 
-                <a href="" class="element-icon" id="id-abastecimento"><i class="fa-solid fa-droplet icon"
-                        title="Abastecimento"></i>
+                <a href="{% url 'registro_abastecimento' %}" class="element-icon" id="id-abastecimento"><i
+                        class="fa-solid fa-droplet icon" title="Abastecimento"></i>
                     <h3 class="text-menu-lateral" id="text-supply">Abastecimento</h3>
                     <i id="icon_abastecimento" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
                 <ul id="submenu-abastecimento" class="submenu">
-                    <li><a id="submenu-registro-abastecimento" href="#">Registro de Abastecimento</a></li>
+                    <li><a id="submenu-registro-abastecimento" href="{% url 'registro_abastecimento' %}">Registro de
+                            Abastecimento</a></li>
                     <li><a id="submenu-lista-abastecimento" href="#">Lista de Abastecimento</a></li>
 
                 </ul>

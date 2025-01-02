@@ -7,6 +7,7 @@ def dashboard(request):
 
 def tela_dashboard(request):
     contexto = {
+        'range_10': range(10),
         'range_7': range(7),  # Lista de 0 a 6
         'range_4': range(4),  # Lista de 0 a 3
         'range_2': range(2)  # Lista de 0 a 1
@@ -48,3 +49,9 @@ def visualizacao_rota(request):
 
 def informacoes_usuario(request):
     return render(request, 'dashboard/informacoes_usuarios.html')
+
+def listagem_reservas(request):
+    return render(request, 'dashboard/listagem_reservas.html')
+
+def registro_abastecimento(request):
+    return render(request, 'dashboard/registro_abastecimento.html')
