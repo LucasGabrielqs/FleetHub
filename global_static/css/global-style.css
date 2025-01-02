@@ -11,6 +11,7 @@ body {
     background-color:var(--color-white);
     margin: 0;
     display: flex;
+    height: 1200px;
 }
 
 hr {/* Estilo de barra horizontal*/
@@ -26,6 +27,7 @@ hr {/* Estilo de barra horizontal*/
     display: flex;
     width: 260px;
     position: relative;
+    height: auto;
 }
 
 /* Seleciona o menu de usuário dentro da sidebar */
@@ -185,7 +187,6 @@ hr {/* Estilo de barra horizontal*/
     display: grid;
     grid-template-rows: 1fr auto;
     width: 100%;
-    height: 1000px;
 }
 
 
