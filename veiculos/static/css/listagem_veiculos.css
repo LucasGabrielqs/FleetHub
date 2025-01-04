@@ -25,6 +25,12 @@ form{
     margin: auto;
 }
 
+h1{
+    color: #153448;
+    font-size: 30px;
+    font-weight: bold;
+}
+
 #container-block-content{
     margin: auto;
 }
@@ -88,12 +94,59 @@ form{
     color: #153448;
 }
 
+#search-box{
+    display: flex;
+    flex-direction: column;
+    max-width: 304px;
+    margin: auto;
+}
+
+#descr-search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 304px;
+    justify-content: space-between;
+}
+
+#descr-search #search-input{
+    color: #625E5E;
+    font-size: 16x;
+}
+
+#linha-search{
+    width: 304px;
+    border: #625E5E 0.1px solid;
+}
+
+
 #lista-veiculos{
     display: flex;
     row-gap: 50px;
     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 1040px;
+    height: 100%; /* Defina uma altura adequada */
+    max-height: 600px; /* Ajuste conforme necessário */
 }
 
+#lista-veiculos::-webkit-scrollbar {
+    width: 6px;
+}
+
+#lista-veiculos::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#lista-veiculos::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+#lista-veiculos::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 #linha-veiculo{
     width: 1020px;
@@ -174,6 +227,8 @@ img{
 
 #descricao-filtros-teste p{
     margin: 0;
+    color: #153448;
+    font-size: 16px;
 }
 
 #linha{

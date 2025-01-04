@@ -73,11 +73,24 @@
 
     </div>
 
+    <div id="search-box">
+        <form action="/search" method="GET">
+                <div id="descr-search">
+                    <input type="text" id="search-input" name="query" placeholder="Nome ou Placa" style="border: none; outline: none; padding: 5px; font-size: 14px; flex: 1;">
+                    <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 50 50" style="color: #153448;">
+                            <path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path>
+                        </svg>
+                    </button>
+                </div>
+            <div id="linha-search"></div>
+        </form>
+    </div>
+
 
     <div id="lista-veiculos">
-        
-        <div id="linha-final">
 
+        {% for _ in range_10 %}
             <div id="linha-veiculo">
 
                 <div id="img-veiculo">
@@ -127,172 +140,8 @@
         </div>
 
         <div id="linha"></div>
-    </div>
 
-
-    <div id="linha-final">
-
-        <div id="linha-veiculo">
-
-            <div id="img-veiculo">
-                <img id="teste" src="{%static 'img\fiat-strada-2025-jpg.png' %}" alt="">
-                <div id="elementos-veiculo">
-                    <div id="elementos-filhos">
-                        <p id="titulo">Modelo:</p>
-                        <p id="resultado">Strada</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Cor:</p>
-                        <p id="resultado">Vermelho</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Placa:</p>
-                        <p id="resultado">RQP1-2E50</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Km:</p>
-                        <p id="resultado">14.000 Km</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Chassi:</p>
-                        <p id="resultado">8EJaLGfcC1HF44180</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div id="conteudo-esquerdo">
-                <div id="descricao-filtros-teste">
-                    <p>No Pátio</p>
-                    <div id="bolinha-filtro" style="background-color: #34C759;">
-                    </div>
-                </div>
-
-                <button id="botao-visualizar">
-                    <p>Visualizar Informações</p>
-                </button>
-
-            </div>
-
-
-    </div>
-
-    <div id="linha"></div>
-    </div>
-
-
-    <div id="linha-final">
-
-        <div id="linha-veiculo">
-
-            <div id="img-veiculo">
-                <img id="teste" src="{%static 'img\fiat-strada-2025-jpg.png' %}" alt="">
-                <div id="elementos-veiculo">
-                    <div id="elementos-filhos">
-                        <p id="titulo">Modelo:</p>
-                        <p id="resultado">Strada</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Cor:</p>
-                        <p id="resultado">Vermelho</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Placa:</p>
-                        <p id="resultado">RQP1-2E50</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Km:</p>
-                        <p id="resultado">14.000 Km</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Chassi:</p>
-                        <p id="resultado">8EJaLGfcC1HF44180</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div id="conteudo-esquerdo">
-                <div id="descricao-filtros-teste">
-                    <p>No Pátio</p>
-                    <div id="bolinha-filtro" style="background-color: #34C759;">
-                    </div>
-                </div>
-
-                <button id="botao-visualizar">
-                    <p>Visualizar Informações</p>
-                </button>
-
-            </div>
-
-
-    </div>
-
-    <div id="linha"></div>
-    </div>
-
-
-
-    <div id="linha-final">
-
-        <div id="linha-veiculo">
-
-            <div id="img-veiculo">
-                <img id="teste" src="{%static 'img\fiat-strada-2025-jpg.png' %}" alt="">
-                <div id="elementos-veiculo">
-                    <div id="elementos-filhos">
-                        <p id="titulo">Modelo:</p>
-                        <p id="resultado">Strada</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Cor:</p>
-                        <p id="resultado">Vermelho</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Placa:</p>
-                        <p id="resultado">RQP1-2E50</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Km:</p>
-                        <p id="resultado">14.000 Km</p>
-                    </div>
-
-                    <div id="elementos-filhos">
-                        <p id="titulo">Chassi:</p>
-                        <p id="resultado">8EJaLGfcC1HF44180</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div id="conteudo-esquerdo">
-                <div id="descricao-filtros-teste">
-                    <p>No Pátio</p>
-                    <div id="bolinha-filtro" style="background-color: #34C759;">
-                    </div>
-                </div>
-
-                <button id="botao-visualizar">
-                    <p>Visualizar Informações</p>
-                </button>
-
-            </div>
-
-
-    </div>
-
-    <div id="linha"></div>
-    </div>
-
-
+    {% endfor %}    
 
     </div>
     
