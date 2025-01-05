@@ -1,10 +1,13 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
-from .models import Usuário, Estado
+from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
+from .models import Usuario, Estado, TipoUsuario, StatusUsuario
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth import authenticate
+from django.contrib import messages
 # Create your views here.
 
 def dashboard(request):
     return render(request, 'base.html')
+
 
 def tela_dashboard(request):
     contexto = {
@@ -15,13 +18,64 @@ def tela_dashboard(request):
     }
     return render(request, 'dashboard/dashboard.html', contexto)
 
+
+
 def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+
+        usuario = Usuario.objects.get(email=username)
+
+
+        print(usuario)
+        if usuario is None:
+            return tela_dashboard(request)
+        else:
+            messages.error(request, 'Usuário ou senha inválidos.')
+
+        
+
     return render(request, 'dashboard/login.html')
 
+
+
 def cadastrar(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        rua = request.POST.get('rua')
+        bairro = request.POST.get('bairro')
+        cidade = request.POST.get('cidade')
+        cep = request.POST.get('cep')
+        estado = request.POST.get('estado')
+        senha = request.POST.get('senha')
+        #imagem = request.FILES.get('img')
+        estado = get_object_or_404(Estado, sigla=estado)
+        tipo_usuario = get_object_or_404(TipoUsuario, id=4)#seleciona o tipo indefinido no database atual
+        status_usuario = get_object_or_404(StatusUsuario, id=3)#seleciona o tipo indefinido no database atual
 
+        usuario = Usuario.objects.create(
+            nome=nome,
+            email=email,
+            cpf=cpf,
+            telefone=telefone,
+            rua=rua,
+            bairro=bairro,
+            cidade=cidade,
+            cep=cep,
+            senha=make_password(senha),
+            estado=estado,
+            tipo_usuario=tipo_usuario,
+            status_usuario=status_usuario,
+        )
 
-    return render(request, 'dashboard/cadastrar.html')
+    estados = get_list_or_404(Estado)
+    return render(request, 'dashboard/cadastrar.html', {'estados':estados})
+
 
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
@@ -65,7 +119,7 @@ def informacoes_usuario(request):
         estado = request.POST.get('estado')
         imagem = request.FILES.get('img')
         
-        usuario = get_object_or_404(Usuário, id=id)
+        usuario = get_object_or_404(Usuario, id=id)
 
         usuario.nome = nome
         usuario.email = email
@@ -87,7 +141,7 @@ def informacoes_usuario(request):
 
 
 
-    usuario = get_object_or_404(Usuário, id=1)
+    usuario = get_object_or_404(Usuario, id=1)
     estados = get_list_or_404(Estado)
     #senha=make_password(password=usuario.senha, hasher='pbkdf2_sha256')
     return render(request, 'dashboard/informacoes_usuarios.html',{'usuario':usuario, 'estados':estados})

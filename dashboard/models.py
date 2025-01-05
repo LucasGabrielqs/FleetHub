@@ -18,7 +18,7 @@ class StatusUsuario(models.Model):
     def __str__(self):
         return self.status
 
-class Usuário(models.Model):
+class Usuario(models.Model):
     nome = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     cpf = models.CharField(max_length=11)
