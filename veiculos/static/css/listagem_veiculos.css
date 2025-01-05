@@ -211,12 +211,6 @@ img{
 
 }
 
-#botao-visualizar p{
-    font-size: 14px;
-    color: #153448;
-    margin: auto;
-}
-
 #descricao-filtros-teste{
     display: flex;
     flex-direction: row;
@@ -234,4 +228,15 @@ img{
 #linha{
     border: #153448 0.5px solid;
     width: 1020px;
+}
+#botao-visualizar #visualizar-link{
+    text-decoration: none;
+    font-size: 14px;
+    color: #153448;
+    margin: auto;
+    text-decoration: none;
+}
+
+#visualzar-link:hover{
+    text-decoration: none;
 }

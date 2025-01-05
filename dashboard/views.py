@@ -39,7 +39,13 @@ def editar_reserva(request):
     return render(request, 'dashboard/editar_reserva.html')
 
 def listagem_usuarios(request):
-    return render(request, 'dashboard/listagem_usuarios.html')
+    contexto = {
+        'range_10': range(10),
+        'range_7': range(7),  # Lista de 0 a 6
+        'range_4': range(4),  # Lista de 0 a 3
+        'range_2': range(2)  # Lista de 0 a 1
+    }
+    return render(request, 'dashboard/listagem_usuarios.html',contexto)
 
 def criacao_rota(request):
     return render(request, 'dashboard/criacao_rota.html')

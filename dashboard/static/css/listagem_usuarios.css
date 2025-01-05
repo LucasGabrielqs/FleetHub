@@ -1,0 +1,238 @@
+section{
+    padding: 0;
+}
+#page_title{
+    margin: auto;
+    text-align: center;
+    font-family: inter;
+    font-weight: bold;
+    font-size: 24px;
+    color: #153448;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#conteudo_principal{
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+#conteudo-secundario{
+    margin: auto;
+}
+
+form{
+    margin: auto;
+}
+
+h1{
+    color: #153448;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#container-block-content{
+    margin: auto;
+}
+
+#filtros{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 745px;
+    margin: auto;
+}
+
+#estrutura-filtros{
+    width: 140px;
+    height: 50px;
+    border: 1px #153448 solid;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#content-listagem{
+    max-width: 1020px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 60px;
+}
+
+#content-listagem h1{
+    text-align: center;
+}
+
+#descricao-filtros{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+}
+
+#descricao-filtros p{
+    margin: 0;
+    color: #153448;
+}
+
+#bolinha-filtro{
+    width: 11px;
+    height: 11px;
+    border-radius: 180px;
+}
+
+#estrutura-filtros #quantidade-filtro{
+    justify-content: center;
+}
+
+#estrutura-filtros #quantidade-filtro p{
+    margin: 0;
+    color: #153448;
+}
+
+#search-box{
+    display: flex;
+    flex-direction: column;
+    max-width: 304px;
+    margin: auto;
+}
+
+#descr-search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 304px;
+    justify-content: space-between;
+}
+
+#descr-search #search-input{
+    color: #625E5E;
+    font-size: 16x;
+}
+
+#linha-search{
+    width: 304px;
+    border: #625E5E 0.1px solid;
+}
+
+
+#lista-veiculos{
+    display: flex;
+    row-gap: 50px;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 1040px;
+    height: 100%; /* Defina uma altura adequada */
+    max-height: 600px; /* Ajuste conforme necessário */
+}
+
+#lista-veiculos::-webkit-scrollbar {
+    width: 6px;
+}
+
+#lista-veiculos::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#lista-veiculos::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+#lista-veiculos::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#linha-veiculo{
+    width: 1020px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#img-veiculo{
+    display: flex;
+    flex-direction: row;
+    max-height: 125px;
+    column-gap: 15px;
+}
+
+img{
+    width: 209px;
+    height: 125px;
+}
+
+#elementos-veiculo{
+    display: flex;
+    flex-direction: column;
+    max-height: 125px;
+}
+
+#elementos-veiculo #elementos-filhos{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2px;
+    
+}
+
+#elementos-veiculo #elementos-filhos #titulo{
+    margin-bottom: 8px;
+    margin-top: 0px;
+    color: #153448;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#elementos-veiculo #elementos-filhos #resultado{
+    margin-bottom: 8px;
+    margin-top: 0px;
+    font-size: 16px;
+    color: #153448;
+}
+
+#conteudo-esquerdo{
+    max-height: 125px;
+    display: flex;
+    align-items: center;
+
+}
+
+
+#botao-visualizar{
+    width: 177px;
+    height: 41px;
+    background-color: #fff;
+    border: #153448 1px solid;
+    border-radius: 30px;
+
+}
+
+#botao-visualizar p{
+    font-size: 14px;
+    color: #153448;
+    margin: auto;
+}
+
+#descricao-filtros-teste{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 5px;
+}
+
+#descricao-filtros-teste p{
+    margin: 0;
+    color: #153448;
+    font-size: 16px;
+}
+
+#linha{
+    border: #153448 0.5px solid;
+    width: 1020px;
+}
