@@ -69,32 +69,36 @@ h1{
     text-align: center;
 }
 
-#descricao-filtros{
+#legenda{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+#search-legenda{
     display: flex;
     flex-direction: row;
+    column-gap: 80px;
+    margin: auto;
     align-items: center;
     justify-content: center;
-    column-gap: 5px;
 }
 
-#descricao-filtros p{
+#legenda #descr-legenda{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+}
+#legenda p{
+    color: #153448;
+    font-size: 18px;
+    margin: 0;
+}
+#legenda #descr-legenda p{
     margin: 0;
     color: #153448;
-}
-
-#bolinha-filtro{
-    width: 11px;
-    height: 11px;
-    border-radius: 180px;
-}
-
-#estrutura-filtros #quantidade-filtro{
-    justify-content: center;
-}
-
-#estrutura-filtros #quantidade-filtro p{
-    margin: 0;
-    color: #153448;
+    font-size: 14px;
 }
 
 #search-box{
@@ -102,6 +106,12 @@ h1{
     flex-direction: column;
     max-width: 304px;
     margin: auto;
+}
+
+#bolinha-filtro{
+    width: 11px;
+    height: 11px;
+    border-radius: 180px;
 }
 
 #descr-search{
@@ -162,6 +172,7 @@ h1{
     display: flex;
     flex-direction: row;
     max-height: 125px;
+    column-gap: 15px;
 }
 
 img{
@@ -198,12 +209,38 @@ img{
 }
 
 #conteudo-esquerdo{
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
     max-height: 125px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: end;
+
 }
 
+#conteudo-esquerdo #descr-legenda{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+}
+
+#conteudo-esquerdo #descr-legenda p{
+    margin: 0;
+    color: #153448;
+    font-size: 16px;
+}
+
+#conteudo-esquerdo #manutencao p{
+    margin: 0;
+    color: #153448;
+    font-size: 16px;
+}
+
+#conteudo-esquerdo #manutencao{
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
 
 #botao-visualizar{
     width: 177px;
@@ -212,6 +249,12 @@ img{
     border: #153448 1px solid;
     border-radius: 30px;
 
+}
+
+#botao-visualizar p{
+    font-size: 14px;
+    color: #153448;
+    margin: auto;
 }
 
 #descricao-filtros-teste{
@@ -232,14 +275,5 @@ img{
     border: #153448 0.5px solid;
     width: 98%;
 }
-#botao-visualizar #visualizar-link{
-    text-decoration: none;
-    font-size: 14px;
-    color: #153448;
-    margin: auto;
-    text-decoration: none;
-}
 
-#visualzar-link:hover{
-    text-decoration: none;
-}
+

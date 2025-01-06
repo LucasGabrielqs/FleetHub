@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_name %}Listagem_Manutencao{% endblock page_name %}
+
+{% block title %}Lista de Manutenções{% endblock title %}
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/listagem_manutencao.css' %}">
+{% endblock estilos %}
+
+{% block content %}
+
+<section id="content-listagem">
+    <h1>Lista de Manutenções</h1>
+
+    <div id="search-legenda">
+
+    <div id="search-box">
+        <form action="/search" method="GET">
+                <div id="descr-search">
+                    <input type="text" id="search-input" name="query" placeholder="Placa ou Id de Manutenção" style="border: none; outline: none; padding: 5px; font-size: 14px; flex: 1;">
+                    <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 50 50" style="color: #153448;">
+                            <path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path>
+                        </svg>
+                    </button>
+                </div>
+            <div id="linha-search"></div>
+        </form>
+    </div>
+
+    <div id="legenda">
+        <p>Legenda:</p>
+        
+        <div id="descr-legenda">
+            <div id="bolinha-filtro" style="background-color: #34C759;"></div>
+            <p>Realizada</p>
+        </div>
+        <div id="descr-legenda">
+            <div id="bolinha-filtro" style="background-color: #FFCC00;"></div>
+            <p>Pendente</p>
+        </div>
+        <div id="descr-legenda">
+            <div id="bolinha-filtro" style="background-color: #FF3B30;"></div>
+            <p>Não foi possivel Realizar</p>
+        </div>
+    </div>
+
+    </div>
+
+    <div id="lista-veiculos">
+
+        {% for _ in range_10 %}
+            <div id="linha-final">
+
+            <div id="linha-veiculo">
+            
+                <div id="img-veiculo">
+                    <div id="elementos-veiculo">
+                        <div id="elementos-filhos">
+                            <p id="titulo">Placa:</p>
+                            <p id="resultado">RQP1-05E4</p>
+                        </div>
+
+                        <div id="elementos-filhos">
+                            <p id="titulo">Tipo de Manutenção:</p>
+                            <p id="resultado">Preventiva</p>
+                        </div>
+
+                        <div id="elementos-filhos">
+                            <p id="titulo">Data de Criação:</p>
+                            <p id="resultado">25/10/2024</p>
+                        </div>
+
+                        <div id="elementos-filhos">
+                            <p id="titulo">Data Prevista de Entrega:</p>
+                            <p id="resultado">30/10/2024</p>
+                        </div>
+
+                        <div id="elementos-filhos">
+                            <p id="titulo">Valor da Manutenção:</p>
+                            <p id="resultado">R$ 500,00</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div id="conteudo-esquerdo">
+
+                    <div id="descr-legenda">
+                        <div id="bolinha-filtro" style="background-color: #34C759;"></div>
+                        <p>Realizada</p>
+                    </div>
+
+                    <button id="botao-visualizar">
+                        <p>Visualizar Informações</p>
+                    </button>
+
+                    <div id="manutencao">
+                        <p>Id Manutenção:</p>
+                        <p>1</p>
+                    </div>
+
+                </div>
+
+                
+        </div>
+            <div id="linha"></div>
+        </div>
+
+        
+
+    {% endfor %}    
+
+    </div>
+    
+</section>
+
+
+
+{% endblock %}

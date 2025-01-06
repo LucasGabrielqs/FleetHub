@@ -16,6 +16,10 @@
     flex-direction: column;
 }
 
+body{
+    height: 1100px;
+}
+
 #reservas {
     align-items: center;
     width: 380px;

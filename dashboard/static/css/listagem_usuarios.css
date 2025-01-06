@@ -1,3 +1,6 @@
+body{
+    height: 1200px;
+}
 section{
     padding: 0;
 }
@@ -55,7 +58,7 @@ h1{
 }
 
 #content-listagem{
-    max-width: 1020px;
+    max-width: 1240px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -126,7 +129,7 @@ h1{
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
-    width: 1040px;
+    width: 1240px;
     height: 100%; /* Defina uma altura adequada */
     max-height: 600px; /* Ajuste conforme necessário */
 }
@@ -149,7 +152,7 @@ h1{
 }
 
 #linha-veiculo{
-    width: 1020px;
+    width: 98%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -234,5 +237,10 @@ img{
 
 #linha{
     border: #153448 0.5px solid;
-    width: 1020px;
+    width: 98%;
+}
+#linha-final{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
 }

@@ -29,6 +29,16 @@ def cadastro_usuario(request):
 def agendar_manutencao(request):
     return render(request,'dashboard/agendar_manutencao.html')
 
+
+def listagem_manutencao(request):
+    contexto = {
+        'range_10': range(10),
+        'range_7': range(7),  # Lista de 0 a 6
+        'range_4': range(4),  # Lista de 0 a 3
+        'range_2': range(2)  # Lista de 0 a 1
+    }
+    return render(request,'dashboard/listagem_manutencao.html',contexto)
+
 def editar_manutencao(request):
     return render(request,'dashboard/editar_manutencao.html')
 
