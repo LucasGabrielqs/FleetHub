@@ -61,3 +61,6 @@ def listagem_reservas(request):
 
 def registro_abastecimento(request):
     return render(request, 'dashboard/registro_abastecimento.html')
+
+def informacoes_veiculo(request):
+    return render(request, 'dashboard/informacoes_veiculo.html')
