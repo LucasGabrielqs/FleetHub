@@ -244,3 +244,14 @@ img{
     flex-direction: column;
     row-gap: 5px;
 }
+#botao-visualizar #visualizar-link{
+    text-decoration: none;
+    font-size: 14px;
+    color: #153448;
+    margin: auto;
+    text-decoration: none;
+}
+
+#visualzar-link:hover{
+    text-decoration: none;
+}

@@ -2,17 +2,17 @@
 
 {% load static %}
 
-{% block page_name %}listagem_reservas{% endblock page_name %}
+{% block page_name %}Listagem_Abastecimentos{% endblock page_name %}
 
-{% block title %}Lista de Reservas{% endblock title %}
+{% block title %}Lista de Abastecimentos{% endblock title %}
 {% block estilos %}
-<link rel="stylesheet" href="{% static 'css/listagem_reservas.css' %}">
+<link rel="stylesheet" href="{% static 'css/listagem_abastecimentos.css' %}">
 {% endblock estilos %}
 
 {% block content %}
 
 <section id="content-listagem">
-    <h1>Lista de Reservas</h1>
+    <h1>Lista de Abastecimentos</h1>
 
     <div id="search-box">
         <form action="/search" method="GET">
@@ -38,23 +38,28 @@
                 <div id="img-veiculo">
                     <div id="elementos-veiculo">
                         <div id="elementos-filhos">
-                            <p id="titulo">Veículo:</p>
-                            <p id="resultado">Strada</p>
+                            <p id="titulo">Nome Completo:</p>
+                            <p id="resultado">Lizandro Vieira</p>
                         </div>
 
                         <div id="elementos-filhos">
-                            <p id="titulo">Motorista:</p>
-                            <p id="resultado">Augusto</p>
+                            <p id="titulo">Quantidade Abastecida:</p>
+                            <p id="resultado">25 L</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Valor:</p>
-                            <p id="resultado">R$ 400,00</p>
+                            <p id="resultado">R$ 125,00</p>
                         </div>
 
                         <div id="elementos-filhos">
-                            <p id="titulo">Forma de Pagamento:</p>
-                            <p id="resultado">PIX</p>
+                            <p id="titulo">Km Atual:</p>
+                            <p id="resultado">15.000 Km</p>
+                        </div>
+
+                        <div id="elementos-filhos">
+                            <p id="titulo">Veículo:</p>
+                            <p id="resultado">Strada</p>
                         </div>
                     </div>
                 </div>
@@ -64,12 +69,12 @@
                     <p style="margin: 0;"></p>
 
                     <button id="botao-visualizar">
-                        <a id="visualizar-link" href="{% url 'editar_reserva' %}">Visualizar Informações</a>
+                        <a id="visualizar-link" href="{% url 'registro_abastecimento' %}">Visualizar Informações</a>
                     </button>
 
                     <div id="manutencao">
-                        <p>Codigo de Reservas:</p>
-                        <p>113</p>
+                        <p>Codigo de Abastecimento:</p>
+                        <p>29118</p>
                     </div>
 
                 </div>

@@ -73,7 +73,7 @@
                 </a>
                 <ul id="submenu-reservas" class="submenu">
                     <li><a id="submenu-criacao-reservas" href="{% url 'criar_reserva' %}">Criação de Reserva</a></li>
-                    <li><a id="submenu-lista-reservas" href="{% url 'criar_reserva' %}">Lista de Reserva</a></li>
+                    <li><a id="submenu-lista-reservas" href="{% url 'listagem_reservas' %}">Lista de Reservas</a></li>
                 </ul>
 
                 <a href="" class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
@@ -108,9 +108,9 @@
 
                 </a>
                 <ul id="submenu-abastecimento" class="submenu">
-                    <li><a id="submenu-registro-abastecimento" href="{% url 'registro_abastecimento' %}">Registro de
+                    <li><a id="submenu-registro-abastecimento" href="{% url 'criacao_abastecimento' %}">Registro de
                             Abastecimento</a></li>
-                    <li><a id="submenu-lista-abastecimento" href="#">Lista de Abastecimento</a></li>
+                    <li><a id="submenu-lista-abastecimento" href="{% url 'listagem_abastecimento' %}">Lista de Abastecimento</a></li>
 
                 </ul>
             </div>
