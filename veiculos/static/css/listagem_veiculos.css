@@ -7,7 +7,7 @@ section{
 #page_title{
     margin: auto;
     text-align: center;
-    font-family: inter;
+    font-family: Inter;
     font-weight: bold;
     font-size: 24px;
     color: #153448;
@@ -80,6 +80,7 @@ h1{
 #descricao-filtros p{
     margin: 0;
     color: #153448;
+    font-family: 'DM Sans', sans-serif;
 }
 
 #bolinha-filtro{
@@ -188,6 +189,7 @@ img{
     color: #153448;
     font-size: 16px;
     font-weight: bold;
+    font-family: 'Dm sans',sans-serif;
 }
 
 #elementos-veiculo #elementos-filhos #resultado{
@@ -195,6 +197,7 @@ img{
     margin-top: 0px;
     font-size: 16px;
     color: #153448;
+    font-family: 'Dm sans',sans-serif;
 }
 
 #conteudo-esquerdo{
@@ -226,6 +229,7 @@ img{
     margin: 0;
     color: #153448;
     font-size: 16px;
+    font-family: 'Dm sans',sans-serif;
 }
 
 #linha{
@@ -238,6 +242,7 @@ img{
     color: #153448;
     margin: auto;
     text-decoration: none;
+    font-family: 'Dm sans',sans-serif;
 }
 
 #visualzar-link:hover{

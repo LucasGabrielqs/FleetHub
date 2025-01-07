@@ -5,7 +5,7 @@ section{
 #page_title{
     margin: auto;
     text-align: center;
-    font-family: inter;
+    font-family: Inter;
     font-weight: bold;
     font-size: 24px;
     color: #153448;
@@ -72,6 +72,8 @@ form{
     border: 0 none;
     color: #153448;
     padding-inline: 0;
+    font-family: Inter;
+    font-weight: normal;
     font-size: 16px;
     padding-top: 10px;
     padding-left: 20px;
@@ -83,6 +85,8 @@ form{
 input::placeholder {
     color: #ABAFB1;
     font-size: 16px;
+    font-family: Inter;
+    font-weight: normal;
   }
 input:focus {
     outline: none; /* Remove a borda padrão ao focar no campo */
@@ -98,7 +102,7 @@ input:focus {
     width: 100%;
     color: #153448;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     padding-left: 20px;
     font-family: Inter;
     border-top-right-radius: 8px;
@@ -215,8 +219,10 @@ select:focus{
     margin-block-end: 0;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+    font-family: Inter;
     font-weight: bold;
     unicode-bidi: isolate;
+    color: #153448;
 }
 .menu_direito-2{
     display: flex;

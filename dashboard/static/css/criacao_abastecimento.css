@@ -62,9 +62,12 @@ form{
     flex-direction: column;
     row-gap: 20px;
 }
-.logo-img{
+.nota-img{
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 90%;
+    
 }
 
 .logo-img input{
@@ -72,9 +75,9 @@ form{
     height: 93%;
 }
 
-input{
+.input{
     width: 100%;
-    height: 25px;
+    height: 1.0rem;
     background-color: rgba(239, 241, 249, 0.6);
     border: 0 none;
     color: #153448;
@@ -114,7 +117,7 @@ input:focus {
 .campo_duplo{
     display: flex;
     flex-direction: row;
-    column-gap: 25px;
+    column-gap: 50px;
 }
 
 .campo_menor{
@@ -173,11 +176,6 @@ select:focus{
     font-family: Inter;
 }
 
-.btn-reset:hover{
-    background-color: rgba(247, 6, 6, 0.3);
-    transition: all 0.4s;
-}
-
 .rodape .btn-reset{
     width: 180px;
     height: 58px;
@@ -188,7 +186,10 @@ select:focus{
     font-size: 20px;
     font-family: Inter;
 }
-
+.btn-reset:hover{
+    background-color: rgba(247, 6, 6, 0.3);
+    transition: all 0.4s;
+}
 
 #select-estado{
     width: 100px;
@@ -226,7 +227,6 @@ select:focus{
     margin-inline-end: 0px;
     font-weight: bold;
     unicode-bidi: isolate;
-    color: #153448;
 }
 .menu_direito-2{
     display: flex;
@@ -238,3 +238,18 @@ select:focus{
     height: 100%;
 }
 
+
+
+.img-nota-fiscal{
+    border-radius: 30px;
+    width: 397px;
+    height: 100%;
+    background-color: rgba(239, 241, 249, 0.6);
+    margin: 0 auto;
+    border: none;
+}
+
+#img{
+    display: none;
+    margin: 10px auto;
+}

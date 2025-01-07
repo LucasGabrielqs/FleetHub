@@ -11,129 +11,156 @@
 {% endblock estilos %}
 
 {% block content %}
-<section id="conteudo-secundario">
-    <h2 id="page_title">Cadastro de Usuário</h2>
-    <form>
-        <div class="container">
-            <div class="coluna">
-                <h3 class="titulo-secao">Dados do Usuário:</h3>
-                <div class="input_container">
-                    <label>Nome Completo</label>
-                    <input type="text" placeholder="Digite o nome completo">
-                </div>
-                <div class="input_container">
-                    <label>Email</label>
-                    <input type="email" placeholder="Digite o email">
-                </div>
-                <div class="input_container">
-                    <label>CPF</label>
-                    <input type="text" placeholder="Digite o CPF">
-                </div>
-                <div class="input_container">
-                    <label>Telefone</label>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <select style="width: 5rem;">
-                            <option>+55</option>
-                        </select>
-                        <input type="text" placeholder="Número de Telefone" style="flex: 1;">
+<div id='container-block-content'>
+
+    <section id="conteudo-secundario">
+        <form>
+
+
+            <h2 id='page_title'>Cadastro de Usuário</h2>
+                <div class="container">
+
+                    <div class="menu_esquerdo">
+                        <h3 class="form-title">Dados do Usuário:</h3>
+
+                        <div class="input_container">
+                            <label>Nome Completo</label>
+                            <input class="input_detect" type="text" id="nome"
+                                placeholder="Digite o Novo Nome">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Email</label>
+                            <input class="input_detect" type="text" id="email"
+                                placeholder="Digite o novo E-mail">
+                        </div>
+
+                        <div class="input_container">
+                            <label>CPF</label>
+                            <input class="input_detect" type="text"  id="cpf"
+                                maxlength="14" placeholder="Digite o CPF">
+                        </div>
+
+                        <div class="campo_duplo">
+
+
+                            <select class="input_detect" name="select-estado" id="select-ddd-inter">
+                                <option value="RN" selected>+55</option>
+                            </select>
+
+                            <div class="input_container">
+                                <label>Telefone</label>
+                                <input class="input_detect" type="text"  id="telefone"
+                                    placeholder="Numero de Telefone">
+                            </div>
+
+                        </div>
+
+                        <div class="input_container">
+                            <label>Tipo Usuário</label>
+                            <select class="input_detect" id="estados" name="estados">
+                                <option >Motorista</option>
+                                <option >Técnico</option>
+                                <option >Gestor</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="input_container">
+                            <label>Senha</label>
+                            <input class="input_detect" type="text" id="nome"
+                                placeholder="Digite a Nova Senha">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Código do Usuário</label>
+                            <input class="input_detect" type="text" id="codigo-usuario">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Status</label>
+                            <select class="input_detect" id="status" name="status">
+                                <option >Selecione</option>
+                                <option >Inativo</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <div class="menu_direito">
+                        <div class="logo-img">
+                            <input class="input_detect" type="file" name="img" id="img">
+                        </div>
+
+                        <h3 class="form-title">Endereços:</h3>
+
+                        <div class="input_container">
+                            <label>Rua</label>
+                            <input class="input_detect" type="text" id="input-rua"
+                                placeholder="Digite a Rua">
+                        </div>
+
+
+                        <div class="input_container">
+                            <label>Bairro</label>
+                            <input class="input_detect" type="text" id="input-bairro" placeholder="Digite o Bairro">
+                        </div>
+                        <div class="input_container">
+                            <label>Cidade</label>
+                            <input class="input_detect" type="text" id="input-cidade" placeholder="Digite a Cidade">
+                        </div>
+
+                        <div class="estado-cep">
+
+                            <select class="input_detect" name="select-estado" id="select-estado">
+                                <option value=""></option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN" >RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                            <div class="input_container">
+                                <label>CEP</label>
+                                <input class="input_detect" type="text" id="input-cep" placeholder="Digite o CEP">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="input_container">
-                    <label>Tipo Usuário</label>
-                    <select>
-                        <option disabled selected>Selecione</option>
-                    </select>
-                </div>
-                <div class="input_container">
-                    <label>Senha</label>
-                    <input type="password" placeholder="Digite a senha">
-                </div>
-                <div class="input_container">
-                    <label>Código Usuário</label>
-                    <input type="text" placeholder="Digite o código">
-                </div>
-                <div class="input_container">
-                    <label>Status</label>
-                    <select>
-                        <option disabled selected>Selecione</option>
-                    </select>
-                </div>
-            </div>
-<div class="coluna enderecos">
-    <h3 class="titulo-secao">Endereços</h3>
-    <div class="input_container">
-        <label>Rua</label>
-        <input type="text" placeholder="Digite a Rua">
-    </div>
-    <div class="input_container">
-        <label>Bairro</label>
-        <input type="text" placeholder="Digite o Bairro">
-    </div>
-    <div class="input_container">
-        <label>Cidade</label>
-        <input type="text" placeholder="Digite a Cidade">
-    </div>
-    <div class="input_container" style="display: flex; gap: 1rem;">
-        <div style="flex: 1;">
-            <label>Estado</label>
-            <select>
-                <option>Selecione seu Estado</option>
-                <option value="AC">AC</option>
-                <option value="AL">AL</option>
-                <option value="AP">AP</option>
-                <option value="AM">AM</option>
-                <option value="BA">BA</option>
-                <option value="CE">CE</option>
-                <option value="DF">DF</option>
-                <option value="ES">ES</option>
-                <option value="GO">GO</option>
-                <option value="MA">MA</option>
-                <option value="MT">MT</option>
-                <option value="MS">MS</option>
-                <option value="MG">MG</option>
-                <option value="PA">PA</option>
-                <option value="PB">PB</option>
-                <option value="PR">PR</option>
-                <option value="PE">PE</option>
-                <option value="PI">PI</option>
-                <option value="RJ">RJ</option>
-                <option value="RN">RN</option>
-                <option value="RS">RS</option>
-                <option value="RO">RO</option>
-                <option value="RR">RR</option>
-                <option value="SC">SC</option>
-                <option value="SP">SP</option>
-                <option value="SE">SE</option>
-                <option value="TO">TO</option>
-            </select>
-        </div>
-        <div style="flex: 2;">
-            <label>CEP</label>
-            <input type="text" placeholder="Digite o CEP">
-        </div>
-    </div>
-    </form>
-</section>
-<div class="form-actions">
-    <button type="button" class="btn btn-cancel">Cancelar</button>
-    <button type="submit" class="btn btn-save">Salvar</button>
-</div>
 
+
+            </form>
+
+    </section>
+
+</div>
 {% endblock content %}
-{% block scripts_extras %}
-<script>
-    function togglePassword() {
-        const passwordField = document.getElementById('senha');
-        const toggleIcon = document.getElementById('toggle-password');
-        
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            toggleIcon.classList.remove('fa-eye');
-            toggleIcon.classList.add('fa-eye-slash');
-        } else {
-            passwordField.type = 'password';
-            toggleIcon.classList.remove('fa-eye-slash');
-            toggleIcon.classList.add('fa-eye');
-        }
-    }
-</script>{% endblock scripts_extras %}
+
