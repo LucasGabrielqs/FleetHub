@@ -76,7 +76,7 @@
                     <li><a id="submenu-lista-reservas" href="{% url 'listagem_reservas' %}">Lista de Reservas</a></li>
                 </ul>
 
-                <a href="" class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
+                <a href="{% url 'criacao_rota' %}" class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
                     <h3 class="text-menu-lateral" id="text-routes">Rotas</h3>
                     <i id="icon_rotas" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
@@ -85,7 +85,7 @@
 
                 <ul id="submenu-rotas" class="submenu">
                     <li><a id="submenu-criar-rotas" href="{% url 'criacao_rota' %}">Criar Rotas</a></li>
-                    <li><a id="submenu-gerenciar-rotas" href="{% url 'visualizacao_rota' %}">Gerenciar Rotas</a></li>
+                    <li><a id="submenu-gerenciar-rotas" href="{% url 'listagem_rota' %}">Gerenciar Rotas</a></li>
                 </ul>
 
                 <a href="{% url 'agendar_manutencao' %}" class="element-icon" id="id-manutencao"><i
