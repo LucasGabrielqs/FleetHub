@@ -16,59 +16,60 @@
 {% endblock estilos %}
 
 {% block content %}
-<div class="form-container">
-    <h1>Agendar Manutenção</h1>
-    <form class="user-form">
-        <div class="form-section-container">
-            <div class="form-section">
-                <h2>Dados do Veículo</h2>
-                <div class="form-group">
-                    <label for="veiculo">Veículo</label>
+<section id="conteudo-secundario">
+    <h2 id='page_title'>Agendar Manutenção</h2>
+    <form action="">
+        <div class="container">
+            <div class="coluna">
+
+                <h4 id="form-title">Dados do Veiculo</h4>
+                <div class="input_container">
+                    <label>Veículo</label>
                     <select id="veiculo" name="veiculo">
-                        <option value="">Selecione</option>
+                        <option disabled selected>Selecione</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="km-atual">Km Atual</label>
-                    <input type="text" id="km-atual" name="km-atual" placeholder="Digite o Km atual do veículo">
+                <div class="input_container">
+                    <label>Km Atual</label>
+                    <input type="text" id="km_atual" placeholder="Digite o Km atual do veiculo">
                 </div>
             </div>
 
-            <div class="form-section">
-                <h2>Dados da Manutenção</h2>
-                <div class="form-group">
-                    <label for="tipo-manutencao">Tipo de Manutenção</label>
-                    <select id="tipo-manutencao" name="tipo-manutencao">
-                        <option value="">Selecione</option>
+            <div class="coluna">
+                <h4 id="form-title">Dados da Manutenção</h4>
+                <div class="input_container">
+                    <label>Tipo de Manutenção</label>
+                    <select id="tipo_manutencao" name="tipo_manutencao">
+                        <option disabled selected>Selecione</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="prioridade">Prioridade do Atendimento</label>
-                    <select id="prioridade" name="prioridade">
-                        <option value="">Selecione</option>
+                <div class="input_container">
+                    <label>Prioridade de Atendimento</label>
+                    <select id="atendimento" name="atendimento">
+                        <option disabled selected>Selecione</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="data-prevista">Data Prevista de Entrega</label>
-                    <input type="text" id="data-prevista" name="data-prevista" placeholder="Digite a data prevista da entrega">
+                <div class="input_container">
+                    <label>Data Prevista da Entrega</label>
+                    <input type="text" id="data_entrega" placeholder="Digite a data prevista da entrega">
                 </div>
-                <div class="form-group">
-                    <label for="valor-manutencao">Valor da Manutenção</label>
-                    <input type="text" id="valor-manutencao" name="valor-manutencao" placeholder="Digite o valor da manutenção">
+                <div class="input_container">
+                    <label>Valor da Manutenção</label>
+                    <input type="text" id="valor_manutencao" placeholder="Digite o valor da manutenção">
                 </div>
             </div>
         </div>
-
-        <div class="form-group" style="width: 100%;">
-            <label for="comentarios">Comentários</label>
-            <textarea id="comentarios" name="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta"></textarea>
+        <div class="container-coment">
+            <label>Comentários</label>
+            <textarea id="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta"></textarea>
         </div>
-
-        <div class="form-actions">
-            <button type="button" class="btn btn-cancel">Cancelar</button>
-            <button type="submit" class="btn btn-save">Salvar</button>
-        </div>
+        
     </form>
+</section>
+
+<div class="rodape">
+    <button type="reset" class="btn-reset">Cancelar</button>
+    <button type="submit" class="btn-submit">Cadastrar</button>
 </div>
 
 {% endblock content %}              

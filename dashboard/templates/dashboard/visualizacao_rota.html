@@ -16,77 +16,169 @@
 {% endblock estilos %}
 
 {% block content %}
-<section id="conteudo-secundario">
-    <h2 id='page_title'>Visualização da Rota</h2>
-    <h3 id="rota_id">Id Rota: 1</h3>
-    <form action="">
-        <div class="container">
-            <div class="coluna">
-                <div class="input_container">
-                    <label>Veículo</label>
-                    <select id="veiculo" name="veiculo" disabled>
-                        <option selected>Strada</option>
-                    </select>
-                </div>
-                <div class="input_container">
-                    <label>Data de Início da Rota</label>
-                    <input type="text" id="data_inicio" value="21/10/2024" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Data de Fim da Rota</label>
-                    <input type="text" id="data_fim" value="30/10/2024" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Km da Viagem</label>
-                    <input type="text" id="km_viagem" value="200 Km" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Km Atual do Veículo</label>
-                    <input type="text" id="km_atual" value="15.000 Km" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Km Final Previsto</label>
-                    <input type="text" id="km_final" value="15.200 Km" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Valor</label>
-                    <input type="text" id="valor" value="R$ 1000,00" disabled>
-                </div>
-            </div>
+<div id='container-block-content'>
 
-            <div class="coluna">
-                <div class="input_container">
-                    <label>Tipo de Carga</label>
-                    <select id="tipo_carga" name="tipo_carga" disabled>
-                        <option selected>Mobilia</option>
-                    </select>
+    <section id="conteudo-secundario">
+        <form>
+
+
+            <h2 id='page_title'>Visualização Rota</h2>
+            <h2 id='page_title'>Id Rota: 1</h2>
+            <form action="">
+                <div class="container">
+
+                    <div class="menu_esquerdo">
+                        
+                        <div class="input_container">
+                            <label>Veículo:</label>
+                            <select class="input_detect" id="veiculo" name="veiculo">
+                                <option selected>Prisma</option>
+                                <option>Strada</option>
+                                <option>Renegade</option>
+                            </select>
+                        </div>
+    
+                        <div class="input_container">
+                            <label>Data de Inicio da Rota:</label>
+                            <input class="input_detect" type="text" id="data_inicio" 
+                            value="23/10/2024">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Data de Fim da Rota</label>
+                            <input class="input_detect" type="text" id="data_fim"
+                                value="30/10/2024">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Km da Viagem</label>
+                            <input class="input_detect" type="text" id="km_viagem"
+                                value="200 Km">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Km Atual do Veiculo</label>
+                            <input class="input_detect" type="text" id="km_atual"
+                                value="15.000 Km">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Km Final Previsto</label>
+                            <input class="input_detect" type="text" id="km_final"
+                                value="15.200 Km">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Valor</label>
+                            <input class="input_detect" type="text" id="valor"
+                                value="R$ 1.000,00">
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="menu_direito">
+
+                        <div class="input_container">
+                            <label>Tipo de Carga:</label>
+                            <select class="input_detect" id="tipo_carga" name="tipo_carga">
+                                <option selected>Mobilia</option>
+                                <option>Perecíveis</option>
+                                <option>Inflamaveis</option>
+                            </select>
+                        </div>
+
+                        <div class="input_container">
+                            <label>Motorista:</label>
+                            <select class="input_detect" id="motorista" name="motorista">
+                                <option selected>Karen</option>
+                                <option>Lizandro</option>
+                                <option>Lucas</option>
+                            </select>
+                        </div>
+
+                        <div class="input_container">
+                            <label>Cidade Inicio da Rota:</label>
+                            <input class="input_detect" type="text" id="cidade_rota"
+                                value="Pau dos Ferros">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Cidade Fim da Rota:</label>
+                            <input class="input_detect" type="text" id="cidade_fim" 
+                            value="Assú">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Estado Inicio:</label>
+                            <input class="input_detect" type="text" id="estado_inicio" 
+                            value="Assú">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Estado Fim:</label>
+                            <input class="input_detect" type="text" id="estado_fim" 
+                            value="Assú">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Forma de Pagamento:</label>
+                            <select class="input_detect" id="forma_pagamento" name="forma_pagamento">
+                                <option selected>Cartão de Crédito</option>
+                                <option>Cartão de Débito</option>
+                                <option>PIX</option>
+                            </select>
+                        </div>
+
+                    
+                    </div>
                 </div>
-                <div class="input_container">
-                    <label>Motorista</label>
-                    <input type="text" id="motorista" value="Karen" disabled>
+
+                <div class="menu-inferior">
+
+                    <div class="menu_esquerdo">
+                        <h3 class="form-title">Outras Informações</h3>
+                        <div class="input_container">
+                            <label>Usuário de Cadastro</label>
+                            <input type="text" id="usuario-cadastro" value="Admin" disabled>
+                        </div>
+                        <div class="input_container">
+                            <label>Usuário Alteração</label>
+                            <input type="text" id="usuario-alteracao" value="Admin" disabled>
+                        </div>
+
+                    </div>
+
+
+                    <div class="menu_direito-2">
+                        <h3 class="form-title"></h3>
+                        <div class="input_container">
+                            <label>Data de Cadastro</label>
+                            <input type="text" id="data-cadastro" value="20/10/2024" disabled>
+                        </div>
+                        <div class="input_container">
+                            <label>Senha</label>
+                            <input type="text" id="data-alteracao" value="27/10/2024" disabled>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="input_container">
-                    <label>Cidade Início da Rota</label>
-                    <input type="text" id="cidade_inicio" value="Pau dos Ferros" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Cidade Fim da Rota</label>
-                    <input type="text" id="cidade_fim" value="Assú" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Estado Início</label>
-                    <input type="text" id="estado_inicio" value="Rio Grande do Norte" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Estado Fim</label>
-                    <input type="text" id="estado_fim" value="Rio Grande do Norte" disabled>
-                </div>
-                <div class="input_container">
-                    <label>Forma de Pagamento</label>
-                    <input type="text" id="forma_pagamento" value="Dinheiro" disabled>
-                </div>
-            </div>
-        </div>
-    </form>
-</section>
-    {% endblock content %}   
+
+
+
+            </form>
+
+    </section>
+
+    <div class="rodape" id="rodape">
+        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+        <button type="submit" class="btn-submit">Salvar Edição</button>
+    </div>
+</div>
+{% endblock content %}  
+
+{% block scripts_extras %}
+<script src="{% static 'js/visualizar-rota-script.js' %}"></script>
+{% endblock  %}

@@ -12,80 +12,59 @@
   {% endblock estilos %}
 
 {% block content %}
-<div class="container">
-  <h1 id='page_title'>Editar Manutenção</h1>
-  <form>
-    <div class="row">
-      <fieldset>
-        <legend>Dados do Veículo</legend>
-        <label for="veiculo">Veículo:</label>
-        <select id="veiculo">
-          <option>Strada</option>
-        </select>
+<section id="conteudo-secundario">
+  <h2 id='page_title'>Agendar Manutenção</h2>
+  <form action="">
+      <div class="container">
+          <div class="coluna">
 
-        <label for="km">Km Atual:</label>
-        <input type="text" id="km" value="15.000 Km">
+              <h4 id="form-title">Dados do Veiculo</h4>
+              <div class="input_container">
+                  <label>Veículo</label>
+                  <select class="input_detect" id="veiculo" name="veiculo">
+                      <option selected>Strada</option>
+                  </select>
+              </div>
+              <div class="input_container">
+                  <label>Km Atual</label>
+                  <input class="input_detect" value="10.000 Km" type="text" id="km_atual" placeholder="Digite o Km atual do veiculo">
+              </div>
+          </div>
 
-        <label for="status">Status:</label>
-        <select id="status">
-          <option>Pendente</option>
-        </select>
-
-        <label for="tipoManutencao">Tipo de Manutenção:</label>
-        <select id="tipoManutencao">
-          <option>Quilometragem/Ano</option>
-        </select>
-      </fieldset>
-
-      <fieldset>
-        <legend>Dados da Manutenção</legend>
-        <label for="idManutencao">ID Manutenção:</label>
-        <input type="text" id="idManutencao" value="01">
-
-        <label for="prioridade">Prioridade de Atendimento:</label>
-        <select id="prioridade">
-          <option>Média</option>
-        </select>
-
-        <label for="dataEntrega">Data Prevista de Entrega:</label>
-        <input type="date" id="dataEntrega" value="2024-02-25">
-
-        <label for="valorManutencao">Valor da Manutenção:</label>
-        <input type="text" id="valorManutencao">
-      </fieldset>
-    </div>
-
-    <div>
-      <label for="comentarios">Comentários:</label>
-      <textarea id="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta"></textarea>
-    </div>
-
-    <fieldset>
-      <legend>Outras Informações</legend>
-      <div class="info-grid">
-        <div>
-          <label for="usuarioCadastro">Usuário de Cadastro:</label>
-          <input type="text" id="usuarioCadastro" value="Admin" disabled>
-        </div>
-        <div>
-          <label for="dataCadastro">Data de Cadastro:</label>
-          <input type="date" id="dataCadastro" value="2024-10-20" disabled>
-        </div>
-        <div>
-          <label for="usuarioAlteracao">Usuário Alteração:</label>
-          <input type="text" id="usuarioAlteracao" value="Admin" disabled>
-        </div>
-        <div>
-          <label for="dataAlteracao">Data de Alteração:</label>
-          <input type="date" id="dataAlteracao" value="2024-10-27" disabled>
-        </div>
+          <div class="coluna">
+              <h4 id="form-title">Dados da Manutenção</h4>
+              <div class="input_container">
+                  <label>Tipo de Manutenção</label>
+                  <select class="input_detect" id="tipo_manutencao" name="tipo_manutencao">
+                      <option selected>Periodica</option>
+                  </select>
+              </div>
+              <div class="input_container">
+                  <label>Prioridade de Atendimento</label>
+                  <select class="input_detect" id="atendimento" name="atendimento">
+                      <option selected>Normal</option>
+                  </select>
+              </div>
+              <div class="input_container">
+                  <label>Data Prevista da Entrega</label>
+                  <input class="input_detect" value="31/12/204" type="text" id="data_entrega" placeholder="Digite a data prevista da entrega">
+              </div>
+              <div class="input_container">
+                  <label>Valor da Manutenção</label>
+                  <input class="input_detect" value="R$ 500,00" type="text" id="valor_manutencao" placeholder="Digite o valor da manutenção">
+              </div>
+          </div>
       </div>
-    </fieldset>
-
-    <div class="buttons">
-      <button type="reset" class="cancel">Cancelar</button>
-      <button type="submit" class="save">Salvar Edição</button>
-    </div>
+      <div class="container-coment">
+          <label>Comentários</label>
+          <textarea id="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta">Verificar o óleo do motor, fluido freio, pastilhas de freio e ajustes na caixa de direção.</textarea>
+      </div>
+      
   </form>
+</section>
+
+<div class="rodape" id="rodape">
+  <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+  <button type="submit" class="btn-submit">Salvar Edição</button>
 </div>
 {% endblock content %}
