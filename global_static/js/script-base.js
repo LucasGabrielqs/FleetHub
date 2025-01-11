@@ -28,6 +28,7 @@ const submenu_abastecimento = document.getElementById('submenu-abastecimento')
 
 const agendar_manutencao = document.getElementById('submenu-agendar-manutencao');
 const editar_manutencao = document.getElementById('submenu-editar-manutencao');
+const lista_manutencao = document.getElementById('submenu-lista-manutencao');
 const cadastrar_veiculo = document.getElementById('submenu-cadastro-veiculos');
 const lista_veiculos = document.getElementById('submenu-lista-veiculos');
 const cadastro_usuarios = document.getElementById('submenu-cadastro-usuarios');
@@ -205,19 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {//Lógica de Identifi
     const pageName = document.body.getAttribute("data-page");
     console.log(pageName)
     switch(pageName){
-        case "agendar_manutencao":
-            submenu_manutencao.style.display = 'block';
-            agendar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
-            container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_manutencao)
-            break;
-        case "editar_manutencao":
-            submenu_manutencao.style.display = 'block';
-            editar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
-            container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_manutencao)
-            break;            
-        
+
         case "cadastrar_veiculo":
             submenu_veiculos.style.display = 'block';
             cadastrar_veiculo.style.color = 'rgba(21, 52, 72, 0.4)';
@@ -232,6 +221,15 @@ document.addEventListener("DOMContentLoaded", function () {//Lógica de Identifi
             verificar_estado(icon_veiculos)
             break;
 
+        case "Listagem_Veiculos":
+            submenu_veiculos.style.display = 'block';
+            lista_veiculos.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_veiculos.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_veiculos)
+            break;
+
+            
+
         case "cadastrar_usuario":
             submenu_usuarios.style.display = 'block';
             cadastro_usuarios.style.color = 'rgba(21, 52, 72, 0.4)';
@@ -245,12 +243,73 @@ document.addEventListener("DOMContentLoaded", function () {//Lógica de Identifi
             verificar_estado(icon_usuarios)
             break;
 
+        case "Listagem_Usuários":
+            submenu_usuarios.style.display = 'block';
+            container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
+            lista_usuarios.style.color = 'rgba(21, 52, 72, 0.4)';
+            verificar_estado(icon_usuarios)
+            break;
+
         case "criar_reserva":
             submenu_reservas.style.display = 'block';
             criacao_reservas.style.color = 'rgba(21, 52, 72, 0.4)';
             container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
             verificar_estado(icon_reservas)
             break;
+        case "listagem_reservas":
+            submenu_reservas.style.display = 'block';
+            lista_reservas.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_reservas)
+            break;
+
+        case "editar_reserva":
+            submenu_reservas.style.display = 'block';
+            container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_reservas)
+            break;
+            
+
+        case "criacao_rota":
+            submenu_rotas.style.display = 'block';
+            container_rotas.style.backgroundColor = "rgba(255,255,255,0.3)";
+            criar_rotas.style.color = 'rgba(21, 52, 72, 0.4)';
+            verificar_estado(icon_reservas)
+            break;
+
+        case "Listagem_Rotas":
+            submenu_rotas.style.display = 'block';
+            container_rotas.style.backgroundColor = "rgba(255,255,255,0.3)";
+            gerenciar_rotas.style.color = 'rgba(21, 52, 72, 0.4)';
+            verificar_estado(icon_reservas)
+            break;
+
+        case "visualizacao_rota":
+            submenu_rotas.style.display = 'block';
+            container_rotas.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_reservas)
+            break;
+
+
+        case "agendar_manutencao":
+            submenu_manutencao.style.display = 'block';
+            agendar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_manutencao)
+            break;
+        case "Listagem_Manutencao":
+            submenu_manutencao.style.display = 'block';
+            lista_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_manutencao)
+            break;
+        case "editar_manutencao":
+            submenu_manutencao.style.display = 'block';
+            container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_manutencao)
+            break;                
+        
+
 
         case "registro_abastecimento":
             submenu_abastecimento.style.display = 'block';
@@ -258,7 +317,18 @@ document.addEventListener("DOMContentLoaded", function () {//Lógica de Identifi
             container_abastecimento.style.backgroundColor = "rgba(255,255,255,0.3)";
             verificar_estado(icon_abastecimento)
             break;
+        case "Listagem_Abastecimentos":
+            submenu_abastecimento.style.display = 'block';
+            lista_abastecimento.style.color = 'rgba(21, 52, 72, 0.4)';
+            container_abastecimento.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_abastecimento)
+            break;
 
+        case "informacoes_abastecimento":
+            submenu_abastecimento.style.display = 'block';
+            container_abastecimento.style.backgroundColor = "rgba(255,255,255,0.3)";
+            verificar_estado(icon_abastecimento)
+            break;
     }
 });
 
