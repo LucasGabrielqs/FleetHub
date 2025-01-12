@@ -337,3 +337,4 @@ function verificar_estado (elemento){
 if (elemento.style.transform == 'rotate(0deg)'){
     elemento.style.transform = 'rotate(180deg)'
 }}
+
