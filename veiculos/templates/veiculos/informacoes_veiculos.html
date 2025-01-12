@@ -16,89 +16,99 @@
 
 <section id="conteudo-secundario">
     <form>
-
-        
-        <h2 id='page_title'>Cadastrar Veículo</h2>
+        <h2 id='page_title'>Informações do Veículo</h2>
         <form action="">
-        <div class="container">
-            
-            <div class="menu_esquerdo">
-                
-                <div class="input_container">
-                    <label>Modelo</label>
-                    <input class="input_detect" type="text" id="modelo" value="Strada" placeholder="Digite o Modelo">
-                </div>
-                
-                <div class="input_container">
-                    <label>Marca</label>
-                    <input class="input_detect" type="text" id="marca" value="Fiat" placeholder="Digite a Marca">
-                </div>
-                
-                <div class="input_container">
-                    <label>Valor da Compra</label>
-                    <input class="input_detect" type="text" id="valcompra" value="R$ 136.000,00"  maxlength="14" placeholder="Digite o valor da compra">
-                </div>
-                
-                <div class="campo_duplo">
-                    
+            <div class="container">
+                <div class="menu_esquerdo">
                     <div class="input_container">
-                        <label>Ano</label>
-                        <input class="input_detect" type="text" id="ano" value="2024" placeholder="Digite o ano">
+                        <label>Modelo</label>
+                        <input class="input_detect input" type="text" id="modelo" value="Strada" placeholder="Digite o nome do modelo do veículo">
                     </div>
-                    
+
                     <div class="input_container">
-                        <label>KM</label>
-                        <input class="input_detect" type="text" id="km" value="10.000 Km" placeholder="Digite a Quilometragem">
+                        <label>Marca</label>
+                        <input class="input_detect input" type="text" id="marca" value="Fiat" placeholder="Digite a marca do veículo">
                     </div>
-                
+
+                    <div class="input_container">
+                        <label>Valor da Compra</label>
+                        <input class="input_detect input" type="text" value="R$ 136.000,00" id="valor-carro" maxlength="14" placeholder="Digite o valor da compra">
+                    </div>
+
+                    <div class="campo_duplo">
+                        <div class="input_container">
+                            <label>Ano</label>
+                            <input class="input_detect input" type="text" value="2024" id="ano-carro" placeholder="Digite o ano do veículo">
+                        </div>
+
+                        <div class="input_container">
+                            <label>KM</label>
+                            <input class="input_detect input" type="text" value="10.000 Km" id="km-carro" placeholder="Digite a quilometragem">
+                        </div>
+                    </div>
+
+                    <div class="campo_duplo">
+                        <div class="input_container">
+                            <label>Motor</label>
+                            <input class="input_detect input" type="text" value="130 CV" id="motor-carro" placeholder="Digite a potência do motor">
+                        </div>
+                        <div class="input_container">
+                            <label>Status</label>
+                            <select class="input_detect" name="select-estado" id="select-status-carro">
+                                <option selected>No Pátio</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="campo_duplo">
+                        <div class="input_container">
+                            <label>Placa</label>
+                            <input class="input_detect input" type="text" value="RQPI-2E50" id="placa-carro" placeholder="Digite a placa do veículo">
+                        </div>
+
+                        <div class="input_container">
+                            <label>Chassi</label>
+                            <input class="input_detect input" type="text" value="8EJaLGfcC1HF44180" id="chassi-carro" placeholder="Digite o número do chassi">
+                        </div>
+                    </div>
                 </div>
 
-                
-                <div class="campo_duplo">
-                    
-                    <div class="input_container">
-                        <label>Motor</label>
-                        <input class="input_detect" type="text" id="motor" value="130 CV" placeholder="Digite o CV do Motor">
+                <div class="menu_direito">
+                    <div class="logo-img input_detect">
+                        <img class="input_detect" src="{% static 'img/fiat-strada-2025-jpg.png' %}" alt="" style="width: 100%;">
+                        <input type="file" accept=".jpg, .jpeg, .png" name="img" id="img" style="display: none;">
                     </div>
-                    
-                    <div class="input_container">
-                        <label>Status</label>
-                        <select class="input_detect" id="estados" name="estados">
-                            <option value="Novo" selected>Novo</option>
-                            <option value="Usado">Usado</option>
-                          </select>
-                    </div>
-                
                 </div>
-
-                
-                <div class="campo_duplo">
-                    
-                    <div class="input_container">
-                        <label>Placa</label>
-                        <input class="input_detect" type="text" id="placa" value="03hy-0785" placeholder="Digite a Placa">
-                    </div>
-                    
-                    <div class="input_container">
-                        <label>Chassi</label>
-                        <input class="input_detect" type="text" id="km" value="asdhadhahdahshadhs" placeholder="Digite o Chassi">
-                    </div>
-                
-                </div>
-            
             </div>
-            
-            <div class="menu_direito">
 
-
-                <div class="logo-img">
-                    <img src="{% static 'img/fiat-strada-2025-jpg.png' %}" alt="">
-                    <input class="input_detect" type="file" name="img" id="img" style="display: none;">
+            <div class="menu-inferior">
+                <div class="menu_esquerdo">
+                    <h3 class="form-title">Outras Informações</h3>
+                    <div class="input_container">
+                        <label>Usuário de Cadastro</label>
+                        <input class="input" type="text" id="usuario-cadastro" value="Admin" disabled>
+                    </div>
+                    <div class="input_container">
+                        <label>Usuário Alteração</label>
+                        <input class="input" type="text" id="usuario-alteracao" value="Admin" disabled>
+                    </div>
                 </div>
-        </div>
+
+                <div class="menu_direito-2">
+                    <h3 class="form-title"></h3>
+                    <div class="input_container">
+                        <label>Data de Cadastro</label>
+                        <input class="input" type="text" id="data-cadastro" value="20/10/2024" disabled>
+                    </div>
+                    <div class="input_container">
+                        <label>Senha</label>
+                        <input class="input" type="text" id="data-alteracao" value="27/10/2024" disabled>
+                    </div>
+                </div>
+            </div>
+
         </form>
-  
-</section>
+    </section>
 
     <div class="rodape" id="rodape">
         <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>

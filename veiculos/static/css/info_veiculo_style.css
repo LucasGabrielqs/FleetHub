@@ -1,7 +1,6 @@
 body{
-    height: 1100px;
+    height: 1200px;
 }
-
 section{
     padding: 0;
 }
@@ -15,9 +14,10 @@ section{
     color: #153448;
     padding-top: 40px;
     padding-bottom: 40px;
+    width: 1200px
 }
 
-#conteudo_secundario{
+#conteudo-secundario{
     margin: auto;
 }
 
@@ -25,12 +25,15 @@ form{
     margin: auto;
 }
 
+#container-block-content{
+    margin: auto;
+}
+
 .container{
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Alteração para 2 colunas */
+    grid-template-columns: 600px 600px;
     height: 100%;
-    margin: auto;
-    gap: 2rem; /* Adicionando um espaço entre as colunas */
+    margin-top: 20px;
 }
 
 .menu_esquerdo{
@@ -44,31 +47,37 @@ form{
 }
 
 .menu_direito{
-    margin: auto;
-    width: 100%;
-    height: 100%;
-}
-
-.menu_direito .logo-img{
-    width: 100%;
-    height: 100%;
-}
-
-.logo-img input{
-    width: 80%;
+    width: 70%;
     height: 70%;
 }
 
-input{
+.menu_direito{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.logo-img{
+    width: 100%;
+    height: 90%;
+    
+}
+
+.logo-img input{
+    width: 100%;
+}
+
+.input{
     width: 100%;
     height: 30px;
     background-color: rgba(239, 241, 249, 0.6);
     border: 0 none;
     color: #153448;
     padding-inline: 0;
-    font-size: 16px;
     font-family: Inter;
-    font-weight: bold;
+    font-weight: normal;
+    font-size: 16px;
     padding-top: 10px;
     padding-left: 20px;
     padding-bottom: 10px;
@@ -81,47 +90,66 @@ input::placeholder {
     font-size: 16px;
     font-family: Inter;
     font-weight: normal;
-}
-
+  }
 input:focus {
     outline: none; /* Remove a borda padrão ao focar no campo */
 }
-
 .input_container{
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 68px;
 }
-
 .input_container label{
     background-color: rgba(239, 241, 249, 0.6);
     width: 100%;
     color: #153448;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     padding-left: 20px;
     font-family: Inter;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
 }
-
 .campo_duplo{
     display: flex;
     flex-direction: row;
-    column-gap: 2rem; /* Ajustando a distância entre os campos */
+    column-gap: 50px;
+}
+
+.campo_menor{
+    width: 8px;
+    border-radius: 8px;
 }
 
 select{
-    width: 110%;
+    width: 108.8%;
     height: 100%;
     background-color: rgba(239, 241, 249, 0.6);
     border: 0 none;
-    text-align: center;
+    text-align: start;
     padding-left: 20px;
 }
 
 select:focus{
     outline: none;    
+}
+
+.campo_menor select{
+    height: 100%;
+    border-radius: 0.8rem;   
+}
+
+.campo_menor input{
+    height: 100%;
+}
+
+.campo_duplo .input_ddd input{
+    width: 100%;
+    height: 100%;
+}
+.campo_duplo .input_telefone{
+    width: 100%;
 }
 
 .rodape{
@@ -158,67 +186,138 @@ select:focus{
     font-size: 20px;
     font-family: Inter;
 }
+
+
+#select-estado{
+    width: 100px;
+    height: 58px;
+    border-radius: 8px;
+} 
+#select-ddd-inter{
+    width: 120px;
+    height: 58px;
+    border-radius: 8px;
+}
+
+.estado-cep{
+    display: flex;
+    gap: 10px;
+}
+
+.menu-inferior{
+    display: grid;
+    grid-template-columns: 600px 600px;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.form-title{
+    width: 100%;
+    height: 20px;
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-family: Inter;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    color: #153448;
+}
+.menu_direito-2{
+    display: flex;
+    row-gap: 20px;
+    flex-direction: column;
+    margin-left: 3em;
+    width: 100%;
+    max-width: 30rem;
+    margin: auto;
+}
+
 .input_detect{
     pointer-events:none;
 }
 
-/* Responsividade para dispositivos móveis e tablets */
+input[type="file"] {
+    position: relative;
+    z-index: 10; /* Garante que o input está no topo */
+}
+
+
+/* Responsivo para tablets */
 @media (max-width: 768px) {
+    body{
+        height: 100%
+    }
     .container {
-        grid-template-columns: 1fr; /* Colocando tudo em uma única coluna em telas menores */
+        grid-template-columns: 1fr;
+    }
+
+    #page_title {
+        font-size: 20px;
+        padding: 20px;
     }
 
     .menu_esquerdo {
-        margin-left: 1em;
+        width: 90%;
     }
 
-    .campo_duplo {
-        flex-direction: column; /* Colocando os campos lado a lado em telas pequenas */
-        column-gap: 0;
-        row-gap: 20px;
-    }
-
-    .logo-img input {
+    .menu_direito {
         width: 100%;
-        height: 50%;
+        padding: 1rem;
     }
 
     .rodape {
-        flex-direction: column; /* Alinhando os botões na vertical */
-        row-gap: 10px;
+        width: 90%;
+    }
+    #container-block-content{
+        width: 760px;
+    }
+    .menu-inferior{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Responsividade para smartphones (largura de até 480px) */
+@media (max-width: 480px) {
+    #page_title {
+        font-size: 18px;
     }
 
-    input, select {
-        font-size: 14px; /* Ajustando o tamanho da fonte para telas menores */
+    .container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
-    .menu_esquerdo {
-        max-width: 100%; /* Ajustando para tela cheia */
-        margin-left: 0;
+    .menu_esquerdo, .menu_direito-2 {
+        width: 100%;
+        padding: 1rem;
     }
-    body{
-        height: 100%;
+
+    .input {
+        font-size: 14px;
     }
-    #content-and-footer{
-        margin-left: 30px;
-        margin-right: 30px;
+
+    label {
+        font-size: 14px;
     }
-    .input_container{
-        height: 67px;
+
+    .rodape .btn-submit, .rodape .btn-reset {
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
     }
-    select{
-        width: 103%;
+
+    .rodape {
+        flex-direction: column;
+        gap: 10px;
     }
-    .rodape{
-        padding-bottom: 20px;
-    }
-    .rodape .btn-reset,.rodape .btn-submit{
-        margin: auto;
-    }
-    .footer-left,.footer-center{
-        display: none;
-    }
-    .logo-img img{
-        margin: auto;
+
+    .logo-img img {
+        max-width: 100%;
+        height: auto;
     }
 }

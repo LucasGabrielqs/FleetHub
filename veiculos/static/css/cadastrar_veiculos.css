@@ -5,7 +5,6 @@ body{
 section{
     padding: 0;
 }
-
 #page_title{
     margin: auto;
     text-align: center;
@@ -17,7 +16,12 @@ section{
     padding-bottom: 40px;
 }
 
-#conteudo_secundario{
+#conteudo_principal{
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+#conteudo-secundario{
     margin: auto;
 }
 
@@ -25,13 +29,17 @@ form{
     margin: auto;
 }
 
+#container-block-content{
+    margin: auto;
+}
+
 .container{
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Alteração para 2 colunas */
+    grid-template-columns: 600px 600px;
     height: 100%;
     margin: auto;
-    gap: 2rem; /* Adicionando um espaço entre as colunas */
 }
+
 
 .menu_esquerdo{
     display: flex;
@@ -42,7 +50,6 @@ form{
     max-width: 30rem;
     margin: auto;
 }
-
 .menu_direito{
     margin: auto;
     width: 100%;
@@ -81,18 +88,15 @@ input::placeholder {
     font-size: 16px;
     font-family: Inter;
     font-weight: normal;
-}
-
+  }
 input:focus {
     outline: none; /* Remove a borda padrão ao focar no campo */
 }
-
 .input_container{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-
 .input_container label{
     background-color: rgba(239, 241, 249, 0.6);
     width: 100%;
@@ -104,11 +108,15 @@ input:focus {
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
 }
-
 .campo_duplo{
     display: flex;
     flex-direction: row;
-    column-gap: 2rem; /* Ajustando a distância entre os campos */
+    column-gap: 4rem;
+}
+
+.campo_menor{
+    width: 8px;
+    border-radius: 8px;
 }
 
 select{
@@ -122,6 +130,23 @@ select{
 
 select:focus{
     outline: none;    
+}
+
+.campo_menor select{
+    height: 100%;
+    border-radius: 0.8rem;   
+}
+
+.campo_menor input{
+    height: 100%;
+}
+
+.campo_duplo .input_ddd input{
+    width: 100%;
+    height: 100%;
+}
+.campo_duplo .input_telefone{
+    width: 100%;
 }
 
 .rodape{
@@ -163,60 +188,99 @@ select:focus{
     font-weight: normal;
 }
 
-/* Responsividade para dispositivos móveis e tablets */
-@media (max-width: 768px) {
+/* Responsivo para tablets */
+@media (max-width: 1024px) {
+    body{
+        height: 100%;
+    }
     .container {
-        grid-template-columns: 1fr; /* Colocando tudo em uma única coluna em telas menores */
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
-    .menu_esquerdo {
-        margin-left: 1em;
+    .menu_esquerdo, .menu_direito {
+        margin: 0;
+    }
+
+    .rodape {
+        flex-direction: column;
+        row-gap: 10px;
+    }
+    .footer-left,.footer-center{
+        display: none;
+    }
+    select{
+        width: 110%;
+    }
+}
+
+/* Responsivo para smartphones */
+@media (max-width: 768px) {
+    body{
+        height: 100%;
+    }
+    #page_title {
+        font-size: 20px;
+        padding: 20px 0;
+    }
+
+    .input_container label {
+        font-size: 12px;
+    }
+
+    input, select {
+        font-size: 14px;
+        padding: 8px;
     }
 
     .campo_duplo {
-        flex-direction: column; /* Colocando os campos lado a lado em telas pequenas */
-        column-gap: 0;
-        row-gap: 20px;
+        flex-direction: column;
+        row-gap: 15px;
+    }
+
+    .rodape {
+        flex-direction: column;
+        margin-top: 30px;
+        row-gap: 15px;
+    }
+
+    .btn-submit, .btn-reset {
+        width: 100%;
+        height: 50px;
+    }
+    .footer-left,.footer-center{
+        display: none;
+    }
+    select{
+        width: 106%;
+    }
+    .logo-img input {
+        width: 100%;
+    }
+    .btn-reset, .btn-submit{
+        margin: auto;
+    }
+}
+
+/* Adaptação para telas muito pequenas */
+@media (max-width: 480px) {
+    body{
+        height: 100%;
+    }
+    img {
+        width: 100%;
+        max-width: 200px;
+        margin: auto;
     }
 
     .logo-img input {
         width: 100%;
-        height: 50%;
-    }
-
-    .rodape {
-        flex-direction: column; /* Alinhando os botões na vertical */
-        row-gap: 10px;
-    }
-
-    input, select {
-        font-size: 14px; /* Ajustando o tamanho da fonte para telas menores */
-    }
-
-    .menu_esquerdo {
-        max-width: 100%; /* Ajustando para tela cheia */
-        margin-left: 0;
-    }
-    body{
-        height: 100%;
-    }
-    #content-and-footer{
-        margin-left: 30px;
-        margin-right: 30px;
-    }
-    .input_container{
-        height: 67px;
-    }
-    select{
-        width: 103%;
-    }
-    .rodape{
-        padding-bottom: 20px;
-    }
-    .rodape .btn-reset,.rodape .btn-submit{
-        margin: auto;
+        height: auto;
     }
     .footer-left,.footer-center{
         display: none;
     }
 }
+
+
+
