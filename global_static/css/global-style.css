@@ -213,12 +213,6 @@ footer #logo_fleethub{/*Formatação da logo*/
 
 
 
-
-
-
-
-
-
 /* Estilização do fundo escuro */
 #custom-confirm {
     display: none; /* Oculto por padrão */
@@ -260,3 +254,4 @@ footer #logo_fleethub{/*Formatação da logo*/
     background-color: #f44336;
     color: white;
 }
+
