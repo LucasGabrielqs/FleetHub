@@ -9,11 +9,9 @@
     --menu-modulos-color: rgba(255, 255, 255, 0.3);
     --box-shadow-reservas: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
 }
-
-#dashboard,
-#reservas {
+#dashboard{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 body{
@@ -21,9 +19,11 @@ body{
 }
 
 #reservas {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     width: 380px;
-    height: 435px;
+    height: 515px;
     border-radius: 12px;
     box-shadow: var(--box-shadow-reservas);
 }
@@ -31,7 +31,7 @@ body{
 .container-reservas {
     width: 380px;
     height: 470px;
-    margin: 50px 20px 50px 50px;
+    margin-top: 20px;
 }
 
 .data-entrega, .numero-telefone{
@@ -267,7 +267,7 @@ body{
 }
 
 #pedidos-usuarios {
-    margin-left: 50px;
+    margin-top: 100px;
     width: 1100px;
     height: 273px;
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3);
@@ -363,8 +363,7 @@ body{
 }
 
 .usuarios-cadastrados {
-    margin-top: 50px;
-    width: 700px;
+    width: 1100px;
     height: 460px;
 }
 
@@ -374,7 +373,7 @@ body{
     align-items: center;
     justify-content: space-evenly;
     border-radius: 8px;
-    width: 700px;
+    width: 1100px;
     height: 45px;
     background-color: #EFF0F4;
     list-style-type: disc;
@@ -397,11 +396,13 @@ body{
 
 .container-reserva-cadastros{
     display: flex;
+    flex-direction: column;
+    margin: 20px 50px;
 }
 
 #lista-usuarios-sistema{
     margin: 15px auto;
-    width: 700px;
+    width: 1100px;
     height: 45px;
     display: flex;
     flex-direction: row;
@@ -423,7 +424,7 @@ body{
 }
 .list-users{
     display: flex;
-    width: 700px;
+    width: 1100px;
     height: 440px;
     flex-direction: column;
 }

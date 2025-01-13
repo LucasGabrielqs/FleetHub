@@ -11,102 +11,22 @@
 <div id="dashboard">
 
     <div class="container-reserva-cadastros">
-        <div class="container-reservas"><!--Container de Reservas-->
+        <div class="usuarios-cadastrados"><!--Container de usuarios-->
             <div class="icon-nome-reservas">
                 <div class="icon-reservas">
-                    <i class="fa-solid fa-tag icon" title="Reservas"
+                    <i class="fa-solid fa-user icon" title="Reservas"
                         style="color: #10B981; width: 13.5px;"></i>
                     <h2 class="h2-name-reservas">
-                        Reservas
+                        Ultimos Usuários Cadastrados
                     </h2>
                 </div>
 
-                <a href="{% url "listagem_reservas" %}" class="vertodas-a"><div class="ver-todas-reservas">
-                    <h2 class="vertodas">Ver todas</h2>
+                <a href="{% url "listagem_usuarios" %}" class="vertodas-a"><div class="ver-todas-reservas">
+                    <h2 class="vertodas">Ver todos</h2>
                     <i id="icon_rotas" class="fa-solid fa-caret-down"
                         style="color: #A1A1AA; display: block; transform: rotate(-90deg);"></i>
                 </div></a>
             </div>
-
-
-            <div id="reservas"> <!--Container de Reservas-->
-                <div id="name-reservas">
-
-
-                </div>
-                <div class="menu-reservas">
-                    <button id="button-hoje" class='button-hoje-selecionado'>
-                        Hoje
-                    </button>
-                    <button id="button-proximosdias" class='button-proximosdias'>
-                        Próximos dias
-                    </button>
-                </div>
-                <div class="scroll-container">
-                    {% for _ in range_10 %}
-                    <div id="carro-reservado">
-                        <!--Container de Reservas (Fazer um for dentro do django com uma quantidade de reservas)-->
-                        <div class="container-nome-veiculo">
-                            <h2 class="numero-reserva">
-                                23827322
-                            </h2>
-                            <div class="ponto"></div>
-                            
-                            <h2 class="nome-carro">
-                                Fiat Strada
-                            </h2>
-                        </div>
-                        <div class="container-estado-veiculo">
-                            <h2 class="numero-placa">
-                                B 3243 ABC
-                            </h2>
-                            <div class="estado-carro">
-                                <div class="ponto-verde"></div>
-                                <h2>Em Uso</h2>
-                            </div>
-
-                        </div>
-                        <hr class="barra-horizontal">
-                        <div class="dados-motorista">
-                            <img id="imagem-motorista" src="{% static 'img/img_perfil.jpg' %}" alt="Imagem do Motorista" >
-                            <h2 class="nome-motorista">
-                                Chris Evan
-                            </h2>
-                        </div>
-                        <div class="numero-telefone">
-                            <div class="icon-phone">
-                                <i class="fa-solid fa-phone" style="color: #A1A1AA;"></i>
-    
-                                <h2 class="nome-telefone">
-                                    Telefone
-                                </h2>
-                            </div>
-                            <h2 class="h2-numero">
-                                081273832821
-                            </h2>
-                        </div>
-                        <div class="data-entrega">
-                            <div class="icon-data">
-                                <i class="fa-solid fa-calendar" style="color: #A1A1AA;"></i>
-    
-                                <h2 class="h2-data-entrega">
-                                    Data de Entrega
-                                </h2>
-                            </div>
-                            <h2 class="h2-data">
-                                24 Jun 2024
-                            </h2>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-
-
-            </div>
-        </div>
-
-        <div class="usuarios-cadastrados"><!--Container de usuarios-->
-            
             <ul class="list-title-users">
                 <li class="title-user">Nome Completo</li>
                 <li class="title-user">Tipo Usuário</li>
@@ -129,44 +49,158 @@
 
 
         </div>
+        
+
+        <div id="pedidos-usuarios"><!--Container pedidos-->
+            <div class="icon-nome-reservas">
+                <div class="icon-reservas">
+                    <i class="fa-solid fa-tag icon" title="Reservas"
+                        style="color: #10B981; width: 13.5px;"></i>
+                    <h2 class="h2-name-reservas">
+                        Últimas Reservas
+                    </h2>
+                </div>
+    
+                <a href="{% url "listagem_reservas" %}" class="vertodas-a"><div class="ver-todas-reservas">
+                    <h2 class="vertodas">Ver todas</h2>
+                    <i id="icon_rotas" class="fa-solid fa-caret-down"
+                        style="color: #A1A1AA; display: block; transform: rotate(-90deg);"></i>
+                </div></a>
+            </div>
+            <div id="titulo-coluna">
+                <h3 class="nome-coluna">Usuário</h3>
+                <h3 class="nome-coluna">Veículo</h3>
+                <h3 class="nome-coluna">Inicio da Rota</h3>
+                <h3 class="nome-coluna">local de inicio</h3>
+                <h3 class="nome-coluna">Local de fim</h3>
+                <h3 class="nome-coluna">Valor</h3>
+            </div>
+    
+            <div class="total-pedidos">
+                <div class="scroll-container">
+                    {% for _ in range_7 %}
+                    <div class="usuario-info">
+                        <ul id="lista-usuarios">
+                            <li class="user-info-all">
+                                <div class="img-name-number">
+                                    <img id="img-usuario" src="{% static 'img/img_perfil.jpg' %}" alt="">
+                                    <div class="name-number">
+                                        <h3 class="name-user">Ana Ferreira</h3>
+                                        <h3 class="number-user">(84) 91111-2222</h3>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="user-info-all">Strada</li>
+                            <li class="user-info-all">04/12/2024</li>
+                            <li class="user-info-all">Pau dos Ferros, Rio Grande do Norte</li>
+                            <li class="user-info-all">Assú, Rio Grande do Norte</li>
+                            <li class="user-info-all">
+                                <h3 id="valor-corrida"> R$ 10.000,00</h3>
+                            </li>
+                        </ul>
+        
+                    </div>    
+                    {% endfor %}
+                </div>
+    
+            </div>
+        </div>
     </div>
 
-    <div id="pedidos-usuarios"><!--Container pedidos-->
-        <div id="titulo-coluna">
-            <h3 class="nome-coluna">Usuário</h3>
-            <h3 class="nome-coluna">Veículo</h3>
-            <h3 class="nome-coluna">Inicio da Rota</h3>
-            <h3 class="nome-coluna">local de inicio</h3>
-            <h3 class="nome-coluna">Local de fim</h3>
-            <h3 class="nome-coluna">Valor</h3>
+
+
+
+
+    <div class="container-reservas"><!--Container de Reservas-->
+        <div class="icon-nome-reservas">
+            <div class="icon-reservas">
+                <i class="fa-solid fa-tag icon" title="Reservas"
+                    style="color: #10B981; width: 13.5px;"></i>
+                <h2 class="h2-name-reservas">
+                    Reservas
+                </h2>
+            </div>
+
+            <a href="{% url "listagem_reservas" %}" class="vertodas-a"><div class="ver-todas-reservas">
+                <h2 class="vertodas">Ver todas</h2>
+                <i id="icon_rotas" class="fa-solid fa-caret-down"
+                    style="color: #A1A1AA; display: block; transform: rotate(-90deg);"></i>
+            </div></a>
         </div>
 
-        <div class="total-pedidos">
+
+        <div id="reservas"> <!--Container de Reservas-->
+            <div id="name-reservas">
+
+
+            </div>
+            <div class="menu-reservas">
+                <button id="button-hoje" class='button-hoje-selecionado'>
+                    Hoje
+                </button>
+                <button id="button-proximosdias" class='button-proximosdias'>
+                    Próximos dias
+                </button>
+            </div>
             <div class="scroll-container">
-                {% for _ in range_7 %}
-                <div class="usuario-info">
-                    <ul id="lista-usuarios">
-                        <li class="user-info-all">
-                            <div class="img-name-number">
-                                <img id="img-usuario" src="{% static 'img/img_perfil.jpg' %}" alt="">
-                                <div class="name-number">
-                                    <h3 class="name-user">Ana Ferreira</h3>
-                                    <h3 class="number-user">(84) 91111-2222</h3>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="user-info-all">Strada</li>
-                        <li class="user-info-all">04/12/2024</li>
-                        <li class="user-info-all">Pau dos Ferros, Rio Grande do Norte</li>
-                        <li class="user-info-all">Assú, Rio Grande do Norte</li>
-                        <li class="user-info-all">
-                            <h3 id="valor-corrida"> R$ 10.000,00</h3>
-                        </li>
-                    </ul>
-    
-                </div>    
+                {% for _ in range_10 %}
+                <div id="carro-reservado">
+                    <!--Container de Reservas (Fazer um for dentro do django com uma quantidade de reservas)-->
+                    <div class="container-nome-veiculo">
+                        <h2 class="numero-reserva">
+                            23827322
+                        </h2>
+                        <div class="ponto"></div>
+                        
+                        <h2 class="nome-carro">
+                            Fiat Strada
+                        </h2>
+                    </div>
+                    <div class="container-estado-veiculo">
+                        <h2 class="numero-placa">
+                            B 3243 ABC
+                        </h2>
+                        <div class="estado-carro">
+                            <div class="ponto-verde"></div>
+                            <h2>Em Uso</h2>
+                        </div>
+
+                    </div>
+                    <hr class="barra-horizontal">
+                    <div class="dados-motorista">
+                        <img id="imagem-motorista" src="{% static 'img/img_perfil.jpg' %}" alt="Imagem do Motorista" >
+                        <h2 class="nome-motorista">
+                            Chris Evan
+                        </h2>
+                    </div>
+                    <div class="numero-telefone">
+                        <div class="icon-phone">
+                            <i class="fa-solid fa-phone" style="color: #A1A1AA;"></i>
+
+                            <h2 class="nome-telefone">
+                                Telefone
+                            </h2>
+                        </div>
+                        <h2 class="h2-numero">
+                            081273832821
+                        </h2>
+                    </div>
+                    <div class="data-entrega">
+                        <div class="icon-data">
+                            <i class="fa-solid fa-calendar" style="color: #A1A1AA;"></i>
+
+                            <h2 class="h2-data-entrega">
+                                Data de Entrega
+                            </h2>
+                        </div>
+                        <h2 class="h2-data">
+                            24 Jun 2024
+                        </h2>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
+
 
         </div>
     </div>
