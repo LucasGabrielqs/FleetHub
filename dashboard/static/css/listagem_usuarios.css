@@ -255,3 +255,146 @@ img{
 #visualzar-link:hover{
     text-decoration: none;
 }
+
+/* Ajustes para telas menores que 1024px (tablets e laptops pequenos) */
+@media (max-width: 1024px) {
+    #filtros {
+        flex-wrap: wrap;
+        row-gap: 10px;
+        width: 90%;
+    }
+
+    #estrutura-filtros {
+        width: 120px;
+        height: 40px;
+    }
+
+    #content-listagem {
+        padding: 0 20px;
+    }
+
+    #lista-veiculos {
+        width: 100%;
+    }
+
+    #conteudo-esquerdo{
+        margin-top: 15px;
+    }
+
+    #linha-veiculo {
+        flex-direction: column;
+        align-items: center;
+    }
+    #img-veiculo{
+        max-height: 140px;
+    }
+    img {
+        width: 180px;
+        height: auto;
+    }
+
+    #elementos-veiculo {
+        align-items: center;
+    }
+
+    #botao-visualizar {
+        width: 150px;
+        height: 35px;
+    }
+    .footer-left,.footer-center{
+        display: none;
+    }
+}
+
+/* Ajustes para telas menores que 768px (smartphones grandes e tablets) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    #filtros {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #estrutura-filtros {
+        width: 100%;
+        height: 50px;
+        margin-bottom: 10px;
+    }
+
+    #search-box {
+        width: 90%;
+    }
+
+    #descr-search {
+        width: 100%;
+    }
+
+    #elementos-filhos.nomes{
+        display: block;
+    }
+
+    #descr-search #search-input {
+        font-size: 14px;
+    }
+
+    #lista-veiculos {
+        max-height: 400px;
+    }
+
+    .footer-left,.footer-center{
+        display: none;
+    }
+
+    #elementos-veiculo #elementos-filhos {
+        flex-direction: column;
+        align-items: center;
+        display: none;
+    }
+
+    #conteudo-esquerdo{
+        margin-top: 15px;
+    }
+
+    #botao-visualizar {
+        width: 120px;
+    }
+}
+
+/* Ajustes para telas menores que 480px (smartphones pequenos) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    #filtros {
+        width: 100%;
+    }
+
+    #descricao-filtros p,
+    #quantidade-filtro p {
+        font-size: 12px;
+    }
+
+    img {
+        width: 150px;
+    }
+
+    #elementos-veiculo {
+        width: 100%;
+    }
+
+    #botao-visualizar {
+        width: 100px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    #linha {
+        width: 95%;
+    }
+    .footer-left,.footer-center{
+        display: none;
+    }
+}

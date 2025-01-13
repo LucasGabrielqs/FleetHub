@@ -241,3 +241,146 @@ select:focus{
     height: 100%;
 }
 
+
+
+
+/* Responsividade para tablets (telas entre 768px e 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr; /* Um único bloco por linha */
+        gap: 30px;
+    }
+
+    .menu_esquerdo{
+        width: 100%;
+        margin: 0 auto;
+    }
+    .menu_direito{
+        width: 45%;
+        margin: 0 auto;
+    }
+
+    .logo-img input {
+        height: 200px; /* Redimensionar para dispositivos menores */
+    }
+    body{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Responsividade para dispositivos móveis (telas menores que 768px) */
+@media (max-width: 768px) {
+    #page_title {
+        font-size: 20px;
+        padding: 20px;
+        width: 100%;
+    }
+
+    input{
+        width: 101.5%;
+    }
+
+    .input_container label {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    input, select {
+        font-size: 14px;
+        height: 35px;
+        padding: 8px;
+    }
+
+    .rodape {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-submit, 
+    .btn-reset {
+        width: 100%;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .menu_esquerdo, 
+    .menu_direito {
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .estado-cep {
+        flex-direction: column;
+    }
+
+    #select-estado, 
+    #input-cep {
+        width: 100%;
+    }
+    body{
+        width: 100%;
+        height: 100%;
+    }
+    .footer-left,.footer-center{
+        display: none;
+    }
+    .btn-submit,.btn-reset{
+        margin: auto;
+    }
+    #select-ddd-inter {
+        height: 67px;
+    }
+    #estados{
+        width: 106%;
+    }
+    #select-estado{
+        width: 106%;
+    }
+}
+
+/* Responsividade para telas muito pequenas (telas menores que 480px) */
+@media (max-width: 480px) {
+    #page_title {
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    input, select {
+        font-size: 12px;
+        height: 30px;
+        padding: 6px;
+    }
+
+    .input_container label {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .btn-submit, 
+    .btn-reset {
+        font-size: 16px;
+        height: 45px;
+    }
+
+    .logo-img input {
+        height: 150px;
+    }
+
+    .menu_esquerdo {
+        padding: 5px;
+    }
+    .menu_direito{
+        width: 100%;
+        margin: 0 auto;
+        padding: 5px;
+    }
+    body{
+        width: 100%;
+        height: 100%;
+    }
+    .footer-left,.footer-center{
+        display: none;
+    }
+}
