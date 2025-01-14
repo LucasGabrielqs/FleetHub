@@ -5,7 +5,7 @@ const img_expand = document.getElementById('img_sidebar-expansive');
 const expand_button = document.getElementById('div-img_sidebar-expansive');
 const icon_expand = document.getElementsByClassName('icon');
 const sidebar = document.getElementById('sidebar');
-const user_icon = document.getElementById('user_icon');//icone do menu de usuário0
+const user_icon = document.getElementById('user_icon');//icone do menu de usuário
 const user_menu = document.getElementById('user_menu');
 const gestor_name = document.getElementById('gestor_name');
 const texto1 = document.getElementById('text-init');
@@ -56,9 +56,29 @@ const icon_manutencao = document.getElementById('icon_manutencao');
 const icon_abastecimento = document.getElementById('icon_abastecimento');
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Inicialmente verificar a largura da tela ao carregar a página
+    verificarTamanhoTela();
+
+    // Adicionar evento de redimensionamento
+    window.addEventListener('resize', verificarTamanhoTela);
+
+    // Exibir a resolução da tela no console
+    console.log(`Resolução da tela: ${window.innerWidth} x ${window.innerHeight}`);
+});
+
+function verificarTamanhoTela() {
+    const larguraTela = window.innerWidth;
+    //const alturaTela = window.innerHeight; // Caso precise da altura em algum lugar
+    if (larguraTela < 768 && sidebar_is_open()) {
+        encolher_sidebar();
+    } else if (larguraTela > 768 && !sidebar_is_open()) {
+        expandir_sidebar();
+    }
+}
+
+
 user_menu.addEventListener('click', () => {
-    //console.log(user_menu_is_open())
-    //console.log('123',sidebar_is_open())
     if (!user_menu_is_open() && sidebar_is_open()) {
         user_icon.style.transform = 'rotate(180deg)';
         menu_perfil.style.display = 'flex';
@@ -76,44 +96,49 @@ user_menu.addEventListener('click', () => {
 
 expand_button.addEventListener('click', () =>{//lógica para a barra lateral
     if (sidebar_is_open()){
-        alter_element_icon()
-        alter_text_sidebar()
-        menu_perfil.style.display = 'none';
-        menu.style.width = '44px';
-        sidebar.style.width = '44px';
-        user_menu.style.width = '30px';
-        user_menu.style.height = '30px';
-        user_menu.style.justifyContent = 'center';
-        img_expand.style.rotate = '180deg';
-        user_icon.style.display = 'none';
-        teste.style.gridTemplateColumns = '44px 1fr';
+        encolher_sidebar()
     }
-    
     else if (!sidebar_is_open()){
-        alter_element_icon()
-        alter_text_sidebar()
-        menu_perfil.style.display = 'none';
-        menu.style.transition = '800ms';
-        sidebar.style.transition = '800ms';
-        img_expand.style.rotate = '0deg';
-        menu.style.width = '260px';
-        sidebar.style.width = '260px';
-        user_menu.style.width = '120px';
-        user_menu.style.height = '40px';
-        user_icon.style.display = 'block';
-        user_menu.style.justifyContent = 'space-evenly';
-        teste.style.gridTemplateColumns = '260px 1fr';
+        expandir_sidebar()
     }
 })
 
+function encolher_sidebar(){
+    alter_element_icon()
+    alter_text_sidebar()
+    menu_perfil.style.display = 'none';
+    menu.style.width = '44px';
+    sidebar.style.width = '44px';
+    user_menu.style.width = '30px';
+    user_menu.style.height = '30px';
+    user_menu.style.justifyContent = 'center';
+    img_expand.style.rotate = '180deg';
+    user_icon.style.display = 'none';
+    //teste.style.gridTemplateColumns = '44px 1fr';
+}
+
+function expandir_sidebar(){
+    alter_element_icon()
+    alter_text_sidebar()
+    menu_perfil.style.display = 'none';
+    menu.style.transition = '800ms';
+    sidebar.style.transition = '800ms';
+    img_expand.style.rotate = '0deg';
+    menu.style.width = '260px';
+    sidebar.style.width = '260px';
+    user_menu.style.width = '120px';
+    user_menu.style.height = '40px';
+    user_icon.style.display = 'block';
+    user_menu.style.justifyContent = 'space-evenly';
+    //teste.style.gridTemplateColumns = '260px 1fr';
+}
+
 function sidebar_is_open() {
-    console.log(sidebar.style.width)
     return sidebar.style.width == '260px' || sidebar.style.width == '';
 }
 
 function user_menu_is_open() {
     const style = window.getComputedStyle(menu_perfil);
-    //console.log(style.display)
     return style.display === 'flex';  // Verifica se o display é 'flex'
 }
 
@@ -173,7 +198,7 @@ function alter_text_sidebar(){
         submenu_rotas.style.display = 'none';
         submenu_usuarios.style.display = 'none';
         submenu_veiculos.style.display = 'none';
-    }else{
+    }else {
         gestor_name.style.display = 'block';
         texto1.style.display = 'block';
         texto2.style.display = 'block';
@@ -204,7 +229,6 @@ else if (page_title.innerText == "Visualização da Rota" || page_title.innerTex
 
 document.addEventListener("DOMContentLoaded", function () {//Lógica de Identificação de Página e ações do submenu
     const pageName = document.body.getAttribute("data-page");
-    console.log(pageName)
     switch(pageName){
 
         case "cadastrar_veiculo":
@@ -337,4 +361,3 @@ function verificar_estado (elemento){
 if (elemento.style.transform == 'rotate(0deg)'){
     elemento.style.transform = 'rotate(180deg)'
 }}
-
