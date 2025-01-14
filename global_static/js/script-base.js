@@ -70,9 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function verificarTamanhoTela() {
     const larguraTela = window.innerWidth;
     //const alturaTela = window.innerHeight; // Caso precise da altura em algum lugar
-    if (larguraTela < 768 && sidebar_is_open()) {
+    if (larguraTela < 1250 && sidebar_is_open()) {
         encolher_sidebar();
-    } else if (larguraTela > 768 && !sidebar_is_open()) {
+    } else if (larguraTela > 1250 && !sidebar_is_open()) {
         expandir_sidebar();
     }
 }
