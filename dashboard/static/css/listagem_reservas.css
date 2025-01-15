@@ -287,3 +287,150 @@ img{
     text-decoration: none;
 }
 
+
+/* Responsividade */
+
+/* Telas até 1240px (desktops médios) */
+@media screen and (max-width: 1240px) {
+    #content-listagem {
+      max-width: 100%;
+      row-gap: 40px;
+    }
+  
+    #lista-veiculos {
+      width: 100%;
+      max-width: 100%;
+    }
+  
+    #linha-veiculo {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  
+    #img-veiculo {
+      column-gap: 10px;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #conteudo-esquerdo {
+      align-items: center;
+      text-align: center;
+    }
+  
+    #botao-visualizar {
+      width: 100%;
+    }
+  }
+  
+  /* Telas até 1024px (tablets grandes) */
+  @media screen and (max-width: 1024px) {
+    h1 {
+      font-size: 26px;
+    }
+  
+    #lista-veiculos {
+      row-gap: 40px;
+      max-height: 500px;
+    }
+  
+    #img-veiculo img {
+      width: 180px;
+      height: 110px;
+    }
+  
+    #conteudo-esquerdo {
+      max-height: auto;
+      align-items: center;
+    }
+  
+    #botao-visualizar {
+      width: 150px;
+    }
+  }
+  
+  /* Telas até 768px (tablets pequenos e smartphones grandes) */
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 22px;
+      text-align: center;
+    }
+  
+    #search-box {
+      max-width: 90%;
+      margin: 10px auto;
+    }
+  
+    #descr-search {
+      width: 100%;
+    }
+  
+    #lista-veiculos {
+      max-width: 100%;
+      max-height: 400px;
+      padding: 0 10px;
+    }
+  
+    #linha-veiculo {
+      row-gap: 20px;
+    }
+  
+    #img-veiculo img {
+      width: 150px;
+      height: 100px;
+    }
+  
+    #conteudo-esquerdo {
+      align-items: center;
+      row-gap: 10px;
+    }
+  
+    #botao-visualizar {
+      width: 100%;
+    }
+  }
+  
+  /* Telas até 480px (smartphones pequenos) */
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  
+    #search-box {
+      max-width: 90%;
+    }
+  
+    #descr-search {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    #lista-veiculos {
+      max-height: 300px;
+      padding: 0 5px;
+    }
+  
+    #linha-veiculo {
+      row-gap: 15px;
+    }
+  
+    #img-veiculo img {
+      width: 120px;
+      height: 80px;
+    }
+  
+    #conteudo-esquerdo {
+      text-align: center;
+      align-items: center;
+    }
+  
+    #botao-visualizar {
+      width: 100%;
+      font-size: 14px;
+    }
+    .foooter-left,.footer-center{
+        display: none;
+    }
+  }
+  
