@@ -200,3 +200,178 @@ select:focus {
 .input_detect{
   pointer-events:none;
 }
+
+
+/* Ajustes para telas menores que 1200px (Tablets e Laptops menores) */
+@media screen and (max-width: 1250px) {
+
+  body{
+    height: 100%;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .coluna{
+    margin: auto;
+  }
+  
+  input {
+    width: 97%;
+  }
+  
+  label{
+    width: 100%;
+  }
+  
+  select{
+    width: 100%;
+  }
+
+  .rodape {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rodape .btn-submit,
+  .rodape .btn-reset {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+  }
+
+  #page_title {
+    font-size: 20px;
+  }
+  .container-coment{
+      margin: 10px;
+  }
+  .container-coment label{
+      width: 100%;
+  }
+  #comentarios{
+      width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #page_title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    gap: 1rem;
+  }
+
+  input, select {
+    font-size: 14px;
+  }
+
+  .rodape {
+    margin-top: 40px;
+  }
+}
+
+
+/* Ajustes para telas menores que 768px (Celulares maiores) */
+@media screen and (max-width: 768px) {
+  #page_title {
+    font-size: 18px;
+    padding: 20px 0;
+  }
+
+  .rodape {
+    margin-top: 30px;
+  }
+
+  body{
+    height: 100%;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .input_container label{
+    width: 320px;
+  }
+
+  .coluna{
+    margin: auto;
+  }
+  
+  input {
+    width: 94%;
+  }
+  
+  label{
+    width: 50%;
+  }
+  
+  select{
+    width: 100%;
+  }
+
+  .footer-left,.footer-center{
+    display: none;
+  }
+
+  .rodape .btn-submit,
+  .rodape .btn-reset {
+    font-size: 18px;
+    height: 50px;
+  }
+}
+
+/* Telas até 480px (smartphones pequenos) */
+@media screen and (max-width: 480px) {
+  #page_title {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  input, select {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .rodape .btn-submit,
+  .rodape .btn-reset {
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .rodape {
+    margin-top: 20px;
+  }
+  body{
+    height: 100%;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .input_container label{
+    width: 270px;
+  }
+
+  .coluna{
+    margin: auto;
+  }
+  
+  input {
+    width: 94%;
+  }
+  
+  select{
+    width: 100%;
+  }
+
+  .footer-left,.footer-center{
+    display: none;
+  }
+}

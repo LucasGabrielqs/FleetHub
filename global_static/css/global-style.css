@@ -255,3 +255,27 @@ footer #logo_fleethub{/*Formatação da logo*/
     color: white;
 }
 
+@media (max-width: 480px) {
+    .footer-left, .footer-center {
+        display: none;
+    }
+    footer{
+        flex-direction: column;
+    }
+}
+@media (max-width: 768px) {
+    .footer-left, .footer-center {
+        display: none;
+    }
+    footer{
+        flex-direction: column;
+    }
+}
+@media (max-width: 1024px) {
+    .footer-left, .footer-center {
+        display: none;
+    }
+    footer{
+        flex-direction: column;
+    }
+}
