@@ -34,6 +34,10 @@ body{
     margin-top: 20px;
 }
 
+#container-block-content{
+    margin: 0 auto;
+}
+
 .data-entrega, .numero-telefone{
     margin-left: 20px;
 }
