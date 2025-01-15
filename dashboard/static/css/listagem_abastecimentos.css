@@ -35,7 +35,7 @@ h1{
 }
 
 #container-block-content{
-    margin: auto;
+    margin: 0 auto;
 }
 
 #filtros{
@@ -287,3 +287,36 @@ img{
     text-decoration: none;
 }
 
+/* Telas até 1240px (desktops médios) */
+@media screen and (max-width: 1240px) {
+    #lista-veiculos{
+        width: 100%;
+        max-width: 1240px;
+    }
+    #container-block-content {
+        margin: 20px;
+    }
+  }
+  
+  /* Telas até 1024px (tablets grandes) */
+  @media screen and (max-width: 1024px) {
+
+  }
+  
+  /* Telas até 768px (tablets pequenos e smartphones grandes) */
+  @media screen and (max-width: 768px) {
+
+  }
+  
+  /* Telas até 480px (smartphones pequenos) */
+  @media screen and (max-width: 480px) {
+    #botao-visualizar{
+        max-width: 177px;
+        width: 100%;
+    }
+    #search-legenda{
+        flex-direction: column;
+        gap: 50px;
+    }
+
+  }
