@@ -71,14 +71,6 @@ hr {/* Estilo de barra horizontal*/
     background-color:var(--menu-modulos-color);
 }
 
-#submenu-abastecimento, #submenu-manutencao, #submenu-rotas, #submenu-reservas, #submenu-usuarios, #submenu-veiculos{
-    display: none;
-}
-
-
-
-
-
 #exit{/* Seleciona o btão de sair*/
     text-decoration: none;
 }
@@ -99,7 +91,9 @@ hr {/* Estilo de barra horizontal*/
     width: 24px;
     height: 24px;
 }
-
+.fa-caret-down{
+    transition: 0.5s;
+}
 /* Seleciona o menu de usuário na sidebar, organizando os itens em uma coluna */
 #user-menu-sidebar {
     display: flex;

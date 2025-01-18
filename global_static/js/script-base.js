@@ -62,15 +62,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Adicionar evento de redimensionamento
     window.addEventListener('resize', verificarTamanhoTela);
-
-    // Exibir a resolução da tela no console
-    console.log(`Resolução da tela: ${window.innerWidth} x ${window.innerHeight}`);
 });
 
 function verificarTamanhoTela() {
     const larguraTela = window.innerWidth;
     //const alturaTela = window.innerHeight; // Caso precise da altura em algum lugar
-    if (larguraTela < 1250 && sidebar_is_open()) {
+    if (larguraTela < 1250 && sidebar_is_open() && !submenu_is_open()) {
         encolher_sidebar();
     } else if (larguraTela > 1250 && !sidebar_is_open()) {
         expandir_sidebar();
@@ -141,15 +138,47 @@ function user_menu_is_open() {
     const style = window.getComputedStyle(menu_perfil);
     return style.display === 'flex';  // Verifica se o display é 'flex'
 }
-
-function open_user_menu (){
-
-}
-
 function close_user_menu (){
     user_icon.style.transform = 'rotate(0deg)';
     menu_perfil.style.display = 'none';
 }
+
+
+function submenu_is_open(){ //retorna true se algum submenu estiver aberto
+    return submenu_veiculos.style.display == 'block' || submenu_usuarios.style.display == 'block' || submenu_reservas.style.display == 'block' || submenu_rotas.style.display == 'block' || submenu_manutencao.style.display == 'block' || submenu_abastecimento.style.display == 'block';
+}
+
+
+//Lógica para abrir e fechar o submenu da barra lateral
+let lista_containers_submenu = [container_veiculos, container_usuarios, container_reservas, container_rotas, container_manutencao, container_abastecimento];
+let lista_submenu = [submenu_veiculos, submenu_usuarios, submenu_reservas, submenu_rotas, submenu_manutencao, submenu_abastecimento];
+let icon_list = [icon_veiculos,icon_usuarios,icon_reservas,icon_rotas,icon_manutencao,icon_abastecimento]
+for (let i = 0; i < lista_containers_submenu.length; i++){
+    lista_containers_submenu[i].addEventListener('click', () => {
+        if (sidebar_is_open()){
+            if (lista_submenu[i].style.display === 'none'){
+                lista_submenu[i].style.display = 'block';
+                verificar_estado_icone(icon_list[i])
+            }
+            else{
+                lista_submenu[i].style.display = 'none';
+                verificar_estado_icone(icon_list[i])
+            }
+        }
+        else{
+            expandir_sidebar()
+        }
+
+    });
+}
+function verificar_estado_icone (elemento){
+    if (elemento.style.transform == 'rotate(0deg)'){
+        elemento.style.transform = 'rotate(180deg)'
+    }else{
+        elemento.style.transform = 'rotate(0deg)'
+    }
+}
+
 
 function alter_element_icon(){//altera o tamanho do container, margens e largura
     if (sidebar_is_open()){
@@ -174,190 +203,133 @@ function alter_element_icon(){//altera o tamanho do container, margens e largura
     }
 }
 
+
+let text_list = [
+    gestor_name,texto1,texto2,texto3,texto4,texto5,texto6,texto7,icon_veiculos,icon_usuarios,icon_reservas,icon_rotas,icon_manutencao,icon_abastecimento
+]
+let text_list_submenu = [...text_list, ...lista_submenu]
+
 function alter_text_sidebar(){
     if (sidebar_is_open()){
-        gestor_name.style.display = 'none';
-        texto1.style.display = 'none';
-        texto2.style.display = 'none';
-        texto3.style.display = 'none';
-        texto4.style.display = 'none';
-        texto5.style.display = 'none';
-        texto6.style.display = 'none';
-        texto7.style.display = 'none';
-
-        icon_veiculos.style.display = 'none';
-        icon_usuarios.style.display = 'none';
-        icon_reservas.style.display = 'none';
-        icon_rotas.style.display = 'none';
-        icon_manutencao.style.display = 'none';
-        icon_abastecimento.style.display = 'none';
-
-        submenu_abastecimento.style.display = 'none';
-        submenu_manutencao.style.display = 'none';
-        submenu_reservas.style.display = 'none';
-        submenu_rotas.style.display = 'none';
-        submenu_usuarios.style.display = 'none';
-        submenu_veiculos.style.display = 'none';
+        for (let i = 0; i < text_list_submenu.length; i++){text_list_submenu[i].style.display = 'none';}
     }else {
-        gestor_name.style.display = 'block';
-        texto1.style.display = 'block';
-        texto2.style.display = 'block';
-        texto3.style.display = 'block';
-        texto4.style.display = 'block';
-        texto5.style.display = 'block';
-        texto6.style.display = 'block';
-        texto7.style.display = 'block';
-
-        icon_veiculos.style.display = 'block';
-        icon_usuarios.style.display = 'block';
-        icon_reservas.style.display = 'block';
-        icon_rotas.style.display = 'block';
-        icon_manutencao.style.display = 'block';
-        icon_abastecimento.style.display = 'block';
+        for (let i = 0; i < text_list.length; i++){text_list[i].style.display = 'block';}
     }
 }
 
 
-if (page_title.innerText == "Registro de Abastecimento" || page_title.innerText == "Lista de Abastecimento" || page_title.innerText == "Registro de Abastecimento"){
-    submenu_abastecimento.style.display = 'block';
-}
-else if (page_title.innerText == "Visualização da Rota" || page_title.innerText == "Lista de Rotas" || page_title.innerText == "Criação da Rota"){
-    submenu_rotas.style.display = 'block';
-}
 
 
+let site_list = ["cadastrar_veiculo", "informacoes_veiculo", "Listagem_Veiculos", 
+                 
+                ]
 
 document.addEventListener("DOMContentLoaded", function () {//Lógica de Identificação de Página e ações do submenu
     const pageName = document.body.getAttribute("data-page");
     switch(pageName){
 
         case "cadastrar_veiculo":
-            submenu_veiculos.style.display = 'block';
+            //submenu_veiculos.style.display = 'block';
             cadastrar_veiculo.style.color = 'rgba(21, 52, 72, 0.4)';
             container_veiculos.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_veiculos)
             break;
 
         case "informacoes_veiculo":
-            submenu_veiculos.style.display = 'block';
-            //cadastrar_veiculo.style.color = 'rgba(21, 52, 72, 0.4)';
+            //submenu_veiculos.style.display = 'block';
             container_veiculos.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_veiculos)
             break;
 
         case "Listagem_Veiculos":
-            submenu_veiculos.style.display = 'block';
+            //submenu_veiculos.style.display = 'block';
             lista_veiculos.style.color = 'rgba(21, 52, 72, 0.4)';
             container_veiculos.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_veiculos)
             break;
 
             
 
         case "cadastrar_usuario":
-            submenu_usuarios.style.display = 'block';
+            //submenu_usuarios.style.display = 'block';
             cadastro_usuarios.style.color = 'rgba(21, 52, 72, 0.4)';
             container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_usuarios)
             break;
 
         case "informacoes_usuario":
-            submenu_usuarios.style.display = 'block';
+            //submenu_usuarios.style.display = 'block';
             container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_usuarios)
             break;
 
         case "Listagem_Usuários":
-            submenu_usuarios.style.display = 'block';
+            //submenu_usuarios.style.display = 'block';
             container_usuarios.style.backgroundColor = "rgba(255,255,255,0.3)";
             lista_usuarios.style.color = 'rgba(21, 52, 72, 0.4)';
-            verificar_estado(icon_usuarios)
             break;
 
         case "criar_reserva":
-            submenu_reservas.style.display = 'block';
+            //submenu_reservas.style.display = 'block';
             criacao_reservas.style.color = 'rgba(21, 52, 72, 0.4)';
             container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_reservas)
             break;
         case "listagem_reservas":
-            submenu_reservas.style.display = 'block';
+            //submenu_reservas.style.display = 'block';
             lista_reservas.style.color = 'rgba(21, 52, 72, 0.4)';
             container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_reservas)
             break;
 
         case "editar_reserva":
-            submenu_reservas.style.display = 'block';
+            //submenu_reservas.style.display = 'block';
             container_reservas.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_reservas)
             break;
             
 
         case "criacao_rota":
-            submenu_rotas.style.display = 'block';
+            //submenu_rotas.style.display = 'block';
             container_rotas.style.backgroundColor = "rgba(255,255,255,0.3)";
             criar_rotas.style.color = 'rgba(21, 52, 72, 0.4)';
-            verificar_estado(icon_reservas)
             break;
 
         case "Listagem_Rotas":
-            submenu_rotas.style.display = 'block';
+            //submenu_rotas.style.display = 'block';
             container_rotas.style.backgroundColor = "rgba(255,255,255,0.3)";
             gerenciar_rotas.style.color = 'rgba(21, 52, 72, 0.4)';
-            verificar_estado(icon_reservas)
             break;
 
         case "visualizacao_rota":
-            submenu_rotas.style.display = 'block';
+            //submenu_rotas.style.display = 'block';
             container_rotas.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_reservas)
             break;
 
 
         case "agendar_manutencao":
-            submenu_manutencao.style.display = 'block';
+            //submenu_manutencao.style.display = 'block';
             agendar_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
             container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_manutencao)
             break;
         case "Listagem_Manutencao":
-            submenu_manutencao.style.display = 'block';
+            //submenu_manutencao.style.display = 'block';
             lista_manutencao.style.color = 'rgba(21, 52, 72, 0.4)';
             container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_manutencao)
             break;
         case "editar_manutencao":
-            submenu_manutencao.style.display = 'block';
+            //submenu_manutencao.style.display = 'block';
             container_manutencao.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_manutencao)
             break;                
         
-
-
         case "registro_abastecimento":
-            submenu_abastecimento.style.display = 'block';
+            //submenu_abastecimento.style.display = 'block';
             registro_abastecimento.style.color = 'rgba(21, 52, 72, 0.4)';
             container_abastecimento.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_abastecimento)
             break;
         case "Listagem_Abastecimentos":
-            submenu_abastecimento.style.display = 'block';
+            //submenu_abastecimento.style.display = 'block';
             lista_abastecimento.style.color = 'rgba(21, 52, 72, 0.4)';
             container_abastecimento.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_abastecimento)
             break;
 
         case "informacoes_abastecimento":
-            submenu_abastecimento.style.display = 'block';
+            //submenu_abastecimento.style.display = 'block';
             container_abastecimento.style.backgroundColor = "rgba(255,255,255,0.3)";
-            verificar_estado(icon_abastecimento)
             break;
     }
 });
 
 
-function verificar_estado (elemento){
-if (elemento.style.transform == 'rotate(0deg)'){
-    elemento.style.transform = 'rotate(180deg)'
-}}

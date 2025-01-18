@@ -37,80 +37,76 @@
                     <h3 id="text-init">Início</h3>
                 </a>
 
-                <a href="{% url 'cadastrar_veiculo' %}" class="element-icon" id="id-veiculos"><i
-                        class="fa-solid fa-car icon" title="Veículos"></i>
+                <a class="element-icon" id="id-veiculos"><i class="fa-solid fa-car icon" title="Veículos"></i>
                     <h3 class="text-menu-lateral" id="text-veicles">Veículos</h3>
 
                     <i id="icon_veiculos" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
-                <ul id="submenu-veiculos" class="submenu">
+                <ul id="submenu-veiculos" class="submenu" style="display: none;">
                     <li><a id="submenu-cadastro-veiculos" href="{% url 'cadastrar_veiculo' %}">Cadastro de Veículos</a>
                     </li>
                     <li><a id="submenu-lista-veiculos" href="{% url 'listagem_veiculos' %}">Lista de Veículos</a></li>
                 </ul>
 
-                <a href="{% url 'cadastrar_usuario' %}" class="element-icon" id="id-usuarios"><i
-                        class="fa-solid fa-users icon" title="Usuários"></i>
+                <a class="element-icon" id="id-usuarios"><i class="fa-solid fa-users icon" title="Usuários"></i>
                     <h3 class="text-menu-lateral" id="text-users">Usuários</h3>
                     <i id="icon_usuarios" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
-                <ul id="submenu-usuarios" class="submenu">
+                <ul id="submenu-usuarios" class="submenu" style="display: none;">
                     <li><a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Criar usuário</a>
                     </li>
                     <li><a id="submenu-lista-usuarios" href="{% url 'listagem_usuarios' %}">Listar usuários</a></li>
                 </ul>
 
-                <a href="{% url 'criar_reserva' %}" class="element-icon" id="id-reservas"><i
-                        class="fa-solid fa-tag icon" title="Reservas"></i>
+                <a class="element-icon" id="id-reservas"><i class="fa-solid fa-tag icon" title="Reservas"></i>
                     <h3 class="text-menu-lateral" id="text-reservations">Reservas</h3>
                     <i id="icon_reservas" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
-                <ul id="submenu-reservas" class="submenu">
+                <ul id="submenu-reservas" class="submenu" style="display: none;">
                     <li><a id="submenu-criacao-reservas" href="{% url 'criar_reserva' %}">Criação de Reserva</a></li>
                     <li><a id="submenu-lista-reservas" href="{% url 'listagem_reservas' %}">Lista de Reservas</a></li>
                 </ul>
 
-                <a href="{% url 'criacao_rota' %}" class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon"
-                        title="Rotas"></i>
+                <a class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
                     <h3 class="text-menu-lateral" id="text-routes">Rotas</h3>
                     <i id="icon_rotas" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
 
-                <ul id="submenu-rotas" class="submenu">
+                <ul id="submenu-rotas" class="submenu" style="display: none;">
                     <li><a id="submenu-criar-rotas" href="{% url 'criacao_rota' %}">Criar Rotas</a></li>
                     <li><a id="submenu-gerenciar-rotas" href="{% url 'listagem_rota' %}">Gerenciar Rotas</a></li>
                 </ul>
 
-                <a href="{% url 'agendar_manutencao' %}" class="element-icon" id="id-manutencao"><i
-                        class="fa-solid fa-screwdriver-wrench icon" title="Manutenção"></i>
+                <a class="element-icon" id="id-manutencao"><i class="fa-solid fa-screwdriver-wrench icon"
+                        title="Manutenção"></i>
                     <h3 class="text-menu-lateral" id="text-maintenance">Manutenção</h3>
                     <i id="icon_manutencao" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
-                <ul id="submenu-manutencao" class="submenu">
+                <ul id="submenu-manutencao" class="submenu" style="display: none;">
                     <li><a id="submenu-agendar-manutencao" href="{% url 'agendar_manutencao' %}">Agendar Manutenção</a>
                     </li>
                     <li><a id="submenu-lista-manutencao" href="{% url 'listagem_manutencao' %}">Lista de manutenções</a>
                     </li>
                 </ul>
 
-                <a href="{% url 'criacao_abastecimento' %}" class="element-icon" id="id-abastecimento"><i
-                        class="fa-solid fa-droplet icon" title="Abastecimento"></i>
+                <a class="element-icon" id="id-abastecimento"><i class="fa-solid fa-droplet icon"
+                        title="Abastecimento"></i>
                     <h3 class="text-menu-lateral" id="text-supply">Abastecimento</h3>
                     <i id="icon_abastecimento" class="fa-solid fa-caret-down"
                         style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
 
                 </a>
-                <ul id="submenu-abastecimento" class="submenu">
+                <ul id="submenu-abastecimento" class="submenu" style="display: none;">
                     <li><a id="submenu-registro-abastecimento" href="{% url 'criacao_abastecimento' %}">Registro de
                             Abastecimento</a></li>
                     <li><a id="submenu-lista-abastecimento" href="{% url 'listagem_abastecimento' %}">Lista de
