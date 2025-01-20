@@ -93,7 +93,7 @@
 
     <div id="lista-veiculos">
 
-        {% for _ in range_10 %}
+        {% for veiculo in veiculos %}
             <div id="linha-veiculo">
 
                 <div id="img-veiculo">
@@ -101,7 +101,7 @@
                     <div id="elementos-veiculo">
                         <div id="elementos-filhos">
                             <p id="titulo">Modelo:</p>
-                            <p id="resultado">Strada</p>
+                            <p id="resultado">{{veiculo.modelo}}</p>
                         </div>
 
                         <div id="elementos-filhos">
@@ -111,17 +111,17 @@
 
                         <div id="elementos-filhos">
                             <p id="titulo">Placa:</p>
-                            <p id="resultado">RQP1-2E50</p>
+                            <p id="resultado">{{veiculo.placa}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Km:</p>
-                            <p id="resultado">14.000 Km</p>
+                            <p id="resultado">{{veiculo.km}} Km</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Chassi:</p>
-                            <p id="resultado">8EJaLGfcC1HF44180</p>
+                            <p id="resultado">{{veiculo.chassi}}</p>
                         </div>
                     </div>
                 </div>

@@ -22,40 +22,40 @@
                 <div class="menu_esquerdo">
                     <div class="input_container">
                         <label>Modelo</label>
-                        <input class="input_detect input" type="text" id="modelo" value="Strada" placeholder="Digite o nome do modelo do veículo">
+                        <input class="input_detect input" type="text" id="modelo" value="{{veiculo.modelo}}" placeholder="Digite o nome do modelo do veículo">
                     </div>
 
                     <div class="input_container">
                         <label>Marca</label>
-                        <input class="input_detect input" type="text" id="marca" value="Fiat" placeholder="Digite a marca do veículo">
+                        <input class="input_detect input" type="text" id="marca" value="{{veiculo.marca}}" placeholder="Digite a marca do veículo">
                     </div>
 
                     <div class="input_container">
                         <label>Valor da Compra</label>
-                        <input class="input_detect input" type="text" value="R$ 136.000,00" id="valor-carro" maxlength="14" placeholder="Digite o valor da compra">
+                        <input class="input_detect input" type="text" value="R$ {{veiculo.valor_compra}},00" id="valor-carro" maxlength="14" placeholder="Digite o valor da compra">
                     </div>
 
                     <div class="campo_duplo">
                         <div class="input_container">
                             <label>Ano</label>
-                            <input class="input_detect input" type="text" value="2024" id="ano-carro" placeholder="Digite o ano do veículo">
+                            <input class="input_detect input" type="text" value="{{veiculo.ano}}" id="ano-carro" placeholder="Digite o ano do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>KM</label>
-                            <input class="input_detect input" type="text" value="10.000 Km" id="km-carro" placeholder="Digite a quilometragem">
+                            <input class="input_detect input" type="text" value="{{veiculo.km}} Km" id="km-carro" placeholder="Digite a quilometragem">
                         </div>
                     </div>
 
                     <div class="campo_duplo">
                         <div class="input_container">
                             <label>Motor</label>
-                            <input class="input_detect input" type="text" value="130 CV" id="motor-carro" placeholder="Digite a potência do motor">
+                            <input class="input_detect input" type="text" value="{{veiculo.motor}} CV" id="motor-carro" placeholder="Digite a potência do motor">
                         </div>
                         <div class="input_container">
                             <label>Status</label>
                             <select class="input_detect" name="select-estado" id="select-status-carro">
-                                <option selected>No Pátio</option>
+                                <option selected>{{veiculo.status}}</option>
                             </select>
                         </div>
                     </div>
@@ -63,12 +63,12 @@
                     <div class="campo_duplo">
                         <div class="input_container">
                             <label>Placa</label>
-                            <input class="input_detect input" type="text" value="RQPI-2E50" id="placa-carro" placeholder="Digite a placa do veículo">
+                            <input class="input_detect input" type="text" value="{{veiculo.placa}}" id="placa-carro" placeholder="Digite a placa do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>Chassi</label>
-                            <input class="input_detect input" type="text" value="8EJaLGfcC1HF44180" id="chassi-carro" placeholder="Digite o número do chassi">
+                            <input class="input_detect input" type="text" value="{{veiculo.chassi}}" id="chassi-carro" placeholder="Digite o número do chassi">
                         </div>
                     </div>
                 </div>

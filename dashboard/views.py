@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse
+
+from dashboard.models import Veiculo
 # Create your views here.
 
 def dashboard(request):
@@ -22,6 +24,20 @@ def cadastrar(request):
 
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
+
+
+
+def listagem_veiculos(request):
+    veiculos = get_list_or_404(Veiculo)
+    return render(request, 'dashboard/listagem_veiculos.html',{'veiculos':veiculos})
+
+def cadastrar_veiculo(request):
+    return render(request, 'dashboard/cadastrar_veiculos.html')
+
+def informacoes_veiculo(request):
+    veiculo = get_object_or_404(Veiculo, id=1)
+    return render(request, 'dashboard/informacoes_veiculos.html',{'veiculo':veiculo})
+
 
 def cadastro_usuario(request):
     return render(request,'dashboard/cadastro_usuario_app.html')
