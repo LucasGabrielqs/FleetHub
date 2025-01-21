@@ -13,9 +13,8 @@
 {% block content %}
 
     <section id="conteudo-secundario">
-        <form>
-
-
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <h2 id='page_title'>Cadastro de Usuário</h2>
                 <div class="container">
 
@@ -24,20 +23,20 @@
 
                         <div class="input_container">
                             <label>Nome Completo</label>
-                            <input class="input_detect" type="text" id="nome"
-                                placeholder="Digite o Novo Nome">
+                            <input name="nome" class="input_detect" type="text" id="nome"
+                                placeholder="Digite o Novo Nome" required>
                         </div>
 
                         <div class="input_container">
                             <label>Email</label>
-                            <input class="input_detect" type="text" id="email"
-                                placeholder="Digite o novo E-mail">
+                            <input name="email" class="input_detect" type="text" id="email"
+                                placeholder="Digite o novo E-mail" required>
                         </div>
 
                         <div class="input_container">
                             <label>CPF</label>
-                            <input class="input_detect" type="text"  id="cpf"
-                                maxlength="14" placeholder="Digite o CPF">
+                            <input name="cpf" class="input_detect" type="text"  id="cpf"
+                                maxlength="14" placeholder="Digite o CPF" required>
                         </div>
 
                         <div class="campo_duplo">
@@ -49,18 +48,18 @@
 
                             <div class="input_container">
                                 <label>Telefone</label>
-                                <input class="input_detect" type="text"  id="telefone"
-                                    placeholder="Numero de Telefone">
+                                <input name="telefone" class="input_detect" type="text"  id="telefone"
+                                    placeholder="Numero de Telefone" required>
                             </div>
 
                         </div>
 
                         <div class="input_container">
                             <label>Tipo Usuário</label>
-                            <select class="input_detect" id="estados" name="estados">
-                                <option >Motorista</option>
-                                <option >Técnico</option>
-                                <option >Gestor</option>
+                            <select class="input_detect" id="estados" name="tipo_usuario">
+                                {% for tipo in tipos %}
+                                <option value="{{tipo.}}">{{tipo.nome}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
@@ -68,8 +67,8 @@
 
                         <div class="input_container">
                             <label>Senha</label>
-                            <input class="input_detect" type="text" id="nome"
-                                placeholder="Digite a Nova Senha">
+                            <input name="senha" class="input_detect" type="text" id="nome"
+                                placeholder="Digite a Nova Senha" required>
                         </div>
 
                         <div class="input_container">
@@ -80,16 +79,14 @@
                         <div class="input_container">
                             <label>Status</label>
                             <select class="input_detect" id="status" name="status">
-                                <option >Selecione</option>
-                                <option >Inativo</option>
+                                {% for st in status %}
+                                <option value="{{st.status}}">{{st.status}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
 
                     </div>
-
-
-
 
                     <div class="menu_direito">
                         <div class="logo-img">
@@ -100,70 +97,46 @@
 
                         <div class="input_container">
                             <label>Rua</label>
-                            <input class="input_detect" type="text" id="input-rua"
-                                placeholder="Digite a Rua">
+                            <input name="rua" class="input_detect" type="text" id="input-rua"
+                                placeholder="Digite a Rua" required>
                         </div>
 
 
                         <div class="input_container">
                             <label>Bairro</label>
-                            <input class="input_detect" type="text" id="input-bairro" placeholder="Digite o Bairro">
+                            <input name="bairro" class="input_detect" type="text" id="input-bairro" placeholder="Digite o Bairro" required>
                         </div>
                         <div class="input_container">
                             <label>Cidade</label>
-                            <input class="input_detect" type="text" id="input-cidade" placeholder="Digite a Cidade">
+                            <input name="cidade" class="input_detect" type="text" id="input-cidade" placeholder="Digite a Cidade" required>
                         </div>
 
                         <div class="estado-cep">
 
-                            <select class="input_detect" name="select-estado" id="select-estado">
-                                <option value=""></option>
-                                <option value="AC">AC</option>
-                                <option value="AL">AL</option>
-                                <option value="AP">AP</option>
-                                <option value="AM">AM</option>
-                                <option value="BA">BA</option>
-                                <option value="CE">CE</option>
-                                <option value="DF">DF</option>
-                                <option value="ES">ES</option>
-                                <option value="GO">GO</option>
-                                <option value="MA">MA</option>
-                                <option value="MT">MT</option>
-                                <option value="MS">MS</option>
-                                <option value="MG">MG</option>
-                                <option value="PA">PA</option>
-                                <option value="PB">PB</option>
-                                <option value="PR">PR</option>
-                                <option value="PE">PE</option>
-                                <option value="PI">PI</option>
-                                <option value="RJ">RJ</option>
-                                <option value="RN" >RN</option>
-                                <option value="RS">RS</option>
-                                <option value="RO">RO</option>
-                                <option value="RR">RR</option>
-                                <option value="SC">SC</option>
-                                <option value="SP">SP</option>
-                                <option value="SE">SE</option>
-                                <option value="TO">TO</option>
+                            <select class="input_detect" name="estado" id="select-estado">
+                                {% for estado in estados %}
+                                <option value="{{estado.sigla}}">{{estado.sigla}}</option>
+                                {% endfor %}
+
                             </select>
                             <div class="input_container">
                                 <label>CEP</label>
-                                <input class="input_detect" type="text" id="input-cep" placeholder="Digite o CEP">
+                                <input name="cep" class="input_detect" type="text" id="input-cep" placeholder="Digite o CEP" required>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-
+                <div class="rodape" id="rodape">
+                    <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+                    <button type="submit" class="btn-submit">Salvar Edição</button>
+                </div>
             </form>
 
     </section>
 
-    <div class="rodape" id="rodape">
-        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-        <button type="submit" class="btn-submit">Salvar Edição</button>
-    </div>
+
 
 {% endblock content %}
 

@@ -78,46 +78,43 @@
     <div id="lista-veiculos">
 
 
-        {% for _ in range_10 %}
+        {% for usuario in usuarios %}
 
             <div id="linha-final">
-
-
             <div id="linha-veiculo">
-
                 <div id="img-veiculo">
-                    <img id="teste" src="{%static 'img\img_perfil.jpg' %}" alt="">
+                    <img id="teste" src="{{usuario.imagem.url}}" alt="">
                     <div id="elementos-veiculo">
                         <div id="elementos-filhos" class="nomes">
                             <p id="titulo">Nome:</p>
-                            <p id="resultado">Lucas Gabriel de Queiroz Souza</p>
+                            <p id="resultado">{{usuario.nome}}</p>
                         </div>
 
                         <div id="elementos-filhos" class="cpf">
                             <p id="titulo">CPF:</p>
-                            <p id="resultado">111.222.333-44</p>
+                            <p id="resultado">{{usuario.cpf}}</p>
                         </div>
 
                         <div id="elementos-filhos" class="email" >
                             <p id="titulo">Email:</p>
-                            <p id="resultado">lucas@gmail.com</p>
+                            <p id="resultado">l{{usuario.email}}</p>
                         </div>
 
                         <div id="elementos-filhos" class="telefone">
                             <p id="titulo">Telefone:</p>
-                            <p id="resultado">(84) 99988-7766</p>       
+                            <p id="resultado">{{usuario.telefone}}</p>       
                         </div>
 
                         <div id="elementos-filhos" class="tipo_usuario">
                             <p id="titulo">Tipo Usuário:</p>
-                            <p id="resultado">Motorista</p>
+                            <p id="resultado">{{usuario.tipo_usuario}}</p>
                         </div>
                     </div>
                 </div>
             
                 <div id="conteudo-esquerdo">
                     <button id="botao-visualizar">
-                        <a id="visualizar-link" href="{% url 'informacoes_usuario' %}">Visualizar Informações</a>
+                        <a id="visualizar-link" href="{% url 'informacoes_usuario' usuario.id %}">Visualizar Informações</a>
                     </button>
 
                 </div>
