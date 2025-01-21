@@ -12,4 +12,8 @@ class Veiculo(models.Model):
     status = models.CharField(max_length=15)
     placa = models.CharField(max_length=20)
     chassi = models.CharField(max_length=20)
-    #imagem = models.ImageField(upload_to='imagens/veeiculos', height_field=None, width_field=None, max_length=None, default='static/img/img_perfil.jpg')
+    cor = models.CharField(max_length=50, default='indefinido')
+    imagem = models.ImageField(upload_to='imagens/veiculos', height_field=None, width_field=None, max_length=None, default='media/carro-escondido.jpg')
+
+    def __str__(self):
+        return self.modelo

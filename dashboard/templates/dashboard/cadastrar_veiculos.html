@@ -13,40 +13,47 @@
 
 {% block content %}
 <section id="conteudo-secundario">
-    <form>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
         
         <h2 id='page_title'>Cadastrar Veículo</h2>
-        <form action="">
+
         <div class="container">
             
             <div class="menu_esquerdo">
                 
                 <div class="input_container">
                     <label>Modelo</label>
-                    <input type="text" id="modelo" placeholder="Digite o Modelo">
+                    <input name="modelo" type="text" id="modelo" placeholder="Digite o Modelo" required>
                 </div>
                 
                 <div class="input_container">
                     <label>Marca</label>
-                    <input type="text" id="marca" placeholder="Digite a Marca">
+                    <input name="marca" type="text" id="marca" placeholder="Digite a Marca" required>
                 </div>
-                
-                <div class="input_container">
-                    <label>Valor da Compra</label>
-                    <input type="text" id="valcompra" maxlength="14" placeholder="Digite o valor da compra">
+                <div class="campo_duplo">
+                    <div class="input_container">
+                        <label>Valor da Compra</label>
+                        <input name="valor" type="text" id="valcompra" maxlength="14" placeholder="Digite o valor da compra" required>
+                    </div>
+
+                    <div class="input_container">
+                        <label>Cor do Veículo</label>
+                        <input name="cor" type="text" id="valcompra" maxlength="14" placeholder="Digite a cor do veículo" required>
+                    </div>
                 </div>
                 
                 <div class="campo_duplo">
                     
                     <div class="input_container">
                         <label>Ano</label>
-                        <input type="text" id="ano" placeholder="Digite o ano">
+                        <input name="ano" type="text" id="ano" placeholder="Digite o ano" required>
                     </div>
                     
                     <div class="input_container">
                         <label>KM</label>
-                        <input type="text" id="km" placeholder="Digite a Quilometragem">
+                        <input name="km" type="text" id="km" placeholder="Digite a Quilometragem" required>
                     </div>
                 
                 </div>
@@ -56,12 +63,12 @@
                     
                     <div class="input_container">
                         <label>Motor</label>
-                        <input type="text" id="motor" placeholder="Digite o CV do Motor">
+                        <input name="motor" type="text" id="motor" placeholder="Digite o CV do Motor" required>
                     </div>
                     
                     <div class="input_container">
                         <label>Status</label>
-                        <select id="estados" name="estados">
+                        <select id="estados" name="status">
                             <option disabled selected>Status</option>
                             <option value="Novo">Novo</option>
                             <option value="Usado">Usado</option>
@@ -75,12 +82,12 @@
                     
                     <div class="input_container">
                         <label>Placa</label>
-                        <input type="text" id="placa" placeholder="Digite a Placa">
+                        <input name="placa" type="text" id="placa" placeholder="Digite a Placa" required>
                     </div>
                     
                     <div class="input_container">
                         <label>Chassi</label>
-                        <input type="text" id="km" placeholder="Digite o Chassi">
+                        <input name="chassi" type="text" id="km" placeholder="Digite o Chassi" required>
                     </div>
                 
                 </div>
@@ -94,14 +101,15 @@
                     <input type="file" name="img" id="img">
                 </div>
         </div>
-        </form>
+        <div class="rodape">
+            <button type="reset" class="btn-reset">Cancelar</button>
+            <button type="submit" class="btn-submit">Cadastrar</button>
+        </div>
+    </form>
   
 </section>
 
-<div class="rodape">
-    <button type="reset" class="btn-reset">Cancelar</button>
-    <button type="submit" class="btn-submit">Cadastrar</button>
-</div>
+
 
 
 <script src="{% static 'js/cadastrar-veiculo-script.js' %}"></script>

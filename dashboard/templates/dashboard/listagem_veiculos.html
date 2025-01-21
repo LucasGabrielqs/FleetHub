@@ -97,7 +97,7 @@
             <div id="linha-veiculo">
 
                 <div id="img-veiculo">
-                    <img id="teste" src="{%static 'img\fiat-strada-2025-jpg.png' %}" alt="">
+                    <img id="teste" src="{{veiculo.imagem.url}}" alt="">
                     <div id="elementos-veiculo">
                         <div id="elementos-filhos">
                             <p id="titulo">Modelo:</p>
@@ -106,7 +106,7 @@
 
                         <div id="elementos-filhos">
                             <p id="titulo">Cor:</p>
-                            <p id="resultado">Vermelho</p>
+                            <p id="resultado">{{veiculo.cor}}</p>
                         </div>
 
                         <div id="elementos-filhos">
@@ -134,7 +134,7 @@
                     </div>
 
                     <button id="botao-visualizar">
-                        <a id="visualizar-link" href="{% url 'informacoes_veiculo' %}">Visualizar Informações</a>
+                        <a id="visualizar-link" href="{% url 'informacoes_veiculo' veiculo.id %}">Visualizar Informações</a>
                     </button>
 
                 </div>
