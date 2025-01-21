@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.http import HttpResponse
 
-from dashboard.models import Veiculo
+from dashboard.models import Veiculo, Status_Veiculo
 # Create your views here.
 
 def dashboard(request):
@@ -36,6 +36,7 @@ def listagem_veiculos(request):
 
 
 def cadastrar_veiculo(request):
+    status = get_list_or_404(Status_Veiculo)
     if request.method == 'POST':
         # Verificar se todos os campos obrigatórios estão presentes
         modelo = request.POST.get('modelo')
@@ -44,15 +45,17 @@ def cadastrar_veiculo(request):
         ano = request.POST.get('ano')
         km = request.POST.get('km')
         motor = request.POST.get('motor')
-        status = "Novo" #request.POST.get('status')
+        status_id = request.POST.get('status')
         placa = request.POST.get('placa')
         chassi = request.POST.get('chassi')
         cor = request.POST.get('cor')
         
         # Certifique-se de que campos obrigatórios não estão vazios
-        if modelo and marca and valor_compra and ano and km and motor and status and placa and chassi and cor:
+        if modelo and marca and valor_compra and ano and km and motor and status_id and placa and chassi and cor:
             # Criar o objeto Veiculo
             print(f"Modelo: {modelo}, Marca: {marca}, Valor: {valor_compra}, status: {status}")
+            # Buscar o objeto Status_Veiculo correspondente
+            status = get_object_or_404(Status_Veiculo, status=status_id)
             veiculo = Veiculo(
                 modelo=modelo,
                 marca=marca,
@@ -81,14 +84,31 @@ def cadastrar_veiculo(request):
                 'error': 'Todos os campos obrigatórios devem ser preenchidos.',
             })
 
-    return render(request, 'dashboard/cadastrar_veiculos.html')
+    return render(request, 'dashboard/cadastrar_veiculos.html', {'status':status})
 
 
 
 
 def informacoes_veiculo(request, id):
     veiculo = get_object_or_404(Veiculo, id=id)
-    return render(request, 'dashboard/informacoes_veiculos.html',{'veiculo':veiculo})
+    status = get_list_or_404(Status_Veiculo)
+    if request.method == 'POST':
+        # Verificar se todos os campos obrigatórios estão presentes
+        veiculo.modelo = request.POST.get('modelo')
+        veiculo.marca = request.POST.get('marca')
+        veiculo.valor_compra = request.POST.get('valor')
+        veiculo.ano = request.POST.get('ano')
+        veiculo.km = request.POST.get('km')
+        veiculo.motor = request.POST.get('motor')
+        veiculo.status = get_object_or_404(Status_Veiculo, status=request.POST.get('status'))
+        veiculo.placa = request.POST.get('placa')
+        veiculo.chassi = request.POST.get('chassi')
+        veiculo.cor = request.POST.get('cor')
+        # Verifica se um arquivo foi enviado no campo "img"
+        if 'img' in request.FILES:
+            veiculo.imagem = request.FILES.get('img')
+        veiculo.save()
+    return render(request, 'dashboard/informacoes_veiculos.html',{'veiculo':veiculo, 'status':status})
 
 
 def cadastro_usuario(request):

@@ -14,48 +14,56 @@
 
 {% block content %}
 
-<section id="conteudo-secundario">
-    <form>
+    <section id="conteudo-secundario">
         <h2 id='page_title'>Informações do Veículo</h2>
-        <form action="">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="container">
                 <div class="menu_esquerdo">
                     <div class="input_container">
                         <label>Modelo</label>
-                        <input class="input_detect input" type="text" id="modelo" value="{{veiculo.modelo}}" placeholder="Digite o nome do modelo do veículo">
+                        <input name="modelo" class="input_detect input" type="text" id="modelo" value="{{veiculo.modelo}}" placeholder="Digite o nome do modelo do veículo">
                     </div>
 
                     <div class="input_container">
                         <label>Marca</label>
-                        <input class="input_detect input" type="text" id="marca" value="{{veiculo.marca}}" placeholder="Digite a marca do veículo">
+                        <input name="marca" class="input_detect input" type="text" id="marca" value="{{veiculo.marca}}" placeholder="Digite a marca do veículo">
                     </div>
-
-                    <div class="input_container">
-                        <label>Valor da Compra</label>
-                        <input class="input_detect input" type="text" value="R$ {{veiculo.valor_compra}},00" id="valor-carro" maxlength="14" placeholder="Digite o valor da compra">
+                    <div class="campo_duplo">
+                        <div class="input_container">
+                            <label>Valor da Compra</label>
+                            <input name="valor" class="input_detect input" type="text" value="{{veiculo.valor_compra}}" id="valor-carro" maxlength="14" placeholder="Digite o valor da compra">
+                        </div>
+                        <div class="input_container">
+                            <label>Cor do Veículo</label>
+                            <input name="cor" class="input_detect input" type="text" value="{{veiculo.cor}}" id="cor-carro" maxlength="14" placeholder="Digite a cor do Veículo">
+                        </div>
                     </div>
 
                     <div class="campo_duplo">
                         <div class="input_container">
                             <label>Ano</label>
-                            <input class="input_detect input" type="text" value="{{veiculo.ano}}" id="ano-carro" placeholder="Digite o ano do veículo">
+                            <input name="ano" class="input_detect input" type="text" value="{{veiculo.ano}}" id="ano-carro" placeholder="Digite o ano do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>KM</label>
-                            <input class="input_detect input" type="text" value="{{veiculo.km}} Km" id="km-carro" placeholder="Digite a quilometragem">
+                            <input name="km" class="input_detect input" type="text" value="{{veiculo.km}}" id="km-carro" placeholder="Digite a quilometragem">
                         </div>
                     </div>
 
                     <div class="campo_duplo">
                         <div class="input_container">
                             <label>Motor</label>
-                            <input class="input_detect input" type="text" value="{{veiculo.motor}} CV" id="motor-carro" placeholder="Digite a potência do motor">
+                            <input name="motor" class="input_detect input" type="text" value="{{veiculo.motor}}" id="motor-carro" placeholder="Digite a potência do motor">
                         </div>
                         <div class="input_container">
                             <label>Status</label>
-                            <select class="input_detect" name="select-estado" id="select-status-carro">
+                            <select class="input_detect" name="status" id="select-status-carro">
                                 <option selected>{{veiculo.status}}</option>
+                                {% for st in status %}
+                                <option value="{{st.status}}">{{st.status}}</option>
+                                {%endfor %}
                             </select>
                         </div>
                     </div>
@@ -63,12 +71,12 @@
                     <div class="campo_duplo">
                         <div class="input_container">
                             <label>Placa</label>
-                            <input class="input_detect input" type="text" value="{{veiculo.placa}}" id="placa-carro" placeholder="Digite a placa do veículo">
+                            <input name="placa" class="input_detect input" type="text" value="{{veiculo.placa}}" id="placa-carro" placeholder="Digite a placa do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>Chassi</label>
-                            <input class="input_detect input" type="text" value="{{veiculo.chassi}}" id="chassi-carro" placeholder="Digite o número do chassi">
+                            <input name="chassi" class="input_detect input" type="text" value="{{veiculo.chassi}}" id="chassi-carro" placeholder="Digite o número do chassi">
                         </div>
                     </div>
                 </div>
@@ -76,8 +84,9 @@
                 <div class="menu_direito">
                     <div class="logo-img input_detect">
                         <img class="input_detect" src="{{veiculo.imagem.url}}" alt="" style="width: 100%;">
-                        <input type="file" accept=".jpg, .jpeg, .png" name="img" id="img" style="display: none;">
+                        
                     </div>
+                    <input type="file" accept=".jpg, .jpeg, .png" name="img" id="img" style="display: none; margin: 0 auto;">
                 </div>
             </div>
 
@@ -106,14 +115,14 @@
                     </div>
                 </div>
             </div>
-
+            <div class="rodape" id="rodape">
+                <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+                <button type="submit" class="btn-submit">Salvar Edição</button>
+            </div>
         </form>
     </section>
 
-    <div class="rodape" id="rodape">
-        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-        <button type="submit" class="btn-submit">Salvar Edição</button>
-    </div>
+
 
 {% endblock %}
 
