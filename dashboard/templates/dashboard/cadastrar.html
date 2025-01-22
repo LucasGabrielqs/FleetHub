@@ -12,7 +12,8 @@
 
         <div class="logo-img"> <img src="{% static 'img/logo_fleethub.png' %}" alt=""></div>
           
-        <form>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
         
             <div class="container">
@@ -25,17 +26,17 @@
 
                     <div class="input_container">
                         <label>Nome Completo</label>
-                        <input type="text" id="nome_completo" placeholder="Digite o Nome Completo">
+                        <input name="nome" type="text" id="nome_completo" placeholder="Digite o Nome Completo" required>
                     </div>
                     
                     <div class="input_container">
                         <label>Email</label>
-                        <input type="email" id="email" placeholder="Digite seu email">
+                        <input name="email" type="email" id="email" placeholder="Digite seu email" required>
                     </div>
                     
                     <div class="input_container">
                         <label>CPF</label>
-                        <input type="text" id="cpf" maxlength="14" placeholder="Digite seu CPF">
+                        <input name="cpf" type="text" id="cpf" maxlength="14" placeholder="Digite seu CPF" required>
                     </div>
                     
                     <div class="campo_duplo">
@@ -46,15 +47,21 @@
                         
                         <div class="input_container">
                             <label>Telefone</label>
-                            <input type="text" id="telefone" maxlength="15" placeholder="Digite seu Telefone">
+                            <input name="telefone" type="text" id="telefone" maxlength="15" placeholder="Digite seu Telefone" required>
                         </div>
                     
                     </div>
+
                     
                     <div class="input_container">
                         <label>Senha</label>
-                        <input type="text" id="senha" placeholder="Digite sua senha">
+                        <input name="senha" type="text" id="senha" placeholder="Digite sua senha" required>
                     </div>
+                    <div class="input_container">
+                        <label>Confirmar Senha</label>
+                        <input name="confirmar_senha" type="text" id="senha" placeholder="Confirme a senha" required>
+                    </div>
+             
                 
                 </div>
                 
@@ -64,60 +71,35 @@
 
                     <div class="input_container">
                         <label>Rua</label>
-                        <input type="text" id="Rua" placeholder="Digite a Rua">
+                        <input name="rua" type="text" id="Rua" placeholder="Digite a Rua" required>
                     </div>
                     
                     <div class="input_container">
                         <label>Bairro</label>
-                        <input type="text" id="bairro" placeholder="Digite o Bairro">
+                        <input name="bairro" type="text" id="bairro" placeholder="Digite o Bairro" required>
                     </div>
                     
                     <div class="input_container">
                         <label>Cidade</label>
-                        <input type="text" id="cidade" placeholder="Digite a Cidade">
+                        <input name="cidade" type="text" id="cidade" placeholder="Digite a Cidade" required>
                     </div>
                     
                     <div class="campo_duplo">
                         
                         <div class="campo_menor">
-                            <select id="estados" name="estados">
-                                <option disabled selected>RN</option>
-                                <option value="AC">AC</option>
-                                <option value="AL">AL</option>
-                                <option value="AP">AP</option>
-                                <option value="AM">AM</option>
-                                <option value="BA">BA</option>
-                                <option value="CE">CE</option>
-                                <option value="DF">DF</option>
-                                <option value="ES">ES</option>
-                                <option value="GO">GO</option>
-                                <option value="MA">MA</option>
-                                <option value="MT">MT</option>
-                                <option value="MS">MS</option>
-                                <option value="MG">MG</option>
-                                <option value="PA">PA</option>
-                                <option value="PB">PB</option>
-                                <option value="PR">PR</option>
-                                <option value="PE">PE</option>
-                                <option value="PI">PI</option>
-                                <option value="RJ">RJ</option>
-                                <option value="RN">RN</option>
-                                <option value="RS">RS</option>
-                                <option value="RO">RO</option>
-                                <option value="RR">RR</option>
-                                <option value="SC">SC</option>
-                                <option value="SP">SP</option>
-                                <option value="SE">SE</option>
-                                <option value="TO">TO</option>
-                              </select>
+                            <select name="estado" id="estados" name="estados" required>
+                                {% for estado in estados %}<option value="{{estado.sigla}}">{{estado.sigla}}</option>{% endfor %}
+                            </select>
                         </div>
                         
                         <div class="input_container">
                             <label>CEP</label>
-                            <input type="text" id="cep" maxlength="9" placeholder="Digite o CEP">
+                            <input name="cep" type="text" id="cep" maxlength="9" placeholder="Digite o CEP" required>
                         </div>
+                        
                     
                     </div>
+
 
                 </div>
                 

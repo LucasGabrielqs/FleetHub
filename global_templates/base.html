@@ -157,6 +157,18 @@
     </div>
 
 
+    <!-- Exibir mensagens -->
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
 </body>
 
 <script src="{% static 'js/script-base.js' %}"></script>

@@ -26,7 +26,8 @@ class Usuário(models.Model):
     bairro = models.CharField(max_length=35)
     cidade = models.CharField(max_length=35)
     cep = models.CharField(max_length=15)
-    imagem = models.ImageField(upload_to='imagens/usuario', height_field=None, width_field=None, max_length=None, default='static/img/img_perfil.jpg')
+    imagem = models.ImageField(upload_to='imagens/usuario', height_field=None, width_field=None, max_length=None, default='carro-escondido.jpg')
+    
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
     
     tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.SET_DEFAULT, default='indefinido')

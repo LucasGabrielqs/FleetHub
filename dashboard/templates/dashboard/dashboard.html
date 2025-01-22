@@ -35,12 +35,12 @@
             </ul>
             <div class="list-users">
                 <div class="scroll-container">
-                    {% for _ in range_10  %}
+                    {% for usuario in usuarios  %}
                     <ul id="lista-usuarios-sistema">
-                        <li class="user-info">Lucas Gabriel</li>
-                        <li class="user-info">Motorista</li>
-                        <li class="user-info">04/12/2024</li>
-                        <li class="user-info">Admin</li>
+                        <li class="user-info">{{usuario.nome}}</li>
+                        <li class="user-info">{{usuario.tipo_usuario}}</li>
+                        <li class="user-info">{{usuario.data_cadastro}}</li>
+                        <li class="user-info">{{usuario.tipo_usuario}}</li>
                     </ul>       
                     {% endfor %}
                 </div>
@@ -78,7 +78,7 @@
     
             <div class="total-pedidos">
                 <div class="scroll-container">
-                    {% for _ in range_7 %}
+                    {% for _ in contexto.range_7 %}
                     <div class="usuario-info">
                         <ul id="lista-usuarios">
                             <li class="user-info-all">
@@ -143,7 +143,7 @@
                 </button>
             </div>
             <div class="scroll-container">
-                {% for _ in range_10 %}
+                {% for _ in contexto.range_10 %}
                 <div id="carro-reservado">
                     <!--Container de Reservas (Fazer um for dentro do django com uma quantidade de reservas)-->
                     <div class="container-nome-veiculo">

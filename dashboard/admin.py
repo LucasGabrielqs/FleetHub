@@ -12,7 +12,7 @@ class Status_VeiculoAdmin(admin.ModelAdmin):
 @admin.register(Usuário)
 class UsuarioAdmin(admin.ModelAdmin):
     ...
-    list_display = ('nome', 'email', 'cpf', 'telefone', 'tipo_usuario', 'status_usuario')
+    list_display = ('nome', 'email', 'cpf', 'telefone', 'tipo_usuario', 'status_usuario', 'data_cadastro')
 @admin.register(StatusUsuario)
 class StatusUsuarioAdmin(admin.ModelAdmin):
     ...
