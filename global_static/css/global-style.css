@@ -249,6 +249,47 @@ footer #logo_fleethub{/*Formatação da logo*/
     color: white;
 }
 
+
+/* Estilos da caixa de alerta */
+.message-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    pointer-events: none; /* Evita interação com o alerta */
+}
+
+.message {
+    background-color: #4caf50; /* Verde para sucesso */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-weight: bold;
+    animation: fadeOut 3s forwards; /* Animação para sumir após 3 segundos */
+}
+
+/* Animação de desaparecimento */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+
 @media (max-width: 480px) {
     .footer-left, .footer-center {
         display: none;

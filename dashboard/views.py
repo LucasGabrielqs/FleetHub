@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 
 from dashboard.models import Veiculo, Status_Veiculo, Usuário, TipoUsuario, StatusUsuario, Estado
 # Create your views here.
@@ -7,13 +8,14 @@ from dashboard.models import Veiculo, Status_Veiculo, Usuário, TipoUsuario, Sta
 
 
 def tela_dashboard(request):
+    usuarios = get_list_or_404(Usuário)
     contexto = {
         'range_10': range(10),
         'range_7': range(7),  # Lista de 0 a 6
         'range_4': range(4),  # Lista de 0 a 3
         'range_2': range(2)  # Lista de 0 a 1
     }
-    return render(request, 'dashboard/dashboard.html', contexto)
+    return render(request, 'dashboard/dashboard.html', {'contexto':contexto, 'usuarios':usuarios})
 
 
 
@@ -133,7 +135,9 @@ def informacoes_veiculo(request, id):
 
             # Salva as alterações
             veiculo.save()
-            success_message = "Veículo atualizado com sucesso!"
+            messages.success(request, "Dados do veículo alterados com sucesso!")
+            # Redireciona para evitar que a mensagem reapareça ao recarregar a página
+            return redirect('informacoes_veiculo', id=id)
         except Status_Veiculo.DoesNotExist:
             error_message = "O status selecionado é inválido."
 
@@ -245,6 +249,8 @@ def informacoes_usuario(request, id):
         if cep != usuario.cep:
             usuario.cep = cep
 
+        print(request.POST)
+
         # Atualiza a ForeignKey `estado` se alterada
         estado = get_object_or_404(Estado, sigla=estado_sigla)
         if estado != usuario.estado:
@@ -256,7 +262,7 @@ def informacoes_usuario(request, id):
             usuario.status_usuario = status_usuario
 
         # Atualiza a ForeignKey `tipo_usuario` se alterada
-        tipo_usuario = get_object_or_404(TipoUsuario, status=tipo_usuario_status)
+        tipo_usuario = get_object_or_404(TipoUsuario, nome=tipo_usuario_status)
         if tipo_usuario != usuario.tipo_usuario:
             usuario.tipo_usuario = tipo_usuario
 
@@ -266,7 +272,9 @@ def informacoes_usuario(request, id):
 
         # Salva as alterações
         usuario.save()
-        success_message = "Informações do usuário atualizadas com sucesso!"
+        messages.success(request, "Informações do usuário atualizadas com sucesso!")
+            # Redireciona para evitar que a mensagem reapareça ao recarregar a página
+        return redirect('informacoes_usuario', id=id)
 
     return render(request, 'dashboard/informacoes_usuarios.html', {
         'usuario': usuario,

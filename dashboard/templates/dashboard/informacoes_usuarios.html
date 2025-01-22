@@ -57,12 +57,10 @@
                         <div class="input_container">
                             <label>Tipo Usuário</label>
                             <select class="input_detect" id="estados" name="tipo_usuario">
-                                <option selected>{{usuario.tipo_usuario}}</option>
+                                <option selected>{{usuario.tipo_usuario}}</option> 
                                 {% for tipo in tipos %}
                                     <option value="{{tipo.nome}}">{{tipo.nome}}</option>
                                 {% endfor %}
-                                
-                                <option value="Usado">Gestor</option>
                             </select>
                         </div>
 
@@ -121,10 +119,13 @@
 
                         <div class="estado-cep">
 
-                            <select class="input_detect" name="select-estado" id="select-estado">
-                                <option value="{{usuario.estado}}" selected>{{usuario.estado}}</option>
+                            <select class="input_detect" name="estado" id="select-estado" required>
+                            
+                                <!-- Lista de estados disponíveis -->
                                 {% for estado in estados %}
-                                <option value="{{estado.sigla}}">{{estado.sigla}}</option>
+                                    <option value="{{ estado.sigla }}" {% if usuario.estado.sigla == estado.sigla %}selected{% endif %}>
+                                        {{ estado.sigla }}
+                                    </option>
                                 {% endfor %}
                             </select>
                             <div class="input_container">
