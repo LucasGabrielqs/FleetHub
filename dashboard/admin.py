@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from dashboard.models import Veiculo, Status_Veiculo, Usuário, StatusUsuario, TipoUsuario, Estado
+from dashboard.models import Veiculo, Status_Veiculo, Usuário, StatusUsuario, TipoUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva
 
 # Register your models here.
 @admin.register(Veiculo)
@@ -21,4 +21,15 @@ class TipoUsuarioAdmin(admin.ModelAdmin):
     ...
 @admin.register(Estado)
 class EstadoAdmin(admin.ModelAdmin):
+    ...
+@admin.register(Status_Reserva)
+class StatusReservaAdmin(admin.ModelAdmin):
+    ...
+
+@admin.register(Forma_Pagamento)
+class FormaPagamentoAdmin(admin.ModelAdmin):
+    ...
+
+@admin.register(Reservas)
+class ReservasAdmin(admin.ModelAdmin):
     ...

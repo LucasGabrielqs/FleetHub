@@ -10,7 +10,8 @@
 {% block content %}
 <section id="conteudo-secundario">
     <h2 id='page_title'>Criação da Reserva</h2>
-    <form action="">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="container">
             <div class="coluna">
                 <div class="input_container">
