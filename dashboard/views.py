@@ -22,8 +22,51 @@ def tela_dashboard(request):
 def login(request):
     return render(request, 'dashboard/login.html')
 
-def cadastrar(request):
-    return render(request, 'dashboard/cadastrar.html')
+def cadastrar(request): #Tela de cadastro de usuário geral
+    #status = get_list_or_404(StatusUsuario)
+    #tipos = get_list_or_404(TipoUsuario)
+    estados = get_list_or_404(Estado)  
+    print(request.POST)
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        rua = request.POST.get('rua')
+        bairro = request.POST.get('bairro')
+        cidade = request.POST.get('cidade')
+        cep = request.POST.get('cep')
+        estado = request.POST.get('estado')
+        #tipo = request.POST.get('tipo_usuario')
+        #status_usuario = request.POST.get('status')
+        #imagem = request.FILES.get('img') 
+
+
+        if nome and email and cpf and telefone and rua and bairro and cidade and cep and estado:
+            usuario = Usuário(
+                nome = nome,
+                email=email,
+                cpf=cpf,
+                telefone=telefone,
+                rua=rua,
+                bairro=bairro,
+                cidade=cidade,
+                cep=cep,
+                estado=get_object_or_404(Estado, sigla=estado),
+                status_usuario=get_object_or_404(StatusUsuario,id=1),#ATENÇAO: O primeiro status e tipousuario foi criado como 'indefinido', pois não há esse campo no formulário de cadastro
+                tipo_usuario=get_object_or_404(TipoUsuario,id=1),
+            )
+
+            usuario.save()
+
+            
+
+    return render(request,'dashboard/cadastrar.html',{
+        'estados':estados,
+        #'tipos':tipos,
+        #'status':status,
+        })
 
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
