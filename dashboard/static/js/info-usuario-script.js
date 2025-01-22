@@ -6,6 +6,7 @@ const alterar_input_ddd = document.getElementById('select-ddd-inter');
 const alterar_input_telefone = document.getElementById('telefone');
 const alterar_input_status = document.getElementById('estados');
 const alterar_input_estado = document.getElementById("select-estado");
+const alterar_img_usuario = document.getElementById('img');
 const rodape = document.getElementById('rodape');
 
 for (let i = 0; i < campos_input.length; i++) {
@@ -22,6 +23,7 @@ function fazer_alteracoes() {
     alterar_input_telefone.style.pointerEvents = 'visible';
     alterar_input_status.style.pointerEvents = 'visible';
     alterar_input_estado.style.pointerEvents = 'visible';
+    alterar_img_usuario.style.display = 'block';
     rodape.style.display = 'flex'; // Exibe o rodapé
 }
 
@@ -34,6 +36,7 @@ function cancelar_alteracoes(){
         alterar_input_telefone.style.pointerEvents = 'none';
         alterar_input_status.style.pointerEvents = 'none';
         alterar_input_estado.style.pointerEvents = 'none';
+        alterar_img_usuario.style.display = 'none';
         rodape.style.display = 'none';
         //adicionar lógica para recarregar as informações salvas
     }

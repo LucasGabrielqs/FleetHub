@@ -87,6 +87,8 @@ def cadastrar_veiculo(request):
 def informacoes_veiculo(request, id):
     veiculo = get_object_or_404(Veiculo, id=id)
     status_list = get_list_or_404(Status_Veiculo)
+    error_message = None  # Para armazenar mensagens de erro
+    success_message = None  # Para indicar sucesso
 
     if request.method == 'POST':
         # Coleta dos dados do formulário
@@ -101,31 +103,94 @@ def informacoes_veiculo(request, id):
         chassi = request.POST.get('chassi')
         cor = request.POST.get('cor')
 
-        # Verifica se todos os campos obrigatórios estão presentes
-        if modelo and marca and valor_compra and ano and km and motor and status and placa and chassi and cor:
-            veiculo.modelo = modelo
-            veiculo.marca = marca
-            veiculo.valor_compra = valor_compra
-            veiculo.ano = ano
-            veiculo.km = km
-            veiculo.motor = motor
-            veiculo.status = get_object_or_404(Status_Veiculo, status=status)
-            veiculo.placa = placa
-            veiculo.chassi = chassi
-            veiculo.cor = cor
+
+        try:
+            # Atualização apenas dos campos modificados
+            if modelo != veiculo.modelo:
+                veiculo.modelo = modelo
+            if marca != veiculo.marca:
+                veiculo.marca = marca
+            if valor_compra != veiculo.valor_compra:
+                veiculo.valor_compra = valor_compra
+            if ano != veiculo.ano:
+                veiculo.ano = ano
+            if km != veiculo.km:
+                veiculo.km = km
+            if motor != veiculo.motor:
+                veiculo.motor = motor
+            if status != veiculo.status.status:  # Comparação pelo valor textual
+                veiculo.status = get_object_or_404(Status_Veiculo, status=status)
+            if placa != veiculo.placa:
+                veiculo.placa = placa
+            if chassi != veiculo.chassi:
+                veiculo.chassi = chassi
+            if cor != veiculo.cor:
+                veiculo.cor = cor
 
             # Verifica se um arquivo foi enviado no campo "img"
             if 'img' in request.FILES:
                 veiculo.imagem = request.FILES.get('img')
 
-            # Salvar o objeto no banco de dados
+            # Salva as alterações
             veiculo.save()
-    return render(request, 'dashboard/informacoes_veiculos.html', {'veiculo': veiculo, 'status': status_list})
+            success_message = "Veículo atualizado com sucesso!"
+        except Status_Veiculo.DoesNotExist:
+            error_message = "O status selecionado é inválido."
+
+    return render(request, 'dashboard/informacoes_veiculos.html', {
+        'veiculo': veiculo,
+        'status': status_list,
+        'error_message': error_message,
+        'success_message': success_message,
+    })
+
 
 
 
 def cadastro_usuario(request):
-    return render(request,'dashboard/cadastro_usuario_app.html')
+    status = get_list_or_404(StatusUsuario)
+    tipos = get_list_or_404(TipoUsuario)
+    estados = get_list_or_404(Estado)  
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        rua = request.POST.get('rua')
+        bairro = request.POST.get('bairro')
+        cidade = request.POST.get('cidade')
+        cep = request.POST.get('cep')
+        estado = request.POST.get('estado')
+        tipo = request.POST.get('tipo_usuario')
+        status_usuario = request.POST.get('status')
+        imagem = request.FILES.get('img') 
+
+
+        if nome and email and cpf and telefone and rua and bairro and cidade and cep and estado:
+            usuario = Usuário(
+                nome = nome,
+                email=email,
+                cpf=cpf,
+                telefone=telefone,
+                rua=rua,
+                bairro=bairro,
+                cidade=cidade,
+                cep=cep,
+                estado=get_object_or_404(Estado, sigla=estado),
+                status_usuario=get_object_or_404(StatusUsuario,status=status_usuario),
+                tipo_usuario=get_object_or_404(TipoUsuario,nome=tipo),
+            )
+            if 'img' in request.FILES:
+                usuario.imagem = imagem
+
+            usuario.save()
+
+    return render(request,'dashboard/cadastro_usuario_app.html',{
+        'estados':estados,
+        'tipos':tipos,
+        'status':status,
+        })
 
 def listagem_usuarios(request):
     usuarios = get_list_or_404(Usuário)
@@ -139,7 +204,15 @@ def listagem_usuarios(request):
 
 
 def informacoes_usuario(request, id):
+    usuario = get_object_or_404(Usuário, id=id)
+    estados = get_list_or_404(Estado)
+    tipos_usuario = get_list_or_404(TipoUsuario)
+    status_usuario_list = get_list_or_404(StatusUsuario)
+    error_message = None  # Para mensagens de erro
+    success_message = None  # Para mensagens de sucesso
+
     if request.method == 'POST':
+        # Coleta de dados do formulário
         nome = request.POST.get('nome')
         email = request.POST.get('email')
         cpf = request.POST.get('cpf')
@@ -148,39 +221,62 @@ def informacoes_usuario(request, id):
         bairro = request.POST.get('bairro')
         cidade = request.POST.get('cidade')
         cep = request.POST.get('cep')
-        estado = request.POST.get('estado')
-        imagem = request.FILES.get('img')
-        
-        usuario = get_object_or_404(Usuário, id=id)
-        usuario.nome = nome
-        usuario.email = email
-        usuario.cpf = cpf
-        usuario.telefone = telefone
-        usuario.rua = rua
-        usuario.bairro = bairro
-        usuario.cidade = cidade
-        usuario.cep = cep
-        # Verifica se um arquivo foi enviado no campo "img"
+        estado_sigla = request.POST.get('estado')
+        status_usuario_status = request.POST.get('status')
+        tipo_usuario_status = request.POST.get('tipo_usuario')
+
+
+
+        # Atualiza apenas os campos alterados
+        if nome != usuario.nome:
+            usuario.nome = nome
+        if email != usuario.email:
+            usuario.email = email
+        if cpf != usuario.cpf:
+            usuario.cpf = cpf
+        if telefone != usuario.telefone:
+            usuario.telefone = telefone
+        if rua != usuario.rua:
+            usuario.rua = rua
+        if bairro != usuario.bairro:
+            usuario.bairro = bairro
+        if cidade != usuario.cidade:
+            usuario.cidade = cidade
+        if cep != usuario.cep:
+            usuario.cep = cep
+
+        # Atualiza a ForeignKey `estado` se alterada
+        estado = get_object_or_404(Estado, sigla=estado_sigla)
+        if estado != usuario.estado:
+            usuario.estado = estado
+
+        # Atualiza a ForeignKey `status_usuario` se alterada
+        status_usuario = get_object_or_404(StatusUsuario, status=status_usuario_status)
+        if status_usuario != usuario.status_usuario:
+            usuario.status_usuario = status_usuario
+
+        # Atualiza a ForeignKey `tipo_usuario` se alterada
+        tipo_usuario = get_object_or_404(TipoUsuario, status=tipo_usuario_status)
+        if tipo_usuario != usuario.tipo_usuario:
+            usuario.tipo_usuario = tipo_usuario
+
+        # Atualiza a imagem se enviada
         if 'img' in request.FILES:
-            usuario.imagem = imagem
-        # Caso `estado` seja uma ForeignKey
-        if hasattr(usuario, 'estado') and usuario.estado:
-            estado = usuario.estado.__class__  # Obter o modelo relacionado
-            usuario.estado = get_object_or_404(Estado, sigla=estado)
-        else:
-            usuario.estado = estado  # Caso seja um campo de texto
+            usuario.imagem = request.FILES.get('img')
+
+        # Salva as alterações
         usuario.save()
-    usuario = get_object_or_404(Usuário, id=1)
-    estados = get_list_or_404(Estado)
-    tipos_usuario = get_list_or_404(TipoUsuario)
-    status_usuario = get_list_or_404(StatusUsuario)
-    #senha=make_password(password=usuario.senha, hasher='pbkdf2_sha256')
-    return render(request, 'dashboard/informacoes_usuarios.html',{
-        'usuario':usuario, 
-        'estados':estados, 
-        'tipos':tipos_usuario,
-        'status':status_usuario,
+        success_message = "Informações do usuário atualizadas com sucesso!"
+
+    return render(request, 'dashboard/informacoes_usuarios.html', {
+        'usuario': usuario,
+        'estados': estados,
+        'tipos': tipos_usuario,
+        'status': status_usuario_list,
+        'error_message': error_message,
+        'success_message': success_message,
     })
+
 
 
 

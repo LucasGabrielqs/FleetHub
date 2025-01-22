@@ -13,11 +13,9 @@
 <div id='container-block-content'>
 
     <section id="conteudo-secundario">
-        <form>
-
-
             <h2 id='page_title'>Informações de Usuário</h2>
-            <form action="">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="container">
 
                     <div class="menu_esquerdo">
@@ -25,19 +23,19 @@
 
                         <div class="input_container">
                             <label>Nome Completo</label>
-                            <input class="input_detect" type="text" id="nome" value="Aluisio Igor Rego Fontes"
+                            <input name="nome" class="input_detect" type="text" id="nome" value="{{usuario.nome}}"
                                 placeholder="Digite o Novo Nome">
                         </div>
 
                         <div class="input_container">
                             <label>Email</label>
-                            <input class="input_detect" type="text" id="email"
-                                value="aluisio.rego@escolar.ifrn.edu.br" placeholder="Digite o novo E-mail">
+                            <input name="email" class="input_detect" type="text" id="email"
+                                value="{{usuario.email}}" placeholder="Digite o novo E-mail">
                         </div>
 
                         <div class="input_container">
                             <label>CPF</label>
-                            <input class="input_detect" type="text" value="111.222.333-44" id="cpf"
+                            <input name="cpf" class="input_detect" type="text" value="{{usuario.cpf}}" id="cpf"
                                 maxlength="14" placeholder="Digite o CPF">
                         </div>
 
@@ -50,7 +48,7 @@
 
                             <div class="input_container">
                                 <label>Telefone</label>
-                                <input class="input_detect" type="text" value="8023456789" id="telefone"
+                                <input name="telefone" class="input_detect" type="text" value="{{usuario.telefone}}" id="telefone"
                                     placeholder="Numero de Telefone">
                             </div>
 
@@ -58,9 +56,12 @@
 
                         <div class="input_container">
                             <label>Tipo Usuário</label>
-                            <select class="input_detect" id="estados" name="estados">
-                                <option selected>Motorista</option>
-                                <option value="Novo">Técnico</option>
+                            <select class="input_detect" id="estados" name="tipo_usuario">
+                                <option selected>{{usuario.tipo_usuario}}</option>
+                                {% for tipo in tipos %}
+                                    <option value="{{tipo.nome}}">{{tipo.nome}}</option>
+                                {% endfor %}
+                                
                                 <option value="Usado">Gestor</option>
                             </select>
                         </div>
@@ -69,20 +70,22 @@
 
                         <div class="input_container">
                             <label>Senha</label>
-                            <input class="input_detect" type="text" id="nome" value="**************"
+                            <input name="senha" class="input_detect" type="text" id="nome" value="{{usuario.senha}}"
                                 placeholder="Digite a Nova Senha">
                         </div>
 
                         <div class="input_container">
                             <label>Código do Usuário</label>
-                            <input class="input_detect" type="text" id="codigo-usuario" value="29110">
+                            <input class="input_detect" type="text" id="codigo-usuario" value="{{usuario.id}}">
                         </div>
 
                         <div class="input_container">
                             <label>Status</label>
                             <select class="input_detect" id="status" name="status">
-                                <option selected>Ativo</option>
-                                <option value="Novo">Inativo</option>
+                                <option selected>{{usuario.status_usuario}}</option>
+                                {% for st in status %}
+                                    <option value="{{st.status}}">{{st.status}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
@@ -94,24 +97,26 @@
 
                     <div class="menu_direito">
                         <div class="logo-img">
-                            <img src="{%static 'img\meneson.jpg' %}" alt="">
+                            <img src="{{usuario.imagem.url}}" alt="">
+                            
                         </div>
+                        <input type="file" accept=".jpg, .jpeg, .png" name="img" id="img" style="display: none; margin: 0 auto;">
 
 
                         <div class="input_container">
                             <label>Rua</label>
-                            <input class="input_detect" type="text" id="input-rua"
-                                value="Avenida Independência">
+                            <input name="rua" class="input_detect" type="text" id="input-rua"
+                                value="{{usuario.rua}}">
                         </div>
 
 
                         <div class="input_container">
                             <label>Bairro</label>
-                            <input class="input_detect" type="text" id="input-bairro" value="Centro">
+                            <input name="bairro" class="input_detect" type="text" id="input-bairro" value="{{usuario.bairro}}">
                         </div>
                         <div class="input_container">
                             <label>Cidade</label>
-                            <input class="input_detect" type="text" id="input-cidade" value="Pau dos Ferros">
+                            <input name="cidade" class="input_detect" type="text" id="input-cidade" value="{{usuario.cidade}}">
                         </div>
 
                         <div class="estado-cep">
@@ -124,7 +129,7 @@
                             </select>
                             <div class="input_container">
                                 <label>CEP</label>
-                                <input class="input_detect" type="text" id="input-cep" value="59900-000">
+                                <input name="cep" class="input_detect" type="text" id="input-cep" value="{{usuario.cep}}">
                             </div>
                         </div>
 
