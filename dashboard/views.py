@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.http import HttpResponse
 
-from dashboard.models import Veiculo, Status_Veiculo, Usuário, TipoUsuario, StatusUsuario, Estado
+from dashboard.models import Veiculo, Status_Veiculo, Usuário, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva
 # Create your views here.
 
 
@@ -202,7 +202,44 @@ def editar_manutencao(request):
 
 
 def criar_reserva(request):
-    return render(request, 'dashboard/criacao_reserva.html')
+    status = get_list_or_404(Status_Reserva)
+    forma_pagamento = get_list_or_404(Forma_Pagamento)
+    veiculo = get_list_or_404(Veiculo)
+    usuario = get_list_or_404(Usuário)
+    if request.method == 'POST':
+        # Verificar se todos os campos obrigatórios estão presentes
+        veiculo = request.POST.get('veiculo')
+        data_reserva = request.POST.get('data_reserva')
+        data_entrega = request.POST.get('data_entrega')
+        motorista = request.POST.get('motorista')
+        idade_condutor = request.POST.get('idade_condutor')
+        valor = request.POST.get('valor')
+        forma_pagamento = request.POST.get('forma_pagamento')
+        
+        # Certifique-se de que campos obrigatórios não estão vazios
+        if veiculo and data_reserva and data_entrega and motorista and idade_condutor and valor and forma_pagamento:
+            # Criar o objeto Veiculo
+            print(f"Veiculo: {veiculo}, Data de Reserva: {data_reserva}, Data de Entrega: {data_entrega}, Motorista: {motorista}, Idade do Condutor: {idade_condutor}, Valor: {valor}, Forma de Pagamento {forma_pagamento}")
+            # Buscar o objeto Status_Veiculo correspondente
+            status = get_object_or_404(Status_Reserva, status=1)
+            forma_pagamento = get_object_or_404(Forma_Pagamento,forma_pagamento=2)
+            reserva = Reservas(
+                veiculo=veiculo,
+                data_reserva=data_reserva,
+                data_entrega=data_entrega,
+                motorista = motorista,
+                idade_condutor = idade_condutor,
+                valor = valor,
+                forma_pagamento = forma_pagamento,
+                status_reserva=status
+            )
+            # Salvar o objeto no banco de dados
+            reserva.save()
+
+            #Redirecionar para uma página de sucesso ou lista de veículos
+            return redirect('listagem_reservas')
+        #else:
+    return render(request, 'dashboard/criacao_reserva.html', {'status': status, 'forma_pagamento': forma_pagamento, 'veiculo' : veiculo, 'usuario' : usuario})
 
 def editar_reserva(request):
     return render(request, 'dashboard/editar_reserva.html')

@@ -31,7 +31,9 @@
                 <div class="input_container">
                     <label>Motorista</label>
                     <select id="motorista" name="motorista">
-                        <option disabled selected>Selecione</option>
+                        <option selected>Selecione</option>
+
+                        {% for user in %}
                     </select>
                 </div>
             </div>
@@ -44,7 +46,7 @@
                 
                 <div class="input_container">
                     <label>Valor:</label>
-                    <input type="text" id="valor" placeholder="Digite o valor">
+                    <input type="text" id="valor_idade" placeholder="Digite o valor">
                 </div>
                 <div class="input_container">
                     <label>Forma de Pagamento:</label>
