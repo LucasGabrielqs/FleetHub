@@ -71,19 +71,6 @@
                                 placeholder="Digite a Nova Senha" required>
                         </div>
 
-                        <div class="input_container">
-                            <label>Código do Usuário</label>
-                            <input class="input_detect" type="text" id="codigo-usuario">
-                        </div>
-
-                        <div class="input_container">
-                            <label>Status</label>
-                            <select class="input_detect" id="status" name="status">
-                                {% for st in status %}
-                                <option value="{{st.status}}">{{st.status}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
 
 
                     </div>
@@ -136,7 +123,7 @@
 
     </section>
 
-
+    <script src="{% static 'js/cadastrar-usuario-script.js' %}"></script>
 
 {% endblock content %}
 

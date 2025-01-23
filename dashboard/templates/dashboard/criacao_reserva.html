@@ -18,6 +18,9 @@
                     <label>Veículo</label>
                     <select id="veiculo" name="veiculo">
                         <option disabled selected>Selecione</option>
+                        {% for veiculo in veiculo %}
+                            <option value="{{ veiculo.modelo }}">{{ veiculo.modelo }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="input_container">
@@ -31,9 +34,12 @@
                 <div class="input_container">
                     <label>Motorista</label>
                     <select id="motorista" name="motorista">
-                        <option selected>Selecione</option>
-
-                        {% for user in %}
+                        <option disabled selected>Selecione</option>
+                        {% for user in usuario %}
+                            {% if user.status_usuario.status == 'Ativo' and user.tipo_usuario.nome == 'Cliente' %}
+                                <option value="{{ user.nome }}">{{ user.nome }}</option>
+                            {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -46,15 +52,15 @@
                 
                 <div class="input_container">
                     <label>Valor:</label>
-                    <input type="text" id="valor_idade" placeholder="Digite o valor">
+                    <input type="text" id="valor" placeholder="Digite o valor">
                 </div>
                 <div class="input_container">
                     <label>Forma de Pagamento:</label>
                     <select id="forma_pagamento" name="forma_pagamento">
                         <option disabled selected>Selecione</option>
-                        <option>Cartão de Crédito</option>
-                        <option>Cartão de Débito</option>
-                        <option>PIX</option>
+                        {% for formapagamento in  forma_pagamento %}
+                            <option value="{{ formapagamento.forma_pagamento }}">{{ formapagamento.forma_pagamento }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>

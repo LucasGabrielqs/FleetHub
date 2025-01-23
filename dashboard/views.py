@@ -209,12 +209,16 @@ def cadastro_usuario(request):
         cidade = request.POST.get('cidade')
         cep = request.POST.get('cep')
         estado = request.POST.get('estado')
-        tipo = request.POST.get('tipo_usuario')
-        status_usuario = request.POST.get('status')
+        #tipo = request.POST.get('tipo_usuario')
+        #status_usuario = request.POST.get('status')
         imagem = request.FILES.get('img') 
 
 
         if nome and email and cpf and telefone and rua and bairro and cidade and cep and estado:
+
+            status = get_object_or_404(StatusUsuario, status="Ativo")
+            tipo_user = get_object_or_404(TipoUsuario, nome="Cliente")
+
             usuario = Usuário(
                 nome = nome,
                 email=email,
@@ -225,8 +229,8 @@ def cadastro_usuario(request):
                 cidade=cidade,
                 cep=cep,
                 estado=get_object_or_404(Estado, sigla=estado),
-                status_usuario=get_object_or_404(StatusUsuario,status=status_usuario),
-                tipo_usuario=get_object_or_404(TipoUsuario,nome=tipo),
+                status_usuario=status,
+                tipo_usuario=tipo_user,
             )
             if 'img' in request.FILES:
                 usuario.imagem = imagem
@@ -349,44 +353,60 @@ def editar_manutencao(request):
 
 
 def criar_reserva(request):
-    status = get_list_or_404(Status_Reserva)
-    forma_pagamento = get_list_or_404(Forma_Pagamento)
-    veiculo = get_list_or_404(Veiculo)
-    usuario = get_list_or_404(Usuário)
+    status = get_list_or_404(Status_Reserva)  # Obtém todos os status disponíveis
+    forma_pagamento = get_list_or_404(Forma_Pagamento) # Obtém todoas as formas de pagamento disponíveis
+    veiculo = get_list_or_404(Veiculo) # Obtém todas as listas de veículos disponiveis
+    usuario = get_list_or_404(Usuário) # Obtém todas as listas de usuários disponíveis
+    
     if request.method == 'POST':
-        # Verificar se todos os campos obrigatórios estão presentes
-        veiculo = request.POST.get('veiculo')
+        # Obtenção de dados do formulário
+        veiculo_nome = request.POST.get('veiculo')
         data_reserva = request.POST.get('data_reserva')
         data_entrega = request.POST.get('data_entrega')
-        motorista = request.POST.get('motorista')
+        motorista_id = request.POST.get('motorista')  # ID do motorista enviado no formulário
         idade_condutor = request.POST.get('idade_condutor')
         valor = request.POST.get('valor')
-        forma_pagamento = request.POST.get('forma_pagamento')
+        forma_pagamento_id = request.POST.get('forma_pagamento')
         
-        # Certifique-se de que campos obrigatórios não estão vazios
-        if veiculo and data_reserva and data_entrega and motorista and idade_condutor and valor and forma_pagamento:
-            # Criar o objeto Veiculo
-            print(f"Veiculo: {veiculo}, Data de Reserva: {data_reserva}, Data de Entrega: {data_entrega}, Motorista: {motorista}, Idade do Condutor: {idade_condutor}, Valor: {valor}, Forma de Pagamento {forma_pagamento}")
-            # Buscar o objeto Status_Veiculo correspondente
-            status = get_object_or_404(Status_Reserva, status=1)
-            forma_pagamento = get_object_or_404(Forma_Pagamento,forma_pagamento=2)
+        # Verificar se todos os campos obrigatórios estão preenchidos
+        if veiculo_nome and data_reserva and data_entrega and motorista_id and idade_condutor and valor and forma_pagamento_id:
+            # Busca o status "Pendente" na tabela Status_Reserva
+            status = get_object_or_404(Status_Reserva, nome="Pendente")  # Certifique-se que o nome é exatamente "Pendente"
+            
+            # Busca a forma de pagamento selecionada
+            forma_pagamento = get_object_or_404(Forma_Pagamento, id=forma_pagamento_id)
+            
+            # Busca o veículo pelo nome
+            veiculo = get_object_or_404(Veiculo, nome=veiculo_nome)
+            
+            # Busca o motorista pelo ID
+            motorista = get_object_or_404(Usuário, id=motorista_id)
+            
+            # Cria o objeto Reserva
             reserva = Reservas(
                 veiculo=veiculo,
                 data_reserva=data_reserva,
                 data_entrega=data_entrega,
-                motorista = motorista,
-                idade_condutor = idade_condutor,
-                valor = valor,
-                forma_pagamento = forma_pagamento,
-                status_reserva=status
+                motorista=motorista,
+                idade_condutor=idade_condutor,
+                valor=valor,
+                forma_pagamento=forma_pagamento,
+                status_reserva=status,
+                #usuario_cadastro=request.user  # Define o usuário logado como responsável pelo cadastro
             )
-            # Salvar o objeto no banco de dados
+            
+            # Salvar no banco de dados
             reserva.save()
-
-            #Redirecionar para uma página de sucesso ou lista de veículos
+            
+            # Redireciona para a página de listagem de reservas
             return redirect('listagem_reservas')
-        #else:
-    return render(request, 'dashboard/criacao_reserva.html', {'status': status, 'forma_pagamento': forma_pagamento, 'veiculo' : veiculo, 'usuario' : usuario})
+    
+    return render(request, 'dashboard/criacao_reserva.html', {
+        'status': status,
+        'forma_pagamento': forma_pagamento,
+        'veiculo': veiculo,
+        'usuario': usuario
+    })
 
 def editar_reserva(request):
     return render(request, 'dashboard/editar_reserva.html')
