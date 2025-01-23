@@ -357,7 +357,7 @@ def criar_reserva(request):
     forma_pagamento = get_list_or_404(Forma_Pagamento) # Obtém todoas as formas de pagamento disponíveis
     veiculo = get_list_or_404(Veiculo) # Obtém todas as listas de veículos disponiveis
     usuario = get_list_or_404(Usuário) # Obtém todas as listas de usuários disponíveis
-    
+    reservas = get_list_or_404(Reservas) # Obtém todas as listas de Reservas
     if request.method == 'POST':
         # Obtenção de dados do formulário
         veiculo_nome = request.POST.get('veiculo')
@@ -405,7 +405,8 @@ def criar_reserva(request):
         'status': status,
         'forma_pagamento': forma_pagamento,
         'veiculo': veiculo,
-        'usuario': usuario
+        'usuario': usuario,
+        'reserva' : reservas
     })
 
 def editar_reserva(request):
