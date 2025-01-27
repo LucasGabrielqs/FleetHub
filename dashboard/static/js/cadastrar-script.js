@@ -53,3 +53,71 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const senha = document.getElementById("senha");
+    const confirmarSenha = document.getElementById("confirmar_senha");
+    const senhaFeedback = document.getElementById("senha-feedback");
+    const confirmarSenhaFeedback = document.getElementById("confirmar-senha-feedback");
+    const submitBtn = document.getElementById("submit-btn");
+
+    const senhaRequisitos = [
+        { regex: /.{8,}/, message: "A senha deve ter pelo menos 8 caracteres." },
+        { regex: /[A-Z]/, message: "A senha deve conter pelo menos uma letra maiúscula." },
+        { regex: /[a-z]/, message: "A senha deve conter pelo menos uma letra minúscula." },
+        { regex: /\d/, message: "A senha deve conter pelo menos um número." },
+        { regex: /[@$!%*?&]/, message: "A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &)." },
+    ];
+
+    function validarSenha() {
+        const senhaValue = senha.value;
+        let valid = true;
+        senhaFeedback.textContent = "";
+
+        senhaRequisitos.forEach(req => {
+            if (!req.regex.test(senhaValue)) {
+                valid = false;
+                senhaFeedback.textContent = req.message;
+            }
+        });
+
+        senhaFeedback.classList.toggle("valid", valid);
+        return valid;
+    }
+
+    function verificarSenhasIguais() {
+        const senhaValue = senha.value;
+        const confirmarSenhaValue = confirmarSenha.value;
+
+        if (senhaValue === confirmarSenhaValue && confirmarSenhaValue !== "") {
+            confirmarSenhaFeedback.textContent = "As senhas correspondem!";
+            confirmarSenhaFeedback.classList.add("valid");
+            return true;
+        } else {
+            confirmarSenhaFeedback.textContent = "As senhas não correspondem.";
+            confirmarSenhaFeedback.classList.remove("valid");
+            return false;
+        }
+    }
+
+    senha.addEventListener("input", () => {
+        validarSenha();
+        verificarSenhasIguais();
+    });
+
+    confirmarSenha.addEventListener("input", verificarSenhasIguais);
+
+    submitBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const senhaValida = validarSenha();
+        const senhasIguais = verificarSenhasIguais();
+
+        if (senhaValida && senhasIguais) {
+            alert("Cadastro realizado com sucesso!");
+            // Aqui você pode enviar o formulário ou executar outra ação
+        } else {
+            alert("Por favor, corrija os erros antes de continuar.");
+        }
+    });
+});

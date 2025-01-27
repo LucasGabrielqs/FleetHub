@@ -80,7 +80,7 @@ class Veiculo(models.Model):
         default="media/carro-escondido.jpg",
     )
     status = models.ForeignKey(Status_Veiculo, on_delete=models.CASCADE, related_name="veiculos_status")
-    status_uso = models.ForeignKey(Status_Uso, on_delete=models.CASCADE, related_name="veiculos_status_uso")
+    #status_uso = models.ForeignKey(Status_Uso, on_delete=models.CASCADE, related_name="veiculos_status_uso")
     data_cadastro = models.DateField(auto_now_add=True)
     data_alteracao = models.DateField(auto_now=True)
     usuario_cadastro = models.ForeignKey(

@@ -54,12 +54,14 @@
 
                     
                     <div class="input_container">
-                        <label>Senha</label>
-                        <input name="senha" type="text" id="senha" placeholder="Digite sua senha" required>
+                        <label for="senha">Senha</label>
+                        <input name="senha" type="password" id="senha" placeholder="Digite sua senha" required>
+                        <small id="senha-feedback" class="feedback"></small>
                     </div>
                     <div class="input_container">
-                        <label>Confirmar Senha</label>
-                        <input name="confirmar_senha" type="text" id="senha" placeholder="Confirme a senha" required>
+                        <label for="confirmar_senha">Confirmar Senha</label>
+                        <input name="confirmar_senha" type="password" id="confirmar_senha" placeholder="Confirme a senha" required>
+                        <small id="confirmar-senha-feedback" class="feedback"></small>
                     </div>
              
                 
@@ -104,7 +106,7 @@
                 </div>
                 
                 <div class="rodape">
-                    <button type="reset" class="btn-reset">Cancelar</button>
+                    <button onclick="location.href'/'" type="reset" class="btn-reset">Cancelar</button>
                     <button type="submit" class="btn-submit">Cadastrar</button>
                 </div>
             

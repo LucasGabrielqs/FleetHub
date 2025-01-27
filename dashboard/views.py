@@ -33,6 +33,7 @@ def cadastrar(request): #Tela de cadastro de usuário geral
         email = request.POST.get('email')
         cpf = request.POST.get('cpf')
         telefone = request.POST.get('telefone')
+        senha = request.POST.get('senha')
         rua = request.POST.get('rua')
         bairro = request.POST.get('bairro')
         cidade = request.POST.get('cidade')
@@ -54,7 +55,7 @@ def cadastrar(request): #Tela de cadastro de usuário geral
                 cidade=cidade,
                 cep=cep,
                 estado=get_object_or_404(Estado, sigla=estado),
-                status_usuario=get_object_or_404(StatusUsuario,id=1),#ATENÇAO: O primeiro status e tipousuario foi criado como 'indefinido', pois não há esse campo no formulário de cadastro
+                status_usuario=get_object_or_404(StatusUsuario,id=2),#ATENÇAO: O primeiro status e tipousuario foi criado como 'indefinido', pois não há esse campo no formulário de cadastro
                 tipo_usuario=get_object_or_404(TipoUsuario,id=1),
             )
 
@@ -78,7 +79,7 @@ def listagem_veiculos(request):
     return render(request, 'dashboard/listagem_veiculos.html',{'veiculos':veiculos})
 
 def cadastrar_veiculo(request):
-    status = get_list_or_404(Status_Veiculo)
+    
     if request.method == 'POST':
         # Verificar se todos os campos obrigatórios estão presentes
         modelo = request.POST.get('modelo')
@@ -95,9 +96,10 @@ def cadastrar_veiculo(request):
         # Certifique-se de que campos obrigatórios não estão vazios
         if modelo and marca and valor_compra and ano and km and motor and status_id and placa and chassi and cor:
             # Criar o objeto Veiculo
-            print(f"Modelo: {modelo}, Marca: {marca}, Valor: {valor_compra}, status: {status}")
+            print(f"Modelo: {modelo}, Marca: {marca}, Valor: {valor_compra}, status: {status_id}")
             # Buscar o objeto Status_Veiculo correspondente
-            status = get_object_or_404(Status_Veiculo, status=status_id)
+            status_veiculo = get_object_or_404(Status_Veiculo, status=status_id)
+            print(status_veiculo)
             veiculo = Veiculo(
                 modelo=modelo,
                 marca=marca,
@@ -105,7 +107,7 @@ def cadastrar_veiculo(request):
                 ano=ano,
                 km=km,
                 motor=motor,
-                status=status,
+                status=status_veiculo,
                 placa=placa,
                 chassi=chassi,
                 cor=cor,
@@ -125,7 +127,8 @@ def cadastrar_veiculo(request):
             return render(request, 'dashboard/cadastrar_veiculos.html', {
                 'error': 'Todos os campos obrigatórios devem ser preenchidos.',
             })
-
+        
+    status = get_list_or_404(Status_Veiculo)
     return render(request, 'dashboard/cadastrar_veiculos.html', {'status':status})
 
 
@@ -357,7 +360,7 @@ def criar_reserva(request):
     forma_pagamento = get_list_or_404(Forma_Pagamento) # Obtém todoas as formas de pagamento disponíveis
     veiculo = get_list_or_404(Veiculo) # Obtém todas as listas de veículos disponiveis
     usuario = get_list_or_404(Usuário) # Obtém todas as listas de usuários disponíveis
-    reservas = get_list_or_404(Reservas) # Obtém todas as listas de Reservas
+    #reservas = get_list_or_404(Reservas) # Obtém todas as listas de Reservas
     if request.method == 'POST':
         # Obtenção de dados do formulário
         veiculo_nome = request.POST.get('veiculo')
@@ -400,13 +403,13 @@ def criar_reserva(request):
             
             # Redireciona para a página de listagem de reservas
             return redirect('listagem_reservas')
-    
+         
     return render(request, 'dashboard/criacao_reserva.html', {
         'status': status,
         'forma_pagamento': forma_pagamento,
         'veiculo': veiculo,
         'usuario': usuario,
-        'reserva' : reservas
+        #'reserva' : reservas
     })
 
 def editar_reserva(request):
