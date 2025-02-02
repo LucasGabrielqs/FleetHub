@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class TipoUsuario(models.Model):
@@ -22,13 +23,13 @@ class StatusUsuario(models.Model):
         return self.status
 
 
-class Usuário(models.Model):
+class CustomUser(AbstractUser):
     nome = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=11)
+    email = models.EmailField(max_length=254, unique=True)
+    cpf = models.CharField(max_length=11, unique=True)
     telefone = models.CharField(max_length=15)
-    senha = models.CharField(max_length=128)
-    data_cadastro = models.DateField(auto_now=True)
+    #senha = models.CharField(max_length=128)
+    #data_cadastro = models.DateField(auto_now=True)
     rua = models.CharField(max_length=35)
     bairro = models.CharField(max_length=35)
     cidade = models.CharField(max_length=35)
@@ -43,6 +44,17 @@ class Usuário(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
     tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.SET_DEFAULT, default="indefinido")
     status_usuario = models.ForeignKey(StatusUsuario, on_delete=models.SET_DEFAULT, default="indefinido")
+  # Evita conflitos nos relacionamentos do Django
+    groups = models.ManyToManyField(
+        "auth.Group",
+        related_name="customuser_set",
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        related_name="customuser_permissions_set",
+        blank=True
+    )
 
     def __str__(self):
         return self.nome
@@ -84,14 +96,14 @@ class Veiculo(models.Model):
     data_cadastro = models.DateField(auto_now_add=True)
     data_alteracao = models.DateField(auto_now=True)
     usuario_cadastro = models.ForeignKey(
-        Usuário,
+        CustomUser,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name="veiculos_cadastrados",
     )
     usuario_alteracao = models.ForeignKey(
-        Usuário,
+        CustomUser,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -121,7 +133,7 @@ class Reservas(models.Model):
     data_reserva = models.DateField()
     data_entrega = models.DateField()
     motorista = models.ForeignKey(
-        Usuário,
+        CustomUser,
         on_delete=models.CASCADE,
         related_name="reservas_como_motorista",
     )
@@ -132,14 +144,14 @@ class Reservas(models.Model):
     data_cadastro = models.DateField(auto_now_add=True)
     data_alteracao = models.DateField(auto_now=True)
     usuario_cadastro = models.ForeignKey(
-        Usuário,
+        CustomUser,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name="reservas_cadastradas",
     )
     usuario_alteracao = models.ForeignKey(
-        Usuário,
+        CustomUser,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

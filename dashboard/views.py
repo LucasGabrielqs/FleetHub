@@ -1,26 +1,41 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
-from dashboard.models import Veiculo, Status_Veiculo, Usuário, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva
+from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva
 # Create your views here.
 
 
 
-def tela_dashboard(request):
-    usuarios = get_list_or_404(Usuário)
-    contexto = {
-        'range_10': range(10),
-        'range_7': range(7),  # Lista de 0 a 6
-        'range_4': range(4),  # Lista de 0 a 3
-        'range_2': range(2)  # Lista de 0 a 1
-    }
-    return render(request, 'dashboard/dashboard.html', {'contexto':contexto, 'usuarios':usuarios})
+def login_view(request):
+    print(request.POST)
+    # Verifica se o usuário foi redirecionado com ?next= na URL
+    if "next" in request.GET:
+        messages.error(request, "Você precisa estar logado para acessar essa página!")
+        # Limpar mensagens manualmente (caso necessário)
+        storage = messages.get_messages(request)
+        for _ in storage:  # Percorre todas as mensagens para garantir que são consumidas
+            pass
 
+    if request.method == "POST":
+        username = request.POST.get("username")  # Pode ser Email ou CPF
+        password = request.POST.get("password")
 
+        user = authenticate(request, username=username, password=password)
+        print(user)
 
-def login(request):
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Login realizado com sucesso!")
+            return redirect("tela_dashboard")  # Redireciona para a página inicial
+        else:
+            messages.error(request, "Usuário ou senha inválidos.")
     return render(request, 'dashboard/login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")
 
 def cadastrar(request): #Tela de cadastro de usuário geral
     #status = get_list_or_404(StatusUsuario)
@@ -45,21 +60,24 @@ def cadastrar(request): #Tela de cadastro de usuário geral
 
 
         if nome and email and cpf and telefone and rua and bairro and cidade and cep and estado:
-            usuario = Usuário(
+            usuario = CustomUser.objects.create_user(
                 nome = nome,
                 email=email,
                 cpf=cpf,
+                password=senha,
+                username=email,
                 telefone=telefone,
                 rua=rua,
                 bairro=bairro,
                 cidade=cidade,
                 cep=cep,
                 estado=get_object_or_404(Estado, sigla=estado),
-                status_usuario=get_object_or_404(StatusUsuario,id=2),#ATENÇAO: O primeiro status e tipousuario foi criado como 'indefinido', pois não há esse campo no formulário de cadastro
+                status_usuario=get_object_or_404(StatusUsuario,id=1),#ATENÇAO: O primeiro status e tipousuario foi criado como 'indefinido', pois não há esse campo no formulário de cadastro
                 tipo_usuario=get_object_or_404(TipoUsuario,id=1),
             )
 
             usuario.save()
+            return redirect("login")
 
             
 
@@ -72,12 +90,23 @@ def cadastrar(request): #Tela de cadastro de usuário geral
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
 
+@login_required
+def tela_dashboard(request):
+    usuarios = get_list_or_404(CustomUser)
+    contexto = {
+        'range_10': range(10),
+        'range_7': range(7),  # Lista de 0 a 6
+        'range_4': range(4),  # Lista de 0 a 3
+        'range_2': range(2)  # Lista de 0 a 1
+    }
+    return render(request, 'dashboard/dashboard.html', {'contexto':contexto, 'usuarios':usuarios})
 
-
+@login_required
 def listagem_veiculos(request):
     veiculos = get_list_or_404(Veiculo)
     return render(request, 'dashboard/listagem_veiculos.html',{'veiculos':veiculos})
 
+@login_required
 def cadastrar_veiculo(request):
     
     if request.method == 'POST':
@@ -131,7 +160,7 @@ def cadastrar_veiculo(request):
     status = get_list_or_404(Status_Veiculo)
     return render(request, 'dashboard/cadastrar_veiculos.html', {'status':status})
 
-
+@login_required
 def informacoes_veiculo(request, id):
     veiculo = get_object_or_404(Veiculo, id=id)
     status_list = get_list_or_404(Status_Veiculo)
@@ -194,9 +223,7 @@ def informacoes_veiculo(request, id):
         'success_message': success_message,
     })
 
-
-
-
+@login_required
 def cadastro_usuario(request):
     status = get_list_or_404(StatusUsuario)
     tipos = get_list_or_404(TipoUsuario)
@@ -222,7 +249,7 @@ def cadastro_usuario(request):
             status = get_object_or_404(StatusUsuario, status="Ativo")
             tipo_user = get_object_or_404(TipoUsuario, nome="Cliente")
 
-            usuario = Usuário(
+            usuario = CustomUser(
                 nome = nome,
                 email=email,
                 cpf=cpf,
@@ -246,8 +273,9 @@ def cadastro_usuario(request):
         'status':status,
         })
 
+@login_required
 def listagem_usuarios(request):
-    usuarios = get_list_or_404(Usuário)
+    usuarios = get_list_or_404(CustomUser)
     contexto = {
         'range_10': range(10),
         'range_7': range(7),  # Lista de 0 a 6
@@ -256,9 +284,9 @@ def listagem_usuarios(request):
     }
     return render(request, 'dashboard/listagem_usuarios.html',{"contexto":contexto, 'usuarios':usuarios})
 
-
+@login_required
 def informacoes_usuario(request, id):
-    usuario = get_object_or_404(Usuário, id=id)
+    usuario = get_object_or_404(CustomUser, id=id)
     estados = get_list_or_404(Estado)
     tipos_usuario = get_list_or_404(TipoUsuario)
     status_usuario_list = get_list_or_404(StatusUsuario)
@@ -335,12 +363,11 @@ def informacoes_usuario(request, id):
         'success_message': success_message,
     })
 
-
-
-
+@login_required
 def agendar_manutencao(request):
     return render(request,'dashboard/agendar_manutencao.html')
 
+@login_required
 def listagem_manutencao(request):
     contexto = {
         'range_10': range(10),
@@ -350,16 +377,16 @@ def listagem_manutencao(request):
     }
     return render(request,'dashboard/listagem_manutencao.html',contexto)
 
+@login_required
 def editar_manutencao(request):
     return render(request,'dashboard/editar_manutencao.html')
 
-
-
+@login_required
 def criar_reserva(request):
     status = get_list_or_404(Status_Reserva)  # Obtém todos os status disponíveis
     forma_pagamento = get_list_or_404(Forma_Pagamento) # Obtém todoas as formas de pagamento disponíveis
     veiculo = get_list_or_404(Veiculo) # Obtém todas as listas de veículos disponiveis
-    usuario = get_list_or_404(Usuário) # Obtém todas as listas de usuários disponíveis
+    usuario = get_list_or_404(CustomUser) # Obtém todas as listas de usuários disponíveis
     #reservas = get_list_or_404(Reservas) # Obtém todas as listas de Reservas
     if request.method == 'POST':
         # Obtenção de dados do formulário
@@ -383,7 +410,7 @@ def criar_reserva(request):
             veiculo = get_object_or_404(Veiculo, nome=veiculo_nome)
             
             # Busca o motorista pelo ID
-            motorista = get_object_or_404(Usuário, id=motorista_id)
+            motorista = get_object_or_404(CustomUser, id=motorista_id)
             
             # Cria o objeto Reserva
             reserva = Reservas(
@@ -412,9 +439,11 @@ def criar_reserva(request):
         #'reserva' : reservas
     })
 
+@login_required
 def editar_reserva(request):
     return render(request, 'dashboard/editar_reserva.html')
 
+@login_required
 def listagem_reservas(request):
     contexto = {
         'range_10': range(10),
@@ -424,10 +453,11 @@ def listagem_reservas(request):
     }
     return render(request, 'dashboard/listagem_reservas.html',contexto)
 
-
+@login_required
 def criacao_rota(request):
     return render(request, 'dashboard/criacao_rota.html')
 
+@login_required
 def listagem_rota(request):
     contexto = {
         'range_10': range(10),
@@ -437,13 +467,15 @@ def listagem_rota(request):
     }
     return render(request,'dashboard/listagem_rota.html',contexto)
 
+@login_required
 def visualizacao_rota(request):
     return render(request, 'dashboard/visualizacao_rota.html')
 
-
+@login_required
 def criacao_abastecimento(request):
     return render(request,'dashboard/criacao_abastecimento.html')
 
+@login_required
 def listagem_abastecimento(request):
     contexto = {
         'range_10': range(10),
@@ -453,10 +485,10 @@ def listagem_abastecimento(request):
     }
     return render(request,'dashboard/listagem_abastecimento.html',contexto)
 
+@login_required
 def registro_abastecimento(request):
     return render(request, 'dashboard/registro_abastecimento.html')
 
-
-
+@login_required
 def dashboard(request):
     return render(request, 'base.html')

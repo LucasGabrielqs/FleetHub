@@ -13,26 +13,40 @@
         <div id="imglogin">
             <img id="img-login" src="{% static 'img/frotas 1.png' %}" alt="">
         </div>
-        <div id="campo-login">
-            <img id="logo-img" src="{% static 'img/logo_fleethub.png' %}" alt="">
-            <h1 id="login-tittle">Faça seu Login:</h1>
-            <div id="user-input">
-                <i class="fa-solid fa-user fa-2xl" style="color: #000000;"></i>
-                <input id="username" type="text" placeholder="Digite seu E-mail">
-            </div>
-            <div id="pass-input">
-                <i class="fa-solid fa-lock fa-2xl" style="color: #000000;"></i>
-                <input type="password" class="password-input" name="password" required="" id="id_password" placeholder="Digite sua Senha">
-                <button class="input-group-addon" type="button" role="button" id="view-password" title="Exibir a senha">
-                    <span class="fa fa-eye fa-fw" aria-hidden="true"></span>
-                </button>
-            </div>
-            <a id="link-enter-button" href="{% url 'tela_dashboard' %}">Entrar</a>
-            <a id="reset-pass" href="{% url 'recuperar_senha' %}"><h3>Esqueceu a Senha?</h3></a>
-            <a id="reset-pass" href="{% url 'cadastrar' %}"><h3>Cadastrar-se</h3></a>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div id="campo-login">
+                <img id="logo-img" src="{% static 'img/logo_fleethub.png' %}" alt="">
+                <h1 id="login-tittle">Faça seu Login:</h1>
+                <div id="user-input">
+                    <i class="fa-solid fa-user fa-2xl" style="color: #000000;"></i>
+                    <input name='username' id="username" type="text" placeholder="Digite seu E-mail">
+                </div>
+                <div id="pass-input">
+                    <i class="fa-solid fa-lock fa-2xl" style="color: #000000;"></i>
+                    <input name='password' type="password" class="password-input" name="password" required="" id="id_password" placeholder="Digite sua Senha">
+                    <button class="input-group-addon" type="button" role="button" id="view-password" title="Exibir a senha">
+                        <span class="fa fa-eye fa-fw" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <button id="link-enter-button" type="submit" class="btn-submit">Entrar</button>
+                <a id="reset-pass" href="{% url 'recuperar_senha' %}"><h3>Esqueceu a Senha?</h3></a>
+                <a id="reset-pass" href="{% url 'cadastrar' %}"><h3>Cadastrar-se</h3></a>
 
-        </div>
+            </div>
+        </form>
     </div>
+
+        <!-- Exibir mensagens -->
+        {% if messages %}
+        <div class="message-container">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
 </body>
 <script src="{% static 'js/login-script.js' %}"></script>
 </html>
