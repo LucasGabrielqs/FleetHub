@@ -14,104 +14,106 @@
           
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-
-        
             <div class="container">
-                
                 <div class="cabecalho">Cadastrar-se</div>
                 
                 <div class="menu_esquedo">
-                    
                     <p>DADOS DO USUÁRIO:</p>
-
+        
                     <div class="input_container">
                         <label>Nome Completo</label>
-                        <input name="nome" type="text" id="nome_completo" placeholder="Digite o Nome Completo" required>
+                        <input name="nome" type="text" id="nome_completo" placeholder="Digite o Nome Completo" required
+                               value="{{ data.nome|default:'' }}">
                     </div>
-                    
+        
                     <div class="input_container">
                         <label>Email</label>
-                        <input name="email" type="email" id="email" placeholder="Digite seu email" required>
+                        <input name="email" type="email" id="email" placeholder="Digite seu email" required
+                               value="{{ data.email|default:'' }}">
                     </div>
-                    
+        
                     <div class="input_container">
                         <label>CPF</label>
-                        <input name="cpf" type="text" id="cpf" maxlength="14" placeholder="Digite seu CPF" required>
+                        <input name="cpf" type="text" id="cpf" maxlength="14" placeholder="Digite seu CPF" required
+                               value="{{ data.cpf|default:'' }}">
                     </div>
-                    
-                    <div class="campo_duplo">
-                        
-                        <div class="campo_menor">
-                            <input type="text" id="ddd"  maxlength="2" placeholder="+ 55">
+                    {% if error %}
+                        <div id="alert" class="alert alert-danger">
+                    {{ error }}
                         </div>
-                        
+                    {% endif %}
+        
+                    <div class="campo_duplo">
+                        <div class="campo_menor">
+                            <input type="text" id="ddd" maxlength="2" placeholder="+ 55">
+                        </div>
                         <div class="input_container">
                             <label>Telefone</label>
-                            <input name="telefone" type="text" id="telefone" maxlength="15" placeholder="Digite seu Telefone" required>
+                            <input name="telefone" type="text" id="telefone" maxlength="15" placeholder="Digite seu Telefone" required
+                                   value="{{ data.telefone|default:'' }}">
                         </div>
-                    
                     </div>
-
-                    
+        
                     <div class="input_container">
                         <label for="senha">Senha</label>
                         <input name="senha" type="password" id="senha" placeholder="Digite sua senha" required>
                         <small id="senha-feedback" class="feedback"></small>
                     </div>
+        
                     <div class="input_container">
                         <label for="confirmar_senha">Confirmar Senha</label>
                         <input name="confirmar_senha" type="password" id="confirmar_senha" placeholder="Confirme a senha" required>
                         <small id="confirmar-senha-feedback" class="feedback"></small>
                     </div>
-             
-                
                 </div>
-                
+        
                 <div class="menu_direito">
-
                     <p>ENDEREÇO:</p>
-
+        
                     <div class="input_container">
                         <label>Rua</label>
-                        <input name="rua" type="text" id="Rua" placeholder="Digite a Rua" required>
+                        <input name="rua" type="text" id="Rua" placeholder="Digite a Rua" required
+                               value="{{ data.rua|default:'' }}">
                     </div>
-                    
+        
                     <div class="input_container">
                         <label>Bairro</label>
-                        <input name="bairro" type="text" id="bairro" placeholder="Digite o Bairro" required>
+                        <input name="bairro" type="text" id="bairro" placeholder="Digite o Bairro" required
+                               value="{{ data.bairro|default:'' }}">
                     </div>
-                    
+        
                     <div class="input_container">
                         <label>Cidade</label>
-                        <input name="cidade" type="text" id="cidade" placeholder="Digite a Cidade" required>
+                        <input name="cidade" type="text" id="cidade" placeholder="Digite a Cidade" required
+                               value="{{ data.cidade|default:'' }}">
                     </div>
-                    
+        
                     <div class="campo_duplo">
-                        
                         <div class="campo_menor">
-                            <select name="estado" id="estados" name="estados" required>
-                                {% for estado in estados %}<option value="{{estado.sigla}}">{{estado.sigla}}</option>{% endfor %}
+                            <select name="estado" id="estados" required>
+                                {% for estado in estados %}
+                                    <option value="{{ estado.sigla }}" {% if data.estado == estado.sigla %}selected{% endif %}>
+                                        {{ estado.sigla }}
+                                    </option>
+                                {% endfor %}
                             </select>
                         </div>
                         
                         <div class="input_container">
                             <label>CEP</label>
-                            <input name="cep" type="text" id="cep" maxlength="9" placeholder="Digite o CEP" required>
+                            <input name="cep" type="text" id="cep" maxlength="9" placeholder="Digite o CEP" required
+                                   value="{{ data.cep|default:'' }}">
                         </div>
-                        
-                    
                     </div>
-
-
                 </div>
                 
                 <div class="rodape">
-                    <button onclick="location.href'/'" type="reset" class="btn-reset">Cancelar</button>
+                    <button type="reset" class="btn-reset" onclick="location.href='/'">Cancelar</button>
                     <button type="submit" class="btn-submit">Cadastrar</button>
                 </div>
-            
             </div>
         </form>
+        
     </main>
 </body>
 <script src="{% static 'js/cadastrar-script.js'%}"></script>

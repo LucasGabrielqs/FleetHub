@@ -37,11 +37,13 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
-def cadastrar(request): #Tela de cadastro de usuário geral
-    #status = get_list_or_404(StatusUsuario)
-    #tipos = get_list_or_404(TipoUsuario)
-    estados = get_list_or_404(Estado)  
-    print(request.POST)
+def cadastrar(request):
+    # Lista de estados para popular o campo no formulário
+    estados = Estado.objects.all()  # ou get_list_or_404(Estado) se preferir
+
+    # Dicionário para manter os dados enviados pelo usuário e repassar ao template
+    data = {}
+    error = None
 
     if request.method == 'POST':
         nome = request.POST.get('nome')
@@ -53,15 +55,48 @@ def cadastrar(request): #Tela de cadastro de usuário geral
         bairro = request.POST.get('bairro')
         cidade = request.POST.get('cidade')
         cep = request.POST.get('cep')
-        estado = request.POST.get('estado')
-        #tipo = request.POST.get('tipo_usuario')
-        #status_usuario = request.POST.get('status')
-        #imagem = request.FILES.get('img') 
+        sigla_estado = request.POST.get('estado')
 
+        # Armazena os dados para repopular o formulário em caso de erro
+        data = {
+            'nome': nome,
+            'email': email,
+            'cpf': cpf,
+            'telefone': telefone,
+            'rua': rua,
+            'bairro': bairro,
+            'cidade': cidade,
+            'cep': cep,
+            'estado': sigla_estado,
+        }
 
-        if nome and email and cpf and telefone and rua and bairro and cidade and cep and estado:
+        # Validação: Todos os campos obrigatórios devem ser preenchidos
+        if not all([nome, email, cpf, telefone, senha, rua, bairro, cidade, cep, sigla_estado]):
+            error = "Por favor, preencha todos os campos obrigatórios."
+            return render(request, 'dashboard/cadastrar.html', {
+                'estados': estados,
+                'error': error,
+                'data': data,
+            })
+
+        # Validação do CPF: verifica se já existe um usuário com esse CPF
+        if CustomUser.objects.filter(cpf=cpf).exists():
+            error = "CPF já cadastrado ou inválido."
+            return render(request, 'dashboard/cadastrar.html', {
+                'estados': estados,
+                'error': error,
+                'data': data,
+            })
+
+        # Obtém o objeto Estado a partir da sigla informada
+        estado_obj = get_object_or_404(Estado, sigla=sigla_estado)
+        # Define os defaults para tipo e status (ajuste conforme a sua lógica)
+        tipo_usuario = get_object_or_404(TipoUsuario, id=1)
+        status_usuario = get_object_or_404(StatusUsuario, id=1)
+
+        try:
             usuario = CustomUser.objects.create_user(
-                nome = nome,
+                nome=nome,
                 email=email,
                 cpf=cpf,
                 password=senha,
@@ -71,21 +106,30 @@ def cadastrar(request): #Tela de cadastro de usuário geral
                 bairro=bairro,
                 cidade=cidade,
                 cep=cep,
-                estado=get_object_or_404(Estado, sigla=estado),
-                status_usuario=get_object_or_404(StatusUsuario,id=1),#ATENÇAO: O primeiro status e tipousuario foi criado como 'indefinido', pois não há esse campo no formulário de cadastro
-                tipo_usuario=get_object_or_404(TipoUsuario,id=1),
+                estado=estado_obj,
+                status_usuario=status_usuario,
+                tipo_usuario=tipo_usuario,
             )
-
+            # Se o usuário que está cadastrando estiver autenticado, salva os rastreamentos
+            #if request.user.is_authenticated:
+                #usuario.usuario_cadastro = request.user
+            # else:
+            #     usuario.usuario_cadastro = 'ADMIN'
             usuario.save()
             return redirect("login")
+        except Exception as e:
+            error = f"Erro ao cadastrar usuário: {e}"
+            return render(request, 'dashboard/cadastrar.html', {
+                'estados': estados,
+                'error': error,
+                'data': data,
+            })
 
-            
-
-    return render(request,'dashboard/cadastrar.html',{
-        'estados':estados,
-        #'tipos':tipos,
-        #'status':status,
-        })
+    # Na requisição GET, renderiza o formulário sem dados preenchidos
+    return render(request, 'dashboard/cadastrar.html', {
+        'estados': estados,
+        'data': data,  # data pode estar vazia
+    })
 
 def recuperar_senha(request):
     return render(request, 'dashboard/recuperar-senha.html')
@@ -141,6 +185,9 @@ def cadastrar_veiculo(request):
                 chassi=chassi,
                 cor=cor,
             )
+
+            if request.user.is_authenticated:
+                    veiculo.usuario_cadastro = request.user
 
             # Verifica se um arquivo foi enviado no campo "img"
             if 'img' in request.FILES:
@@ -207,6 +254,9 @@ def informacoes_veiculo(request, id):
             # Verifica se um arquivo foi enviado no campo "img"
             if 'img' in request.FILES:
                 veiculo.imagem = request.FILES.get('img')
+
+            if request.user.is_authenticated:
+                    veiculo.usuario_alteracao = request.user
 
             # Salva as alterações
             veiculo.save()

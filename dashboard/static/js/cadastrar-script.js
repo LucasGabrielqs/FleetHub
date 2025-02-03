@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
         ddd: "ddd",
     };
 
+    const alertElem = document.getElementById('alert');
+    if (alertElem) {
+        setTimeout(function () {
+            alertElem.style.display = 'none';
+        }, 5000);
+    }
+
     Object.entries(camposComMascara).forEach(([campo, id]) => {
         const input = document.getElementById(id);
         input?.addEventListener("input", (e) => {
@@ -84,6 +91,8 @@ document.addEventListener("DOMContentLoaded", function () {
         senhaFeedback.classList.toggle("valid", valid);
         return valid;
     }
+
+    
 
     function verificarSenhasIguais() {
         const senhaValue = senha.value;

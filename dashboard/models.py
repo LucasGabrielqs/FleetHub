@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+# from django.conf import settings
 
 class TipoUsuario(models.Model):
     nome = models.CharField(max_length=30)
@@ -55,6 +55,25 @@ class CustomUser(AbstractUser):
         related_name="customuser_permissions_set",
         blank=True
     )
+
+    # data_cadastro = models.DateField(auto_now_add=True, verbose_name="Data de Cadastro")
+    # data_alteracao = models.DateField(auto_now=True, verbose_name="Data de Alteração")
+    # usuario_cadastro = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    #     blank=True,
+    #     related_name="usuarios_cadastrados",
+    #     verbose_name="Usuário Cadastro"
+    # )
+    # usuario_alteracao = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    #     blank=True,
+    #     related_name="usuarios_alterados",
+    #     verbose_name="Usuário Alteração"
+    # )
 
     def __str__(self):
         return self.nome
