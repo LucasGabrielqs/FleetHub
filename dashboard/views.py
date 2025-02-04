@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404, redirec
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import re
 
 from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva
 # Create your views here.
@@ -23,7 +24,6 @@ def login_view(request):
         password = request.POST.get("password")
 
         user = authenticate(request, username=username, password=password)
-        print(user)
 
         if user is not None:
             login(request, user)
@@ -46,7 +46,10 @@ def cadastrar(request):
     error = None
 
     if request.method == 'POST':
-        nome = request.POST.get('nome')
+        nome_comp = request.POST.get('nome')
+        nome = re.sub(r'\b[a-zA-Z]', lambda match: match.group().upper(), nome_comp.lower()) #Deixa a primeira letra Maiuscula
+        primeiro_nome = re.search(r"^\S+", nome).group()
+        ultimo_nome = re.search(r"\S+$", nome).group()
         email = request.POST.get('email')
         cpf = request.POST.get('cpf')
         telefone = request.POST.get('telefone')
@@ -101,6 +104,8 @@ def cadastrar(request):
                 cpf=cpf,
                 password=senha,
                 username=email,
+                first_name = primeiro_nome,
+                last_name = ultimo_nome,
                 telefone=telefone,
                 rua=rua,
                 bairro=bairro,
@@ -280,7 +285,10 @@ def cadastro_usuario(request):
     estados = get_list_or_404(Estado)  
 
     if request.method == 'POST':
-        nome = request.POST.get('nome')
+        nome_comp = request.POST.get('nome')
+        nome = re.sub(r'\b[a-zA-Z]', lambda match: match.group().upper(), nome_comp.lower()) #Deixa a primeira letra Maiuscula
+        primeiro_nome = re.search(r"^\S+", nome).group()
+        ultimo_nome = re.search(r"\S+$", nome).group()
         email = request.POST.get('email')
         cpf = request.POST.get('cpf')
         telefone = request.POST.get('telefone')
@@ -301,6 +309,8 @@ def cadastro_usuario(request):
 
             usuario = CustomUser(
                 nome = nome,
+                first_name=primeiro_nome,
+                last_name=ultimo_nome,
                 email=email,
                 cpf=cpf,
                 telefone=telefone,
@@ -345,7 +355,10 @@ def informacoes_usuario(request, id):
 
     if request.method == 'POST':
         # Coleta de dados do formulário
-        nome = request.POST.get('nome')
+        nome_comp = request.POST.get('nome')
+        nome = re.sub(r'\b[a-zA-Z]', lambda match: match.group().upper(), nome_comp.lower()) #Deixa a primeira letra Maiuscula
+        primeiro_nome = re.search(r"^\S+", nome).group()
+        ultimo_nome = re.search(r"\S+$", nome).group()
         email = request.POST.get('email')
         cpf = request.POST.get('cpf')
         telefone = request.POST.get('telefone')
@@ -362,6 +375,8 @@ def informacoes_usuario(request, id):
         # Atualiza apenas os campos alterados
         if nome != usuario.nome:
             usuario.nome = nome
+            usuario.first_name = primeiro_nome
+            usuario.last_name = ultimo_nome
         if email != usuario.email:
             usuario.email = email
         if cpf != usuario.cpf:

@@ -26,8 +26,8 @@
         </div>
         <div id="user-menu-sidebar">
             <div id="user_menu">
-                <img id="img_perfil" src="{% static 'img/img_perfil.jpg' %}" alt="" title="Imagem do Perfil">
-                <h1 id="gestor_name">Thiago</h1>
+                <img id="img_perfil" src="{{request.user.imagem.url}}" alt="" title="Imagem do Perfil">
+                <h1 id="gestor_name">{{request.user.first_name}}</h1>
                 <i id="user_icon" class="fa-solid fa-caret-down" style="color: #a1a1aa;"></i>
             </div>
             <hr>

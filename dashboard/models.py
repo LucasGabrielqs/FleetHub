@@ -41,9 +41,9 @@ class CustomUser(AbstractUser):
         max_length=None,
         default="carro-escondido.jpg",
     )
-    estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
-    tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.SET_DEFAULT, default="indefinido")
-    status_usuario = models.ForeignKey(StatusUsuario, on_delete=models.SET_DEFAULT, default="indefinido")
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE, null=True, blank=True, default=1)
+    tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE, null=True, blank=True, default=1)
+    status_usuario = models.ForeignKey(StatusUsuario, on_delete=models.CASCADE, null=True, blank=True, default=1)
   # Evita conflitos nos relacionamentos do Django
     groups = models.ManyToManyField(
         "auth.Group",

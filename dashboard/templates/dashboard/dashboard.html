@@ -37,7 +37,11 @@
                 <div class="scroll-container">
                     {% for usuario in usuarios  %}
                     <ul id="lista-usuarios-sistema">
+                        {% if usuario.first_name %}
+                        <li class="user-info">{{usuario.first_name}} {{usuario.last_name}}</li>
+                        {% else %}
                         <li class="user-info">{{usuario.nome}}</li>
+                        {% endif %}
                         <li class="user-info">{{usuario.tipo_usuario}}</li>
                         <li class="user-info">{{usuario.date_joined}}</li>
                         <li class="user-info">{{usuario.tipo_usuario}}</li>
