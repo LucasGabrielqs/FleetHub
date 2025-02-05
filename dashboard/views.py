@@ -152,7 +152,14 @@ def tela_dashboard(request):
 
 @login_required
 def listagem_veiculos(request):
-    veiculos = get_list_or_404(Veiculo)
+    query = request.GET.get('query')
+    veiculos = Veiculo.objects.all()
+    if query:
+        veiculos = veiculos.filter(
+            modelo__icontains=query
+        ) | veiculos.filter(
+            placa__icontains=query
+        )
     return render(request, 'dashboard/listagem_veiculos.html',{'veiculos':veiculos})
 
 @login_required
@@ -335,14 +342,15 @@ def cadastro_usuario(request):
 
 @login_required
 def listagem_usuarios(request):
-    usuarios = get_list_or_404(CustomUser)
-    contexto = {
-        'range_10': range(10),
-        'range_7': range(7),  # Lista de 0 a 6
-        'range_4': range(4),  # Lista de 0 a 3
-        'range_2': range(2)  # Lista de 0 a 1
-    }
-    return render(request, 'dashboard/listagem_usuarios.html',{"contexto":contexto, 'usuarios':usuarios})
+    query = request.GET.get('query')
+    usuarios = CustomUser.objects.all()
+    if query:
+        usuarios = usuarios.filter(
+            nome__icontains=query
+        ) | usuarios.filter(
+            cpf__icontains=query
+        )
+    return render(request, 'dashboard/listagem_usuarios.html',{'usuarios':usuarios})
 
 @login_required
 def informacoes_usuario(request, id):
