@@ -28,8 +28,6 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=254, unique=True)
     cpf = models.CharField(max_length=11, unique=True)
     telefone = models.CharField(max_length=15)
-    #senha = models.CharField(max_length=128)
-    #data_cadastro = models.DateField(auto_now=True)
     rua = models.CharField(max_length=35)
     bairro = models.CharField(max_length=35)
     cidade = models.CharField(max_length=35)
@@ -41,9 +39,9 @@ class CustomUser(AbstractUser):
         max_length=None,
         default="carro-escondido.jpg",
     )
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE, null=True, blank=True, default=1)
-    tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE, null=True, blank=True, default=1)
-    status_usuario = models.ForeignKey(StatusUsuario, on_delete=models.CASCADE, null=True, blank=True, default=1)
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE, null=True, blank=True)
+    tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE, null=True, blank=True)
+    status_usuario = models.ForeignKey(StatusUsuario, on_delete=models.CASCADE, null=True, blank=True)
   # Evita conflitos nos relacionamentos do Django
     groups = models.ManyToManyField(
         "auth.Group",
@@ -80,7 +78,7 @@ class CustomUser(AbstractUser):
 
 
 class Status_Veiculo(models.Model):
-    status = models.CharField(max_length=50, default="Indefinido")
+    status = models.CharField(max_length=50, default=1)
 
     def __str__(self):
         return self.status
