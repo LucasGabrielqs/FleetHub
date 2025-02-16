@@ -154,13 +154,26 @@ def tela_dashboard(request):
 def listagem_veiculos(request):
     query = request.GET.get('query')
     veiculos = Veiculo.objects.all()
+    veiculos_disponiveis = Veiculo.objects.filter(status__status="Disponível").count()
+    veiculos_reservados = Veiculo.objects.filter(status__status="Reservados").count()
+    veiculos_emuso = Veiculo.objects.filter(status__status="Em Uso").count()
+    veiculos_atrasados = Veiculo.objects.filter(status__status="Atrasados").count()
+    veiculos_manutencao = Veiculo.objects.filter(status__status="Manutenção").count()
+    print(veiculos_disponiveis)
     if query:
         veiculos = veiculos.filter(
             modelo__icontains=query
         ) | veiculos.filter(
             placa__icontains=query
         )
-    return render(request, 'dashboard/listagem_veiculos.html',{'veiculos':veiculos})
+    return render(request, 'dashboard/listagem_veiculos.html',{
+                'veiculos':veiculos,
+                'disponivel':veiculos_disponiveis,
+                'reservados':veiculos_reservados,
+                'emuso':veiculos_emuso,
+                'atrasados':veiculos_atrasados,
+                'manutencao':veiculos_manutencao
+                })
 
 @login_required
 def cadastrar_veiculo(request):
@@ -221,8 +234,8 @@ def cadastrar_veiculo(request):
 
 @login_required
 def informacoes_veiculo(request, id):
-    veiculo = get_object_or_404(Veiculo, id=id)
-    status_list = get_list_or_404(Status_Veiculo)
+    veiculo = Veiculo.objects.get(id=id)
+    status_list = Status_Veiculo.objects.all()
     error_message = None  # Para armazenar mensagens de erro
     success_message = None  # Para indicar sucesso
 
@@ -238,6 +251,7 @@ def informacoes_veiculo(request, id):
         placa = request.POST.get('placa')
         chassi = request.POST.get('chassi')
         cor = request.POST.get('cor')
+        
 
 
         try:
@@ -255,7 +269,7 @@ def informacoes_veiculo(request, id):
             if motor != veiculo.motor:
                 veiculo.motor = motor
             if status != veiculo.status.status:  # Comparação pelo valor textual
-                veiculo.status = get_object_or_404(Status_Veiculo, status=status)
+                veiculo.status = Status_Veiculo.objects.get(status=status)
             if placa != veiculo.placa:
                 veiculo.placa = placa
             if chassi != veiculo.chassi:
@@ -344,13 +358,25 @@ def cadastro_usuario(request):
 def listagem_usuarios(request):
     query = request.GET.get('query')
     usuarios = CustomUser.objects.all()
+    usuarios_ativos = usuarios.filter(status_usuario__status="Ativo").count()
+    usuarios_inativos = usuarios.filter(status_usuario__status="Inativo").count()
+    usuarios_gestores = usuarios.filter(tipo_usuario__nome="Gestor").count()
+    usuarios_motoristas = usuarios.filter(tipo_usuario__nome="Motorista").count()
     if query:
         usuarios = usuarios.filter(
             nome__icontains=query
         ) | usuarios.filter(
             cpf__icontains=query
         )
-    return render(request, 'dashboard/listagem_usuarios.html',{'usuarios':usuarios})
+
+        print(usuarios)
+    return render(request, 'dashboard/listagem_usuarios.html',{
+        'usuarios':usuarios,
+        'ativos':usuarios_ativos,
+        "inativos":usuarios_inativos,
+        'motoristas':usuarios_motoristas,
+        'gestores':usuarios_gestores
+        })
 
 @login_required
 def informacoes_usuario(request, id):

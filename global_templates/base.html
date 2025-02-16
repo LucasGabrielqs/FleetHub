@@ -16,155 +16,159 @@
 <body id="{% block body_id %}default-page{% endblock %}" data-page="{% block page_name %}default{% endblock %}">
     <!-- Identificador de Página -->
 
-
-    <aside id="sidebar">
-        <div id="sidebar-menu">
-            <h3>Mudar a Senha</h3>
-
-            <h3><a id="exit" href="{% url 'logout' %}">Sair</a></h3>
-
-        </div>
-        <div id="user-menu-sidebar">
-            <div id="user_menu">
-                <img id="img_perfil" src="{{request.user.imagem.url}}" alt="" title="Imagem do Perfil">
-                <h1 id="gestor_name">{{request.user.first_name}}</h1>
-                <i id="user_icon" class="fa-solid fa-caret-down" style="color: #a1a1aa;"></i>
+    <div class="container-base" id="container-base">
+        <aside id="sidebar">
+            <div id="sidebar-menu">
+                <h3>Mudar a Senha</h3>
+    
+                <h3><a id="exit" href="{% url 'logout' %}">Sair</a></h3>
+    
             </div>
-            <hr>
-            <div id="sidebar-expansive">
-                <a href="{% url 'tela_dashboard' %}" class="element-icon"><i class="fa-solid fa-house icon"
-                        title="Início"></i>
-                    <h3 id="text-init">Início</h3>
-                </a>
-
-                {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
-                    <a class="element-icon" id="id-veiculos"><i class="fa-solid fa-car icon" title="Veículos"></i>
-                        <h3 class="text-menu-lateral" id="text-veicles">Veículos</h3>
-
-                        <i id="icon_veiculos" class="fa-solid fa-caret-down"
-                            style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
-
+            <div id="user-menu-sidebar">
+                <div id="user_menu">
+                    <img id="img_perfil" src="{{request.user.imagem.url}}" alt="" title="Imagem do Perfil">
+                    <h1 id="gestor_name">{{request.user.first_name}}</h1>
+                    <i id="user_icon" class="fa-solid fa-caret-down" style="color: #a1a1aa;"></i>
+                </div>
+                <hr>
+                <div id="sidebar-expansive">
+                    <a href="{% url 'tela_dashboard' %}" class="element-icon"><i class="fa-solid fa-house icon"
+                            title="Início"></i>
+                        <h3 id="text-init">Início</h3>
                     </a>
-                    <ul id="submenu-veiculos" class="submenu" style="display: none;">
-                        <li>
-                            <a id="submenu-cadastro-veiculos" href="{% url 'cadastrar_veiculo' %}">Cadastro de Veículos</a>
-                        </li>
-                        <li>
-                            <a id="submenu-lista-veiculos" href="{% url 'listagem_veiculos' %}">Lista de Veículos</a>
-                        </li>
-                    </ul>
-                {% endif %}
-
-                {% if user.tipo_usuario.nome == 'ADMIN' or user.tipo_usuario.nome == 'Cliente' and user.status_usuario.status == 'Ativo' %}
-                    <a class="element-icon" id="id-usuarios">
-                        <i class="fa-solid fa-users icon" title="Usuários"></i>
-                        <h3 class="text-menu-lateral" id="text-users">Usuários</h3>
-                        <i id="icon_usuarios" class="fa-solid fa-caret-down"
-                            style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);">
-                        </i>
-
-                    </a>
-                    <ul id="submenu-usuarios" class="submenu" style="display: none;">
-                        {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
+    
+                    {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
+                        <a class="element-icon" id="id-veiculos"><i class="fa-solid fa-car icon" title="Veículos"></i>
+                            <h3 class="text-menu-lateral" id="text-veicles">Veículos</h3>
+    
+                            <i id="icon_veiculos" class="fa-solid fa-caret-down"
+                                style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+    
+                        </a>
+                        <ul id="submenu-veiculos" class="submenu" style="display: none;">
                             <li>
-                                <a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Criar usuário</a>
+                                <a id="submenu-cadastro-veiculos" href="{% url 'cadastrar_veiculo' %}">Cadastro de Veículos</a>
                             </li>
-                        {% endif %}
-                        <li>
-                            <a id="submenu-lista-usuarios" href="{% url 'listagem_usuarios' %}">Listar usuários</a>
-                        </li>
-                    </ul>
-                {% endif %}
-
-                {% if user.tipo_usuario.nome == 'ADMIN' or user.tipo_usuario.nome == 'Cliente' and user.status_usuario.status == 'Ativo' %}    
-                    <a class="element-icon" id="id-reservas"><i class="fa-solid fa-tag icon" title="Reservas"></i>
-                        <h3 class="text-menu-lateral" id="text-reservations">Reservas</h3>
-                            <i id="icon_reservas" class="fa-solid fa-caret-down"
-                            style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
-
-                    </a>
-                    <ul id="submenu-reservas" class="submenu" style="display: none;">
-                        <li>
-                            <a id="submenu-criacao-reservas" href="{% url 'criar_reserva' %}">Criação de Reserva</a>
-                        </li>
-                        <li>
-                            <a id="submenu-lista-reservas" href="{% url 'listagem_reservas' %}">Lista de Reservas</a>
-                        </li>
-                    </ul>
-                {% endif %}
-
-
-                {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
-                    <a class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
-                        <h3 class="text-menu-lateral" id="text-routes">Rotas</h3>
-                            <i id="icon_rotas" class="fa-solid fa-caret-down"
-                            style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
-
-                    </a>
-
-                    <ul id="submenu-rotas" class="submenu" style="display: none;">
-                        <li>
-                            <a id="submenu-criar-rotas" href="{% url 'criacao_rota' %}">Criar Rotas</a>
-                        </li>
-                        <li>
-                            <a id="submenu-gerenciar-rotas" href="{% url 'listagem_rota' %}">Gerenciar Rotas</a>
-                        </li>
-                    </ul>
-                {% endif %}
-
-
-
-                {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
-                    <a class="element-icon" id="id-manutencao">
-                        <i class="fa-solid fa-screwdriver-wrench icon" title="Manutenção">
-                        </i>
-                        <h3 class="text-menu-lateral" id="text-maintenance">Manutenção</h3>
-                            <i id="icon_manutencao" class="fa-solid fa-caret-down"
-                            style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
-
-                    </a>
-                    <ul id="submenu-manutencao" class="submenu" style="display: none;">
-                        <li>
-                            <a id="submenu-agendar-manutencao" href="{% url 'agendar_manutencao' %}">Agendar Manutenção</a>
-                        </li>
-                        <li>
-                            <a id="submenu-lista-manutencao" href="{% url 'listagem_manutencao' %}">Lista de manutenções</a>
-                        </li>
-                    </ul>
-                {% endif %}
-
-
-                {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
-                    <a class="element-icon" id="id-abastecimento">
-                        <i class="fa-solid fa-droplet icon"
-                            title="Abastecimento">
-                        </i>
-                    <h3 class="text-menu-lateral" id="text-supply">Abastecimento</h3>
-                        <i id="icon_abastecimento" class="fa-solid fa-caret-down"
-                            style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
-
-                    </a>
-                    <ul id="submenu-abastecimento" class="submenu" style="display: none;">
-                        <li>
-                            <a id="submenu-registro-abastecimento" href="{% url 'criacao_abastecimento' %}">Registro de
-                            Abastecimento</a>
-                        </li>
-                        <li>
-                            <a id="submenu-lista-abastecimento" href="{% url 'listagem_abastecimento' %}">Lista de
-                            Abastecimento</a>
-                        </li>
-
+                            <li>
+                                <a id="submenu-lista-veiculos" href="{% url 'listagem_veiculos' %}">Lista de Veículos</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+    
+                    {% if user.tipo_usuario.nome == 'ADMIN' or user.tipo_usuario.nome == 'Cliente' and user.status_usuario.status == 'Ativo' %}
+                        <a class="element-icon" id="id-usuarios">
+                            <i class="fa-solid fa-users icon" title="Usuários"></i>
+                            <h3 class="text-menu-lateral" id="text-users">Usuários</h3>
+                            <i id="icon_usuarios" class="fa-solid fa-caret-down"
+                                style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);">
+                            </i>
+    
+                        </a>
+                        <ul id="submenu-usuarios" class="submenu" style="display: none;">
+                            {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
+                                <li>
+                                    <a id="submenu-cadastro-usuarios" href="{% url 'cadastrar_usuario' %}">Criar usuário</a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a id="submenu-lista-usuarios" href="{% url 'listagem_usuarios' %}">Listar usuários</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+    
+                    {% if user.tipo_usuario.nome == 'ADMIN' or user.tipo_usuario.nome == 'Cliente' and user.status_usuario.status == 'Ativo' %}    
+                        <a class="element-icon" id="id-reservas"><i class="fa-solid fa-tag icon" title="Reservas"></i>
+                            <h3 class="text-menu-lateral" id="text-reservations">Reservas</h3>
+                                <i id="icon_reservas" class="fa-solid fa-caret-down"
+                                style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+    
+                        </a>
+                        <ul id="submenu-reservas" class="submenu" style="display: none;">
+                            <li>
+                                <a id="submenu-criacao-reservas" href="{% url 'criar_reserva' %}">Criação de Reserva</a>
+                            </li>
+                            <li>
+                                <a id="submenu-lista-reservas" href="{% url 'listagem_reservas' %}">Lista de Reservas</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+    
+    
+                    {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
+                        <a class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
+                            <h3 class="text-menu-lateral" id="text-routes">Rotas</h3>
+                                <i id="icon_rotas" class="fa-solid fa-caret-down"
+                                style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+    
+                        </a>
+    
+                        <ul id="submenu-rotas" class="submenu" style="display: none;">
+                            <li>
+                                <a id="submenu-criar-rotas" href="{% url 'criacao_rota' %}">Criar Rotas</a>
+                            </li>
+                            <li>
+                                <a id="submenu-gerenciar-rotas" href="{% url 'listagem_rota' %}">Gerenciar Rotas</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+    
+    
+    
+                    {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
+                        <a class="element-icon" id="id-manutencao">
+                            <i class="fa-solid fa-screwdriver-wrench icon" title="Manutenção">
+                            </i>
+                            <h3 class="text-menu-lateral" id="text-maintenance">Manutenção</h3>
+                                <i id="icon_manutencao" class="fa-solid fa-caret-down"
+                                style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+    
+                        </a>
+                        <ul id="submenu-manutencao" class="submenu" style="display: none;">
+                            <li>
+                                <a id="submenu-agendar-manutencao" href="{% url 'agendar_manutencao' %}">Agendar Manutenção</a>
+                            </li>
+                            <li>
+                                <a id="submenu-lista-manutencao" href="{% url 'listagem_manutencao' %}">Lista de manutenções</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+    
+    
+                    {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
+                        <a class="element-icon" id="id-abastecimento">
+                            <i class="fa-solid fa-droplet icon"
+                                title="Abastecimento">
+                            </i>
+                        <h3 class="text-menu-lateral" id="text-supply">Abastecimento</h3>
+                            <i id="icon_abastecimento" class="fa-solid fa-caret-down"
+                                style="color: rgb(255, 255, 255); display: block; transform: rotate(0deg);"></i>
+    
+                        </a>
+                        <ul id="submenu-abastecimento" class="submenu" style="display: none;">
+                            <li>
+                                <a id="submenu-registro-abastecimento" href="{% url 'criacao_abastecimento' %}">Registro de
+                                Abastecimento</a>
+                            </li>
+                            <li>
+                                <a id="submenu-lista-abastecimento" href="{% url 'listagem_abastecimento' %}">Lista de
+                                Abastecimento</a>
+                            </li>
+    
+                    
+                    {% endif %}
                 </ul>
-                {% endif %}
+                </div>
+                <img src="{% static 'img/logo_fleethub.png' %}" alt="" style="width: 100%;">
             </div>
-            <img src="{% static 'img/logo_fleethub.png' %}" alt="" style="width: 100%;">
-        </div>
-        <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
-    </aside>
+            <div id="div-img_sidebar-expansive"><i id="img_sidebar-expansive" class="fa-solid fa-chevron-left"></i></div>
+        </aside>
+    
+
+    </div>
 
     <div id="content-and-footer">
-
-
+    
+    
         <div id='container-block-content'>
             {% block content %}{% endblock content %}
         </div>
@@ -198,7 +202,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Exibir mensagens -->
     {% if messages %}

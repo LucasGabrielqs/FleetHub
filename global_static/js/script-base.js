@@ -54,6 +54,7 @@ const icon_reservas = document.getElementById('icon_reservas');
 const icon_rotas = document.getElementById('icon_rotas');
 const icon_manutencao = document.getElementById('icon_manutencao');
 const icon_abastecimento = document.getElementById('icon_abastecimento');
+const container_base = document.getElementById('container-base');
 
 //const alturaTela = window.innerHeight; // Caso precise da altura em algum lugar
 
@@ -111,6 +112,7 @@ function encolher_sidebar(){
     user_menu.style.justifyContent = 'center';
     img_expand.style.rotate = '180deg';
     user_icon.style.display = 'none';
+    container_base.style.gridTemplateColumns = '44px 1fr';
     //teste.style.gridTemplateColumns = '44px 1fr';
 }
 
@@ -123,6 +125,7 @@ function expandir_sidebar(){
     img_expand.style.rotate = '0deg';
     menu.style.width = '260px';
     sidebar.style.width = '260px';
+    container_base.style.gridTemplateColumns = '260px 1fr';
     user_menu.style.width = '120px';
     user_menu.style.height = '40px';
     user_icon.style.display = 'block';

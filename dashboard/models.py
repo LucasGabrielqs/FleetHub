@@ -79,6 +79,7 @@ class CustomUser(AbstractUser):
 
 class Status_Veiculo(models.Model):
     status = models.CharField(max_length=50, default=1)
+    status_cor = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return self.status

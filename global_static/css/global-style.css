@@ -20,16 +20,31 @@ hr {/* Estilo de barra horizontal*/
     height: 0.5px;
     margin: 20px auto;
     }
-
+#page_title{
+    margin: auto;
+    text-align: center;
+    font-family: Inter;
+    font-weight: bold;
+    font-size: 24px;
+    color: #153448;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 1200px;
+}
 /* Seleciona a sidebar */
 #sidebar {
     background-color: var(--color-green-menu);
     display: flex;
     width: 260px;
-    position: relative;
-    height: auto;
+    position: fixed;
+    height: 100vh;
 }
-
+.container-base {
+    display: grid;
+    transition: 800ms;
+    grid-template-columns: 250px 1fr; /* Sidebar fixa + Conteúdo */
+    height: 100vh; /* Ocupa toda a altura da tela */
+}
 /* Seleciona o menu de usuário dentro da sidebar */
 #user_menu {
     display: flex;

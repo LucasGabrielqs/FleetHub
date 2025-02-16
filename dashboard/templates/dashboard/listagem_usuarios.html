@@ -12,7 +12,7 @@
 {% block content %}
 
 <section id="content-listagem">
-    <h1>Lista de Usuários</h1>
+    <h1 id="page_title">Lista de Usuários</h1>
     
     <div id="filtros">
         
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div id="quantidade-filtro">
-                <p>235</p>
+                <p>{{ativos}}</p>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div id="quantidade-filtro">
-                <p>235</p>
+                <p>{{inativos}}</p>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
                 <p>Gestores</p>
             </div>
             <div id="quantidade-filtro">
-                <p>235</p>
+                <p>{{gestores}}</p>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
                 <p>Motoristas</p>
             </div>
             <div id="quantidade-filtro">
-                <p>235</p>
+                <p>{{motoristas}}</p>
             </div>
         </div>
 
@@ -77,7 +77,8 @@
 
     <div id="lista-veiculos">
 
-
+        {% if usuarios %}
+        
         {% for usuario in usuarios %}
 
             <div id="linha-final">
@@ -124,7 +125,10 @@
 
         <div id="linha"></div>
     </div>
-    {% endfor %}    
+    {% endfor %} 
+    {% else %}
+    <h1 style="font-size: 24px;">Nenhum Usuário Encontrado!</h1>
+    {% endif %}   
 
     </div>
     
