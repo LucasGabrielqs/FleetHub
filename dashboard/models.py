@@ -184,3 +184,82 @@ class Reservas(models.Model):
 
     def __str__(self):
         return f"Reserva {self.id} - {self.veiculo.modelo}"
+    
+
+class Tipo_Combustivel(models.Model):
+    nome_combustivel = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome_combustivel
+
+
+class Abastecimento(models.Model):
+    veiculo = models.ForeignKey(Veiculo,on_delete=models.CASCADE,related_name='veiculo_abastecido')
+    km_atual = models.IntegerField()
+    tipo_combustivel = models.ForeignKey(Tipo_Combustivel,on_delete=models.CASCADE,related_name="combustivel_abastecimento")
+    motorista = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='usuario_abastecimento')
+    quant_litros = models.FloatField()
+    valor = models.FloatField()
+    img_abastecimento = models.ImageField(
+        upload_to="imagens/abastecimento",
+        height_field=None,
+        width_field=None,
+        max_length=None
+    )
+    data_cadastro = models.DateField(auto_now_add=True)
+    data_alteracao = models.DateField(auto_now=True)
+    usuario_cadastro = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="abastecimentos_cadastradas",
+    )
+    usuario_alteracao = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="abastecimentos_alteradas",
+    )
+
+    def __str__(self):
+        return f"Abatecimento {self.id} - {self.veiculo.modelo}"
+    
+
+class Tipo_Manutencao(models.Model):
+    nome_manutencao = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome_manutencao
+
+class Prioridade_Atendimento(models.Model):
+    nome_prioridade = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome_prioridade
+
+class Manutencao(models.Model):
+    veiculo = models.ForeignKey(Veiculo,on_delete=models.SET_NULL,related_name='veiculo_manutencao',null=True)
+    km_atual = models.IntegerField()
+    tipo_manutencao = models.ForeignKey(Tipo_Manutencao,on_delete=models.SET_NULL,related_name='manutencao_tipo',null=True)
+    prioridade = models.ForeignKey(Prioridade_Atendimento,on_delete=models.SET_NULL,related_name='manutencao_prioridade',null=True)
+    data_prevista = models.DateField()
+    valor_manutencao = models.FloatField()
+    comentario = models.TextField()
+    data_cadastro = models.DateField(auto_now_add=True)
+    data_alteracao = models.DateField(auto_now=True)
+    usuario_cadastro = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="manutencao_cadastrada",
+    )
+    usuario_alteracao = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="manutencao_alterada",
+    )

@@ -23,32 +23,37 @@
 
                         <div class="input_container">
                             <label>Nome Completo</label>
-                            <input name="nome" class="input_detect" type="text" id="nome"
+                            <input name="nome" class="input_detect" type="text" id="nome" value="{{ data.nome|default:'' }}"
                                 placeholder="Digite o Novo Nome" required>
                         </div>
 
                         <div class="input_container">
                             <label>Email</label>
-                            <input name="email" class="input_detect" type="text" id="email"
+                            <input name="email" class="input_detect" type="text" id="email" value="{{ data.email|default:'' }}"
                                 placeholder="Digite o novo E-mail" required>
                         </div>
 
                         <div class="input_container">
                             <label>CPF</label>
-                            <input name="cpf" class="input_detect" type="text"  id="cpf"
+                            <input name="cpf" class="input_detect" type="text"  id="cpf" value="{{ data.cpf|default:'' }}"
                                 maxlength="14" placeholder="Digite o CPF" required>
                         </div>
+                        {% if error %}
+                            <div id="alert" class="alert alert-danger">
+                        {{ error }}
+                            </div>
+                        {% endif %}
 
                         <div class="campo_duplo">
 
 
                             <select class="input_detect" name="select-estado" id="select-ddd-inter">
-                                <option value="RN" selected>+55</option>
+                                <option value="">+55</option>
                             </select>
 
                             <div class="input_container">
                                 <label>Telefone</label>
-                                <input name="telefone" class="input_detect" type="text"  id="telefone"
+                                <input name="telefone" class="input_detect" type="text"  id="telefone" value="{{ data.telefone|default:'' }}"
                                     placeholder="Numero de Telefone" required>
                             </div>
 
@@ -58,7 +63,7 @@
                             <label>Tipo Usuário</label>
                             <select class="input_detect" id="estados" name="tipo_usuario">
                                 {% for tipo in tipos %}
-                                <option value="{{tipo.nome}}">{{tipo.nome}}</option>
+                                <option value="{{tipo.nome}}" value="{{ data.tipo|default:'' }}">{{tipo.nome}}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -76,40 +81,43 @@
                     </div>
 
                     <div class="menu_direito">
-                        <div class="logo-img">
-                            <input class="input_detect" type="file" name="img" id="img">
-                        </div>
-
+                        
                         <h3 class="form-title">Endereços:</h3>
 
                         <div class="input_container">
                             <label>Rua</label>
-                            <input name="rua" class="input_detect" type="text" id="input-rua"
+                            <input name="rua" class="input_detect" type="text" id="input-rua" value="{{ data.rua|default:'' }}"
                                 placeholder="Digite a Rua" required>
                         </div>
 
 
                         <div class="input_container">
                             <label>Bairro</label>
-                            <input name="bairro" class="input_detect" type="text" id="input-bairro" placeholder="Digite o Bairro" required>
+                            <input name="bairro" class="input_detect" type="text" id="input-bairro" value="{{ data.bairro|default:'' }}" placeholder="Digite o Bairro" required>
                         </div>
                         <div class="input_container">
                             <label>Cidade</label>
-                            <input name="cidade" class="input_detect" type="text" id="input-cidade" placeholder="Digite a Cidade" required>
+                            <input name="cidade" class="input_detect" type="text" id="input-cidade" value="{{ data.cidade|default:'' }}" placeholder="Digite a Cidade" required>
                         </div>
 
                         <div class="estado-cep">
 
                             <select class="input_detect" name="estado" id="select-estado">
                                 {% for estado in estados %}
-                                <option value="{{estado.sigla}}">{{estado.sigla}}</option>
+                                <option value="{{estado.sigla}}" {% if data.estado == estado.sigla %}selected{% endif %}>{{estado.sigla}}</option>
                                 {% endfor %}
 
                             </select>
                             <div class="input_container">
                                 <label>CEP</label>
-                                <input name="cep" class="input_detect" type="text" id="input-cep" placeholder="Digite o CEP" required>
+                                <input name="cep" class="input_detect" type="text" id="input-cep" value="{{ data.cep|default:'' }}" placeholder="Digite o CEP" required>
                             </div>
+                        </div>
+                        
+                        <div class="logo-img">
+                            <label for="img" class="upload-button">Anexar Imagem</label>
+                            <input class="input_detect" type="file" name="img" id="img" hidden accept="image/*">
+                            <img id="preview" style="display:none; margin-top: 10px; max-width: 488px; max-height: 400px; width: auto; height: auto;" />
                         </div>
 
                     </div>

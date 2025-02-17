@@ -94,7 +94,7 @@ def cadastrar(request):
         # Obtém o objeto Estado a partir da sigla informada
         estado_obj = get_object_or_404(Estado, sigla=sigla_estado)
         # Define os defaults para tipo e status (ajuste conforme a sua lógica)
-        tipo_usuario = get_object_or_404(TipoUsuario, id=1)
+        tipo_usuario = get_object_or_404(TipoUsuario, id=2)
         status_usuario = get_object_or_404(StatusUsuario, id=1)
 
         try:
@@ -305,6 +305,9 @@ def cadastro_usuario(request):
     tipos = get_list_or_404(TipoUsuario)
     estados = get_list_or_404(Estado)  
 
+    error = None
+    data = {}
+
     if request.method == 'POST':
         nome_comp = request.POST.get('nome')
         nome = re.sub(r'\b[a-zA-Z]', lambda match: match.group().upper(), nome_comp.lower()) #Deixa a primeira letra Maiuscula
@@ -318,15 +321,44 @@ def cadastro_usuario(request):
         cidade = request.POST.get('cidade')
         cep = request.POST.get('cep')
         estado = request.POST.get('estado')
-        #tipo = request.POST.get('tipo_usuario')
+        tipo = request.POST.get('tipo_usuario')
         #status_usuario = request.POST.get('status')
         imagem = request.FILES.get('img') 
 
+        data = {
+            'nome': nome_comp,
+            'email': email,
+            'cpf': cpf,
+            'telefone': telefone,
+            'rua': rua,
+            'bairro': bairro,
+            'tipo': tipo,
+            'cidade': cidade,
+            'cep': cep,
+            'estado': estado,
+        }
 
-        if nome and email and cpf and telefone and rua and bairro and cidade and cep and estado:
+        if not all([nome, email, cpf, telefone, rua, bairro, cidade, cep, estado]):
+            error = "Por favor, preencha todos os campos obrigatórios."
+            return render(request, 'dashboard/cadastro_usuario_app.html', {
+                'estados': estados,
+                'error': error,
+                'tipos':tipos,
+                'data': data,
+            })
 
+        # Validação do CPF: verifica se já existe um usuário com esse CPF
+        if CustomUser.objects.filter(cpf=cpf).exists():
+            error = "CPF já cadastrado ou inválido."
+            return render(request, 'dashboard/cadastro_usuario_app.html', {
+                'estados': estados,
+                'error': error,
+                'data': data,
+                'tipos':tipos
+            })
+
+        try:
             status = get_object_or_404(StatusUsuario, status="Ativo")
-            tipo_user = get_object_or_404(TipoUsuario, nome="Cliente")
 
             usuario = CustomUser(
                 nome = nome,
@@ -347,11 +379,21 @@ def cadastro_usuario(request):
                 usuario.imagem = imagem
 
             usuario.save()
-
+            return redirect("dashboard/listagem_usuarios.html")
+        except Exception as e:
+            error = f"Erro ao cadastrar usuário: {e}"
+            return render(request, 'dashboard/cadastro_usuario_app.html', {
+                'estados': estados,
+                'error': error,
+                'tipos':tipos,
+                'data': data,
+            })
+    
     return render(request,'dashboard/cadastro_usuario_app.html',{
         'estados':estados,
         'tipos':tipos,
         'status':status,
+        'data': data
         })
 
 @login_required

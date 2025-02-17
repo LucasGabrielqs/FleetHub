@@ -47,7 +47,6 @@ form{
     margin-left: 3em;
     width: 100%;
     max-width: 30rem;
-    margin: auto;
 }
 
 .menu_direito{
@@ -56,7 +55,7 @@ form{
 }
 
 .menu_direito{
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -240,7 +239,16 @@ select:focus{
     width: 100%;
     height: 100%;
 }
-
+.upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+}
 
 
 
