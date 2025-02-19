@@ -30,36 +30,36 @@
 
     <div id="lista-veiculos">
 
-        {% for _ in range_10 %}
+        
             <div id="linha-final">
-
+                {% for abastecimento in abastecimentos %}
             <div id="linha-veiculo">
             
                 <div id="img-veiculo">
                     <div id="elementos-veiculo">
                         <div id="elementos-filhos">
                             <p id="titulo">Nome Completo:</p>
-                            <p id="resultado">Lizandro Vieira</p>
+                            <p id="resultado">{{abastecimento.motorista.nome}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Quantidade Abastecida:</p>
-                            <p id="resultado">25 L</p>
+                            <p id="resultado">{{abastecimento.quant_litros}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Valor:</p>
-                            <p id="resultado">R$ 125,00</p>
+                            <p id="resultado">{{abastecimento.valor}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Km Atual:</p>
-                            <p id="resultado">15.000 Km</p>
+                            <p id="resultado">{{abastecimento.km_atual}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Veículo:</p>
-                            <p id="resultado">Strada</p>
+                            <p id="resultado">{{abastecimento.veiculo.modelo}}</p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
 
                     <div id="manutencao">
                         <p>Codigo de Abastecimento:</p>
-                        <p>29118</p>
+                        <p>{{abastecimento.id}}</p>
                     </div>
 
                 </div>
@@ -82,11 +82,11 @@
                 
         </div>
             <div id="linha"></div>
+            {% endfor %}
         </div>
 
         
-
-    {% endfor %}    
+  
 
     </div>
     

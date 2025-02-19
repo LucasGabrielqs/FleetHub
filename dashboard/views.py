@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import re
 
-from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva
+from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Abastecimento,Manutencao,Prioridade_Atendimento,Tipo_Combustivel,Tipo_Manutencao
 # Create your views here.
 
 
@@ -178,7 +178,10 @@ def listagem_veiculos(request):
 @login_required
 def cadastrar_veiculo(request):
     
+    print(request.POST)
+
     if request.method == 'POST':
+        print(request.POST)
         # Verificar se todos os campos obrigatórios estão presentes
         modelo = request.POST.get('modelo')
         marca = request.POST.get('marca')
@@ -373,7 +376,7 @@ def cadastro_usuario(request):
                 cep=cep,
                 estado=get_object_or_404(Estado, sigla=estado),
                 status_usuario=status,
-                tipo_usuario=tipo_user,
+                tipo_usuario=tipo,
             )
             if 'img' in request.FILES:
                 usuario.imagem = imagem
@@ -614,17 +617,88 @@ def visualizacao_rota(request):
 
 @login_required
 def criacao_abastecimento(request):
-    return render(request,'dashboard/criacao_abastecimento.html')
+    tipo_combustivel = get_list_or_404(Tipo_Combustivel)
+    veiculo = get_list_or_404(Veiculo)
+    motorista = get_list_or_404(CustomUser)
+    data = {}
+    error = None
+
+    print(request.POST)
+
+    if request.method == 'POST':
+        print(f"Dados recebidos no POST: {request.POST}")
+        veiculo_id = request.POST.get('veiculo')
+        km_atual = request.POST.get('km_atual')
+        tipo_combustivel_id = request.POST.get('tipo_combustivel')
+        motorista_id = request.POST.get('motorista')
+        quant_litros = request.POST.get('quant_litros')
+        valor = request.POST.get('valor')
+        imagem = request.FILES.get('img')
+
+
+        data = {
+            'veiculo' : veiculo_id,
+            'km_atual' : km_atual,
+            'tipo_combustivel' : tipo_combustivel_id,
+            'motorista' : motorista_id,
+            'quant_litros' : quant_litros,
+            'valor' : valor,
+        }
+
+        if not all([veiculo_id, km_atual, tipo_combustivel_id, motorista_id, quant_litros, valor]):
+                print(f"Erro: Campos obrigatórios faltando! veiculo_id={veiculo_id}, km_atual={km_atual}, tipo_combustivel_id={tipo_combustivel_id}, motorista_id={motorista_id}, quant_litros={quant_litros}, valor={valor}")  
+                error = "Por favor, preencha todos os campos obrigatórios."
+                return render(request, 'dashboard/criacao_abastecimento.html', {
+                    'data': data,
+                    'tipo_combustivel': tipo_combustivel,
+                    'motorista': motorista,
+                    'veiculo': veiculo,
+                    'error': error,
+                })
+
+        try:
+            tipo_combustivel = get_object_or_404(Tipo_Combustivel, id=tipo_combustivel_id)
+            veiculo = get_object_or_404(Veiculo, id=veiculo_id)
+            motorista = get_object_or_404(CustomUser, id=motorista_id)
+
+            abastecimento = Abastecimento(
+                veiculo=veiculo,
+                km_atual=km_atual,
+                tipo_combustivel=tipo_combustivel,
+                motorista=motorista,
+                quant_litros=quant_litros,
+                valor=valor
+            )
+
+            if request.user.is_authenticated:
+                abastecimento.usuario_cadastro = request.user
+            else:
+                abastecimento.usuario_cadastro = 'ADMIN'
+
+            if imagem:
+                abastecimento.img_abastecimento = imagem
+
+            abastecimento.save()
+            return redirect('listagem_abastecimento')
+        
+        except Exception as e:
+            error = f"Erro ao Registrar Abastecimento: {e}"
+
+    return render(request, 'dashboard/criacao_abastecimento.html', {
+        'data': data,
+        'veiculo': veiculo,
+        'tipo_combustivel': tipo_combustivel,
+        'motorista': motorista,
+        'error': error,
+    })
 
 @login_required
 def listagem_abastecimento(request):
-    contexto = {
-        'range_10': range(10),
-        'range_7': range(7),  # Lista de 0 a 6
-        'range_4': range(4),  # Lista de 0 a 3
-        'range_2': range(2)  # Lista de 0 a 1
-    }
-    return render(request,'dashboard/listagem_abastecimento.html',contexto)
+    query = request.GET.get('query')
+    abastecimento = Abastecimento.objects.all()
+    return render(request, 'dashboard/listagem_abastecimento.html',{
+                'abastecimentos':abastecimento,
+                })
 
 @login_required
 def registro_abastecimento(request):

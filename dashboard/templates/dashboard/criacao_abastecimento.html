@@ -13,36 +13,40 @@
 
 
     <section id="conteudo-secundario">
-        <form>
-
-
             <h2 id='page_title'>Registro de Abastecimento</h2>
-            <form action="">
+            {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+            {% endif %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="container">
-
                     <div class="menu_esquerdo">
 
                         <div class="input_container">
                             <label>Veículo</label>
-                            <select class="input_detect" name="select-estado" id="select-status-carro">
-                                <option >Selecione</option>
-                                <option >Strada</option>
-                                <option >Hilux</option>
+                            <select class="input_detect" name="veiculo" id="veiculo">
+                                <option selected>Selecione</option>
+                                {% for veiculos in veiculo%}
+                                    <option value="{{veiculos.id}}" value="{{ data.veiculos|default:'' }}">{{veiculos.modelo}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                         <div class="input_container">
                             <label>Km Atual</label>
-                            <input class="input_detect input" type="text" id="valor-compra"
+                            <input class="input_detect input" type="text" name="km_atual" id="km_atual" value="{{ data.km_atual|default:'' }}"
                                 maxlength="14" placeholder="Digite a Quilometragem do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>Tipo de Combustível</label>
-                            <select class="input_detect" name="select-estado" id="select-status-carro">
-                                <option >Selecione</option>
-                                <option >Gasolina</option>
-                                <option >Díesel</option>
+                            <select class="input_detect" name="tipo_combustivel" id="tipo_combustivel">
+                                <option selected>Selecione</option>
+                                {% for tipos in tipo_combustivel %}
+                                    <option value="{{tipos.id}}" value="{{ data.tipos|default:'' }}" > {{tipos.nome_combustivel}} </option>
+                                {% endfor %}
                             </select>
                         </div>
 
@@ -50,16 +54,17 @@
 
                         <div class="input_container">
                             <label>Motorista</label>
-                            <select class="input_detect" name="select-estado" id="select-status-carro">
-                                <option >Selecione</option>
-                                <option >Lizandro</option>
-                                <option >Lázaro Ramos</option>
+                            <select class="input_detect" name="motorista" id="motorista">
+                                <option selected>Selecione</option>
+                                {% for motoristas in motorista %}
+                                    <option value="{{motoristas.id}}" value="{{ data.motoristas|default:'' }}" >{{motoristas.nome}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                             <div class="input_container">
                                 <label>Quantidade em Litros</label>
-                                <input class="input_detect input" type="text" id="ka-carro"
+                                <input class="input_detect input" name='quant_litros' type="text" id="quant_litros"
                                     placeholder="Digite a Quantidade em Litros">
                             </div>
 
@@ -67,7 +72,7 @@
 
                             <div class="input_container">
                                 <label>Valor em R$</label>
-                                <input class="input_detect input" type="text" id="motor-carro"
+                                <input class="input_detect input" type="text" name="valor" id="valor"
                                     placeholder="Digite o valor em R$">
                             </div>
 
@@ -77,9 +82,10 @@
 
 
                     <div class="menu_direito">
-                        <div class="nota-img">
-                            <img class="input_detect img-nota-fiscal" src="" alt="">
-
+                        <div class="logo-img">
+                            <label for="img" class="upload-button">Anexar Imagem</label>
+                            <input class="input_detect" type="file" name="img" id="img" hidden accept="image/*">
+                            <img id="preview" style="display:none; margin-top: 10px; max-width: 488px; max-height: 400px; width: auto; height: auto;" />
                         </div>
 
                         
@@ -87,16 +93,15 @@
                     </div>
                 </div>
 
-
+                <div class="rodape" id="rodape">
+                    <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+                    <button type="submit" class="btn-submit">Salvar Edição</button>
+                </div>
 
             </form>
 
     </section>
 
-    <div class="rodape" id="rodape">
-        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-        <button type="submit" class="btn-submit">Salvar Edição</button>
-    </div>
 
 
 

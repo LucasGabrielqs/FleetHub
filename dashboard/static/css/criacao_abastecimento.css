@@ -257,6 +257,16 @@ select:focus{
     margin: 10px auto;
 }
 
+.upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-weight: bold;
+}
 
 /* Ajustes para telas menores que 1200px (Tablets e Laptops menores) */
 @media screen and (max-width: 1250px) {
