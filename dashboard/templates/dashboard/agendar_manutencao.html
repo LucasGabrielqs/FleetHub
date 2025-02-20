@@ -18,7 +18,13 @@
 {% block content %}
 <section id="conteudo-secundario">
     <h2 id='page_title'>Agendar Manutenção</h2>
-    <form action="">
+            {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+            {% endif %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="container">
             <div class="coluna">
 
@@ -26,12 +32,15 @@
                 <div class="input_container">
                     <label>Veículo</label>
                     <select id="veiculo" name="veiculo">
-                        <option disabled selected>Selecione</option>
+                        <option selected>Selecione</option>
+                        {% for veiculos in veiculo %}
+                            <option value="{{veiculos.id}}" value="{{ data.veiculo|default:'' }}">{{veiculos.modelo}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="input_container">
                     <label>Km Atual</label>
-                    <input type="text" id="km_atual" placeholder="Digite o Km atual do veiculo">
+                    <input type="text" id="km_atual" value="{{ data.km_atual|default:'' }}" name="km_atual" placeholder="Digite o Km atual do veiculo">
                 </div>
             </div>
 
@@ -40,36 +49,43 @@
                 <div class="input_container">
                     <label>Tipo de Manutenção</label>
                     <select id="tipo_manutencao" name="tipo_manutencao">
-                        <option disabled selected>Selecione</option>
+                        <option selected>Selecione</option>
+                        {% for tipos in tipo_manutencao %}
+                        <option value="{{tipos.id}} " value="{{ data.tipo_manutencao|default:'' }}">{{tipos.nome_manutencao}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="input_container">
                     <label>Prioridade de Atendimento</label>
-                    <select id="atendimento" name="atendimento">
-                        <option disabled selected>Selecione</option>
+                    <select id="atendimento" name="prioridade">
+                        <option selected>Selecione</option>
+                        {% for prioridades in prioridade %}
+                            <option value="{{prioridades.id}}" value="{{ data.prioridade|default:'' }}">{{prioridades.nome_prioridade}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="input_container">
                     <label>Data Prevista da Entrega</label>
-                    <input type="text" id="data_entrega" placeholder="Digite a data prevista da entrega">
+                    <input type="text" id="data_entrega" value="{{ data.data_prevista|default:'' }}" name="data_prevista" placeholder="Digite a data prevista da entrega">
                 </div>
                 <div class="input_container">
                     <label>Valor da Manutenção</label>
-                    <input type="text" id="valor_manutencao" placeholder="Digite o valor da manutenção">
+                    <input type="text" id="valor_manutencao" value="{{ data.valor_manutencao|default:'' }}" name="valor_manutencao" placeholder="Digite o valor da manutenção">
                 </div>
             </div>
         </div>
         <div class="container-coment">
             <label>Comentários</label>
-            <textarea id="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta"></textarea>
+            <textarea id="comentarios" value="{{ data.comentario|default:'' }}" name="comentario" placeholder="Digite aqui informações sobre o problema que o carro apresenta"></textarea>
         </div>
         
+        <div class="rodape">
+            <button type="reset" class="btn-reset">Cancelar</button>
+            <button type="submit" class="btn-submit">Cadastrar</button>
+        </div>
     </form>
 </section>
 
-<div class="rodape">
-    <button type="reset" class="btn-reset">Cancelar</button>
-    <button type="submit" class="btn-submit">Cadastrar</button>
-</div>
+
 
 {% endblock content %}              

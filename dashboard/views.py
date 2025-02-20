@@ -3,9 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import re
+from datetime import datetime
 
-from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Abastecimento,Manutencao,Prioridade_Atendimento,Tipo_Combustivel,Tipo_Manutencao
-# Create your views here.
+from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Abastecimento,Manutencao,Prioridade_Atendimento,Tipo_Combustivel,Tipo_Manutencao,Status_Manutencao
 
 
 
@@ -177,8 +177,6 @@ def listagem_veiculos(request):
 
 @login_required
 def cadastrar_veiculo(request):
-    
-    print(request.POST)
 
     if request.method == 'POST':
         print(request.POST)
@@ -509,17 +507,117 @@ def informacoes_usuario(request, id):
 
 @login_required
 def agendar_manutencao(request):
-    return render(request,'dashboard/agendar_manutencao.html')
+    tipo_manutencao_list = get_list_or_404(Tipo_Manutencao)
+    prioridade_list = get_list_or_404(Prioridade_Atendimento)
+    veiculo_list = get_list_or_404(Veiculo)
+
+    error = None
+    data = {}
+
+    print(request.POST)
+    if request.method == 'POST':
+        veiculo = request.POST.get('veiculo')
+        km_atual = request.POST.get('km_atual')
+        tipo_manutencao = request.POST.get('tipo_manutencao')
+        prioridade = request.POST.get('prioridade')
+        data_prevista = request.POST.get('data_prevista')
+        valor_manutencao = request.POST.get('valor_manutencao')
+        comentario = request.POST.get('comentario')
+
+        data_prevista_obj = datetime.strptime(data_prevista, '%d/%m/%Y')  
+        data_atual_obj = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+        data_formatada = datetime.strptime(data_prevista, '%d/%m/%Y').strftime('%Y-%m-%d')
+
+        data = {
+            'veiculo': veiculo,
+            'km_atual': km_atual,
+            'tipo_manutencao': tipo_manutencao,
+            'prioridade': prioridade,
+            'data_prevista': data_prevista,
+            'valor_manutencao': valor_manutencao,
+            'comentario': comentario
+        }
+
+        if any(value is None or value == "" for value in [veiculo, km_atual, tipo_manutencao, prioridade, data_prevista, valor_manutencao, comentario]):
+            error = 'Por favor, preencha todos os campos obrigatórios'
+            return render(request, 'dashboard/agendar_manutencao.html', {
+                'data': data,
+                'tipo_manutencao': tipo_manutencao_list,
+                'prioridade': prioridade_list,
+                'veiculo': veiculo_list,
+                'error': error
+            })
+        
+        if (data_prevista_obj<data_atual_obj):
+            error = 'Data informada, é menor que a data atual'
+            return render(request, 'dashboard/agendar_manutencao.html', {
+                'data': data,
+                'tipo_manutencao': tipo_manutencao_list,
+                'prioridade': prioridade_list,
+                'veiculo': veiculo_list,
+                'error': error
+            })
+
+        try:
+            veiculo_obj = Veiculo.objects.get(id=veiculo)
+            tipo_manutencao_obj = Tipo_Manutencao.objects.get(id=tipo_manutencao)
+            prioridade_obj = Prioridade_Atendimento.objects.get(id=prioridade)
+        except Veiculo.DoesNotExist:
+            error = "Veículo não encontrado."
+            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+        except Tipo_Manutencao.DoesNotExist:
+            error = "Tipo de manutenção não encontrado."
+            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+        except Prioridade_Atendimento.DoesNotExist:
+            error = "Prioridade não encontrada."
+            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+
+        try:
+            km_atual = int(km_atual)
+            valor_manutencao = float(valor_manutencao)
+        except ValueError:
+            error = "Erro ao converter KM ou Valor da Manutenção. Verifique os valores inseridos."
+            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+
+        veiculo_obj.modificar_estados(25)
+
+        try:
+            manutencao = Manutencao(
+                veiculo=veiculo_obj,
+                km_atual=km_atual,
+                tipo_manutencao=tipo_manutencao_obj,
+                status = Status_Manutencao.objects.get(id=2),
+                prioridade=prioridade_obj,
+                data_prevista=data_formatada,
+                valor_manutencao=valor_manutencao,
+                comentario=comentario
+            )
+
+            manutencao.usuario_cadastro = request.user if request.user.is_authenticated else 'ADMIN'
+            manutencao.save()
+
+            print(f"Manutenção cadastrada: {manutencao.id}")
+
+            return redirect('listagem_manutencao')
+
+        except Exception as e:
+            error = f"Erro ao Registrar Manutenção: {e}"
+
+    return render(request, 'dashboard/agendar_manutencao.html', {
+        'data': data,
+        'tipo_manutencao': tipo_manutencao_list,
+        'prioridade': prioridade_list,
+        'veiculo': veiculo_list,
+        'error': error
+    })
+
 
 @login_required
 def listagem_manutencao(request):
-    contexto = {
-        'range_10': range(10),
-        'range_7': range(7),  # Lista de 0 a 6
-        'range_4': range(4),  # Lista de 0 a 3
-        'range_2': range(2)  # Lista de 0 a 1
-    }
-    return render(request,'dashboard/listagem_manutencao.html',contexto)
+    manutencao = Manutencao.objects.all()
+    return render(request,'dashboard/listagem_manutencao.html',{
+        'manutencao' : manutencao
+    })
 
 @login_required
 def editar_manutencao(request):

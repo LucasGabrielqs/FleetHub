@@ -137,6 +137,10 @@ class Veiculo(models.Model):
     def __str__(self):
         return self.modelo
 
+    def modificar_estados(self,value):
+        novo_status = Status_Veiculo.objects.get(id=value)  # Busca o status pelo ID
+        self.status = novo_status  # Atualiza o status do veículo
+        self.save() 
 
 class Forma_Pagamento(models.Model):
     forma_pagamento = models.CharField(max_length=30, default="Indefinido")
@@ -239,6 +243,14 @@ class Prioridade_Atendimento(models.Model):
     def __str__(self):
         return self.nome_prioridade
 
+
+class Status_Manutencao(models.Model):
+    nome_status = models.CharField(max_length=100)
+    status_cor = models.CharField(max_length=10,null=True)
+
+    def __str__(self):
+        return self.nome_status
+
 class Manutencao(models.Model):
     veiculo = models.ForeignKey(Veiculo,on_delete=models.SET_NULL,related_name='veiculo_manutencao',null=True)
     km_atual = models.IntegerField()
@@ -247,6 +259,7 @@ class Manutencao(models.Model):
     data_prevista = models.DateField()
     valor_manutencao = models.FloatField()
     comentario = models.TextField()
+    status = models.ForeignKey(Status_Manutencao,on_delete=models.SET_NULL,related_name='manutencao_status',null=True)
     data_cadastro = models.DateField(auto_now_add=True)
     data_alteracao = models.DateField(auto_now=True)
     usuario_cadastro = models.ForeignKey(

@@ -51,7 +51,7 @@
 
     <div id="lista-veiculos">
 
-        {% for _ in range_10 %}
+        {% for manutencoes in manutencao %}
             <div id="linha-final">
 
             <div id="linha-veiculo">
@@ -60,27 +60,27 @@
                     <div id="elementos-veiculo">
                         <div id="elementos-filhos">
                             <p id="titulo">Placa:</p>
-                            <p id="resultado">RQP1-05E4</p>
+                            <p id="resultado">{{manutencoes.veiculo.placa}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Tipo de Manutenção:</p>
-                            <p id="resultado">Preventiva</p>
+                            <p id="resultado">{{manutencoes.tipo_manutencao.nome_manutencao}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Data de Criação:</p>
-                            <p id="resultado">25/10/2024</p>
+                            <p id="resultado">{{manutencoes.data_cadastro}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Data Prevista de Entrega:</p>
-                            <p id="resultado">30/10/2024</p>
+                            <p id="resultado">{{manutencoes.data_prevista}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Valor da Manutenção:</p>
-                            <p id="resultado">R$ 500,00</p>
+                            <p id="resultado">{{manutencoes.valor_manutencao}}</p>
                         </div>
                     </div>
                 </div>
@@ -88,8 +88,8 @@
                 <div id="conteudo-esquerdo">
 
                     <div id="descr-legenda">
-                        <div id="bolinha-filtro" style="background-color: #34C759;"></div>
-                        <p>Realizada</p>
+                        <div id="bolinha-filtro" style="background-color: #{{manutencoes.status.status_cor}};"></div>
+                        <p>{{manutencoes.status.nome_status}}</p>
                     </div>
 
                     <button id="botao-visualizar">
@@ -98,7 +98,7 @@
 
                     <div id="manutencao">
                         <p>Id Manutenção:</p>
-                        <p>1</p>
+                        <p>{{manutencoes.id}}</p>
                     </div>
 
                 </div>

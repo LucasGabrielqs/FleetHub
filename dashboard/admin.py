@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from dashboard.models import Veiculo, Status_Veiculo, CustomUser, StatusUsuario, TipoUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Status_Uso,Abastecimento,Tipo_Combustivel,Manutencao,Prioridade_Atendimento,Tipo_Manutencao
+from dashboard.models import Veiculo, Status_Veiculo, CustomUser, StatusUsuario, TipoUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Status_Uso,Abastecimento,Tipo_Combustivel,Manutencao,Prioridade_Atendimento,Tipo_Manutencao, Status_Manutencao
 
 # Register your models here.
 @admin.register(Veiculo)
@@ -9,6 +9,7 @@ class VeiculoAdmin(admin.ModelAdmin):
     ...
 @admin.register(Status_Veiculo)
 class Status_VeiculoAdmin(admin.ModelAdmin):
+    list_display = ("id","status")
     ...
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
@@ -58,6 +59,10 @@ class Tipo_CombustivelAdmin(admin.ModelAdmin):
     ...
 
 @admin.register(Prioridade_Atendimento)
-class Prioridade_Atendimento(admin.ModelAdmin):
+class Prioridade_AtendimentoAdmin(admin.ModelAdmin):
     ...
 
+@admin.register(Status_Manutencao)
+class Status_ManutencaoAdmin(admin.ModelAdmin):
+    list_display = ("id","nome_status")
+    ...
