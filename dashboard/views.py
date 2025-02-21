@@ -620,8 +620,58 @@ def listagem_manutencao(request):
     })
 
 @login_required
-def editar_manutencao(request):
-    return render(request,'dashboard/editar_manutencao.html')
+def editar_manutencao(request,id):
+    manutencao = get_object_or_404(Manutencao,id=id)
+    tipo_manutencao_list = get_list_or_404(Tipo_Manutencao)
+    prioridade_list = get_list_or_404(Prioridade_Atendimento)
+    veiculo_list = get_list_or_404(Veiculo)
+    error_message = None  # Para mensagens de erro
+    success_message = None  # Para mensagens de sucesso
+
+    if request.method == 'POST':
+        veiculo = request.POST.get('veiculo')
+        km_atual = request.POST.get('km_atual')
+        tipo_manutencao = request.POST.get('tipo_manutencao')
+        prioridade = request.POST.get('prioridade')
+        data_prevista = request.POST.get('data_prevista')
+        valor_manutencao = request.POST.get('valor_manutencao')
+        comentario = request.POST.get('comentario')
+
+
+        veiculo = get_object_or_404(Veiculo, id=veiculo)
+        if veiculo != veiculo.id:
+            veiculo.id = veiculo
+
+        if km_atual != manutencao.km_atual:
+            manutencao.km_atual = km_atual
+
+        if data_prevista != manutencao.data_prevista:
+            manutencao.data_prevista = data_prevista
+
+        tipo_manutencao_list = get_object_or_404(Tipo_Manutencao, id=tipo_manutencao)
+        if tipo_manutencao_list != tipo_manutencao_list.id:
+            tipo_manutencao_list.id = tipo_manutencao_list
+
+        prioridade_list = get_object_or_404(Prioridade_Atendimento, id=prioridade)
+        if prioridade_list != prioridade_list.id:
+            prioridade_list.id = prioridade_list
+
+        if valor_manutencao != manutencao.valor_manutencao:
+            manutencao.valor_manutencao = valor_manutencao
+        
+        if comentario != manutencao.comentario:
+            manutencao.comentario = comentario
+
+        messages.success(request, "Informações de Manutenção atualizadas com sucesso!")
+        manutencao.save()
+        return redirect('registro_abastecimento',id=id)
+
+    return render(request,'dashboard/editar_manutencao.html',{
+            'manutencao' : manutencao,
+            'tipo_manutencao_list' : tipo_manutencao_list,
+            'prioridade_list' : prioridade_list,
+            'veiculo_list' : veiculo_list
+    })
 
 @login_required
 def criar_reserva(request):

@@ -17,17 +17,19 @@
   <form action="">
       <div class="container">
           <div class="coluna">
-
               <h4 id="form-title">Dados do Veiculo</h4>
               <div class="input_container">
                   <label>Veículo</label>
                   <select class="input_detect" id="veiculo" name="veiculo">
-                      <option selected>Strada</option>
-                  </select>
+                      <option selected>{{manutencao.veiculo.modelo}}</option>
+                      {% for veiculos in veiculo_list %}
+                        <option value="{{veiculos.id}}">{{veiculos.modelo}}</option>
+                      {% endfor %}
+                    </select>
               </div>
               <div class="input_container">
                   <label>Km Atual</label>
-                  <input class="input_detect" value="10.000 Km" type="text" id="km_atual" placeholder="Digite o Km atual do veiculo">
+                  <input class="input_detect" name="km_atual" value="{{manutencao.km_atual}}" type="text" id="km_atual" placeholder="Digite o Km atual do veiculo">
               </div>
           </div>
 
@@ -36,35 +38,48 @@
               <div class="input_container">
                   <label>Tipo de Manutenção</label>
                   <select class="input_detect" id="tipo_manutencao" name="tipo_manutencao">
-                      <option selected>Periodica</option>
-                  </select>
+                      <option selected>{{manutencao.tipo_manutencao.nome_manutencao}}</option>
+                      {% for tipos in tipo_manutencao_list %}
+                            <option value="{{tipos.id}}">{{tipos.nome_manutencao}}</option>
+                      {% endfor %}
+                   </select>
               </div>
               <div class="input_container">
                   <label>Prioridade de Atendimento</label>
-                  <select class="input_detect" id="atendimento" name="atendimento">
-                      <option selected>Normal</option>
+                  <select class="input_detect" id="atendimento" name="prioridade">
+                      <option selected>{{manutencao.prioridade.nome_prioridade}}</option>
+                      {% for prioridade in prioridade_list %}
+                        <option value="prioridade.id">{{prioridade.nome_prioridade}}</option>
+                      {% endfor %}
                   </select>
               </div>
               <div class="input_container">
                   <label>Data Prevista da Entrega</label>
-                  <input class="input_detect" value="31/12/204" type="text" id="data_entrega" placeholder="Digite a data prevista da entrega">
+                  <input class="input_detect" name="data_prevista" value="{{manutencao.data_prevista}}" type="text" id="data_entrega" placeholder="Digite a data prevista da entrega">
               </div>
               <div class="input_container">
                   <label>Valor da Manutenção</label>
-                  <input class="input_detect" value="R$ 500,00" type="text" id="valor_manutencao" placeholder="Digite o valor da manutenção">
+                  <input class="input_detect" type="text" name="valor_manutencao" id="valor_manutencao" value="{{manutencao.valor_manutencao}}" placeholder="Digite o valor da manutenção">
               </div>
           </div>
       </div>
       <div class="container-coment">
           <label>Comentários</label>
-          <textarea id="comentarios" placeholder="Digite aqui informações sobre o problema que o carro apresenta">Verificar o óleo do motor, fluido freio, pastilhas de freio e ajustes na caixa de direção.</textarea>
+          <textarea id="comentarios" name="comentario" class="input_detect" placeholder="Digite aqui informações sobre o problema que o carro apresenta">{{manutencao.comentario}}</textarea>
       </div>
       
+
+      <div class="rodape" id="rodape">
+        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+        <button type="submit" class="btn-submit">Salvar Edição</button>
+      </div>
+
   </form>
 </section>
 
-<div class="rodape" id="rodape">
-  <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-  <button type="submit" class="btn-submit">Salvar Edição</button>
-</div>
-{% endblock content %}
+
+{% endblock %}
+
+{% block scripts_extras %}
+<script src={% static "js/info-manutencao-script.js" %}></script>
+{% endblock  %}
