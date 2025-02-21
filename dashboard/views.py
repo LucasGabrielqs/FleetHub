@@ -624,53 +624,74 @@ def editar_manutencao(request,id):
     manutencao = get_object_or_404(Manutencao,id=id)
     tipo_manutencao_list = get_list_or_404(Tipo_Manutencao)
     prioridade_list = get_list_or_404(Prioridade_Atendimento)
-    veiculo_list = get_list_or_404(Veiculo)
+    veiculo_list = Veiculo.objects.exclude(status_id=23).exclude(modelo=manutencao.veiculo.modelo)
+    status_manutencao_list = get_list_or_404(Status_Manutencao)
     error_message = None  # Para mensagens de erro
     success_message = None  # Para mensagens de sucesso
 
     if request.method == 'POST':
-        veiculo = request.POST.get('veiculo')
+        veiculo_id = request.POST.get('veiculo')
         km_atual = request.POST.get('km_atual')
-        tipo_manutencao = request.POST.get('tipo_manutencao')
-        prioridade = request.POST.get('prioridade')
+        tipo_manutencao_id = request.POST.get('tipo_manutencao')
+        prioridade_id = request.POST.get('prioridade')
         data_prevista = request.POST.get('data_prevista')
         valor_manutencao = request.POST.get('valor_manutencao')
         comentario = request.POST.get('comentario')
+        status_manutencao_id = request.POST.get('status')
 
+        print(request.POST)
+        alterado = False  # Flag para verificar se houve alguma alteração
 
-        veiculo = get_object_or_404(Veiculo, id=veiculo)
-        if veiculo != veiculo.id:
-            veiculo.id = veiculo
-
-        if km_atual != manutencao.km_atual:
-            manutencao.km_atual = km_atual
-
-        if data_prevista != manutencao.data_prevista:
-            manutencao.data_prevista = data_prevista
-
-        tipo_manutencao_list = get_object_or_404(Tipo_Manutencao, id=tipo_manutencao)
-        if tipo_manutencao_list != tipo_manutencao_list.id:
-            tipo_manutencao_list.id = tipo_manutencao_list
-
-        prioridade_list = get_object_or_404(Prioridade_Atendimento, id=prioridade)
-        if prioridade_list != prioridade_list.id:
-            prioridade_list.id = prioridade_list
-
-        if valor_manutencao != manutencao.valor_manutencao:
-            manutencao.valor_manutencao = valor_manutencao
+        # Validações e atualização apenas se houver mudanças
+        if veiculo_id != manutencao.veiculo.modelo:
+            manutencao.veiculo = get_object_or_404(Veiculo, modelo=veiculo_id)
+            alterado = True
         
-        if comentario != manutencao.comentario:
-            manutencao.comentario = comentario
+        if km_atual and km_atual != str(manutencao.km_atual):
+            manutencao.km_atual = km_atual
+            alterado = True
 
-        messages.success(request, "Informações de Manutenção atualizadas com sucesso!")
-        manutencao.save()
-        return redirect('registro_abastecimento',id=id)
+        if data_prevista and data_prevista != str(manutencao.data_prevista):
+            manutencao.data_prevista = data_prevista
+            alterado = True
+
+        if tipo_manutencao_id != manutencao.tipo_manutencao.nome_manutencao:
+            manutencao.tipo_manutencao = get_object_or_404(Tipo_Manutencao, nome_manutencao=tipo_manutencao_id)
+            alterado = True
+
+        if prioridade_id != manutencao.prioridade.nome_prioridade:
+            manutencao.prioridade = get_object_or_404(Prioridade_Atendimento, nome_prioridade=prioridade_id)
+            alterado = True
+
+        if valor_manutencao and valor_manutencao != str(manutencao.valor_manutencao):
+            manutencao.valor_manutencao = valor_manutencao
+            alterado = True
+        
+        if comentario and comentario != manutencao.comentario:
+            manutencao.comentario = comentario
+            alterado = True
+
+        if status_manutencao_id != manutencao.status.nome_status:
+            manutencao.status= get_object_or_404(Status_Manutencao, nome_status=status_manutencao_id)
+            if status_manutencao_id == 'Realizada':
+                manutencao.veiculo.modificar_estados(21)
+            alterado = True
+
+        # Apenas salva se alguma alteração foi feita
+        if alterado:
+            manutencao.save()
+            messages.success(request, "Informações de Manutenção atualizadas com sucesso!")
+        else:
+            messages.info(request, "Nenhuma alteração foi feita.")
+
+        return redirect('editar_manutencao', id=id)
 
     return render(request,'dashboard/editar_manutencao.html',{
             'manutencao' : manutencao,
             'tipo_manutencao_list' : tipo_manutencao_list,
             'prioridade_list' : prioridade_list,
-            'veiculo_list' : veiculo_list
+            'veiculo_list' : veiculo_list,
+            'status_list' : status_manutencao_list,
     })
 
 @login_required

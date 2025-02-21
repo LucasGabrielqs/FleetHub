@@ -14,7 +14,8 @@
 {% block content %}
 <section id="conteudo-secundario">
   <h2 id='page_title'>Editar Manutenção</h2>
-  <form action="">
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
       <div class="container">
           <div class="coluna">
               <h4 id="form-title">Dados do Veiculo</h4>
@@ -23,7 +24,7 @@
                   <select class="input_detect" id="veiculo" name="veiculo">
                       <option selected>{{manutencao.veiculo.modelo}}</option>
                       {% for veiculos in veiculo_list %}
-                        <option value="{{veiculos.id}}">{{veiculos.modelo}}</option>
+                          <option value="{{veiculos.modelo}}">{{veiculos.modelo}}</option>
                       {% endfor %}
                     </select>
               </div>
@@ -40,7 +41,7 @@
                   <select class="input_detect" id="tipo_manutencao" name="tipo_manutencao">
                       <option selected>{{manutencao.tipo_manutencao.nome_manutencao}}</option>
                       {% for tipos in tipo_manutencao_list %}
-                            <option value="{{tipos.id}}">{{tipos.nome_manutencao}}</option>
+                            <option value="{{tipos.nome_manutencao}}">{{tipos.nome_manutencao}}</option>
                       {% endfor %}
                    </select>
               </div>
@@ -49,18 +50,27 @@
                   <select class="input_detect" id="atendimento" name="prioridade">
                       <option selected>{{manutencao.prioridade.nome_prioridade}}</option>
                       {% for prioridade in prioridade_list %}
-                        <option value="prioridade.id">{{prioridade.nome_prioridade}}</option>
+                        <option value="{{prioridade.nome_prioridade}}">{{prioridade.nome_prioridade}}</option>
                       {% endfor %}
                   </select>
               </div>
               <div class="input_container">
                   <label>Data Prevista da Entrega</label>
-                  <input class="input_detect" name="data_prevista" value="{{manutencao.data_prevista}}" type="text" id="data_entrega" placeholder="Digite a data prevista da entrega">
+                  <input class="input_detect" name="data_prevista" type="date" name="data_prevista" value="{{ manutencao.data_prevista|date:'Y-m-d' }}" type="date" id="data_entrega" placeholder="Digite a data prevista da entrega">
               </div>
               <div class="input_container">
                   <label>Valor da Manutenção</label>
-                  <input class="input_detect" type="text" name="valor_manutencao" id="valor_manutencao" value="{{manutencao.valor_manutencao}}" placeholder="Digite o valor da manutenção">
+                  <input class="input_detect" type="number" name="valor_manutencao" id="valor_manutencao" value="{{manutencao.valor_manutencao}}" placeholder="Digite o valor da manutenção">
               </div>
+              <div class="input_container">
+                <label>Status</label>
+                <select class="input_detect" id="status" name="status">
+                    <option selected>{{manutencao.status.nome_status}}</option>
+                    {% for status in status_list %}
+                      <option value="{{status.nome_status}}">{{status.nome_status}}</option>
+                    {% endfor %}
+                </select>
+            </div>
           </div>
       </div>
       <div class="container-coment">

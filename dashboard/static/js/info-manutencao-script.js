@@ -6,6 +6,7 @@ const alterar_input_ddd = document.getElementById('atendimento');
 const alterar_input_telefone = document.getElementById('data_entrega');
 const alterar_input_status = document.getElementById('valor_manutencao');
 const alterar_input_estado = document.getElementById("comentarios");
+const alterar_input_status_manutencao = document.getElementById("status");
 const rodape = document.getElementById('rodape');
 
 for (let i = 0; i < campos_input.length; i++) {
@@ -22,6 +23,7 @@ function fazer_alteracoes() {
     alterar_input_telefone.style.pointerEvents = 'visible';
     alterar_input_status.style.pointerEvents = 'visible';
     alterar_input_estado.style.pointerEvents = 'visible';
+    alterar_input_status_manutencao.style.pointerEvents = 'visible';
     rodape.style.display = 'flex'; // Exibe o rodapé
 }
 
@@ -34,6 +36,7 @@ function cancelar_alteracoes(){
         alterar_input_telefone.style.pointerEvents = 'none';
         alterar_input_status.style.pointerEvents = 'none';
         alterar_input_estado.style.pointerEvents = 'none';
+        alterar_input_status_manutencao.style.pointerEvents = 'none';
         rodape.style.display = 'none';
         //adicionar lógica para recarregar as informações salvas
     }
