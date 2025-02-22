@@ -6,14 +6,14 @@ section {
 }
 
 #page_title {
-    margin: auto;
-    text-align: center;
-    font-family: inter;
-    font-weight: bold;
-    font-size: 24px;
-    color: #153448;
-    padding-top: 40px;
-    margin-bottom: 25px;
+  margin: auto;
+  text-align: center;
+  font-family: inter;
+  font-weight: bold;
+  font-size: 24px;
+  color: #153448;
+  padding-top: 40px;
+  margin-bottom: 25px;
 }
 #form-title{
     font-family: inter;
@@ -195,6 +195,12 @@ select:focus {
     font-family: Inter;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 

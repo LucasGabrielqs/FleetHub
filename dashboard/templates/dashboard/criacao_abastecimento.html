@@ -36,7 +36,7 @@
 
                         <div class="input_container">
                             <label>Km Atual</label>
-                            <input class="input_detect input" type="text" name="km_atual" id="km_atual" value="{{ data.km_atual|default:'' }}"
+                            <input class="input_detect input" type="number" name="km_atual" id="km_atual" value="{{ data.km_atual|default:'' }}"
                                 maxlength="14" placeholder="Digite a Quilometragem do veículo">
                         </div>
 
@@ -64,7 +64,7 @@
 
                             <div class="input_container">
                                 <label>Quantidade em Litros</label>
-                                <input class="input_detect input" name='quant_litros' type="text" id="quant_litros"
+                                <input class="input_detect input" name='quant_litros' type="number" id="quant_litros"
                                     placeholder="Digite a Quantidade em Litros">
                             </div>
 
@@ -72,7 +72,7 @@
 
                             <div class="input_container">
                                 <label>Valor em R$</label>
-                                <input class="input_detect input" type="text" name="valor" id="valor"
+                                <input class="input_detect input" type="number" name="valor" id="valor"
                                     placeholder="Digite o valor em R$">
                             </div>
 
@@ -95,7 +95,7 @@
 
                 <div class="rodape" id="rodape">
                     <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-                    <button type="submit" class="btn-submit">Salvar Edição</button>
+                    <button type="submit" class="btn-submit">Cadastrar</button>
                 </div>
 
             </form>

@@ -14,34 +14,37 @@
 <div id='container-block-content'>
 
     <section id="conteudo-secundario">
-        <form>
-
 
             <h2 id='page_title'>Informações de Abastecimento</h2>
-            <form action="">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="container">
 
                     <div class="menu_esquerdo">
 
                         <div class="input_container">
                             <label>Veículo</label>
-                            <select class="input_detect" name="select-estado" id="select-status-carro">
-                                <option selected>Strada</option>
-                                <option selected>Hilux</option>
+                            <select class="input_detect" name="veiculo" id="select-status-carro">
+                                <option selected>{{abastecimento.veiculo.modelo}}</option>
+                                {% for veiculo in veiculo_list %}
+                                    <option value="{{veiculo.modelo}}">{{veiculo.modelo}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                         <div class="input_container">
                             <label>Km Atual</label>
-                            <input class="input_detect input" type="text" value="30.000 Km" id="valor-compra"
+                            <input class="input_detect input" name="km_atual" type="number" value="{{abastecimento.km_atual}}" id="valor-compra"
                                 maxlength="14" placeholder="Digite a Quilometragem do veículo">
                         </div>
 
                         <div class="input_container">
                             <label>Tipo de Combustível</label>
-                            <select class="input_detect" name="select-estado" id="select-status-carro">
-                                <option selected>Gasolina</option>
-                                <option selected>Díesel</option>
+                            <select class="input_detect" name="tipo_combustivel" id="select-status-carro">
+                                <option>{{abastecimento.tipo_combustivel.nome_combustivel}}</option>
+                                {% for combustivel in tipo_combustivel_list %}
+                                    <option value="{{combustivel.nome_combustivel}}">{{combustivel.nome_combustivel}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
@@ -49,15 +52,17 @@
 
                         <div class="input_container">
                             <label>Motorista</label>
-                            <select class="input_detect" name="select-estado" id="select-status-carro">
-                                <option selected>Lizandro</option>
-                                <option selected>Lázaro Ramos</option>
+                            <select class="input_detect" name="motorista" id="select-status-carro">
+                                <option selected>{{abastecimento.motorista.nome}}</option>
+                                {% for motorista in motorista_list %}
+                                    <option value="{{motorista.mome}}">{{motorista.nome}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                             <div class="input_container">
                                 <label>Quantidade em Litros</label>
-                                <input class="input_detect input" type="text" value="25 Litros" id="ka-carro"
+                                <input class="input_detect input" name="quant_litros" type="text" value="{{abastecimento.quant_litros}}" id="ka-carro"
                                     placeholder="Digite a Quantidade em Litros">
                             </div>
 
@@ -65,13 +70,13 @@
 
                             <div class="input_container">
                                 <label>Valor em R$</label>
-                                <input class="input_detect input" type="text" value="R$ 130,00" id="motor-carro"
+                                <input class="input_detect input" type="text" name="valor" value="{{abastecimento.valor}}" id="motor-carro"
                                     placeholder="Digite o valor em R$">
                             </div>
 
                             <div class="input_container">
                                 <label>Código do Abastecimento</label>
-                                <input class="input_detect input" type="text" value="2345345234" id="motor-carro"
+                                <input class="input_detect input" type="text" value="{{abastecimento.id}}" id="motor-carro"
                                     placeholder="Digite o valor em R$">
                             </div>
 
@@ -82,7 +87,7 @@
 
                     <div class="menu_direito">
                         <div class="nota-img">
-                            <img class="input_detect img-nota-fiscal" src="{% static 'img/nota-fiscal.webp' %}" alt="">
+                            <img class="input_detect img-nota-fiscal" src="{{abastecimento.img_abastecimento.url}}" alt="">
                             <input  type="file" name="img" id="img" style="display: none;">
                         </div>
 
@@ -97,11 +102,11 @@
                         <h3 class="form-title">Outras Informações</h3>
                         <div class="input_container">
                             <label>Usuário de Cadastro</label>
-                            <input class="input" type="text" id="usuario-cadastro" value="Admin" disabled>
+                            <input class="input" type="text" id="usuario-cadastro" value="{{abastecimento.usuario_cadastro}}" disabled>
                         </div>
                         <div class="input_container">
                             <label>Usuário Alteração</label>
-                            <input class="input" type="text" id="usuario-alteracao" value="Admin" disabled>
+                            <input class="input" type="text" id="usuario-alteracao" value="{{abastecimento.usuario_alteracao}}" disabled>
                         </div>
 
                     </div>
@@ -111,26 +116,27 @@
                         <h3 class="form-title"></h3>
                         <div class="input_container">
                             <label>Data de Cadastro</label>
-                            <input class="input" type="text" id="data-cadastro" value="20/10/2024" disabled>
+                            <input class="input" type="text" id="data-cadastro" value="{{abastecimento.data_cadastro}}" disabled>
                         </div>
                         <div class="input_container">
-                            <label>Senha</label>
-                            <input class="input" type="text" id="data-alteracao" value="27/10/2024" disabled>
+                            <label>Data de Alteração</label>
+                            <input class="input" type="text" id="data-alteracao" value="{{abastecimento.data_alteracao}}" disabled>
                         </div>
                     </div>
 
                 </div>
 
+                <div class="rodape" id="rodape">
+                    <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+                    <button type="submit" class="btn-submit">Salvar Edição</button>
+                </div>
 
 
             </form>
 
     </section>
 
-    <div class="rodape" id="rodape">
-        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-        <button type="submit" class="btn-submit">Salvar Edição</button>
-    </div>
+    
 </div>
 
 

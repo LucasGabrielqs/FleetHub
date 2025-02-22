@@ -6,13 +6,13 @@ section{
 }
 #page_title{
     margin: auto;
-    text-align: center;
-    font-family: inter;
-    font-weight: bold;
-    font-size: 24px;
-    color: #153448;
-    padding-top: 40px;
-    padding-bottom: 40px;
+  text-align: center;
+  font-family: inter;
+  font-weight: bold;
+  font-size: 24px;
+  color: #153448;
+  padding-top: 40px;
+  margin-bottom: 25px;
 }
 
 #conteudo_principal{

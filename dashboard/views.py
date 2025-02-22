@@ -524,9 +524,10 @@ def agendar_manutencao(request):
         valor_manutencao = request.POST.get('valor_manutencao')
         comentario = request.POST.get('comentario')
 
-        data_prevista_obj = datetime.strptime(data_prevista, '%d/%m/%Y')  
-        data_atual_obj = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
-        data_formatada = datetime.strptime(data_prevista, '%d/%m/%Y').strftime('%Y-%m-%d')
+        if data_prevista and data_prevista.strip(): 
+            data_prevista_obj = datetime.strptime(data_prevista, '%d/%m/%Y')  
+            data_atual_obj = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+            data_formatada = datetime.strptime(data_prevista, '%d/%m/%Y').strftime('%Y-%m-%d')
 
         data = {
             'veiculo': veiculo,
@@ -539,23 +540,21 @@ def agendar_manutencao(request):
         }
 
         if any(value is None or value == "" for value in [veiculo, km_atual, tipo_manutencao, prioridade, data_prevista, valor_manutencao, comentario]):
-            error = 'Por favor, preencha todos os campos obrigatórios'
+            messages.error(request,'Por favor, preencha todos os campos obrigatórios')
             return render(request, 'dashboard/agendar_manutencao.html', {
                 'data': data,
                 'tipo_manutencao': tipo_manutencao_list,
                 'prioridade': prioridade_list,
                 'veiculo': veiculo_list,
-                'error': error
             })
         
         if (data_prevista_obj<data_atual_obj):
-            error = 'Data informada, é menor que a data atual'
+            messages.error(request,'Data informada, é menor que a data atual')
             return render(request, 'dashboard/agendar_manutencao.html', {
                 'data': data,
                 'tipo_manutencao': tipo_manutencao_list,
                 'prioridade': prioridade_list,
                 'veiculo': veiculo_list,
-                'error': error
             })
 
         try:
@@ -563,21 +562,21 @@ def agendar_manutencao(request):
             tipo_manutencao_obj = Tipo_Manutencao.objects.get(id=tipo_manutencao)
             prioridade_obj = Prioridade_Atendimento.objects.get(id=prioridade)
         except Veiculo.DoesNotExist:
-            error = "Veículo não encontrado."
-            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+            messages.error(request,"Veículo não encontrado.")
+            return render(request, 'dashboard/agendar_manutencao.html')
         except Tipo_Manutencao.DoesNotExist:
-            error = "Tipo de manutenção não encontrado."
-            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+            messages.error(request,"Tipo de manutenção não encontrado.")
+            return render(request, 'dashboard/agendar_manutencao.html')
         except Prioridade_Atendimento.DoesNotExist:
-            error = "Prioridade não encontrada."
-            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+            messages.error(request,"Prioridade não encontrada.")
+            return render(request, 'dashboard/agendar_manutencao.html')
 
         try:
             km_atual = int(km_atual)
             valor_manutencao = float(valor_manutencao)
         except ValueError:
-            error = "Erro ao converter KM ou Valor da Manutenção. Verifique os valores inseridos."
-            return render(request, 'dashboard/agendar_manutencao.html', {'error': error})
+            messages.error(request,"Erro ao converter KM ou Valor da Manutenção. Verifique os valores inseridos.")
+            return render(request, 'dashboard/agendar_manutencao.html')
 
         veiculo_obj.modificar_estados(25)
 
@@ -595,20 +594,19 @@ def agendar_manutencao(request):
 
             manutencao.usuario_cadastro = request.user if request.user.is_authenticated else 'ADMIN'
             manutencao.save()
-
+            messages.success(request,"Manutenção cadastrada com sucesso")
             print(f"Manutenção cadastrada: {manutencao.id}")
 
             return redirect('listagem_manutencao')
 
         except Exception as e:
-            error = f"Erro ao Registrar Manutenção: {e}"
+            messages.error = f"Erro ao Registrar Manutenção: {e}"
 
     return render(request, 'dashboard/agendar_manutencao.html', {
         'data': data,
         'tipo_manutencao': tipo_manutencao_list,
         'prioridade': prioridade_list,
         'veiculo': veiculo_list,
-        'error': error
     })
 
 
@@ -626,8 +624,6 @@ def editar_manutencao(request,id):
     prioridade_list = get_list_or_404(Prioridade_Atendimento)
     veiculo_list = Veiculo.objects.exclude(status_id=23).exclude(modelo=manutencao.veiculo.modelo)
     status_manutencao_list = get_list_or_404(Status_Manutencao)
-    error_message = None  # Para mensagens de erro
-    success_message = None  # Para mensagens de sucesso
 
     if request.method == 'POST':
         veiculo_id = request.POST.get('veiculo')
@@ -640,9 +636,9 @@ def editar_manutencao(request,id):
         status_manutencao_id = request.POST.get('status')
 
         print(request.POST)
-        alterado = False  # Flag para verificar se houve alguma alteração
+        alterado = False 
 
-        # Validações e atualização apenas se houver mudanças
+
         if veiculo_id != manutencao.veiculo.modelo:
             manutencao.veiculo = get_object_or_404(Veiculo, modelo=veiculo_id)
             alterado = True
@@ -677,7 +673,6 @@ def editar_manutencao(request,id):
                 manutencao.veiculo.modificar_estados(21)
             alterado = True
 
-        # Apenas salva se alguma alteração foi feita
         if alterado:
             manutencao.save()
             messages.success(request, "Informações de Manutenção atualizadas com sucesso!")
@@ -870,8 +865,86 @@ def listagem_abastecimento(request):
                 })
 
 @login_required
-def registro_abastecimento(request):
-    return render(request, 'dashboard/registro_abastecimento.html')
+def registro_abastecimento(request,id):
+    abastecimento = get_object_or_404(Abastecimento,id=id)
+    combustivel = get_list_or_404(Tipo_Combustivel)
+    veiculo = get_list_or_404(Veiculo)
+    motorista = get_list_or_404(CustomUser)
+
+    if request.method == 'POST':
+        veiculo_id = request.POST.get('veiculo')
+        km_atual = request.POST.get('km_atual')
+        tipo_combustivel_id = request.POST.get('tipo_combustivel')
+        motorista_id = request.POST.get('motorista')
+        quant_litros = request.POST.get('quant_litros')
+        valor = request.POST.get('valor')
+        imagem = request.FILES.get('img')
+
+
+        alterado = False
+
+        if quant_litros:  
+            quant_litros = quant_litros.replace(",", ".") 
+            try:
+                quant_litros = float(quant_litros)  
+            except ValueError:
+                quant_litros = None
+            
+        if valor:  # Se o campo não estiver vazio
+            valor = valor.replace(",", ".")  # Substitui vírgula por ponto
+            try:
+                valor = float(valor)  # Converte para número
+            except ValueError:
+                valor = None 
+
+
+        if veiculo_id != abastecimento.veiculo.modelo:
+            abastecimento.veiculo = get_object_or_404(Veiculo,modelo=veiculo_id)
+            alterado = True
+        
+        if km_atual and km_atual != str(abastecimento.km_atual):
+            abastecimento.km_atual = km_atual
+            alterado = True
+
+        if tipo_combustivel_id != abastecimento.tipo_combustivel.nome_combustivel:
+            abastecimento.tipo_combustivel = get_object_or_404(Tipo_Combustivel,nome_combustivel=tipo_combustivel_id)
+            alterado = True
+
+        if motorista_id != abastecimento.motorista.nome:
+            abastecimento.motorista.nome = get_object_or_404(CustomUser,nome=motorista_id)
+            alterado = True
+
+        if quant_litros and quant_litros != str(abastecimento.quant_litros):
+            abastecimento.quant_litros = quant_litros
+            alterado = True
+
+        if valor and valor != str(abastecimento.valor):
+            abastecimento.valor = valor
+            alterado = True
+
+        if 'img' in request.FILES:
+                abastecimento.img_abastecimento = request.FILES.get('img')
+
+        if request.user.is_authenticated:
+            abastecimento.usuario_alteracao = request.user
+
+        if alterado:
+            abastecimento.save()
+            messages.success(request,"Abastecimento alterado com sucesso!")
+        else:
+            messages.info(request,"Nenhuma alteração foi feita")
+
+        return redirect('registro_abastecimento',id=id)
+
+
+
+
+    return render(request, 'dashboard/registro_abastecimento.html',{
+        'abastecimento' : abastecimento,
+        'veiculo_list' : veiculo,
+        'motorista_list' : motorista,
+        'tipo_combustivel_list' : combustivel,
+    })
 
 @login_required
 def dashboard(request):
