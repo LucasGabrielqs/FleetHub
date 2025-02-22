@@ -95,9 +95,9 @@ class Status_Uso(models.Model):
 class Veiculo(models.Model):
     modelo = models.CharField(max_length=50)
     marca = models.CharField(max_length=100)
-    valor_compra = models.CharField(max_length=25)
+    valor_compra = models.FloatField()
     ano = models.IntegerField()
-    km = models.CharField(max_length=20)
+    km = models.IntegerField()
     motor = models.CharField(max_length=10)
     placa = models.CharField(max_length=20)
     chassi = models.CharField(max_length=20)
@@ -138,9 +138,13 @@ class Veiculo(models.Model):
         return self.modelo
 
     def modificar_estados(self,value):
-        novo_status = Status_Veiculo.objects.get(id=value)  # Busca o status pelo ID
-        self.status = novo_status  # Atualiza o status do veículo
+        novo_status = Status_Veiculo.objects.get(id=value)  
+        self.status = novo_status  
         self.save() 
+
+    def modificar_km(self,value):
+        self.km = value
+        self.save()
 
 class Forma_Pagamento(models.Model):
     forma_pagamento = models.CharField(max_length=30, default="Indefinido")
@@ -151,6 +155,7 @@ class Forma_Pagamento(models.Model):
 
 class Status_Reserva(models.Model):
     status = models.CharField(max_length=50, default="Indefinido")
+    status_cor = models.CharField(max_length=10,null=True)
 
     def __str__(self):
         return self.status
@@ -188,6 +193,11 @@ class Reservas(models.Model):
 
     def __str__(self):
         return f"Reserva {self.id} - {self.veiculo.modelo}"
+    
+    def modificar_reserva(self,value):
+        novo_status = Status_Reserva.objects.get(id=value) 
+        self.status_reserva = novo_status 
+        self.save() 
     
 
 class Tipo_Combustivel(models.Model):

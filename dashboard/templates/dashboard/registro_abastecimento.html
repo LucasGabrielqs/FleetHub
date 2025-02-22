@@ -62,7 +62,7 @@
 
                             <div class="input_container">
                                 <label>Quantidade em Litros</label>
-                                <input class="input_detect input" name="quant_litros" type="text" value="{{abastecimento.quant_litros}}" id="ka-carro"
+                                <input class="input_detect input" name="quant_litros" type="text" value="{{abastecimento.quant_litros|floatformat:2}}" id="ka-carro"
                                     placeholder="Digite a Quantidade em Litros">
                             </div>
 
@@ -70,7 +70,7 @@
 
                             <div class="input_container">
                                 <label>Valor em R$</label>
-                                <input class="input_detect input" type="text" name="valor" value="{{abastecimento.valor}}" id="motor-carro"
+                                <input class="input_detect input" type="text" name="valor" value="{{abastecimento.valor|floatformat:2}}" id="motor-carro"
                                     placeholder="Digite o valor em R$">
                             </div>
 

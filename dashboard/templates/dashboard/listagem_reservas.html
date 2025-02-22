@@ -14,23 +14,48 @@
 <section id="content-listagem">
     <h1 id="page_title">Lista de Reservas</h1>
 
-    <div id="search-box">
-        <form action="/search" method="GET">
-                <div id="descr-search">
-                    <input type="text" id="search-input" name="query" placeholder="Veículo ou motorista" style="border: none; outline: none; padding: 5px; font-size: 14px; flex: 1;">
-                    <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 50 50" style="color: #153448;">
-                            <path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path>
-                        </svg>
-                    </button>
-                </div>
-            <div id="linha-search"></div>
-        </form>
-    </div>
+    <div id="search-legenda">
+
+        <div id="search-box">
+            <form action="" method="GET">
+                    <div id="descr-search">
+                        <input type="text" id="search-input" name="query" placeholder="Veiculo ou Motorista" style="border: none; outline: none; padding: 5px; font-size: 14px; flex: 1;">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 50 50" style="color: #153448;">
+                                <path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                <div id="linha-search"></div>
+            </form>
+        </div>
+    
+        <div id="legenda">
+            <p>Legenda:</p>
+            
+            <div id="descr-legenda">
+                <div id="bolinha-filtro" style="background-color: #34C759;"></div>
+                <p>Concluida</p>
+            </div>
+            <div id="descr-legenda">
+                <div id="bolinha-filtro" style="background-color: #FFCC00;"></div>
+                <p>Pendente</p>
+            </div>
+            <div id="descr-legenda">
+                <div id="bolinha-filtro" style="background-color: #FF3B30;"></div>
+                <p>Cancelada</p>
+            </div>
+            <div id="descr-legenda">
+                <div id="bolinha-filtro" style="background-color: #625E5E;"></div>
+                <p>Em Andamento</p>
+            </div>
+        </div>
+    
+        </div>
 
     <div id="lista-veiculos">
 
-        {% for _ in range_10 %}
+        {% for reservas in reserva %}
             <div id="linha-final">
 
             <div id="linha-veiculo">
@@ -39,38 +64,49 @@
                     <div id="elementos-veiculo">
                         <div id="elementos-filhos">
                             <p id="titulo">Veículo:</p>
-                            <p id="resultado">Strada</p>
+                            <p id="resultado">{{reservas.veiculo.modelo}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Motorista:</p>
-                            <p id="resultado">Augusto</p>
+                            <p id="resultado">{{reservas.motorista.nome}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Valor:</p>
-                            <p id="resultado">R$ 400,00</p>
+                            <p id="resultado">{{reservas.valor}}</p>
                         </div>
 
                         <div id="elementos-filhos">
                             <p id="titulo">Forma de Pagamento:</p>
-                            <p id="resultado">PIX</p>
+                            <p id="resultado">{{reservas.forma_pagamento}}</p>
+                        </div>
+                        <div id="elementos-filhos">
+                            <p id="titulo">Data de Criação:</p>
+                            <p id="resultado">{{reservas.data_cadastro|date:'d-m-Y'}}</p>
+                        </div>
+
+                        <div id="elementos-filhos">
+                            <p id="titulo">Data da Reserva:</p>
+                            <p id="resultado">{{reservas.data_reserva|date:'d-m-Y'}}</p>
                         </div>
                     </div>
                 </div>
             
                 <div id="conteudo-esquerdo">
 
-                    <p style="margin: 0;"></p>
+                    <div id="descr-legenda">
+                        <div id="bolinha-filtro" style="background-color: #{{reservas.status_reserva.status_cor}};"></div>
+                        <p id="status-reserva">{{reservas.status_reserva.status}}</p>
+                    </div>
 
                     <button id="botao-visualizar">
                         <a id="visualizar-link" href="{% url 'editar_reserva' %}">Visualizar Informações</a>
                     </button>
 
-                    <div id="manutencao">
-                        <p>Codigo de Reservas:</p>
-                        <p>113</p>
-                    </div>
+                    <button id="botao-visualizar-2" class="botao-visualizar-2" data-reserva-id="{{ reservas.id }}">Confirmar Entrega</button>
+                    {% csrf_token %}
+                    
 
                 </div>
 
@@ -90,3 +126,7 @@
 
 
 {% endblock %}
+
+{% block scripts_extras %}
+<script src={% static "js/listagem-reserva-script.js" %}></script>
+{% endblock  %}

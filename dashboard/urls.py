@@ -26,6 +26,7 @@ urlpatterns = [
     path('criacao_abastecimento',views.criacao_abastecimento,name='criacao_abastecimento'),
     path('listagem_abastecimento',views.listagem_abastecimento,name='listagem_abastecimento'),
     path('registro_abastecimento/<int:id>/', views.registro_abastecimento, name='registro_abastecimento'),
+    path('confirmar-entrega/<int:reserva_id>/', views.confirmar_entrega, name='confirmar_entrega'),
     # path('informacoes_veiculo', views.informacoes_veiculo, name='informacoes_veiculo'),
 
 ]

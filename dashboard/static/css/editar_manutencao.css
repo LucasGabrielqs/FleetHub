@@ -200,6 +200,11 @@ select:focus {
 .input_detect{
   pointer-events:none;
 }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 
 /* Ajustes para telas menores que 1200px (Tablets e Laptops menores) */

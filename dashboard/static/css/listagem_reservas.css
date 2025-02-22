@@ -171,7 +171,7 @@ h1{
 #img-veiculo{
     display: flex;
     flex-direction: row;
-    max-height: 125px;
+    max-height: 150px;
     column-gap: 15px;
 }
 
@@ -183,7 +183,7 @@ img{
 #elementos-veiculo{
     display: flex;
     flex-direction: column;
-    max-height: 125px;
+    max-height: 150px;
 }
 
 #elementos-veiculo #elementos-filhos{
@@ -209,9 +209,9 @@ img{
 }
 
 #conteudo-esquerdo{
-    max-height: 125px;
+    max-height: 150px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
     align-items: end;
 
@@ -222,6 +222,7 @@ img{
     flex-direction: row;
     column-gap: 10px;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 #conteudo-esquerdo #descr-legenda p{
@@ -248,6 +249,19 @@ img{
     background-color: #fff;
     border: #153448 1px solid;
     border-radius: 30px;
+
+}
+#botao-visualizar-2{
+  width: 177px;
+  height: 41px;
+  background-color: #fff;
+  border: #153448 1px solid;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #153448;
+  margin: auto;
+  text-decoration: none;
 
 }
 
@@ -281,6 +295,13 @@ img{
     color: #153448;
     margin: auto;
     text-decoration: none;
+}
+#botao-visualizar-2 #visualizar-link{
+  text-decoration: none;
+  font-size: 14px;
+  color: #153448;
+  margin: auto;
+  text-decoration: none;
 }
 
 #visualzar-link:hover{

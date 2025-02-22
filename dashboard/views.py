@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 import re
-from datetime import datetime
+import json
+from django.db.models import Q
+from datetime import datetime,date
 
 from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Abastecimento,Manutencao,Prioridade_Atendimento,Tipo_Combustivel,Tipo_Manutencao,Status_Manutencao
 
@@ -612,7 +615,14 @@ def agendar_manutencao(request):
 
 @login_required
 def listagem_manutencao(request):
+    query = request.GET.get('query', '').strip()
     manutencao = Manutencao.objects.all()
+    print(f"Query recebida: {query}")
+
+    if query:
+        manutencao = manutencao.filter(
+            Q(veiculo__placa__icontains=query)
+        )
     return render(request,'dashboard/listagem_manutencao.html',{
         'manutencao' : manutencao
     })
@@ -638,14 +648,31 @@ def editar_manutencao(request,id):
         print(request.POST)
         alterado = False 
 
+        if valor_manutencao: 
+            valor_manutencao = valor_manutencao.replace(",", ".") 
+            try:
+                valor_manutencao = float(valor_manutencao)
+            except ValueError:
+                valor_manutencao = None 
 
         if veiculo_id != manutencao.veiculo.modelo:
             manutencao.veiculo = get_object_or_404(Veiculo, modelo=veiculo_id)
             alterado = True
         
-        if km_atual and km_atual != str(manutencao.km_atual):
-            manutencao.km_atual = km_atual
-            alterado = True
+        if km_atual:
+            try:
+                km_atual = int(km_atual)  # Converte para inteiro
+            except ValueError:
+                messages.error(request, "Valor inválido para KM Atual.")
+                return redirect('editar_manutencao', id=id)
+
+            if manutencao.veiculo.km < km_atual:
+                manutencao.km_atual = km_atual
+                manutencao.veiculo.modificar_km(km_atual)
+                alterado = True
+            else:
+                messages.error(request, "Km Atual menor que o km atual do veículo")
+                return redirect('editar_manutencao', id=id)
 
         if data_prevista and data_prevista != str(manutencao.data_prevista):
             manutencao.data_prevista = data_prevista
@@ -691,36 +718,69 @@ def editar_manutencao(request,id):
 
 @login_required
 def criar_reserva(request):
-    status = get_list_or_404(Status_Reserva)  # Obtém todos os status disponíveis
-    forma_pagamento = get_list_or_404(Forma_Pagamento) # Obtém todoas as formas de pagamento disponíveis
-    veiculo = get_list_or_404(Veiculo) # Obtém todas as listas de veículos disponiveis
-    usuario = get_list_or_404(CustomUser) # Obtém todas as listas de usuários disponíveis
-    #reservas = get_list_or_404(Reservas) # Obtém todas as listas de Reservas
+    status = get_list_or_404(Status_Reserva) 
+    forma_pagamento = get_list_or_404(Forma_Pagamento) 
+    veiculo = Veiculo.objects.exclude(status_id__in=[22, 23, 25])
+    usuario = CustomUser.objects.exclude(status_usuario_id=2).exclude(tipo_usuario_id=2).exclude(tipo_usuario_id=None)
+    data = {}
+
     if request.method == 'POST':
-        # Obtenção de dados do formulário
+
         veiculo_nome = request.POST.get('veiculo')
         data_reserva = request.POST.get('data_reserva')
         data_entrega = request.POST.get('data_entrega')
-        motorista_id = request.POST.get('motorista')  # ID do motorista enviado no formulário
+        motorista_id = request.POST.get('motorista')  
         idade_condutor = request.POST.get('idade_condutor')
         valor = request.POST.get('valor')
         forma_pagamento_id = request.POST.get('forma_pagamento')
+
+        print(request.POST)
+
+        data = {
+            'veiculo' : veiculo_nome,
+            'data_reserva' : data_reserva,
+            'data_entrega' : data_entrega,
+            'motorista' : motorista_id,
+            'idade_condutor' : idade_condutor,
+            'forma_pagamento' : forma_pagamento_id
+        }
         
-        # Verificar se todos os campos obrigatórios estão preenchidos
-        if veiculo_nome and data_reserva and data_entrega and motorista_id and idade_condutor and valor and forma_pagamento_id:
-            # Busca o status "Pendente" na tabela Status_Reserva
-            status = get_object_or_404(Status_Reserva, nome="Pendente")  # Certifique-se que o nome é exatamente "Pendente"
+
+        if not all([veiculo_nome,data_reserva,data_entrega,motorista_id,idade_condutor,valor,forma_pagamento_id]):
+            messages.error(request,"Por favor preencha todos os campos obrigatórios")
+            return render(request,"dashboard/criacao_reserva.html",{
+                    'data' : data,
+                    'status' : status,
+                    'forma_pagamento' : forma_pagamento,
+                    'veiculo' : veiculo,
+                    'usuario' : usuario
+            })
+        
+        data_reserva = date.fromisoformat(data_reserva) if data_reserva else None
+        data_entrega = date.fromisoformat(data_entrega) if data_entrega else None
+        today = date.today()
+        
+        if data_reserva <= today:
+            messages.error(request, "A data de reserva deve ser maior que a data atual.")
+            return render(request, "dashboard/criacao_reserva.html", {
+                'data': data, 'status': status, 'forma_pagamento': forma_pagamento,
+                'veiculo': veiculo, 'usuario': usuario
+            })
+
+        if data_entrega <= data_reserva:
+            messages.error(request, "A data de entrega deve ser maior que a data de reserva.")
+            return render(request, "dashboard/criacao_reserva.html", {
+                'data': data, 'status': status, 'forma_pagamento': forma_pagamento,
+                'veiculo': veiculo, 'usuario': usuario
+            })
+
+        try:   
+            status = get_object_or_404(Status_Reserva, status="Pendente")  
+            forma_pagamento = get_object_or_404(Forma_Pagamento, forma_pagamento=forma_pagamento_id)
+            veiculo = get_object_or_404(Veiculo, modelo=veiculo_nome)
+            motorista = get_object_or_404(CustomUser, nome=motorista_id)
             
-            # Busca a forma de pagamento selecionada
-            forma_pagamento = get_object_or_404(Forma_Pagamento, id=forma_pagamento_id)
-            
-            # Busca o veículo pelo nome
-            veiculo = get_object_or_404(Veiculo, nome=veiculo_nome)
-            
-            # Busca o motorista pelo ID
-            motorista = get_object_or_404(CustomUser, id=motorista_id)
-            
-            # Cria o objeto Reserva
+
             reserva = Reservas(
                 veiculo=veiculo,
                 data_reserva=data_reserva,
@@ -730,21 +790,27 @@ def criar_reserva(request):
                 valor=valor,
                 forma_pagamento=forma_pagamento,
                 status_reserva=status,
-                #usuario_cadastro=request.user  # Define o usuário logado como responsável pelo cadastro
             )
-            
-            # Salvar no banco de dados
+
+            if request.user.is_authenticated:
+                reserva.usuario_cadastro = request.user
+
+            veiculo.modificar_estados(22)
+
             reserva.save()
-            
-            # Redireciona para a página de listagem de reservas
+            messages.success(request,"Reserva Cadastrada com sucesso")
             return redirect('listagem_reservas')
+        except Exception as e:
+            print(f"{e}")
+            messages.error(request,f"Erro ao Registrar Reserva: {e}")
          
     return render(request, 'dashboard/criacao_reserva.html', {
         'status': status,
         'forma_pagamento': forma_pagamento,
         'veiculo': veiculo,
         'usuario': usuario,
-        #'reserva' : reservas
+        'data' : data
+
     })
 
 @login_required
@@ -753,13 +819,39 @@ def editar_reserva(request):
 
 @login_required
 def listagem_reservas(request):
-    contexto = {
-        'range_10': range(10),
-        'range_7': range(7),  # Lista de 0 a 6
-        'range_4': range(4),  # Lista de 0 a 3
-        'range_2': range(2)  # Lista de 0 a 1
-    }
-    return render(request, 'dashboard/listagem_reservas.html',contexto)
+    querry = request.GET.get('query','').strip()
+    reserva = Reservas.objects.all()
+
+    if querry:
+        reserva = reserva.filter(
+            Q(veiculo__modelo__icontains=querry) | Q(motorista__nome__icontains=querry)
+        )
+
+    return render(request, 'dashboard/listagem_reservas.html',{
+        'reserva' : reserva
+    })
+
+@login_required
+def confirmar_entrega(request, reserva_id):
+    if request.method == "POST":
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            # Imprima o corpo da requisição para ver o que está sendo enviado
+            data = json.loads(request.body)
+            print("Dados recebidos:", data)  # Verifique o conteúdo
+
+            # Verifique se a ação foi "confirmar_entrega"
+            if data.get('acao') == 'confirmar_entrega':
+                reserva = get_object_or_404(Reservas, id=reserva_id)
+            
+                reserva.modificar_reserva(5)
+
+                reserva.veiculo.modificar_estados(23)
+
+                reserva.save()
+
+                return JsonResponse({'success': True})
+
+            return JsonResponse({'success': False, 'error': 'Requisição inválida'})
 
 @login_required
 def criacao_rota(request):
@@ -785,8 +877,6 @@ def criacao_abastecimento(request):
     veiculo = get_list_or_404(Veiculo)
     motorista = get_list_or_404(CustomUser)
     data = {}
-    error = None
-
     print(request.POST)
 
     if request.method == 'POST':
@@ -810,14 +900,13 @@ def criacao_abastecimento(request):
         }
 
         if not all([veiculo_id, km_atual, tipo_combustivel_id, motorista_id, quant_litros, valor]):
-                print(f"Erro: Campos obrigatórios faltando! veiculo_id={veiculo_id}, km_atual={km_atual}, tipo_combustivel_id={tipo_combustivel_id}, motorista_id={motorista_id}, quant_litros={quant_litros}, valor={valor}")  
-                error = "Por favor, preencha todos os campos obrigatórios."
+                #messages.error(request,f"Erro: Campos obrigatórios faltando! veiculo_id={veiculo_id}, km_atual={km_atual}, tipo_combustivel_id={tipo_combustivel_id}, motorista_id={motorista_id}, quant_litros={quant_litros}, valor={valor}")  
+                messages.error(request,"Por favor, preencha todos os campos obrigatórios.")
                 return render(request, 'dashboard/criacao_abastecimento.html', {
                     'data': data,
                     'tipo_combustivel': tipo_combustivel,
                     'motorista': motorista,
                     'veiculo': veiculo,
-                    'error': error,
                 })
 
         try:
@@ -842,24 +931,33 @@ def criacao_abastecimento(request):
             if imagem:
                 abastecimento.img_abastecimento = imagem
 
+
             abastecimento.save()
+
+            messages.success(request,"Abastecimento Cadastrado com sucesso")
             return redirect('listagem_abastecimento')
         
         except Exception as e:
-            error = f"Erro ao Registrar Abastecimento: {e}"
+            messages.error(request,f"Erro ao Registrar Abastecimento: {e}")
 
     return render(request, 'dashboard/criacao_abastecimento.html', {
         'data': data,
         'veiculo': veiculo,
         'tipo_combustivel': tipo_combustivel,
         'motorista': motorista,
-        'error': error,
     })
 
 @login_required
 def listagem_abastecimento(request):
-    query = request.GET.get('query')
+    query = request.GET.get('query', '').strip()
     abastecimento = Abastecimento.objects.all()
+    print(f"Query recebida: {query}")
+
+    if query:
+        abastecimento = abastecimento.filter(
+            Q(veiculo__modelo__icontains=query) | Q(motorista__nome__icontains=query)
+        )
+
     return render(request, 'dashboard/listagem_abastecimento.html',{
                 'abastecimentos':abastecimento,
                 })
@@ -867,9 +965,9 @@ def listagem_abastecimento(request):
 @login_required
 def registro_abastecimento(request,id):
     abastecimento = get_object_or_404(Abastecimento,id=id)
-    combustivel = get_list_or_404(Tipo_Combustivel)
-    veiculo = get_list_or_404(Veiculo)
-    motorista = get_list_or_404(CustomUser)
+    combustivel = Tipo_Combustivel.objects.exclude(nome_combustivel=abastecimento.tipo_combustivel.nome_combustivel)
+    veiculo = Veiculo.objects.exclude(modelo=abastecimento.veiculo.modelo)
+    motorista = CustomUser.objects.exclude(status_usuario_id=2).exclude(nome=abastecimento.motorista.nome)
 
     if request.method == 'POST':
         veiculo_id = request.POST.get('veiculo')
@@ -890,10 +988,10 @@ def registro_abastecimento(request,id):
             except ValueError:
                 quant_litros = None
             
-        if valor:  # Se o campo não estiver vazio
-            valor = valor.replace(",", ".")  # Substitui vírgula por ponto
+        if valor: 
+            valor = valor.replace(",", ".") 
             try:
-                valor = float(valor)  # Converte para número
+                valor = float(valor)
             except ValueError:
                 valor = None 
 

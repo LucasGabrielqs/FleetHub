@@ -28,6 +28,7 @@ class EstadoAdmin(admin.ModelAdmin):
     ...
 @admin.register(Status_Reserva)
 class StatusReservaAdmin(admin.ModelAdmin):
+    list_display = ('id',"status")
     ...
 
 @admin.register(Forma_Pagamento)

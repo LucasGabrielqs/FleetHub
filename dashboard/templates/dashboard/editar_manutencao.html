@@ -30,7 +30,7 @@
               </div>
               <div class="input_container">
                   <label>Km Atual</label>
-                  <input class="input_detect" name="km_atual" value="{{manutencao.km_atual}}" type="text" id="km_atual" placeholder="Digite o Km atual do veiculo">
+                  <input class="input_detect" name="km_atual" value="{{manutencao.km_atual}}" type="number" id="km_atual" placeholder="Digite o Km atual do veiculo">
               </div>
           </div>
 
@@ -60,7 +60,7 @@
               </div>
               <div class="input_container">
                   <label>Valor da Manutenção</label>
-                  <input class="input_detect" type="number" name="valor_manutencao" id="valor_manutencao" value="{{manutencao.valor_manutencao}}" placeholder="Digite o valor da manutenção">
+                  <input class="input_detect" type="text" name="valor_manutencao" id="valor_manutencao" value="{{manutencao.valor_manutencao|floatformat:2}}" placeholder="Digite o valor da manutenção">
               </div>
               <div class="input_container">
                 <label>Status</label>
