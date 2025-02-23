@@ -31,11 +31,11 @@
                     </div>
                     <div class="input_container">
                         <label>Data de Início da Rota</label>
-                        <input type="date" id="data_inicio" name="data_inicio" placeholder="Digite a data de início da rota">
+                        <input type="date" id="data_inicio" name="data_inicio" value="{{ data.data_inicio|default:'' }}" placeholder="Digite a data de início da rota">
                     </div>
                     <div class="input_container">
                         <label>Data de Fim da Rota</label>
-                        <input type="date" id="data_fim" name="data_fim" placeholder="Digite a data de fim da rota">
+                        <input type="date" id="data_fim" name="data_fim" value="{{ data.data_fim|default:'' }}" placeholder="Digite a data de fim da rota">
                     </div>
                     
                 </div>
@@ -45,11 +45,11 @@
                 
                     <div class="input_container">
                         <label>Cidade Início da Rota</label>
-                        <input type="text" id="cidade_inicio" name="cidade_inicio" placeholder="Digite a cidade de início da rota">
+                        <input type="text" id="cidade_inicio" name="cidade_inicio" value="{{ data.cidade_inicio|default:'' }}" placeholder="Digite a cidade de início da rota">
                     </div>
                     <div class="input_container">
                         <label>Cidade Fim da Rota</label>
-                        <input type="text" id="cidade_fim" name="cidade_fim" placeholder="Digite a cidade de fim da rota">
+                        <input type="text" id="cidade_fim" name="cidade_fim" value="{{ data.cidade_fim|default:'' }}" placeholder="Digite a cidade de fim da rota">
                     </div>
                     <div class="input_container">
                         <label>Tipo de Carga</label>

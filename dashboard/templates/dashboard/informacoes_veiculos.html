@@ -80,7 +80,18 @@
                             <input name="chassi" class="input_detect input" type="text" value="{{veiculo.chassi}}" id="chassi-carro" placeholder="Digite o número do chassi" required>
                         </div>
                     </div>
+                    <div class="input_container" style="height: 67.14px;">
+                        <label>Tipo Veiculo</label>
+                        <select id="tipo" name="tipo" style="width: 104%;">
+                            <option selected>{{veiculo.tipo.tipo}}</option>
+                          {% for tipos in tipo_veiculo %}
+                            <option value="{{tipos.tipo}}">{{tipos.tipo}}</option>
+                          {%endfor %}
+                          
+                        </select>
+                    </div>
                 </div>
+
 
                 <div class="menu_direito">
                     <div class="logo-img input_detect">

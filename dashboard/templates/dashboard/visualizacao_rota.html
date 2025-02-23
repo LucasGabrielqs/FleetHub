@@ -19,59 +19,31 @@
 <div id='container-block-content'>
 
     <section id="conteudo-secundario">
-        <form>
-
-
             <h2 id='page_title'>Visualização Rota</h2>
-            <h2 id='page_title'>Id Rota: 1</h2>
-            <form action="">
+            <h2 id='page_title'>Id Rota: {{rota.id}}</h2>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="container">
 
                     <div class="menu_esquerdo">
                         
                         <div class="input_container">
-                            <label>Veículo:</label>
+                            <label>Reserva</label>
                             <select class="input_detect" id="veiculo" name="veiculo">
-                                <option selected>Prisma</option>
-                                <option>Strada</option>
-                                <option>Renegade</option>
+                                <option selected>{{rota.reserva.id}}</option>
                             </select>
                         </div>
     
                         <div class="input_container">
-                            <label>Data de Inicio da Rota:</label>
-                            <input class="input_detect" type="text" id="data_inicio" 
-                            value="23/10/2024">
+                            <label>Data de Inicio da Rota</label>
+                            <input class="input_detect" name="data_inicio" type="date" id="data_inicio" 
+                            value="{{rota.data_inicio|date:'Y-m-d'}}">
                         </div>
 
                         <div class="input_container">
                             <label>Data de Fim da Rota</label>
-                            <input class="input_detect" type="text" id="data_fim"
-                                value="30/10/2024">
-                        </div>
-
-                        <div class="input_container">
-                            <label>Km da Viagem</label>
-                            <input class="input_detect" type="text" id="km_viagem"
-                                value="200 Km">
-                        </div>
-
-                        <div class="input_container">
-                            <label>Km Atual do Veiculo</label>
-                            <input class="input_detect" type="text" id="km_atual"
-                                value="15.000 Km">
-                        </div>
-
-                        <div class="input_container">
-                            <label>Km Final Previsto</label>
-                            <input class="input_detect" type="text" id="km_final"
-                                value="15.200 Km">
-                        </div>
-
-                        <div class="input_container">
-                            <label>Valor</label>
-                            <input class="input_detect" type="text" id="valor"
-                                value="R$ 1.000,00">
+                            <input class="input_detect" type="date" name="data_fim" id="data_fim"
+                                value="{{rota.data_fim|date:'Y-m-d'}}">
                         </div>
 
                     </div>
@@ -82,56 +54,26 @@
                     <div class="menu_direito">
 
                         <div class="input_container">
-                            <label>Tipo de Carga:</label>
+                            <label>Tipo de Carga</label>
                             <select class="input_detect" id="tipo_carga" name="tipo_carga">
-                                <option selected>Mobilia</option>
-                                <option>Perecíveis</option>
-                                <option>Inflamaveis</option>
+                                <option selected>{{rota.tipo_carga.descr_carga}}</option>
+                                {% for tipos in tipo_carga %}
+                                    <option value="{{tipos.descr_carga}}">{{tipos.descr_carga}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                         <div class="input_container">
-                            <label>Motorista:</label>
-                            <select class="input_detect" id="motorista" name="motorista">
-                                <option selected>Karen</option>
-                                <option>Lizandro</option>
-                                <option>Lucas</option>
-                            </select>
-                        </div>
-
-                        <div class="input_container">
-                            <label>Cidade Inicio da Rota:</label>
-                            <input class="input_detect" type="text" id="cidade_rota"
-                                value="Pau dos Ferros">
+                            <label>Cidade Inicio da Rota</label>
+                            <input class="input_detect" type="text" name="cidade_rota" id="cidade_rota"
+                                value="{{rota.cidade_inicio}}">
                         </div>
 
                         <div class="input_container">
                             <label>Cidade Fim da Rota:</label>
-                            <input class="input_detect" type="text" id="cidade_fim" 
-                            value="Assú">
+                            <input class="input_detect" type="text" name="cidade_fim" id="cidade_fim" 
+                            value="{{rota.cidade_fim}}">
                         </div>
-
-                        <div class="input_container">
-                            <label>Estado Inicio:</label>
-                            <input class="input_detect" type="text" id="estado_inicio" 
-                            value="Assú">
-                        </div>
-
-                        <div class="input_container">
-                            <label>Estado Fim:</label>
-                            <input class="input_detect" type="text" id="estado_fim" 
-                            value="Assú">
-                        </div>
-
-                        <div class="input_container">
-                            <label>Forma de Pagamento:</label>
-                            <select class="input_detect" id="forma_pagamento" name="forma_pagamento">
-                                <option selected>Cartão de Crédito</option>
-                                <option>Cartão de Débito</option>
-                                <option>PIX</option>
-                            </select>
-                        </div>
-
                     
                     </div>
                 </div>
@@ -142,11 +84,11 @@
                         <h3 class="form-title">Outras Informações</h3>
                         <div class="input_container">
                             <label>Usuário de Cadastro</label>
-                            <input type="text" id="usuario-cadastro" value="Admin" disabled>
+                            <input type="text" id="usuario-cadastro" value="{{rota.usuario_cadastro}}" disabled>
                         </div>
                         <div class="input_container">
                             <label>Usuário Alteração</label>
-                            <input type="text" id="usuario-alteracao" value="Admin" disabled>
+                            <input type="text" id="usuario-alteracao" value="{{rota.usuario_alteracao}}" disabled>
                         </div>
 
                     </div>
@@ -156,26 +98,26 @@
                         <h3 class="form-title"></h3>
                         <div class="input_container">
                             <label>Data de Cadastro</label>
-                            <input type="text" id="data-cadastro" value="20/10/2024" disabled>
+                            <input type="text" id="data-cadastro" value="{{rota.data_cadastro}}" disabled>
                         </div>
                         <div class="input_container">
-                            <label>Senha</label>
-                            <input type="text" id="data-alteracao" value="27/10/2024" disabled>
+                            <label>Data de Alteração</label>
+                            <input type="text" id="data-alteracao" value="{{rota.data_alteracao}}" disabled>
                         </div>
                     </div>
 
                 </div>
 
-
+                <div class="rodape" id="rodape">
+                    <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+                    <button type="submit" class="btn-submit">Salvar Edição</button>
+                </div>
 
             </form>
 
     </section>
 
-    <div class="rodape" id="rodape">
-        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-        <button type="submit" class="btn-submit">Salvar Edição</button>
-    </div>
+    
 </div>
 {% endblock content %}  
 

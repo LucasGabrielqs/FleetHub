@@ -227,9 +227,7 @@ select:focus{
     display: flex;
     row-gap: 20px;
     flex-direction: column;
-    margin-left: 3em;
-    margin: auto;
-    width: 100%;
+    width: 480px;
     height: 100%;
 }
 

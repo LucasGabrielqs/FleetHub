@@ -130,3 +130,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+document.getElementById('img').addEventListener('change', function(event) {
+    const preview = document.getElementById('preview');
+    const fileInput = event.target;
+    const file = fileInput.files[0];
+
+    console.log("Arquivo selecionado: ", file);  // Para verificar se o arquivo está sendo capturado corretamente
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+});

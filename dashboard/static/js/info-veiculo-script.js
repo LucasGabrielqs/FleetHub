@@ -9,6 +9,7 @@ const alterar_input_motor = document.getElementById('motor-carro');
 const alterar_input_status = document.getElementById('select-status-carro');
 const alterar_input_placa = document.getElementById('placa-carro');
 const alterar_input_chassi = document.getElementById('chassi-carro');
+const alterar_input_tipo = document.getElementById('tipo')
 const alterar_img_carro = document.getElementById('img');
 const rodape = document.getElementById('rodape');
 
@@ -29,6 +30,7 @@ function fazer_alteracoes() {
     alterar_input_status.style.pointerEvents = 'visible';
     alterar_input_valor.style.pointerEvents = 'visible';
     alterar_cor.style.pointerEvents = 'visible';
+    alterar_input_tipo.style.pointerEvents = 'visible';
     alterar_img_carro.style.display = 'block';
     rodape.style.display = 'flex'; // Exibe o rodapé
 }
@@ -45,6 +47,7 @@ function cancelar_alteracoes(){
         alterar_input_status.style.pointerEvents = 'none';
         alterar_input_valor.style.pointerEvents = 'none';
         alterar_cor.style.pointerEvents = 'none';
+        alterar_input_tipo.style.pointerEvents = 'none';
         alterar_img_carro.style.display = 'none';
         rodape.style.display = 'none';
         //adicionar lógica para recarregar as informações salvas

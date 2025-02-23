@@ -144,14 +144,14 @@ def recuperar_senha(request):
 
 @login_required
 def tela_dashboard(request):
-    usuarios = get_list_or_404(CustomUser)
-    contexto = {
-        'range_10': range(10),
-        'range_7': range(7),  # Lista de 0 a 6
-        'range_4': range(4),  # Lista de 0 a 3
-        'range_2': range(2)  # Lista de 0 a 1
-    }
-    return render(request, 'dashboard/dashboard.html', {'contexto':contexto, 'usuarios':usuarios})
+    usuarios = CustomUser.objects.exclude(tipo_usuario_id=None)
+    reserva = get_list_or_404(Reservas)
+    rotas = get_list_or_404(Rota)
+    return render(request, 'dashboard/dashboard.html', {
+        'usuarios':usuarios,
+        'reservas' : reserva,
+        'rotas' : rotas
+    })
 
 @login_required
 def listagem_veiculos(request):
@@ -242,6 +242,7 @@ def cadastrar_veiculo(request):
 def informacoes_veiculo(request, id):
     veiculo = Veiculo.objects.get(id=id)
     status_list = Status_Veiculo.objects.all()
+    tipo_veiculo = Tipo_Veiculo.objects.exclude(tipo=veiculo.tipo)
     error_message = None  # Para armazenar mensagens de erro
     success_message = None  # Para indicar sucesso
 
@@ -252,6 +253,7 @@ def informacoes_veiculo(request, id):
         valor_compra = request.POST.get('valor')
         ano = request.POST.get('ano')
         km = request.POST.get('km')
+        tipo = request.POST.get('tipo')
         motor = request.POST.get('motor')
         status = request.POST.get('status')
         placa = request.POST.get('placa')
@@ -259,6 +261,12 @@ def informacoes_veiculo(request, id):
         cor = request.POST.get('cor')
         
 
+        if valor_compra: 
+            valor_compra = valor_compra.replace(",", ".") 
+            try:
+                valor_compra = float(valor_compra)
+            except ValueError:
+                valor_compra = None 
 
         try:
             # Atualização apenas dos campos modificados
@@ -282,6 +290,8 @@ def informacoes_veiculo(request, id):
                 veiculo.chassi = chassi
             if cor != veiculo.cor:
                 veiculo.cor = cor
+            if tipo != veiculo.tipo:
+                veiculo.tipo = Tipo_Veiculo.objects.get(tipo=tipo)
 
             # Verifica se um arquivo foi enviado no campo "img"
             if 'img' in request.FILES:
@@ -303,6 +313,7 @@ def informacoes_veiculo(request, id):
         'status': status_list,
         'error_message': error_message,
         'success_message': success_message,
+        'tipo_veiculo' : tipo_veiculo
     })
 
 @login_required
@@ -962,9 +973,10 @@ def confirmar_entrega(request, reserva_id):
             return JsonResponse({'success': False, 'error': 'Requisição inválida'})
 
 @login_required
-def criacao_rota(request, id):  # Recebe o ID da reserva
-    tipo_carga = Tipo_Carga.objects.all()  # Traz todos os tipos de carga
-    reserva = get_object_or_404(Reservas, id=id)  # Busca a reserva
+def criacao_rota(request, id): 
+    tipo_carga = Tipo_Carga.objects.all()  
+    reserva = get_object_or_404(Reservas, id=id) 
+    data = {}
 
     if request.method == 'POST':
         data_inicio = request.POST.get('data_inicio')
@@ -973,20 +985,64 @@ def criacao_rota(request, id):  # Recebe o ID da reserva
         cidade_inicio = request.POST.get('cidade_inicio')
         cidade_fim = request.POST.get('cidade_fim')
 
+        data = {
+            'data_inicio' : data_inicio,
+            'data_fim' : data_fim,
+            'tipo_carga' : tipo_carga_id,
+            'cidade_inicio' : cidade_inicio,
+            'cidade_fim' : cidade_fim
+        }
+
         print(request.POST)
 
-        # Verifica se todos os campos foram preenchidos
         if not all([data_inicio, data_fim, tipo_carga_id, cidade_inicio, cidade_fim]):
             messages.error(request, "Por favor, preencha todas as informações.")
             return render(request, 'dashboard/criacao_rota.html', {
                 'tipos': tipo_carga,
-                'reserva': reserva
+                'reserva': reserva,
+                'data': data  # Mantendo os dados preenchidos
+            })
+
+        if data_inicio < str(reserva.data_reserva):
+            messages.error(request, "Data de Início menor que a data da reserva")
+            return render(request, 'dashboard/criacao_rota.html', {
+                'tipos': tipo_carga,
+                'reserva': reserva,
+                'data': data
+            })
+        elif data_inicio > str(reserva.data_entrega):
+            messages.error(request, "Data de Início maior que a data de entrega")
+            return render(request, 'dashboard/criacao_rota.html', {
+                'tipos': tipo_carga,
+                'reserva': reserva,
+                'data': data
+            })
+
+        if data_fim < str(reserva.data_reserva):
+            messages.error(request, "Data de Fim menor que a data de reserva")
+            return render(request, 'dashboard/criacao_rota.html', {
+                'tipos': tipo_carga,
+                'reserva': reserva,
+                'data': data
+            })
+        elif data_fim > str(reserva.data_entrega):
+            messages.error(request, "Data de Fim maior que a data de entrega")
+            return render(request, 'dashboard/criacao_rota.html', {
+                'tipos': tipo_carga,
+                'reserva': reserva,
+                'data': data
+            })
+        elif data_fim < data_inicio:
+            messages.error(request, "Data de Fim menor que a data de início")
+            return render(request, 'dashboard/criacao_rota.html', {
+                'tipos': tipo_carga,
+                'reserva': reserva,
+                'data': data
             })
 
         try:
             tipo_carga_obj = get_object_or_404(Tipo_Carga, descr_carga=tipo_carga_id)  # Obtém o objeto Tipo_Carga
 
-            # Cria a nova rota
             rota = Rota(
                 reserva=reserva,
                 data_inicio=data_inicio,
@@ -996,36 +1052,104 @@ def criacao_rota(request, id):  # Recebe o ID da reserva
                 cidade_fim=cidade_fim
             )
 
-            # Verifica se o usuário está autenticado
+
             if request.user.is_authenticated:
                 rota.usuario_cadastro = request.user
 
-            rota.save()  # Salva a nova rota
+            rota.save() 
 
-            # Redireciona para a lista de rotas
+
             return redirect('listagem_rota')
 
         except Exception as e:
             messages.error(request, f"Erro ao Registrar Rota: {e}")
+            return render(request, 'dashboard/criacao_rota.html', {
+                'tipos': tipo_carga,
+                'reserva': reserva,
+                'data': data
+            })
 
     return render(request, 'dashboard/criacao_rota.html', {
         'tipos': tipo_carga,
-        'reserva': reserva
+        'reserva': reserva,
+        'data' : data
     })
 
 @login_required
 def listagem_rota(request):
-    contexto = {
-        'range_10': range(10),
-        'range_7': range(7),  # Lista de 0 a 6
-        'range_4': range(4),  # Lista de 0 a 3
-        'range_2': range(2)  # Lista de 0 a 1
-    }
-    return render(request,'dashboard/listagem_rota.html',contexto)
+    querry = request.GET.get('query','').strip()
+    rotas = Rota.objects.all()
 
+    if querry:
+        rotas = rotas.filter(
+            Q(reserva__veiculo__modelo__icontains=querry) | Q(reserva__motorista__nome__icontains=querry)
+        )
+
+    return render(request,'dashboard/listagem_rota.html',{
+        'rotas' : rotas
+    })
+    
 @login_required
-def visualizacao_rota(request):
-    return render(request, 'dashboard/visualizacao_rota.html')
+def visualizacao_rota(request,id):
+    rotas = get_object_or_404(Rota,id=id)
+    tipo_carga = Tipo_Carga.objects.exclude(descr_carga=rotas.tipo_carga.descr_carga)
+    alterado = False
+
+    if request.method == 'POST':
+        data_inicio = request.POST.get('data_inicio')
+        data_fim = request.POST.get('data_fim')
+        tipo_carga_id = request.POST.get('tipo_carga')
+        cidade_inicio = request.POST.get('cidade_rota')
+        cidade_fim = request.POST.get('cidade_fim')
+
+        if data_inicio != rotas.data_inicio:
+            if data_inicio < str(rotas.reserva.data_reserva):
+                messages.error(request, "Data de Início menor que a data da reserva")
+                return redirect("visualizacao_rota",id=id)
+            elif data_inicio > str(rotas.reserva.data_entrega):
+                messages.error(request, "Data de Início maior que a data de entrega")
+                return redirect("visualizacao_rota",id=id)
+            else:
+                rotas.data_inicio = data_inicio
+                alterado = True
+
+        if data_fim != rotas.data_fim:
+            if data_fim < str(rotas.reserva.data_reserva):
+                messages.error(request, "Data de Fim menor que a data de reserva")
+                return redirect("visualizacao_rota",id=id)
+            elif data_fim > str(rotas.reserva.data_entrega):
+                messages.error(request, "Data de Fim maior que a data de entrega")
+                return redirect("visualizacao_rota",id=id)
+            elif data_fim < data_inicio:
+                messages.error(request, "Data de Fim menor que a data de início")
+                return redirect("visualizacao_rota",id=id)
+            else:
+                rotas.data_fim = data_fim
+                alterado = True
+
+        if tipo_carga_id != rotas.tipo_carga.descr_carga:
+            rotas.tipo_carga = get_object_or_404(Tipo_Carga,descr_carga=tipo_carga_id)
+            alterado = True
+        
+        if cidade_inicio != rotas.cidade_inicio:
+            rotas.cidade_inicio = cidade_inicio
+            alterado = True
+
+        if cidade_fim != rotas.cidade_fim:
+            rotas.cidade_fim = cidade_fim
+            alterado = True
+
+        if request.user.is_authenticated:
+            rotas.usuario_alteracao = request.user
+
+        rotas.save()
+        messages.success(request,"Informações alteradas com sucesso")
+        return redirect("visualizacao_rota",id=id)
+
+    return render(request, 'dashboard/visualizacao_rota.html',{
+        'rota' : rotas,
+        'tipo_carga' : tipo_carga
+    })
 
 @login_required
 def criacao_abastecimento(request):
