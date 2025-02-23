@@ -130,7 +130,14 @@ select{
     text-align: start;
     padding-left: 20px;
 }
-
+.menu_direito select{
+    width: 103.5%;
+    height: 100%;
+    background-color: rgba(239, 241, 249, 0.6);
+    border: 0 none;
+    text-align: start;
+    padding-left: 20px;
+}
 select:focus{
     outline: none;    
 }
@@ -241,6 +248,11 @@ select:focus{
     pointer-events:none;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 /* Estilo padrão - Desktop (largura maior que 1200px) */
 /* Já está definido no seu CSS principal */

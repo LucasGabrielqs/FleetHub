@@ -19,83 +19,56 @@
 
 <section id="conteudo-secundario">
         <h2 id='page_title'>Criação da Rota</h2>
-        <form action="">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="container">
                 <div class="coluna">
                     <div class="input_container">
-                        <label>Veículo</label>
+                        <label>Reserva</label>
                         <select id="veiculo" name="veiculo">
-                            <option disabled selected>Selecione</option>
+                            <option disabled selected>{{reserva.id}}</option>
                         </select>
                     </div>
                     <div class="input_container">
                         <label>Data de Início da Rota</label>
-                        <input type="date" id="data_inicio" placeholder="Digite a data de início da rota">
+                        <input type="date" id="data_inicio" name="data_inicio" placeholder="Digite a data de início da rota">
                     </div>
                     <div class="input_container">
                         <label>Data de Fim da Rota</label>
-                        <input type="date" id="data_fim" placeholder="Digite a data de fim da rota">
+                        <input type="date" id="data_fim" name="data_fim" placeholder="Digite a data de fim da rota">
                     </div>
-                    <div class="input_container">
-                        <label>Km da Viagem</label>
-                        <input type="number" id="km_viagem" placeholder="Digite a quantidade de Km da viagem">
-                    </div>
-                    <div class="input_container">
-                        <label>Km Atual do Veículo</label>
-                        <input type="number" id="km_atual" placeholder="Digite o Km atual do veículo">
-                    </div>
-                    <div class="input_container">
-                        <label>Km Final Previsto</label>
-                        <input type="number" id="km_final" placeholder="Digite o Km final previsto">
-                    </div>
-                    <div class="input_container">
-                        <label>Valor</label>
-                        <input type="number" id="valor" placeholder="Digite o valor em R$">
-                    </div>
+                    
                 </div>
     
                 <div class="coluna">
+                   
+                
+                    <div class="input_container">
+                        <label>Cidade Início da Rota</label>
+                        <input type="text" id="cidade_inicio" name="cidade_inicio" placeholder="Digite a cidade de início da rota">
+                    </div>
+                    <div class="input_container">
+                        <label>Cidade Fim da Rota</label>
+                        <input type="text" id="cidade_fim" name="cidade_fim" placeholder="Digite a cidade de fim da rota">
+                    </div>
                     <div class="input_container">
                         <label>Tipo de Carga</label>
                         <select id="tipo_carga" name="tipo_carga">
                             <option disabled selected>Selecione</option>
+                            {% for tipo in tipos%}
+                                <option value="{{tipo.descr_carga}}">{{tipo.descr_carga}}</option>
+                            {% endfor %}
                         </select>
-                    </div>
-                    <div class="input_container">
-                        <label>Motorista</label>
-                        <select id="motorista" name="motorista">
-                            <option disabled selected>Selecione</option>
-                        </select>
-                    </div>
-                    <div class="input_container">
-                        <label>Cidade Início da Rota</label>
-                        <input type="text" id="cidade_inicio" placeholder="Digite a cidade de início da rota">
-                    </div>
-                    <div class="input_container">
-                        <label>Cidade Fim da Rota</label>
-                        <input type="text" id="cidade_fim" placeholder="Digite a cidade de fim da rota">
-                    </div>
-                    <div class="input_container">
-                        <label>Estado Início</label>
-                        <input type="text" id="estado_inicio" placeholder="Digite o estado de início">
-                    </div>
-                    <div class="input_container">
-                        <label>Estado Fim</label>
-                        <input type="text" id="estado_fim" placeholder="Digite o estado de fim">
-                    </div>
-                    <div class="input_container">
-                        <label>Forma de Pagamento</label>
-                        <input type="text" id="forma_pagamento" placeholder="Digite a forma de pagamento">
                     </div>
                 </div>
             </div>
+            <div class="rodape" id="rodape">
+                <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+                <button type="submit" class="btn-submit">Cadastrar</button>
+              </div>
         </form>
     </section>
 
-    <div class="rodape">
-        <button type="reset" class="btn-reset">Cancelar</button>
-        <button type="submit" class="btn-submit">Cadastrar</button>
-    </div>
 
 {% endblock content %}   
     

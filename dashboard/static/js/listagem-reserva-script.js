@@ -40,12 +40,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll("#conteudo-esquerdo").forEach(reserva => {
+    document.querySelectorAll(".conteudo-esquerdo").forEach(reserva => {
         const statusElement = reserva.querySelector("#status-reserva");
-        const botao = reserva.querySelector(".botao-visualizar-2"); // Usamos a classe, pois IDs devem ser únicos
+        const botao = reserva.querySelector(".botao-visualizar-2");
 
-        if (statusElement && botao && statusElement.innerText.trim() === "Em Andamento") {
-            botao.style.display = "none";
+        if (statusElement && botao) {
+            const status = statusElement.innerText.trim().toLowerCase(); // Normaliza o texto
+            
+            console.log("Status encontrado:", status); // Debug para verificar no console
+
+            if (status !== "pendente") {
+                botao.style.display = "none"; // Esconde o botão se o status NÃO for "Pendente"
+            } else {
+                botao.style.display = "block"; // Garante que fique visível se for "Pendente"
+            }
         }
     });
 });
+
+

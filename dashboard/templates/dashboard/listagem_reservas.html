@@ -93,7 +93,7 @@
                     </div>
                 </div>
             
-                <div id="conteudo-esquerdo">
+                <div id="conteudo-esquerdo" class="conteudo-esquerdo">
 
                     <div id="descr-legenda">
                         <div id="bolinha-filtro" style="background-color: #{{reservas.status_reserva.status_cor}};"></div>
@@ -101,7 +101,7 @@
                     </div>
 
                     <button id="botao-visualizar">
-                        <a id="visualizar-link" href="{% url 'editar_reserva' %}">Visualizar Informações</a>
+                        <a id="visualizar-link" href="{% url 'editar_reserva' reservas.id%}">Visualizar Informações</a>
                     </button>
 
                     <button id="botao-visualizar-2" class="botao-visualizar-2" data-reserva-id="{{ reservas.id }}">Confirmar Entrega</button>

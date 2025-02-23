@@ -92,12 +92,19 @@ class Status_Uso(models.Model):
         return self.nome
 
 
+class Tipo_Veiculo(models.Model):
+    tipo = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.tipo
+
 class Veiculo(models.Model):
     modelo = models.CharField(max_length=50)
     marca = models.CharField(max_length=100)
     valor_compra = models.FloatField()
     ano = models.IntegerField()
     km = models.IntegerField()
+    tipo = models.ForeignKey(Tipo_Veiculo,on_delete=models.SET_NULL,null=True)
     motor = models.CharField(max_length=10)
     placa = models.CharField(max_length=20)
     chassi = models.CharField(max_length=20)
@@ -285,4 +292,36 @@ class Manutencao(models.Model):
         null=True,
         blank=True,
         related_name="manutencao_alterada",
+    )
+
+
+class Tipo_Carga(models.Model):
+    descr_carga = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.descr_carga
+
+
+class Rota(models.Model):
+    data_inicio = models.DateField()
+    data_fim = models.DateField()
+    tipo_carga = models.ForeignKey(Tipo_Carga,on_delete=models.SET_NULL,null=True)
+    cidade_inicio = models.CharField(max_length=100)
+    cidade_fim = models.CharField(max_length=100)
+    reserva = models.OneToOneField(Reservas,on_delete=models.CASCADE)
+    data_cadastro = models.DateField(auto_now_add=True)
+    data_alteracao = models.DateField(auto_now=True)
+    usuario_cadastro = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="rota_cadastrada",
+    )
+    usuario_alteracao = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="rota_alterada",
     )

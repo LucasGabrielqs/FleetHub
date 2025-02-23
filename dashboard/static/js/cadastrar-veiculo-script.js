@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const valorInput = document.getElementById("valcompra");
-    const kmInput = document.getElementById("km");
     const motorInput = document.getElementById("motor");
 
     // Função para formatar números com separadores de milhar
@@ -9,18 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Formata o campo Valor com R$ no início
-    valorInput.addEventListener("input", function (e) {
-        let value = e.target.value.replace(/[^\d]/g, ""); // Remove caracteres não numéricos
-        e.target.dataset.rawValue = value; // Armazena o valor sem formatação
-        e.target.value = value ? `R$ ${formatNumber(value)}` : "";
-    });
-
-    // Formata o campo KM com "km" no final
-    kmInput.addEventListener("input", function (e) {
-        let value = e.target.value.replace(/[^\d]/g, ""); // Remove caracteres não numéricos
-        e.target.dataset.rawValue = value; // Armazena o valor sem formatação
-        e.target.value = value ? `${formatNumber(value)} km` : "";
-    });
 
     // Formata o campo Motor com "cv" no final
     motorInput.addEventListener("input", function (e) {
@@ -30,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Permite edição contínua (sem reintroduzir sufixos ao apagar)
-    [valorInput, kmInput, motorInput].forEach(input => {
+    [motorInput].forEach(input => {
         input.addEventListener("keydown", function (e) {
             if (e.key === "Backspace" || e.key === "Delete") {
                 let rawValue = input.dataset.rawValue || ""; // Recupera o valor bruto sem formatação
@@ -49,11 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Reaplica o formato ao sair do campo
         input.addEventListener("blur", function () {
             let rawValue = input.dataset.rawValue || ""; // Recupera o valor bruto
-            if (input === valorInput) {
-                input.value = rawValue ? `R$ ${formatNumber(rawValue)}` : "";
-            } else if (input === kmInput) {
-                input.value = rawValue ? `${formatNumber(rawValue)} km` : "";
-            } else if (input === motorInput) {
+            if (input === motorInput) {
                 input.value = rawValue ? `${rawValue} cv` : "";
             }
         });

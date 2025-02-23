@@ -19,49 +19,50 @@
 <div id='container-block-content'>
 
     <section id="conteudo-secundario">
-        <form>
-
 
             <h2 id='page_title'>Editar Reserva</h2>
-            <form action="">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="container">
 
                     <div class="menu_esquerdo">
                         
                         <div class="input_container">
-                            <label>Veículo:</label>
-                            <select class="input_detect" id="veiculo" name="veiculo">
-                                <option selected>Prisma</option>
-                                <option>Strada</option>
-                                <option>Renegade</option>
+                            <label>Veículo</label>
+                            <select class="input_detect" id="veiculo" name="veiculo_nome" onchange="calcularValor()">
+                                <option data-valor="{{ reserva.veiculo.valor_compra }}" selected>{{reserva.veiculo.modelo}}</option>
+                                {% for veiculos in veiculo %}
+                                    <option value="{{veiculos.modelo}}" data-valor="{{ veiculos.valor_compra }}">{{veiculos.modelo}}</option>
+                                {% endfor %}
                             </select>
                         </div>
     
                         <div class="input_container">
-                            <label>Data da Reserva:</label>
-                            <input class="input_detect" type="text" id="date_reserva" 
-                            value="23/10/2024">
+                            <label>Data da Reserva</label>
+                            <input class="input_detect" type="date" id="date_reserva" name="data_reserva" onchange="calcularValor()"
+                            value="{{reserva.data_reserva|date:'Y-m-d'}}">
                         </div>
 
                         <div class="input_container">
                             <label>Data da Entrega</label>
-                            <input class="input_detect" type="text" id="data_entrega"
-                                value="30/10/2024">
+                            <input class="input_detect" type="date" id="data_entrega" name="data_entrega" onchange="calcularValor()"
+                                value="{{reserva.data_entrega|date:'Y-m-d'}}">
                         </div>
 
                         <div class="input_container">
-                            <label>Motorista:</label>
+                            <label>Motorista</label>
                             <select class="input_detect" id="motorista" name="motorista">
-                                <option selected>Lizandro</option>
-                                <option>Lucas</option>
-                                <option>Karen</option>
+                                <option selected>{{reserva.motorista.nome}}</option>
+                                {% for motoristas in motorista %}
+                                    <option value="{{motoristas.nome}}">{{motoristas.nome}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                         <div class="input_container">
-                            <label>Código da Reserva:</label>
+                            <label>Código da Reserva</label>
                             <input class="input_detect" type="text" id="codigo_reserva" 
-                            value="25">
+                            value="{{reserva.id}}">
                         </div>
                     </div>
 
@@ -73,31 +74,33 @@
 
                         <div class="input_container">
                             <label>Idade do Condutor</label>
-                            <input class="input_detect" type="text" id="input-idade-condutor"
-                                value="20 Anos">
+                            <input class="input_detect" min="18" type="number" id="idade-condutor" name="idade-condutor" onchange="calcularValor()"
+                                value="{{reserva.idade_condutor}}">
                         </div>
 
                         <div class="input_container">
-                            <label>Valor:</label>
-                            <input class="input_detect" type="text" id="input-valor" 
-                            value="R$ 500,00">
+                            <label>Valor</label>
+                            <input class="input_detect" type="text" id="valor"  name="valor"
+                            value="{{reserva.valor}}">
                         </div>
 
                         <div class="input_container">
-                            <label>Forma de Pagamento:</label>
-                            <select class="input_detect" id="forma_pagamento" name="forma_pagamento">
-                                <option selected>Cartão de Crédito</option>
-                                <option>Cartão de Débito</option>
-                                <option>PIX</option>
+                            <label>Forma de Pagamento</label>
+                            <select class="input_detect" id="forma_pagamento_teste" name="forma_pagamento">
+                                <option selected>{{reserva.forma_pagamento}}</option>
+                                {% for pagamento in forma_pagamento %}
+                                    <option value="{{pagamento.forma_pagamento}}">{{pagamento.forma_pagamento}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                         <div class="input_container">
-                            <label>Status:</label>
+                            <label>Status</label>
                             <select class="input_detect" id="status" name="status">
-                                <option selected>Pendente</option>
-                                <option>Concluida</option>
-                                <option>Cancelada</option>
+                                <option selected>{{reserva.status_reserva}}</option>
+                                {% for status_reserva in status %}
+                                    <option value="{{status_reserva.status}}">{{status_reserva.status}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     
@@ -110,11 +113,11 @@
                         <h3 class="form-title">Outras Informações</h3>
                         <div class="input_container">
                             <label>Usuário de Cadastro</label>
-                            <input type="text" id="usuario-cadastro" value="Admin" disabled>
+                            <input type="text" id="usuario-cadastro" value="{{reserva.usuario_cadastro}}" disabled>
                         </div>
                         <div class="input_container">
                             <label>Usuário Alteração</label>
-                            <input type="text" id="usuario-alteracao" value="Admin" disabled>
+                            <input type="text" id="usuario-alteracao" value="{{reserva.usuario_alteracao}}" disabled>
                         </div>
 
                     </div>
@@ -124,26 +127,26 @@
                         <h3 class="form-title"></h3>
                         <div class="input_container">
                             <label>Data de Cadastro</label>
-                            <input type="text" id="data-cadastro" value="20/10/2024" disabled>
+                            <input type="text" id="data-cadastro" value="{{reserva.data_cadastro}}" disabled>
                         </div>
                         <div class="input_container">
-                            <label>Senha</label>
-                            <input type="text" id="data-alteracao" value="27/10/2024" disabled>
+                            <label>Data de Alteração</label>
+                            <input type="text" id="data-alteracao" value="{{reserva.data_alteracao}}" disabled>
                         </div>
                     </div>
 
                 </div>
 
-
+                <div class="rodape" id="rodape">
+                    <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
+                    <button type="submit" class="btn-submit">Salvar Edição</button>
+                </div>
 
             </form>
 
     </section>
 
-    <div class="rodape" id="rodape">
-        <button type="reset" id="btn-reset" onclick="cancelar_alteracoes()" class="btn-reset">Cancelar</button>
-        <button type="submit" class="btn-submit">Salvar Edição</button>
-    </div>
+
 </div>
 {% endblock content %}  
 

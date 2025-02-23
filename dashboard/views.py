@@ -8,7 +8,7 @@ import json
 from django.db.models import Q
 from datetime import datetime,date
 
-from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Abastecimento,Manutencao,Prioridade_Atendimento,Tipo_Combustivel,Tipo_Manutencao,Status_Manutencao
+from dashboard.models import Veiculo, Status_Veiculo, CustomUser, TipoUsuario, StatusUsuario, Estado,Forma_Pagamento,Reservas,Status_Reserva,Abastecimento,Manutencao,Prioridade_Atendimento,Tipo_Combustivel,Tipo_Manutencao,Status_Manutencao,Tipo_Carga,Rota,Tipo_Veiculo
 
 
 
@@ -180,6 +180,7 @@ def listagem_veiculos(request):
 
 @login_required
 def cadastrar_veiculo(request):
+    tipo_veiculo = Tipo_Veiculo.objects.all()
 
     if request.method == 'POST':
         print(request.POST)
@@ -189,6 +190,7 @@ def cadastrar_veiculo(request):
         valor_compra = request.POST.get('valor')
         ano = request.POST.get('ano')
         km = request.POST.get('km')
+        tipo = request.POST.get('tipo')
         motor = request.POST.get('motor')
         status_id = request.POST.get('status')
         placa = request.POST.get('placa')
@@ -201,6 +203,7 @@ def cadastrar_veiculo(request):
             print(f"Modelo: {modelo}, Marca: {marca}, Valor: {valor_compra}, status: {status_id}")
             # Buscar o objeto Status_Veiculo correspondente
             status_veiculo = get_object_or_404(Status_Veiculo, status=status_id)
+            tipo = get_object_or_404(Tipo_Veiculo,tipo=tipo)
             print(status_veiculo)
             veiculo = Veiculo(
                 modelo=modelo,
@@ -208,6 +211,7 @@ def cadastrar_veiculo(request):
                 valor_compra=valor_compra,
                 ano=ano,
                 km=km,
+                tipo = tipo,
                 motor=motor,
                 status=status_veiculo,
                 placa=placa,
@@ -224,17 +228,15 @@ def cadastrar_veiculo(request):
 
             # Salvar o objeto no banco de dados
             veiculo.save()
-
+            messages.success(request,"Veiculo salvo com sucesso")
             # Redirecionar para uma página de sucesso ou lista de veículos
             return redirect('listagem_veiculos')
         else:
-            # Se algum campo obrigatório estiver faltando, retornar um erro
-            return render(request, 'dashboard/cadastrar_veiculos.html', {
-                'error': 'Todos os campos obrigatórios devem ser preenchidos.',
-            })
+            messages.error(request,'Todos os campos obrigatórios devem ser preenchidos.')
+            return render(request, 'dashboard/cadastrar_veiculos.html')
         
     status = get_list_or_404(Status_Veiculo)
-    return render(request, 'dashboard/cadastrar_veiculos.html', {'status':status})
+    return render(request, 'dashboard/cadastrar_veiculos.html', {'status':status,'tipo':tipo_veiculo})
 
 @login_required
 def informacoes_veiculo(request, id):
@@ -799,7 +801,10 @@ def criar_reserva(request):
 
             reserva.save()
             messages.success(request,"Reserva Cadastrada com sucesso")
-            return redirect('listagem_reservas')
+            if veiculo.tipo.id == 2:
+                return redirect('listagem_reservas')
+            else:
+                return redirect('criacao_rota', id=reserva.id)
         except Exception as e:
             print(f"{e}")
             messages.error(request,f"Erro ao Registrar Reserva: {e}")
@@ -814,8 +819,111 @@ def criar_reserva(request):
     })
 
 @login_required
-def editar_reserva(request):
-    return render(request, 'dashboard/editar_reserva.html')
+def editar_reserva(request,id):
+    reserva = get_object_or_404(Reservas,id=id)
+    forma_pagamento = Forma_Pagamento.objects.exclude(forma_pagamento=reserva.forma_pagamento)
+    veiculo = Veiculo.objects.exclude(modelo=reserva.veiculo.modelo).exclude(status_id__in=[22,23,25])
+    motorista = CustomUser.objects.exclude(nome=reserva.motorista.nome).exclude(status_usuario_id=2).exclude(tipo_usuario_id__in =[2,None])
+    status = Status_Reserva.objects.exclude(status=reserva.status_reserva.status)
+
+    alterado = False
+
+    if request.method == 'POST':
+        veiculo_nome = request.POST.get('veiculo_nome')
+        data_reserva = request.POST.get('data_reserva')
+        data_entrega = request.POST.get('data_entrega')
+        motorista_id = request.POST.get('motorista')  
+        idade_condutor = request.POST.get('idade-condutor')
+        valor = request.POST.get('valor')
+        forma_pagamento_id = request.POST.get('forma_pagamento')
+        status_reserva = request.POST.get('status')
+
+        print(request.POST)
+
+        if valor: 
+            valor = valor.replace(",", ".") 
+            try:
+                valor = float(valor)
+            except ValueError:
+                valor = None 
+
+        if veiculo_nome != reserva.veiculo.modelo:
+            reserva.veiculo.modificar_estados(21)
+            reserva.veiculo = get_object_or_404(Veiculo,modelo=veiculo_nome)
+            reserva.veiculo.modificar_estados(22)
+            alterado = True
+
+        data_reserva = date.fromisoformat(data_reserva) if data_reserva else None
+        data_entrega = date.fromisoformat(data_entrega) if data_entrega else None
+        today = date.today()
+    
+        if data_reserva != reserva.data_reserva:
+            if data_reserva <= today:
+                messages.error(request, "A data de reserva deve ser maior que a data atual.")
+                return redirect("editar_reserva",id=id) 
+            else:
+                reserva.data_reserva = data_reserva
+                alterado = True
+
+        if data_entrega != reserva.data_entrega:
+            if data_entrega <= reserva.data_reserva:
+                messages.error(request, "A data de entrega deve ser maior que a data de reserva.")
+                return redirect("editar_reserva",id=id)
+            else:
+                reserva.data_entrega = data_entrega
+                alterado = True
+
+        if motorista_id != reserva.motorista.nome:
+            reserva.motorista = get_object_or_404(CustomUser,nome=motorista_id)
+            alterado = True
+
+        idade_condutor = int(idade_condutor)
+
+        if idade_condutor != reserva.idade_condutor:
+            if idade_condutor>=18:
+                reserva.idade_condutor = idade_condutor
+                alterado = True
+            else:
+                messages.error(request,"Idade Minima é 18 anos")
+                return redirect("editar_reserva",id=id) 
+
+        if valor != reserva.valor:
+            reserva.valor = valor
+            alterado = True
+
+        if forma_pagamento_id != reserva.forma_pagamento:
+            reserva.forma_pagamento = forma_pagamento_id
+            alterado = True
+
+        if status_reserva != reserva.status_reserva.status:
+            if status_reserva == "Em Andamento":
+                reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
+                reserva.veiculo.modificar_estados(23)
+            elif status_reserva == "Concluida":
+                reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
+                reserva.veiculo.modificar_estados(21)
+            elif status_reserva == "Cancelada":
+                reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
+                reserva.veiculo.modificar_estados(21)
+            elif status_reserva == "Pendente":
+                reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
+                reserva.veiculo.modificar_estados(22)
+                alterado = True
+
+        if request.user.is_authenticated:
+            reserva.usuario_alteracao = request.user
+
+        reserva.save()
+        messages.success(request,"Informações alteradas com sucesso")
+        return redirect("editar_reserva",id=id)
+
+    return render(request, 'dashboard/editar_reserva.html',{
+        'forma_pagamento' : forma_pagamento,
+        'motorista' : motorista,
+        'status' : status,
+        'veiculo' : veiculo,
+        'reserva' : reserva
+    })
 
 @login_required
 def listagem_reservas(request):
@@ -854,8 +962,56 @@ def confirmar_entrega(request, reserva_id):
             return JsonResponse({'success': False, 'error': 'Requisição inválida'})
 
 @login_required
-def criacao_rota(request):
-    return render(request, 'dashboard/criacao_rota.html')
+def criacao_rota(request, id):  # Recebe o ID da reserva
+    tipo_carga = Tipo_Carga.objects.all()  # Traz todos os tipos de carga
+    reserva = get_object_or_404(Reservas, id=id)  # Busca a reserva
+
+    if request.method == 'POST':
+        data_inicio = request.POST.get('data_inicio')
+        data_fim = request.POST.get('data_fim')
+        tipo_carga_id = request.POST.get('tipo_carga')
+        cidade_inicio = request.POST.get('cidade_inicio')
+        cidade_fim = request.POST.get('cidade_fim')
+
+        print(request.POST)
+
+        # Verifica se todos os campos foram preenchidos
+        if not all([data_inicio, data_fim, tipo_carga_id, cidade_inicio, cidade_fim]):
+            messages.error(request, "Por favor, preencha todas as informações.")
+            return render(request, 'dashboard/criacao_rota.html', {
+                'tipos': tipo_carga,
+                'reserva': reserva
+            })
+
+        try:
+            tipo_carga_obj = get_object_or_404(Tipo_Carga, descr_carga=tipo_carga_id)  # Obtém o objeto Tipo_Carga
+
+            # Cria a nova rota
+            rota = Rota(
+                reserva=reserva,
+                data_inicio=data_inicio,
+                data_fim=data_fim,
+                tipo_carga=tipo_carga_obj,
+                cidade_inicio=cidade_inicio,
+                cidade_fim=cidade_fim
+            )
+
+            # Verifica se o usuário está autenticado
+            if request.user.is_authenticated:
+                rota.usuario_cadastro = request.user
+
+            rota.save()  # Salva a nova rota
+
+            # Redireciona para a lista de rotas
+            return redirect('listagem_rota')
+
+        except Exception as e:
+            messages.error(request, f"Erro ao Registrar Rota: {e}")
+
+    return render(request, 'dashboard/criacao_rota.html', {
+        'tipos': tipo_carga,
+        'reserva': reserva
+    })
 
 @login_required
 def listagem_rota(request):
