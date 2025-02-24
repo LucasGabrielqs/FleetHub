@@ -17,7 +17,12 @@
                 <div class="input_container">
                     <label>Veículo</label>
                     <select id="veiculo" name="veiculo" onchange="calcularValor()">
+                        {% if not veiculo %}
+                        <option disabled selected>Não há veículos Disponíveis</option>
+                        {% else %}
                         <option disabled selected>Selecione</option>
+                        {% endif %}
+                        
                         {% for veiculo in veiculo %}
                             <option value="{{ veiculo.modelo }}" value="{{ data.veiculo|default:'' }}" data-valor="{{ veiculo.valor_compra }}" >{{ veiculo.modelo }}</option>
                         {% endfor %}

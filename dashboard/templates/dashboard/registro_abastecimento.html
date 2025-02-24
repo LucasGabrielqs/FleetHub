@@ -87,7 +87,12 @@
 
                     <div class="menu_direito">
                         <div class="nota-img">
+                            {% if abastecimento.img_abastecimento %}
                             <img class="input_detect img-nota-fiscal" src="{{abastecimento.img_abastecimento.url}}" alt="">
+                            {% else %}
+                            <img class="input_detect img-nota-fiscal" src="{{abastecimento.img_abastecimento}}" alt="">
+                            {% endif %}
+                            
                             <input  type="file" name="img" id="img" style="display: none;">
                         </div>
 

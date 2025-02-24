@@ -107,7 +107,7 @@ def agendar_manutencao(request):
                 'veiculo': veiculo_list,
             })
         else:
-            veiculo.modificar_km(km_atual)
+            veiculo_obj.modificar_km(km_atual)
             alterado = True
 
         veiculo_obj.modificar_estados(5)
