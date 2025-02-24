@@ -15,6 +15,7 @@ def criar_registros_padrao(sender, **kwargs):
         Tipo_Manutencao = apps.get_model('dashboard', 'Tipo_Manutencao')
         Prioridade_Atendimento = apps.get_model('dashboard', 'Prioridade_Atendimento')
         Tipo_Combustivel = apps.get_model('dashboard', 'Tipo_Combustivel')
+        Status_Manutencao = apps.get_model('dashboard', 'Status_Manutencao')
 
         
 
@@ -84,17 +85,17 @@ def criar_registros_padrao(sender, **kwargs):
                 print(f"Status de Reserva {status_['status']} criado.")
 
 
-        tipo_manutencao = [
-            {"nome_manutencao": "Realizada"}, #"status_cor": "34C759" , "status_cor": "FFCC00"  , "status_cor": "FF3B30"
-            {"nome_manutencao": "Pendente"},
-            {"nome_manutencao": "Não foi Possível Realizar"}   
+        status_manutencao = [
+            {"nome_manutencao": "Realizada", "status_cor": "34C759"},   
+            {"nome_manutencao": "Pendente", "status_cor": "FFCC00" },
+            {"nome_manutencao": "Não foi Possível Realizar", "status_cor": "FF3B30"}   
         ]
-        for status_ in tipo_manutencao:
-            tipo_manutencao, created = Tipo_Manutencao.objects.get_or_create(
-                nome_manutencao=status_["nome_manutencao"] #status_cor=status_["status_cor"]
+        for status_ in status_manutencao:
+            status_manutencao, created = Status_Manutencao.objects.get_or_create(
+                nome_status=status_["nome_manutencao"], status_cor=status_["status_cor"]
             )
             if created:
-                print(f"Tipo de Manutenção {status_['nome_manutencao']} criado.")
+                print(f"Status de Manutenção {status_['nome_manutencao']} criado.")
 
 
         tipo_combustivel = [
@@ -122,3 +123,16 @@ def criar_registros_padrao(sender, **kwargs):
             )
             if created:
                 print(f"Prioridade de Atendimento {status_['prioridade']} criado.")
+
+        tipo_manutencao = [
+            {"tipo": "Manutenção corretiva"},
+            {"tipo": "Manutenção preventiva"},
+            {"tipo": "Manutenção preditiva"},
+            {"tipo": "Manutenção detetiva"},
+        ]
+        for status_ in tipo_manutencao:
+            nome_manutencao, created = Tipo_Manutencao.objects.get_or_create(
+                nome_manutencao=status_["tipo"]
+            )
+            if created:
+                print(f"Tipo de Manutenção {status_['tipo']} criado.")
