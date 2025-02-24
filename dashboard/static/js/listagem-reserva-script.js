@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            fetch(`/confirmar-entrega/${reservaId}/`, {
+            fetch(`/dashboard/confirmar-entrega/${reservaId}/`, {  // ← Adicione "dashboard/"
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

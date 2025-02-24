@@ -63,6 +63,7 @@ def cadastrar(request):
         cep = request.POST.get('cep')
         sigla_estado = request.POST.get('estado')
 
+        
         # Armazena os dados para repopular o formulário em caso de erro
         data = {
             'nome': nome,
@@ -164,6 +165,8 @@ def cadastro_usuario(request):
         #status_usuario = request.POST.get('status')
         imagem = request.FILES.get('img') 
 
+        print(request.POST)
+
         data = {
             'nome': nome_comp,
             'email': email,
@@ -201,6 +204,7 @@ def cadastro_usuario(request):
             tipo = get_object_or_404(TipoUsuario,nome=tipo)
 
             usuario = CustomUser(
+                username=email,
                 nome = nome,
                 first_name=primeiro_nome,
                 last_name=ultimo_nome,
@@ -217,6 +221,8 @@ def cadastro_usuario(request):
             )
             if 'img' in request.FILES:
                 usuario.imagem = imagem
+
+            
 
             usuario.save()
             return redirect("listagem_usuarios")

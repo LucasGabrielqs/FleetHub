@@ -5,16 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
     // Função para formatar o CPF (000.000.000-00)
-    if (cpfInput) {
-        cpfInput.addEventListener("input", function (e) {
-            let value = e.target.value.replace(/\D/g, ""); // Remove caracteres não numéricos
-            if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
-            e.target.value = value
-                .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o primeiro ponto
-                .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o segundo ponto
-                .replace(/(\d{3})(\d{2})$/, "$1-$2"); // Adiciona o hífen
-        });
-    }
+    // if (cpfInput) {
+    //     cpfInput.addEventListener("input", function (e) {
+    //         let value = e.target.value.replace(/\D/g, ""); // Remove caracteres não numéricos
+    //         if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
+    //         e.target.value = value
+    //             .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o primeiro ponto
+    //             .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o segundo ponto
+    //             .replace(/(\d{3})(\d{2})$/, "$1-$2"); // Adiciona o hífen
+    //     });
+    // }
 
     // Função para formatar o telefone (+55 (00) 00000-0000)
     if (telefoneInput) {

@@ -43,7 +43,7 @@
                         <li class="user-info">{{usuario.nome}}</li>
                         {% endif %}
                         <li class="user-info">{{usuario.tipo_usuario}}</li>
-                        <li class="user-info">{{usuario.date_joined}}</li>
+                        <li class="user-info">{{usuario.date_joined|date:'d-m-Y'}}</li>
                         <li class="user-info">{{usuario.tipo_usuario}}</li>
                     </ul>       
                     {% endfor %}

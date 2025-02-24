@@ -30,7 +30,7 @@ def tela_dashboard(request):
 def agendar_manutencao(request):
     tipo_manutencao_list = get_list_or_404(Tipo_Manutencao)
     prioridade_list = get_list_or_404(Prioridade_Atendimento)
-    veiculo_list = get_list_or_404(Veiculo)
+    veiculo_list = Veiculo.objects.exclude(status_id__in=[5,4,3,2])
 
     error = None
     data = {}
@@ -45,10 +45,9 @@ def agendar_manutencao(request):
         valor_manutencao = request.POST.get('valor_manutencao')
         comentario = request.POST.get('comentario')
 
-        if data_prevista and data_prevista.strip(): 
-            data_prevista_obj = datetime.strptime(data_prevista, '%d/%m/%Y')  
-            data_atual_obj = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
-            data_formatada = datetime.strptime(data_prevista, '%d/%m/%Y').strftime('%Y-%m-%d')
+        data_prevista = datetime.strptime(data_prevista, "%Y-%m-%d")  
+        data_atual_obj = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+
 
         data = {
             'veiculo': veiculo,
@@ -69,7 +68,7 @@ def agendar_manutencao(request):
                 'veiculo': veiculo_list,
             })
         
-        if (data_prevista_obj<data_atual_obj):
+        if (data_prevista<data_atual_obj):
             messages.error(request,'Data informada, é menor que a data atual')
             return render(request, 'dashboard/agendar_manutencao.html', {
                 'data': data,
@@ -99,7 +98,20 @@ def agendar_manutencao(request):
             messages.error(request,"Erro ao converter KM ou Valor da Manutenção. Verifique os valores inseridos.")
             return render(request, 'dashboard/agendar_manutencao.html')
 
-        veiculo_obj.modificar_estados(25)
+        if veiculo_obj.km > km_atual:
+            messages.error(request,'Km informado é menor que o km do veiculo cadastrado')
+            return render(request, 'dashboard/agendar_manutencao.html', {
+                'data': data,
+                'tipo_manutencao': tipo_manutencao_list,
+                'prioridade': prioridade_list,
+                'veiculo': veiculo_list,
+            })
+        else:
+            veiculo.modificar_km(km_atual)
+            alterado = True
+
+        veiculo_obj.modificar_estados(5)
+
 
         try:
             manutencao = Manutencao(
@@ -108,7 +120,7 @@ def agendar_manutencao(request):
                 tipo_manutencao=tipo_manutencao_obj,
                 status = Status_Manutencao.objects.get(id=2),
                 prioridade=prioridade_obj,
-                data_prevista=data_formatada,
+                data_prevista=data_prevista,
                 valor_manutencao=valor_manutencao,
                 comentario=comentario
             )
@@ -150,7 +162,7 @@ def editar_manutencao(request,id):
     manutencao = get_object_or_404(Manutencao,id=id)
     tipo_manutencao_list = get_list_or_404(Tipo_Manutencao)
     prioridade_list = get_list_or_404(Prioridade_Atendimento)
-    veiculo_list = Veiculo.objects.exclude(status_id=23).exclude(modelo=manutencao.veiculo.modelo)
+    veiculo_list = Veiculo.objects.exclude(status_id__in=[3,2,4]).exclude(modelo=manutencao.veiculo.modelo)
     status_manutencao_list = get_list_or_404(Status_Manutencao)
 
     if request.method == 'POST':
@@ -184,7 +196,7 @@ def editar_manutencao(request,id):
                 messages.error(request, "Valor inválido para KM Atual.")
                 return redirect('editar_manutencao', id=id)
 
-            if manutencao.veiculo.km < km_atual:
+            if manutencao.veiculo.km <= km_atual:
                 manutencao.km_atual = km_atual
                 manutencao.veiculo.modificar_km(km_atual)
                 alterado = True
@@ -215,7 +227,9 @@ def editar_manutencao(request,id):
         if status_manutencao_id != manutencao.status.nome_status:
             manutencao.status= get_object_or_404(Status_Manutencao, nome_status=status_manutencao_id)
             if status_manutencao_id == 'Realizada':
-                manutencao.veiculo.modificar_estados(21)
+                manutencao.veiculo.modificar_estados(1)
+            elif status_manutencao_id == 'Cancelada':
+                manutencao.veiculo.modificar_estados(1)  
             alterado = True
 
         if alterado:
@@ -238,8 +252,8 @@ def editar_manutencao(request,id):
 def criar_reserva(request):
     status = get_list_or_404(Status_Reserva) 
     forma_pagamento = get_list_or_404(Forma_Pagamento) 
-    veiculo = Veiculo.objects.exclude(status_id__in=[22, 23, 25])
-    usuario = CustomUser.objects.exclude(status_usuario_id=2).exclude(tipo_usuario_id=2).exclude(tipo_usuario_id=None)
+    veiculo = Veiculo.objects.exclude(status_id__in=[5,3,2,4])
+    usuario = CustomUser.objects.exclude(status_usuario_id=2).exclude(tipo_usuario_id=None)
     data = {}
 
     if request.method == 'POST':
@@ -313,11 +327,11 @@ def criar_reserva(request):
             if request.user.is_authenticated:
                 reserva.usuario_cadastro = request.user
 
-            veiculo.modificar_estados(22)
+            veiculo.modificar_estados(2)
 
             reserva.save()
             messages.success(request,"Reserva Cadastrada com sucesso")
-            if veiculo.tipo.id == 2:
+            if veiculo.tipo.id == 1:
                 return redirect('listagem_reservas')
             else:
                 return redirect('criacao_rota', id=reserva.id)
@@ -338,7 +352,7 @@ def criar_reserva(request):
 def editar_reserva(request,id):
     reserva = get_object_or_404(Reservas,id=id)
     forma_pagamento = Forma_Pagamento.objects.exclude(forma_pagamento=reserva.forma_pagamento)
-    veiculo = Veiculo.objects.exclude(modelo=reserva.veiculo.modelo).exclude(status_id__in=[22,23,25])
+    veiculo = Veiculo.objects.exclude(modelo=reserva.veiculo.modelo).exclude(status_id__in=[4,3,5,2])
     motorista = CustomUser.objects.exclude(nome=reserva.motorista.nome).exclude(status_usuario_id=2).exclude(tipo_usuario_id__in =[2,None])
     status = Status_Reserva.objects.exclude(status=reserva.status_reserva.status)
 
@@ -364,9 +378,9 @@ def editar_reserva(request,id):
                 valor = None 
 
         if veiculo_nome != reserva.veiculo.modelo:
-            reserva.veiculo.modificar_estados(21)
+            reserva.veiculo.modificar_estados(1)
             reserva.veiculo = get_object_or_404(Veiculo,modelo=veiculo_nome)
-            reserva.veiculo.modificar_estados(22)
+            reserva.veiculo.modificar_estados(2)
             alterado = True
 
         data_reserva = date.fromisoformat(data_reserva) if data_reserva else None
@@ -414,16 +428,16 @@ def editar_reserva(request,id):
         if status_reserva != reserva.status_reserva.status:
             if status_reserva == "Em Andamento":
                 reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
-                reserva.veiculo.modificar_estados(23)
+                reserva.veiculo.modificar_estados(3)
             elif status_reserva == "Concluida":
                 reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
-                reserva.veiculo.modificar_estados(21)
+                reserva.veiculo.modificar_estados(1)
             elif status_reserva == "Cancelada":
                 reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
-                reserva.veiculo.modificar_estados(21)
+                reserva.veiculo.modificar_estados(1)
             elif status_reserva == "Pendente":
                 reserva.status_reserva = get_object_or_404(Status_Reserva,status=status_reserva)
-                reserva.veiculo.modificar_estados(22)
+                reserva.veiculo.modificar_estados(2)
                 alterado = True
 
         if request.user.is_authenticated:
@@ -459,23 +473,31 @@ def listagem_reservas(request):
 def confirmar_entrega(request, reserva_id):
     if request.method == "POST":
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            # Imprima o corpo da requisição para ver o que está sendo enviado
-            data = json.loads(request.body)
-            print("Dados recebidos:", data)  # Verifique o conteúdo
+            try:
+                # Tente carregar os dados do JSON
+                data = json.loads(request.body)
+                print("Dados recebidos:", data)  
+                print("ID da reserva recebido:", reserva_id)  
 
-            # Verifique se a ação foi "confirmar_entrega"
-            if data.get('acao') == 'confirmar_entrega':
-                reserva = get_object_or_404(Reservas, id=reserva_id)
-            
-                reserva.modificar_reserva(5)
+                if data.get('acao') == 'confirmar_entrega':
+                    reserva = get_object_or_404(Reservas, id=reserva_id)
+                    print("Reserva encontrada:", reserva)
 
-                reserva.veiculo.modificar_estados(23)
+                    reserva.modificar_reserva(4)
+                    reserva.veiculo.modificar_estados(3)
+                    reserva.save()
 
-                reserva.save()
+                    return JsonResponse({'success': True})
 
-                return JsonResponse({'success': True})
+                return JsonResponse({'success': False, 'error': 'Ação inválida'})  # ← Aqui está corrigido!
 
-            return JsonResponse({'success': False, 'error': 'Requisição inválida'})
+            except json.JSONDecodeError:
+                return JsonResponse({'success': False, 'error': 'Erro ao processar JSON'})
+
+            except Exception as e:
+                return JsonResponse({'success': False, 'error': str(e)})
+
+    return JsonResponse({'success': False, 'error': 'Método não permitido'}, status=405)
 
 @login_required
 def criacao_rota(request, id): 

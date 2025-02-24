@@ -18,7 +18,7 @@ def listagem_veiculos(request):
     query = request.GET.get('query')
     veiculos = Veiculo.objects.all()
     veiculos_disponiveis = Veiculo.objects.filter(status__status="Disponível").count()
-    veiculos_reservados = Veiculo.objects.filter(status__status="Reservados").count()
+    veiculos_reservados = Veiculo.objects.filter(status__status="Reservado").count()
     veiculos_emuso = Veiculo.objects.filter(status__status="Em Uso").count()
     veiculos_atrasados = Veiculo.objects.filter(status__status="Atrasados").count()
     veiculos_manutencao = Veiculo.objects.filter(status__status="Manutenção").count()
@@ -41,6 +41,8 @@ def listagem_veiculos(request):
 @login_required
 def cadastrar_veiculo(request):
     tipo_veiculo = Tipo_Veiculo.objects.all()
+    status = Status_Veiculo.objects.all()
+    data = {}
 
     if request.method == 'POST':
         print(request.POST)
@@ -56,6 +58,20 @@ def cadastrar_veiculo(request):
         placa = request.POST.get('placa')
         chassi = request.POST.get('chassi')
         cor = request.POST.get('cor')
+
+        data = {
+            'modelo' : modelo,
+            'marca' : marca,
+            'valor_compra' : valor_compra,
+            'ano' : ano,
+            'km' : km,
+            'tipo' : tipo,
+            'motor' : motor,
+            'status_id' : status_id,
+            'placa' : placa,
+            'chassi' : chassi,
+            'cor' : cor
+        }
         
         # Certifique-se de que campos obrigatórios não estão vazios
         if modelo and marca and valor_compra and ano and km and motor and status_id and placa and chassi and cor:
@@ -85,6 +101,13 @@ def cadastrar_veiculo(request):
             # Verifica se um arquivo foi enviado no campo "img"
             if 'img' in request.FILES:
                 veiculo.imagem = request.FILES.get('img')
+            else:
+                messages.error(request,"Todos os campos devem ser preenchidos")
+                return render(request, 'veiculos/cadastrar_veiculos.html',{
+                'data' : data,
+                'status':status,'tipo':tipo_veiculo
+            })
+                
 
             # Salvar o objeto no banco de dados
             veiculo.save()
@@ -93,10 +116,12 @@ def cadastrar_veiculo(request):
             return redirect('listagem_veiculos')
         else:
             messages.error(request,'Todos os campos obrigatórios devem ser preenchidos.')
-            return render(request, 'veiculos/cadastrar_veiculos.html')
+            return render(request, 'veiculos/cadastrar_veiculos.html',{
+                'data' : data,
+                'status':status,'tipo':tipo_veiculo
+            })
         
-    status = get_list_or_404(Status_Veiculo)
-    return render(request, 'veiculos/cadastrar_veiculos.html', {'status':status,'tipo':tipo_veiculo})
+    return render(request, 'veiculos/cadastrar_veiculos.html', {'status':status,'tipo':tipo_veiculo,'data' : data})
 
 @login_required
 def informacoes_veiculo(request, id):

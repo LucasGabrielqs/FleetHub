@@ -22,22 +22,22 @@
                 
                 <div class="input_container">
                     <label>Modelo</label>
-                    <input name="modelo" type="text" id="modelo" placeholder="Digite o Modelo" required>
+                    <input name="modelo" type="text" id="modelo" placeholder="Digite o Modelo" value="{{ data.modelo|default:'' }}" required>
                 </div>
                 
                 <div class="input_container">
                     <label>Marca</label>
-                    <input name="marca" type="text" id="marca" placeholder="Digite a Marca" required>
+                    <input name="marca" type="text" id="marca" placeholder="Digite a Marca" value="{{ data.marca|default:'' }}" required>
                 </div>
                 <div class="campo_duplo">
                     <div class="input_container">
                         <label>Valor da Compra</label>
-                        <input name="valor" type="text" id="valcompra" maxlength="14" placeholder="Digite o valor da compra" required>
+                        <input name="valor" type="text" id="valcompra" maxlength="14" value="{{ data.valor_compra|default:'' }}" placeholder="Digite o valor da compra" required>
                     </div>
 
                     <div class="input_container">
                         <label>Cor do Veículo</label>
-                        <input name="cor" type="text" id="cor_veiculo" maxlength="14" placeholder="Digite a cor do veículo" required>
+                        <input name="cor" type="text" id="cor_veiculo" maxlength="14" value="{{ data.cor|default:'' }}" placeholder="Digite a cor do veículo" required>
                     </div>
                 </div>
                 
@@ -45,12 +45,12 @@
                     
                     <div class="input_container">
                         <label>Ano</label>
-                        <input name="ano" type="text" id="ano" placeholder="Digite o ano" required>
+                        <input name="ano" type="text" id="ano" placeholder="Digite o ano" value="{{ data.ano|default:'' }}" required>
                     </div>
                     
                     <div class="input_container">
                         <label>KM</label>
-                        <input name="km" type="text" id="km" placeholder="Digite a Quilometragem" required>
+                        <input name="km" type="text" id="km" placeholder="Digite a Quilometragem" value="{{ data.km|default:'' }}" required>
                     </div>
                 
                 </div>
@@ -60,14 +60,13 @@
                     
                     <div class="input_container">
                         <label>Motor</label>
-                        <input name="motor" type="text" id="motor" placeholder="Digite o CV do Motor" required>
+                        <input name="motor" type="text" id="motor" value="{{ data.motor|default:'' }}" placeholder="Digite o CV do Motor" required>
                     </div>
                     
                     <div class="input_container">
                         <label>Status</label>
                         <select id="estados" name="status">
-                            <option selected>Selecione</option>
-                          
+                            <option value="{{ data.status|default:'Selecione' }}" selected>Selecione</option>
                           {% for st in status %}
                             <option value="{{st.status}}">{{st.status}}</option>
                           {%endfor %}
@@ -82,12 +81,12 @@
                     
                     <div class="input_container">
                         <label>Placa</label>
-                        <input name="placa" type="text" id="placa" placeholder="Digite a Placa" required>
+                        <input name="placa" type="text" id="placa" value="{{ data.placa|default:'' }}" placeholder="Digite a Placa" required>
                     </div>
                     
                     <div class="input_container">
                         <label>Chassi</label>
-                        <input name="chassi" type="text" id="km" placeholder="Digite o Chassi" required>
+                        <input name="chassi" type="text" id="km" value="{{ data.chassi|default:'' }}" placeholder="Digite o Chassi" required>
                     </div>
                 
                 </div>
@@ -95,8 +94,8 @@
                 <div class="input_container" style="height: 67.14px;">
                     <label>Tipo Veiculo</label>
                     <select id="tipo" name="tipo" style="width: 104%;">
-                        <option selected>Selecione</option>
-                      {% for tipos in tipo %}
+                        <option value="{{ data.tipo|default:'Selecione' }}" selected>Selecione</option>
+                      {% for tipos in tipo %}   
                         <option value="{{tipos.tipo}}">{{tipos.tipo}}</option>
                       {%endfor %}
                       
