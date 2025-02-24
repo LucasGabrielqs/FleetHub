@@ -55,6 +55,7 @@
 
     <div id="lista-veiculos">
 
+        {% if reserva %}
         {% for reservas in reserva %}
             <div id="linha-final">
 
@@ -117,7 +118,10 @@
 
         
 
-    {% endfor %}    
+    {% endfor %}
+    {% else %}
+        <h1 style="font-size: 24px;">Nenhuma Reserva Encontrado!</h1>   
+    {% endif %} 
 
     </div>
     

@@ -32,6 +32,7 @@
 
         
             <div id="linha-final">
+                {% if abastecimentos %}
                 {% for abastecimento in abastecimentos %}
             <div id="linha-veiculo">
             
@@ -81,6 +82,9 @@
         </div>
             <div id="linha"></div>
             {% endfor %}
+            {% else %}
+                <h1 style="font-size: 24px;">Nenhum Abastecimento Encontrado!</h1>
+            {% endif %}
         </div>
 
         
