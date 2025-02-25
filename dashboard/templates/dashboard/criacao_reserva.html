@@ -24,7 +24,7 @@
                         {% endif %}
                         
                         {% for veiculo in veiculo %}
-                            <option value="{{ veiculo.modelo }}" value="{{ data.veiculo|default:'' }}" data-valor="{{ veiculo.valor_compra }}" >{{ veiculo.modelo }}</option>
+                            <option value="{{ veiculo.id }}" data-valor="{{ veiculo.valor_compra }}" >{{ veiculo.modelo }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -36,15 +36,29 @@
                     <label>Data da Entrega</label>
                     <input type="date" id="data_entrega" name="data_entrega" value="{{ data.data_entrega|default:'' }}" onchange="calcularValor()" placeholder="Digite a data de Entrega">
                 </div>
+
+                {% if user.tipo_usuario.nome == "ADMIN" %}
                 <div class="input_container">
                     <label>Motorista</label>
                     <select id="motorista" name="motorista">
                         <option disabled selected>Selecione</option>
                         {% for user in usuario %}
-                            <option value="{{ user.nome }}" value="{{ data.motorista|default:'' }}">{{ user.nome }}</option>
+                            <option value="{{ user.id }}" value="{{ data.motorista|default:'' }}">{{ user.nome }}</option>
                         {% endfor %}
                     </select>
                 </div>
+
+                {% else %}
+
+                <div class="input_container">
+                    <label>Motorista</label>
+                    <select id="motorista" name="motorista">
+                        <option value="{{ user.id }}" value="{{ data.motorista|default:'' }}">{{ user.nome }}</option>
+                    </select>
+                </div>
+                {% endif %}
+
+
             </div>
 
             <div class="coluna">

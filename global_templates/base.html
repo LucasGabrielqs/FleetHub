@@ -19,7 +19,7 @@
     <div class="container-base" id="container-base">
         <aside id="sidebar">
             <div id="sidebar-menu">
-                <h3>Mudar a Senha</h3>
+                <h3><a id="exit" href="{% url 'recuperar_senha' %}">Mudar a Senha</a></h3>
     
                 <h3><a id="exit" href="{% url 'logout' %}">Sair</a></h3>
     
@@ -94,7 +94,7 @@
                     {% endif %}
     
     
-                    {% if user.tipo_usuario.nome == 'ADMIN' and user.status_usuario.status == 'Ativo' %}
+                    {% if user.tipo_usuario.nome == 'ADMIN' or user.tipo_usuario.nome == 'Cliente' and user.status_usuario.status == 'Ativo' %}
                         <a class="element-icon" id="id-rotas"><i class="fa-solid fa-route icon" title="Rotas"></i>
                             <h3 class="text-menu-lateral" id="text-routes">Rotas</h3>
                                 <i id="icon_rotas" class="fa-solid fa-caret-down"
@@ -104,7 +104,12 @@
     
                         <ul id="submenu-rotas" class="submenu" style="display: none;">
                             <li>
+                                {% if user.tipo_usuario.nome == 'ADMIN' %}
                                 <a id="submenu-gerenciar-rotas" href="{% url 'listagem_rota' %}">Gerenciar Rotas</a>
+                                {% elif user.tipo_usuario.nome == 'Cliente' %}
+                                <a id="submenu-gerenciar-rotas" href="{% url 'listagem_rota' %}">Visualizar Rotas</a>
+                                {% endif %}
+                                
                             </li>
                         </ul>
                     {% endif %}

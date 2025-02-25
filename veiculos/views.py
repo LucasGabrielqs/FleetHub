@@ -1,3 +1,5 @@
+from email import message
+import secrets
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -72,6 +74,15 @@ def cadastrar_veiculo(request):
             'chassi' : chassi,
             'cor' : cor
         }
+
+
+
+        if tipo == 'Selecione':
+            messages.error(request, 'Selecione o tipo do veículo')
+
+
+
+
         
         # Certifique-se de que campos obrigatórios não estão vazios
         if modelo and marca and valor_compra and ano and km and motor and status_id and placa and chassi and cor:

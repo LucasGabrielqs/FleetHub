@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 import re
+import secrets
 import json
 from django.db.models import Q
 from datetime import datetime,date
@@ -163,6 +164,7 @@ def cadastro_usuario(request):
         estado = request.POST.get('estado')
         tipo = request.POST.get('tipo_usuario')
         #status_usuario = request.POST.get('status')
+        senha = request.POST.get('senha')
         imagem = request.FILES.get('img') 
 
         print(request.POST)
@@ -200,8 +202,8 @@ def cadastro_usuario(request):
             })
 
         try:
-            status = get_object_or_404(StatusUsuario, status="Ativo")
-            tipo = get_object_or_404(TipoUsuario,nome=tipo)
+            status = StatusUsuario.objects.get(status="Ativo")
+            tipo = TipoUsuario.objects.get(nome=tipo)
 
             usuario = CustomUser(
                 username=email,
@@ -215,12 +217,22 @@ def cadastro_usuario(request):
                 bairro=bairro,
                 cidade=cidade,
                 cep=cep,
-                estado=get_object_or_404(Estado, sigla=estado),
+                estado=Estado.objects.get(sigla=estado),
                 status_usuario=status,
                 tipo_usuario=tipo,
             )
             if 'img' in request.FILES:
                 usuario.imagem = imagem
+
+
+
+
+            if senha:#definindo a senha do usuário
+                usuario.set_password(senha)
+            else:
+                password = secrets.token_urlsafe(8)
+                usuario.set_password(password)
+                #para funcionar perfeitamente, seria necessário configurar um servidor de email para enviar a senha para o usuário
 
             
 

@@ -30,7 +30,7 @@ class CustomUser(AbstractUser):
         height_field=None,
         width_field=None,
         max_length=None,
-        default="carro-escondido.jpg",
+        default="img_perfil.png",
     )
     estado = models.ForeignKey('dashboard.Estado', on_delete=models.CASCADE, null=True, blank=True)
     tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE, null=True, blank=True)

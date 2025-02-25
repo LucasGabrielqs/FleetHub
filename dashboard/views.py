@@ -250,8 +250,8 @@ def editar_manutencao(request,id):
 
 @login_required
 def criar_reserva(request):
-    status = get_list_or_404(Status_Reserva) 
-    forma_pagamento = get_list_or_404(Forma_Pagamento) 
+    status = Status_Reserva.objects.all()
+    forma_pagamento_list = Forma_Pagamento.objects.all()
     veiculo = Veiculo.objects.exclude(status_id__in=[5,3,2,4])
     usuario = CustomUser.objects.exclude(status_usuario_id=2).exclude(tipo_usuario_id=None)
     data = {}
@@ -283,7 +283,7 @@ def criar_reserva(request):
             return render(request,"dashboard/criacao_reserva.html",{
                     'data' : data,
                     'status' : status,
-                    'forma_pagamento' : forma_pagamento,
+                    'forma_pagamento' : forma_pagamento_list,
                     'veiculo' : veiculo,
                     'usuario' : usuario
             })
@@ -295,22 +295,22 @@ def criar_reserva(request):
         if data_reserva <= today:
             messages.error(request, "A data de reserva deve ser maior que a data atual.")
             return render(request, "dashboard/criacao_reserva.html", {
-                'data': data, 'status': status, 'forma_pagamento': forma_pagamento,
+                'data': data, 'status': status, 'forma_pagamento': forma_pagamento_list,
                 'veiculo': veiculo, 'usuario': usuario
             })
 
         if data_entrega <= data_reserva:
             messages.error(request, "A data de entrega deve ser maior que a data de reserva.")
             return render(request, "dashboard/criacao_reserva.html", {
-                'data': data, 'status': status, 'forma_pagamento': forma_pagamento,
+                'data': data, 'status': status, 'forma_pagamento': forma_pagamento_list,
                 'veiculo': veiculo, 'usuario': usuario
             })
 
         try:   
-            status = get_object_or_404(Status_Reserva, status="Pendente")  
-            forma_pagamento = get_object_or_404(Forma_Pagamento, forma_pagamento=forma_pagamento_id)
-            veiculo = get_object_or_404(Veiculo, modelo=veiculo_nome)
-            motorista = get_object_or_404(CustomUser, nome=motorista_id)
+            status = Status_Reserva.objects.get(status="Pendente")  
+            forma_pagamento_object = Forma_Pagamento.objects.get(forma_pagamento=forma_pagamento_id)
+            veiculo = Veiculo.objects.get(id=veiculo_nome) 
+            motorista = CustomUser.objects.get(id=motorista_id)
             
 
             reserva = Reservas(
@@ -320,7 +320,7 @@ def criar_reserva(request):
                 motorista=motorista,
                 idade_condutor=idade_condutor,
                 valor=valor,
-                forma_pagamento=forma_pagamento,
+                forma_pagamento=forma_pagamento_object,
                 status_reserva=status,
             )
 
@@ -341,7 +341,7 @@ def criar_reserva(request):
          
     return render(request, 'dashboard/criacao_reserva.html', {
         'status': status,
-        'forma_pagamento': forma_pagamento,
+        'forma_pagamento': forma_pagamento_list,
         'veiculo': veiculo,
         'usuario': usuario,
         'data' : data
