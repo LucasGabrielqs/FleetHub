@@ -268,7 +268,7 @@ footer #logo_fleethub{/*Formatação da logo*/
 /* Estilos da caixa de alerta */
 .message-container {
     position: fixed;
-    top: 50%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
@@ -279,7 +279,6 @@ footer #logo_fleethub{/*Formatação da logo*/
 }
 
 .message {
-    background-color: #4caf50; /* Verde para sucesso */
     color: white;
     padding: 15px 20px;
     border-radius: 8px;
@@ -288,6 +287,22 @@ footer #logo_fleethub{/*Formatação da logo*/
     font-weight: bold;
     animation: fadeOut 3s forwards; /* Animação para sumir após 3 segundos */
 }
+.success {
+    background-color: green;
+}
+
+.error {
+    background-color: red;
+}
+
+.warning {
+    background-color: orange;
+}
+
+.info {
+    background-color: blue;
+}
+
 
 /* Animação de desaparecimento */
 @keyframes fadeOut {

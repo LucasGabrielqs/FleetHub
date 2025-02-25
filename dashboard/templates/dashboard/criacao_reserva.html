@@ -50,7 +50,7 @@
             <div class="coluna">
                 <div class="input_container">
                     <label>Idade do Condutor:</label>
-                    <input type="number" id="idade_condutor" value="{{ data.idade_condutor|default:'' }}" oninput="calcularValor()" name="idade_condutor" placeholder="Digite a idade">
+                    <input type="number" id="idade_condutor" min="18" value="{{ data.idade_condutor|default:'' }}" oninput="calcularValor()" name="idade_condutor" placeholder="Digite a idade">
                 </div>
                 
                 <div class="input_container">

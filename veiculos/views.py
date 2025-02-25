@@ -78,8 +78,8 @@ def cadastrar_veiculo(request):
             # Criar o objeto Veiculo
             print(f"Modelo: {modelo}, Marca: {marca}, Valor: {valor_compra}, status: {status_id}")
             # Buscar o objeto Status_Veiculo correspondente
-            status_veiculo = get_object_or_404(Status_Veiculo, status=status_id)
-            tipo = get_object_or_404(Tipo_Veiculo,tipo=tipo)
+            status_veiculo = Status_Veiculo.objects.get (status=status_id)
+            tipo = Tipo_Veiculo.objects.get(tipo=tipo)
             print(status_veiculo)
             veiculo = Veiculo(
                 modelo=modelo,

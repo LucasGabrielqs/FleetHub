@@ -88,7 +88,7 @@ def criar_registros_padrao(sender, **kwargs):
         status_manutencao = [
             {"nome_manutencao": "Realizada", "status_cor": "34C759"},   
             {"nome_manutencao": "Pendente", "status_cor": "FFCC00" },
-            {"nome_manutencao": "Não foi Possível Realizar", "status_cor": "FF3B30"}   
+            {"nome_manutencao": "Cancelada", "status_cor": "FF3B30"}   
         ]
         for status_ in status_manutencao:
             status_manutencao, created = Status_Manutencao.objects.get_or_create(

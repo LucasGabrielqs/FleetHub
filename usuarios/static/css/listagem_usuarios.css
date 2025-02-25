@@ -42,7 +42,7 @@ h1{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 745px;
+    width: 300px;
     margin: auto;
 }
 

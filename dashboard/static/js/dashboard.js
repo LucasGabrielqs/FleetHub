@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const hoje = new Date().toISOString().split("T")[0]; // Data de hoje no formato "YYYY-MM-DD"
-    
+
     const reservas = document.querySelectorAll(".carro-reservado");
     const btnHoje = document.getElementById("button-hoje");
     const btnProximosDias = document.getElementById("button-proximosdias");

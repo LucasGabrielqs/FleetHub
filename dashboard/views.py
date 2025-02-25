@@ -16,7 +16,7 @@ from usuarios.models import CustomUser,StatusUsuario,TipoUsuario
 @login_required
 def tela_dashboard(request):
     usuarios = CustomUser.objects.exclude(tipo_usuario_id=None)
-    reserva = Reservas.objects.all()
+    reserva = Reservas.objects.exclude(status_reserva_id__in=[1,3])
     rotas = Rota.objects.all
     return render(request, 'dashboard/dashboard.html', {
         'usuarios':usuarios,
@@ -682,7 +682,7 @@ def visualizacao_rota(request,id):
 def criacao_abastecimento(request):
     tipo_combustivel = get_list_or_404(Tipo_Combustivel)
     veiculo = get_list_or_404(Veiculo)
-    motorista = get_list_or_404(CustomUser)
+    motorista = CustomUser.objects.exclude(tipo_usuario_id=None)
     data = {}
     print(request.POST)
 
@@ -774,7 +774,7 @@ def registro_abastecimento(request,id):
     abastecimento = get_object_or_404(Abastecimento,id=id)
     combustivel = Tipo_Combustivel.objects.exclude(nome_combustivel=abastecimento.tipo_combustivel.nome_combustivel)
     veiculo = Veiculo.objects.exclude(modelo=abastecimento.veiculo.modelo)
-    motorista = CustomUser.objects.exclude(status_usuario_id=2).exclude(nome=abastecimento.motorista.nome)
+    motorista = CustomUser.objects.exclude(status_usuario_id=2).exclude(nome=abastecimento.motorista.nome).exclude(tipo_usuario_id=None)
 
     if request.method == 'POST':
         veiculo_id = request.POST.get('veiculo')
